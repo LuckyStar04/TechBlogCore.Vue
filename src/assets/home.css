@@ -1,0 +1,10 @@
+.el-header {
+  display: none !important;
+}
+
+.el-main {
+  padding: 0;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
