@@ -1,0 +1,7 @@
+.el-textarea__inner {
+    height: 100%;
+}
+
+textarea {
+    overflow: auto;
+}

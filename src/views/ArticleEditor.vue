@@ -8,6 +8,7 @@ import EditTag from '@/components/EditTag.vue'
 import marked from '@/utils/markdown'
 import "highlight.js/styles/atom-one-dark.css"
 import "/src/assets/marked.css"
+import "@/assets/editor.css"
 import { Edit } from '@element-plus/icons-vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import type { AxiosResponse } from 'axios'
@@ -106,7 +107,7 @@ const saveArticle = async () => {
                     <EditTag class="tags" v-model="data.article.tags"></EditTag>
                     <el-button type="primary" class="save" size="small" :icon="Edit" @click="saveArticle">保存</el-button>
                 </div>
-                <el-input class="content" v-model="data.article.content" type="textarea" />
+                <el-input class="content" v-model="data.article.content" type="textarea"/>
             </div>
             <div class="right">
                 <div class="note-view" v-html="noteHtml"></div>
@@ -116,9 +117,7 @@ const saveArticle = async () => {
 </template>
 <style scoped>
 .editor-wrapper {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
+    height: calc(100vh - 6.25rem);
 }
 
 .title {
@@ -129,32 +128,30 @@ const saveArticle = async () => {
     border: 0px;
     padding: 0 1rem 1rem;
     outline: none;
-    flex-shrink: 0;
 }
 
 .main {
-    flex-grow: 1;
     background-color: #E7E9EB;
-    display: flex;
-    justify-content: space-around;
-    align-items: stretch;
+    width: 100%;
+    height: calc(100vh - 9.6rem);
 }
 
 .left, .right {
     box-sizing: border-box;
-    width: 0;
-    flex-grow: 1;
+    width: 50%;
+    height: 100%;
+    float: left;
     padding: 10px;
 }
 
 .left {
-    display: flex;
-    flex-direction: column;
     border-right: 1px solid #bcc;
+}
+.right {
+    overflow: auto;
 }
 
 .left>.tag-wrapper {
-    flex-shrink: 0;
     padding: 0 2px 10px 0;
     display: flex;
     align-items: baseline;
@@ -173,8 +170,7 @@ const saveArticle = async () => {
 }
 
 .left>.content {
-    flex-grow: 1;
-    display: flex;
-    align-items: stretch;
+    height: calc(100vh - 13.475rem)
 }
+
 </style>
