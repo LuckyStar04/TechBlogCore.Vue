@@ -6,6 +6,7 @@ export interface ArticleDetail {
     state: number,
     viewCount: number,
     createTime: Date,
+    modifyTime: Date,
     tags: Array<string>,
     comments: Array<Comment>,
 }

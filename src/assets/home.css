@@ -7,4 +7,18 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
+  background-color: transparent;
+}
+
+body {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
+.flex-main {
+    margin: 0 auto !important;
 }

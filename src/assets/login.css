@@ -1,0 +1,20 @@
+.el-header {
+    display: none !important;
+}
+
+.el-main {
+    background-color: transparent !important;
+}
+
+body {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+}
+
+.flex-main {
+    margin: 0 auto !important;
+}

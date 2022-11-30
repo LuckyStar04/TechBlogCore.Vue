@@ -7,8 +7,6 @@ import { useRoute, useRouter } from 'vue-router'
 import EditTag from '@/components/EditTag.vue'
 import marked from '@/utils/markdown'
 import "highlight.js/styles/atom-one-dark.css"
-import "/src/assets/marked.css"
-import "@/assets/editor.css"
 import { Edit } from '@element-plus/icons-vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import type { AxiosResponse } from 'axios'
@@ -99,6 +97,7 @@ const saveArticle = async () => {
 </script>
 <template>
     <div class="editor-wrapper" v-loading.fullscreen="data.isLoading">
+        <link href="/src/assets/editor.css" rel="stylesheet" type="text/css" />
         <input class="title" type="text" v-model="data.article.title" placeholder="请输入文章标题" />
         <div class="main">
             <div class="left">
