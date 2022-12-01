@@ -35,7 +35,7 @@ watch(() => route.query, () => {
                 <el-menu-item index="0" route="/">首页</el-menu-item>
                 <el-menu-item index="1" route="/articles">文章</el-menu-item>
             </el-menu>
-            <el-switch id="navi-theme" v-model="isDark" :inline-prompt="true" :active-icon="Sunny" :inactive-icon="Moon"
+            <el-switch v-model="isDark" :inline-prompt="true" :active-icon="Sunny" :inactive-icon="Moon"
                 style="margin: 0 1.7rem;" />
             <UserAvatar></UserAvatar>
         </div>

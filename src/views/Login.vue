@@ -14,7 +14,9 @@ import { useRouter } from 'vue-router'
 
 const router = useRouter()
 const jumpHome = () => {
-    router.push({ name: 'home' })
+    setTimeout(() =>{
+        router.push({ name: 'home' })
+    }, 1500)
 }
 </script>
 <style>

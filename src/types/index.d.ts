@@ -70,3 +70,9 @@ export interface RegisterModel {
     email: string,
     password: string,
 }
+
+export interface UserInfo {
+    user: string,
+    email: string,
+    role: string,
+}

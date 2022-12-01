@@ -11,9 +11,9 @@
 
                 <form method="post">
                     <input type="text" id="login" class="fadeIn second" name="login" v-model="data.username"
-                        placeholder="请输入用户名">
+                        placeholder="请输入用户名" autocomplete="off" maxlength="50">
                     <input type="password" id="password" class="fadeIn third" name="password" v-model="data.password"
-                        placeholder="请输入密码">
+                        placeholder="请输入密码" maxlength="50">
                     <input type="submit" class="fadeIn fourth" value="立即登录" @click.prevent="login">
                 </form>
             </template>
@@ -27,13 +27,13 @@
 
                 <form>
                     <input type="text" id="email" class="fadeIn third" name="email" v-model="data.email"
-                        placeholder="输入注册邮箱">
+                        placeholder="输入注册邮箱" autocomplete="off" maxlength="50">
                     <input type="text" id="login" class="fadeIn second" name="login" v-model="data.username"
-                        placeholder="输入用户名">
+                        placeholder="输入用户名" autocomplete="off" maxlength="50">
                     <input type="password" id="password" class="fadeIn third" name="password" v-model="data.password"
-                        placeholder="输入注册密码">
+                        placeholder="输入注册密码" maxlength="50">
                     <input type="password" id="password2" class="fadeIn third" name="password2" v-model="data.password2"
-                        placeholder="再次输入密码">
+                        placeholder="再次输入密码" maxlength="50">
                     <input type="submit" class="fadeIn fourth" value="立即注册" @click.prevent="register">
                 </form>
             </template>
@@ -76,6 +76,10 @@ const login = async () => {
         if (response.status == 200) {
             localStorage.setItem('token', 'Bearer ' + response.data.data)
             data.isLoading = false
+            data.username = ''
+            data.password = ''
+            data.password2 = ''
+            data.email = ''
             ElMessage({ message: '登录成功', type: 'success', duration: 1500, onClose: () => emit('callback') })
         }
     }
@@ -102,12 +106,13 @@ const register = async () => {
     data.isLoading = true
     try {
         let response = await req.request({
-            url: 'auth/login', method: 'post', data: { username: data.username, password: data.password }
+            url: 'auth/register', method: 'post', data: { email: data.email, username: data.username, password: data.password }
         })
         if (response.status == 200) {
             localStorage.setItem('token', 'Bearer ' + response.data.data)
             data.isLoading = false
-            ElMessage({ message: '注册成功', type: 'success', duration: 1500, onClose: () => emit('callback') })
+            ElMessage({ message: '注册成功', type: 'success', duration: 4000 })
+            emit('callback')
         }
     }
     catch (e: any) {
