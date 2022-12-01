@@ -75,4 +75,5 @@ export interface UserInfo {
     user: string,
     email: string,
     role: string,
+    avatar: string,
 }
