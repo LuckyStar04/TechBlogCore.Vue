@@ -27,7 +27,7 @@ import { ElContainer, ElHeader, ElMain } from 'element-plus'
   top: 0;
   left: 0;
   right: 0;
-  z-index: 2013;
+  z-index: 999;
   background-color: var(--el-bg-color);
   padding: 0;
   border-bottom: solid 1px var(--el-menu-border-color);

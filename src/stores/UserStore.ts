@@ -12,7 +12,7 @@ export const useUserStore = defineStore('user', () => {
     user: '',
     email: '',
     role: '',
-    avatar: '',
+    avatar: nologinpng,
   })
   let timer: number = 0
   const getWelcome = () => {

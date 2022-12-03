@@ -42,6 +42,7 @@ export interface Comment {
     id: number,
     userName: string,
     email: string,
+    role: string,
     content: string,
     commentTime: Date,
     modifyTime: Date | any,
