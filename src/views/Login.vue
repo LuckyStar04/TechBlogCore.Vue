@@ -1,12 +1,3 @@
-<template>
-    <Teleport to="body">
-        <div class="bg-wrapper">
-            <StarryBackground></StarryBackground>
-        </div>
-    </Teleport>
-    <link href="/src/assets/login.css" rel="stylesheet" type="text/css" />
-    <LoginForm @callback="jumpHome"></LoginForm>
-</template>
 <script lang="ts" setup>
 import LoginForm from '@/components/LoginForm.vue'
 import StarryBackground from '@/components/StarryBackground.vue'
@@ -14,6 +5,9 @@ import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
 onMounted(() => {
+    let classes = document.querySelector('body')!.classList
+    classes.remove('not-found')
+    classes.add('fixed')
     document.querySelector('meta[name="theme-color"]')!.setAttribute("content", "#16161e")
 })
 
@@ -24,6 +18,14 @@ const jumpHome = () => {
     }, 1500)
 }
 </script>
+<template>
+    <Teleport to="body">
+        <div class="bg-wrapper">
+            <StarryBackground></StarryBackground>
+        </div>
+    </Teleport>
+    <LoginForm @callback="jumpHome"></LoginForm>
+</template>
 <style>
 .bg-wrapper {
   z-index: -999;

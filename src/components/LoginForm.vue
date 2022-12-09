@@ -6,7 +6,7 @@
                 <h2 class="inactive underlineHover" @click="data.login = false">注&nbsp;&nbsp;册 </h2>
 
                 <div class=" logo fadeIn first">
-                    <img src="/src/assets/logo.svg" id="icon" alt="favicon" />
+                    <img src="@/assets/logo.svg" id="icon" alt="favicon" />
                 </div>
 
                 <form method="post">
@@ -22,7 +22,7 @@
                 <h2 class="active">注&nbsp;&nbsp;册 </h2>
 
                 <div class=" logo fadeIn first">
-                    <img src="/src/assets/logo.svg" id="icon" alt="favicon" />
+                    <img src="@/assets/logo.svg" id="icon" alt="favicon" />
                 </div>
 
                 <form>

@@ -1,3 +1,16 @@
+<script lang="ts" setup>
+import StarryBackground from '@/components/StarryBackground.vue';
+import { onMounted } from 'vue';
+import avatar from '@/assets/avatar-2.png'
+
+onMounted(() => {
+    let classes = document.querySelector('body')!.classList
+    classes.remove('not-found')
+    classes.add('fixed')
+  document.querySelector('meta[name="theme-color"]')!.setAttribute("content", "#16161e");
+})
+
+</script>
 <template>
   <Teleport to="body">
     <div class="bg-wrapper">
@@ -5,7 +18,6 @@
     </div>
   </Teleport>
   <div class="home-main">
-    <link href="/src/assets/home.css" rel="stylesheet" type="text/css" />
     <div class="avatar-wrapper">
       <img class="avatar" :src="avatar" />
     </div>
@@ -19,16 +31,6 @@
     <p class="description">A tech Blog focus on full-stack Web development.</p>
   </div>
 </template>
-<script lang="ts" setup>
-import StarryBackground from '@/components/StarryBackground.vue';
-import { onMounted } from 'vue';
-import avatar from '../assets/avatar-2.png'
-
-onMounted(() => {
-  document.querySelector('meta[name="theme-color"]')!.setAttribute("content", "#16161e");
-})
-
-</script>
 <style scoped>
 .home-main {
   margin: auto;

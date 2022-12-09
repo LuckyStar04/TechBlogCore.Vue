@@ -2,7 +2,7 @@
 import req from '@/utils/request'
 import { getNow } from '@/utils/dates'
 import type { ArticleEdit } from '@/types'
-import { onMounted, reactive, watch } from 'vue'
+import { reactive, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import EditTag from '@/components/EditTag.vue'
 import marked from '@/utils/markdown'
@@ -101,7 +101,6 @@ const saveArticle = async () => {
 </script>
 <template>
     <div class="editor-wrapper" v-loading.fullscreen="data.isLoading">
-        <link href="/src/assets/editor.css" rel="stylesheet" type="text/css" />
         <input class="title" type="text" v-model="data.article.title" placeholder="请输入文章标题" />
         <div class="main">
             <div class="left">
@@ -119,6 +118,18 @@ const saveArticle = async () => {
     </div>
 </template>
 <style scoped>
+.content >>> textarea::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+.content >>> .el-textarea__inner {
+    height: 100%;
+}
+
+.content >>> textarea {
+    resize: none !important;
+    overflow: auto;
+}
 .editor-wrapper {
     height: calc(100vh - 80px);
     width: 100%;

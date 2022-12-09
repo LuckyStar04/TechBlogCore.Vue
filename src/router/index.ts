@@ -59,7 +59,24 @@ const router = createRouter({
         //rightSide: SidebarRight,
       },
     },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'NotFound',
+      components: {
+        default: () => import('@/views/NotFound.vue'),
+        //rightSide: SidebarRight,
+        //navigation: TheNavigation,
+      },
+    },
   ]
+})
+
+router.afterEach((to, from) => {
+  if (to.path != '/' && to.path != '/login') {
+    let classes = document.querySelector('body')?.classList
+    classes?.remove('fixed')
+    classes?.remove('not-found')
+  }
 })
 
 export default router

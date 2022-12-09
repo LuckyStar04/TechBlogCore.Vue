@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Trebuchet MS';
-    src: url('/src/assets/trebuc.ttf')
+    src: url('./trebuc.ttf')
 }
 
 pre {
@@ -32,6 +32,7 @@ code::-webkit-scrollbar {
     border-radius: 10px;
     transition: all .2s ease-in-out;
 }
+
 code::-webkit-scrollbar-thumb {
     background-color: #fff3;
     border-radius: 10px;
@@ -76,4 +77,63 @@ html.dark .thin-scrollbar::-webkit-scrollbar-thumb {
 
 .thin-scrollbar::-webkit-scrollbar-track {
     border-radius: 10px;
+}
+
+textarea::-webkit-scrollbar {
+    width: 6px;
+}
+
+textarea::-webkit-scrollbar-thumb {
+    background-color: #0003;
+    border-radius: 10px;
+    transition: all .2s ease-in-out;
+}
+
+html.dark textarea::-webkit-scrollbar-thumb {
+    background-color: #FFF3 !important;
+}
+
+body.fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+}
+
+body.fixed .el-container {
+    display: flex !important;
+}
+
+body.fixed .el-header {
+    display: none !important;
+}
+
+body.fixed .el-main {
+    padding: 0;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+}
+
+body.fixed .flex-main {
+    margin: 0 auto !important;
+}
+
+body.not-found .el-container {
+    display: block !important;
+}
+
+body.not-found .el-header {
+    display: none !important;
+}
+
+body.not-found .el-main {
+    margin: 0;
+    display: block;
+    background-color: transparent;
+    width: 100vw !important;
+    height: 100vh !important;
 }

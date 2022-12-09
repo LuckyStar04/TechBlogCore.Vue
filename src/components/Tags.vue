@@ -5,7 +5,7 @@ import req from '@/utils/request'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
-const colors = ['primary', 'success', 'info', 'warning', 'danger']
+//const colors = ['primary', 'success', 'info', 'warning', 'danger']
 
 const data = reactive({
     tags: [] as Array<TagModel>,

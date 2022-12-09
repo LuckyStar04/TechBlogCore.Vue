@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { ElMenu } from 'element-plus'
-import { Search, MoreFilled, Sunny, Moon } from '@element-plus/icons-vue'
+import { MoreFilled, Sunny, Moon } from '@element-plus/icons-vue'
 import logopng from '@/assets/logo-2.png'
-import { reactive, watch, watchEffect } from 'vue';
+import { reactive, watch } from 'vue';
 import Categories from '@/components/Categories.vue'
 import Tags from '@/components/Tags.vue'
 import SearchInput from '@/components/SearchInput.vue'

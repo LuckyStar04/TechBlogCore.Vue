@@ -93,8 +93,9 @@ const showExtraEmoji = () => {
 </script>
 <template>
     <div class="mc-wrapper" v-loading.fullscreen="data.isLoading" @click.stop="showExtraEmoji">
-        <input v-if="userStore.info.role" type="text" ref="input" class="comment" v-model="data.comment" :placeholder="placeholder" />
+        <input v-if="userStore.info.role" type="text" ref="input" class="comment" v-model="data.comment" :placeholder="placeholder" maxlength="1000" />
         <input v-else type="text" ref="input" class="comment" disabled v-model="data.comment" placeholder="您还未登录，先去登录"/>
+        <transition name="el-zoom-in-top">
         <div class="extra" v-if="showExtra">
             <div class="emojis">
                 <el-popover :width="380" trigger="click"
@@ -114,6 +115,7 @@ const showExtraEmoji = () => {
             </div>
             <el-button type="primary" @click="commitComment">发布</el-button>
         </div>
+        </transition>
     </div>
 </template>
 <style scoped>

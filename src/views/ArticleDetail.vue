@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import req from '@/utils/request'
-import { reactive, ref, watch } from 'vue';
+import { reactive, watch } from 'vue';
 import type { ArticleDetail, Comment } from '@/types'
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 import marked from '@/utils/markdown'
 import "highlight.js/styles/atom-one-dark.css";
 import { computed } from '@vue/reactivity'
@@ -89,7 +89,7 @@ const noteHtml = computed(() => {
             <p class="comment-title">{{data.article.comments.length}} 条评论</p>
             <div class="comment-body">
                 <Comments v-if="(data.article.comments.length > 0)" :comments="data.article.comments"></Comments>
-                <el-empty description="快来坐沙发吧~" :image-size="200" v-else></el-empty>
+                <el-empty description="快来坐沙发吧~" :image-size="200" v-else style="height: 380px;padding-top: 0;"></el-empty>
             </div>
         </div>
     </div>

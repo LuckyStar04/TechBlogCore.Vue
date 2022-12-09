@@ -1,9 +1,8 @@
 <script lang="ts" setup>
 import req from '@/utils/request'
-import { onMounted, reactive, watch } from 'vue';
-import type { ArticleList, TagModel, CategoryModel } from '../types/index'
-import { useRoute, useRouter } from 'vue-router'
-import { ElLoading } from 'element-plus'
+import { reactive, watch } from 'vue';
+import type { ArticleList } from '@/types'
+import { useRoute } from 'vue-router'
 import { parseDateTime } from '@/utils/dates'
 import markdownToTxt from 'markdown-to-txt'
 import { Plus } from '@element-plus/icons-vue'
