@@ -8,7 +8,7 @@ import userpng from '@/assets/panda.png'
 import type { Comment } from '@/types'
 import MakeComment from './MakeComment.vue'
 import Comments from '@/components/Comments.vue'
-import { CaretRight } from '@element-plus/icons-vue'
+import { CaretRight, ChatLineRound } from '@element-plus/icons-vue'
 
 const props = defineProps<{
     comment: Comment,
@@ -64,7 +64,7 @@ const showMakeComment = () => {
                 <span class="time-span">{{ getDateSpan(new Date(comment.commentTime)) }}</span>
                 <div class="buttons">
                     <!-- <el-button type="info" link v-if="(userStore.info.role == 'Admin' || comment.email == userStore.info.email)" @click="deleteComment(comment.id)">删除</el-button> -->
-                    <el-button type="info" link @click="showMakeComment">回复</el-button>
+                    <el-button type="info" link :icon="ChatLineRound" @click="showMakeComment">回复</el-button>
                 </div>
             </div>
             <MakeComment class="make-comment" v-show="data.showReply" :placeholder="`回复 ${comment.userName}：`" :articleId="props.comment.articleId.toString()"
