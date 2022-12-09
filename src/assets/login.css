@@ -1,3 +1,7 @@
+.el-container {
+    display: flex !important;
+  }
+
 .el-header {
     display: none !important;
 }

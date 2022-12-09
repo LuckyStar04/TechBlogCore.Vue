@@ -2,7 +2,7 @@
 import { ElMenu } from 'element-plus'
 import { Search, MoreFilled, Sunny, Moon } from '@element-plus/icons-vue'
 import logopng from '@/assets/logo-2.png'
-import { reactive, watch } from 'vue';
+import { reactive, watch, watchEffect } from 'vue';
 import Categories from '@/components/Categories.vue'
 import Tags from '@/components/Tags.vue'
 import SearchInput from '@/components/SearchInput.vue'
@@ -10,7 +10,17 @@ import UserAvatar from '@/components/UserAvatar.vue'
 import { useRoute } from 'vue-router'
 import { useDark } from '@vueuse/core'
 
-const isDark = useDark()
+const isDark = useDark({
+  onChanged(dark: boolean) {
+    if (dark) {
+        document.querySelector('html')!.classList.add('dark')
+        document.querySelector('meta[name="theme-color"]')!.setAttribute('content', '#121212')
+    } else {
+        document.querySelector('html')!.classList.remove('dark')
+        document.querySelector('meta[name="theme-color"]')!.setAttribute('content', '#ffffff')
+    }
+  },
+})
 
 const route = useRoute()
 
@@ -18,6 +28,7 @@ const data = reactive({
     drawer: false,
     search: '',
 })
+
 watch(() => route.query, () => {
     data.drawer = false
 })
@@ -105,13 +116,13 @@ watch(() => route.query, () => {
 
 @media only screen and (min-width: 1440px) {
     .navigations-wrapper {
-        width: 1400px;
+        width: 1150px;
     }
 }
 
 @media only screen and (min-width: 1024px) and (max-width: 1440px) {
     .navigations-wrapper {
-        width: 1000px;
+        width: 960px;
     }
 }
 

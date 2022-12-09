@@ -13,7 +13,12 @@ html.dark img.math-block,html.dark img.math-inline{
     margin-right:.2em
 }
 .note-view{
-    font-size:16px
+    font-size:16px;
+    color: var(--el-text-color-regular);
+}
+
+.note-view ol,.note-view ul{
+    padding-left:0
 }
 .note-view blockquote p{
     font-weight:400;
@@ -194,6 +199,9 @@ html.dark .note-view code{
 .note-view table thead th{
     vertical-align:middle;
     text-align:inherit
+}
+.note-view table thead th[align="center"] {
+    text-align: center;
 }
 .note-view table tr:nth-of-type(2n){
     background-color:hsla(0,0%,71%,.1)

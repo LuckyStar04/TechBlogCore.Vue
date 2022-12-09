@@ -1,14 +1,19 @@
 <script lang="ts" setup>
 import req from '@/utils/request'
-import { watchEffect, reactive, ref, watch } from 'vue';
-import type { ArticleParam, ArticleList, TagModel, CategoryModel, ArticleDetail } from '@/types'
+import { reactive, ref, watch } from 'vue';
+import type { ArticleDetail, Comment } from '@/types'
 import { useRoute, useRouter } from 'vue-router'
 import marked from '@/utils/markdown'
 import "highlight.js/styles/atom-one-dark.css";
 import { computed } from '@vue/reactivity'
 import { parseDateTime } from '@/utils/dates'
+import { EditPen } from '@element-plus/icons-vue'
+import Comments from '@/components/Comments.vue'
+import MakeComment from '@/components/MakeComment.vue'
+import { useUserStore } from '@/stores/UserStore'
 
 const route = useRoute()
+const userStore = useUserStore()
 
 
 const data = reactive({
@@ -38,6 +43,10 @@ const fetchData = async () => {
     }
 }
 
+const addComment = (comment: Comment) => {
+    data.article.comments.push(comment)
+}
+
 watch(() => route.params.id, fetchData)
 fetchData()
 const noteHtml = computed(() => {
@@ -50,52 +59,48 @@ const noteHtml = computed(() => {
     <div v-loading.fullscreen="data.isLoading" class="wrapper">
         <div class="article-title">
             <h1>{{ data.article.title }}</h1>
+            <RouterLink :to="{ name: 'editArticle', params: { id: route.params.id } }"><el-button type="primary" plain :icon="EditPen">编辑文章</el-button></RouterLink>
         </div>
-        <div class="meta-info">
-            <div class="subtitle">
-                分类 - <RouterLink :to="{ name: 'articles', query: { category: data.article.category } }">{{
-                        data.article.category
-                }}</RouterLink>
-                <br />
-                <span v-if="data.article.modifyTime != data.article.createTime">修改于
-                    {{ parseDateTime(data.article.modifyTime, true) }}</span>
-                <span v-else>创建于 {{ parseDateTime(data.article.createTime, true) }}</span>
-                <span>{{ data.article.viewCount }} 人阅读</span>
-            </div>
-            <div class="tags">
+        <table class="meta-table">
+            <tbody>
+                <tr>
+                    <td>分类</td><td><RouterLink :to="{ name: 'articles', query: { category: data.article.category } }">{{data.article.category}}</RouterLink></td>
+                </tr>
+                <tr>
+                    <td>创建于</td><td>{{ parseDateTime(data.article.createTime, true) }}&nbsp;&nbsp;&nbsp;&nbsp;{{ data.article.viewCount }} 人阅读</td>
+                </tr>
+                <tr>
+                    <td>标签</td><td><div class="tags">
                 <RouterLink v-for="(tag, index) in data.article.tags" :to="{ name: 'articles', query: { tag: tag } }">
                     <el-tag :key="tag" class="mx-1">{{ tag }}</el-tag>
                 </RouterLink>
-            </div>
-        </div>
+            </div></td>
+                </tr>
+            </tbody>
+        </table>
         <div class="articles">
             <div class="note-view" v-html="noteHtml"></div>
-            <h2>评论</h2>
-            <hr />
-            <div class="comments">
-                <template v-if="data.article.comments.length > 0">
-                    <div v-for="comment in data.article.comments">
-                        <div>{{ comment.userName }}</div>
-                        <div>{{ comment.content }}</div>
-                        <div v-if="comment.modifyTime">修改时间：{{ comment.modifyTime }}</div>
-                        <div v-else>评论时间：{{ comment.commentTime }}</div>
-                        <div class="children-comments">
-                            <div v-for="child in comment.children">
-                                <div>{{ child.userName }}</div>
-                                <div>{{ child.content }}</div>
-                                <div v-if="child.modifyTime">修改时间：{{ child.modifyTime }}</div>
-                                <div v-else>评论时间：{{ child.commentTime }}</div>
-                            </div>
-                        </div>
-                    </div>
-                </template>
-                <p v-else>没有评论哦，快来坐沙发吧~</p>
+            <div class="make-comment">
+                <div class="make-comment-avatar">
+                    <img class="avatar" :src="userStore.info.avatar" />
+                </div>
+                <MakeComment placeholder="期待您的更多见解 :)" :article-id="route.params.id.toString()" @comment-success="addComment"></MakeComment>
+            </div>
+            <p class="comment-title">{{data.article.comments.length}} 条评论</p>
+            <div class="comment-body">
+                <Comments v-if="(data.article.comments.length > 0)" :comments="data.article.comments"></Comments>
+                <el-empty description="快来坐沙发吧~" :image-size="200" v-else></el-empty>
             </div>
         </div>
     </div>
 </template>
 <style scoped>
-.article-title, .meta-info {
+.article-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.article-title, .meta-table {
     font-family: 'Trebuchet MS';
 }
 a {
@@ -104,15 +109,36 @@ a {
 
 .wrapper {
     margin: .5rem;
+    width: calc(100% - 400px);
 }
 .article-title, .articles {
     padding: 1rem;
 }
 .article-title>h1{
+    display: inline-block;
     line-height: 0;
 }
 .article-title {
     border-bottom: 1px solid var(--el-border-color-light);
+}
+.meta-table {
+    width: 100%;
+    color: #8590a6;
+    padding: 1rem;
+    border-bottom: 1px solid var(--el-border-color-light);
+}
+.meta-table a {
+    color: var(--el-text-color-regular);
+}
+.meta-table td {
+    text-align: left;
+    vertical-align: middle;
+}
+.meta-table a:hover {
+    color: var(--el-text-color-secondary);
+}
+.meta-table tr>td:first-child {
+    width: 60px;
 }
 .meta-info {
     padding: 1rem;
@@ -138,15 +164,33 @@ a {
 }
 
 .tags>a {
-    margin: 0 .5rem .5rem 0;
+    margin: 0 .5rem 0 0;
 }
 
-/* @media only screen and (max-width: 768px) {
-    .wrapper {
-        height: calc(100vh - 5rem);
-        overflow: auto;
-        overflow-y: scroll;
-        padding: 1rem 1.5rem 0 1.5rem;
-    }
-} */
+.comment-title {
+    font-weight: 600;
+    font-size: var(--el-font-size-large);
+    color: var(--el-text-color-regular);
+    line-height: 0;
+    padding: 15px 0 30px 0;
+    border-bottom: 1px solid var(--el-border-color-light);
+}
+
+.make-comment {
+    padding-top: 30px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.make-comment-avatar {
+    display: inline-block;
+    width: 57px;
+}
+.make-comment-avatar>img {
+    width: 48px;
+    border-radius: 5px;
+}
+.comment-body {
+    min-height: 300px;
+}
 </style>

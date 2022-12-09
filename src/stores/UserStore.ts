@@ -30,6 +30,7 @@ export const useUserStore = defineStore('user', () => {
     welcome.value = w
     timer = setTimeout(
       getWelcome, (60 - new Date().getMinutes()) * 60000)
+    getStatus()
   }
   getWelcome()
   timer = setTimeout(

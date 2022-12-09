@@ -1,0 +1,79 @@
+@font-face {
+    font-family: 'Trebuchet MS';
+    src: url('/src/assets/trebuc.ttf')
+}
+
+pre {
+    border-radius: 6px !important;
+}
+
+.hljs {
+    font-family: 'Courier New', monospace;
+}
+
+#app {
+    height: 100%;
+}
+
+html,
+body {
+    margin: 0;
+    min-height: 100vh;
+}
+
+.regular-scrollbar::-webkit-scrollbar,
+code::-webkit-scrollbar {
+    height: 6px;
+    width: 6px;
+}
+
+.regular-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #0003;
+    border-radius: 10px;
+    transition: all .2s ease-in-out;
+}
+code::-webkit-scrollbar-thumb {
+    background-color: #fff3;
+    border-radius: 10px;
+    transition: all .2s ease-in-out;
+}
+
+html.dark .regular-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #FFF3 !important;
+}
+
+.regular-scrollbar::-webkit-scrollbar-track,
+code::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+.el-drawer__body {
+    padding: .2rem !important;
+}
+
+html {
+    --header-shadow: 0px 0px 12px rgba(0, 0, 0, .12);
+}
+
+html.dark {
+    --header-shadow: 0px 0px;
+}
+
+.thin-scrollbar::-webkit-scrollbar {
+    height: 3px;
+    width: 3px;
+}
+
+.thin-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #0003;
+    border-radius: 10px;
+    transition: all .2s ease-in-out;
+}
+
+html.dark .thin-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #FFF3 !important;
+}
+
+.thin-scrollbar::-webkit-scrollbar-track {
+    border-radius: 10px;
+}

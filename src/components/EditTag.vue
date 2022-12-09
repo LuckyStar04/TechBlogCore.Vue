@@ -1,5 +1,5 @@
 <template>
-  <div style="display:block;">
+  <div class="wrapper thin-scrollbar">
     <el-tag v-for="tag in modelValue" :key="tag" class="mx-1" closable :disable-transitions="false"
       @close="handleClose(tag)">
       {{ tag }}
@@ -39,7 +39,7 @@ const showInput = () => {
 }
 
 const handleInputConfirm = () => {
-  if (inputValue.value) {
+  if (inputValue.value && !props.modelValue.includes(inputValue.value)) {
     props.modelValue.push(inputValue.value)
   }
   inputVisible.value = false
@@ -47,6 +47,17 @@ const handleInputConfirm = () => {
 }
 </script>
 <style scoped>
+.wrapper {
+  display: flex;
+  flex-grow: row nowrap;
+  overflow: auto;
+  overflow-x: scroll;
+}
+
+.wrapper > * {
+  flex-shrink: 0;
+}
+
 .mx-1 {
   margin-left: 0.25rem;
   margin-right: 0.25rem;

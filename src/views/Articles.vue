@@ -1,11 +1,12 @@
 <script lang="ts" setup>
 import req from '@/utils/request'
-import { reactive, watch } from 'vue';
+import { onMounted, reactive, watch } from 'vue';
 import type { ArticleList, TagModel, CategoryModel } from '../types/index'
 import { useRoute, useRouter } from 'vue-router'
 import { ElLoading } from 'element-plus'
 import { parseDateTime } from '@/utils/dates'
 import markdownToTxt from 'markdown-to-txt'
+import { Plus } from '@element-plus/icons-vue'
 
 const route = useRoute()
 
@@ -48,6 +49,7 @@ fetchData()
             <h2 v-else-if="route.query.category" class="color-primary"># 文章分类：{{ route.query.category }}</h2>
             <h2 v-else-if="route.query.keyword" class="color-purple"># 关键字搜索：{{route.query.keyword}}</h2>
             <h2 v-else>文章列表</h2>
+            <RouterLink :to="{ name: 'createArticle' }"><el-button type="primary" plain :icon="Plus">创建文章</el-button></RouterLink>
         </div>
         <div class="articles">
             <div class="article" v-for="article in data.articles">
@@ -67,6 +69,20 @@ fetchData()
     font-family: 'Trebuchet MS';
 }
 
+.article-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.article-title > h2 {
+    display: inline;
+    line-height: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
 h1, h2, h3 {
     color: var(--el-text-color-regular);
 }
@@ -76,7 +92,7 @@ h1, h2, h3 {
 }
 
 .color-primary {
-    color: var(--el-text-color-primary);
+    color: var(--el-color-primary);
 }
 
 .color-purple {
@@ -88,9 +104,6 @@ h1, h2, h3 {
 }
 .article-title {
     border-bottom: 1px solid var(--el-border-color-light);
-}
-.article-title>h2{
-    line-height: 0;
 }
 .article {
     border-bottom: 1px solid var(--el-border-color-light);
@@ -122,32 +135,6 @@ h1, h2, h3 {
 }
 
 .wrapper {
-    /* height: calc(100vh - 5rem); */
     margin: .5rem;
-    /* box-shadow: 0 1px 3px hsl(0deg 0% 7% / 10%);
-    border-radius: 5px; */
 }
-
-/* .wrapper::-webkit-scrollbar {
-    width: 6px;
-}
-
-.wrapper::-webkit-scrollbar-thumb {
-    background-color: #0003;
-    border-radius: 10px;
-    transition: all .2s ease-in-out;
-}
-
-.wrapper::-webkit-scrollbar-track {
-    border-radius: 10px;
-} */
-
-/* @media only screen and (max-width: 768px) {
-    .wrapper {
-        height: calc(100vh - 8rem);
-        overflow: auto;
-        overflow-y: scroll;
-        padding: 1rem 1.5rem 0 1.5rem;
-    }
-} */
 </style>

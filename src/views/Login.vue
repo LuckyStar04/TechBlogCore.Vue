@@ -10,7 +10,12 @@
 <script lang="ts" setup>
 import LoginForm from '@/components/LoginForm.vue'
 import StarryBackground from '@/components/StarryBackground.vue'
+import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+
+onMounted(() => {
+    document.querySelector('meta[name="theme-color"]')!.setAttribute("content", "#16161e")
+})
 
 const router = useRouter()
 const jumpHome = () => {

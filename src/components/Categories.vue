@@ -2,8 +2,9 @@
 import type { CategoryModel } from '@/types';
 import { reactive } from 'vue';
 import req from '@/utils/request'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
+const route = useRoute()
 const router = useRouter()
 const data = reactive({
     categories: [] as Array<CategoryModel>,
@@ -27,13 +28,16 @@ const jumpCategory = (category: string) => {
     <div class="wrapper">
         <div class="category-title"><h2>文章分类</h2></div>
         <ul class="categories">
-            <li v-for="category in data.categories" @click="jumpCategory(category.name)">
+            <li v-for="category in data.categories" @click="jumpCategory(category.name)" :class="(route.query.category==category.name?'active':'')">
                 {{ category.name }} ({{category.count}})
             </li>
         </ul>
     </div>
 </template>
 <style scoped>
+* {
+    font-family: 'Trebuchet MS';
+}
 a {
     text-decoration: none !important;
 }
@@ -57,18 +61,15 @@ h1, h2, h3 {
 }
 li {
     list-style-type: none;
-    padding: .6rem 0 .6rem .2rem;
+    padding: .6rem 0 .6rem .8rem;
     cursor: pointer;
-    color: var(--el-text-color-secondary);
-    font-family: var(--el-font-family);
-    /* font-weight: bold; */
+    color: var(--el-color-info);
+    border-radius: 8px;
 }
-li:not(:last-child) {
-    border-bottom: 1px solid var(--el-border-color-light);
+li.active {
+    font-weight: 600;
+    color: var(--el-color-primary);
+    transition: color .25s;
+    background-color: rgba(var(--el-color-primary-rgb), .1);
 }
-/* @media only screen and (max-width: 768px) {
-    .wrapper {
-        margin: 0;
-    }
-} */
 </style>

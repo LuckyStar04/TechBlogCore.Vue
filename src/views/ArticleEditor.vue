@@ -2,7 +2,7 @@
 import req from '@/utils/request'
 import { getNow } from '@/utils/dates'
 import type { ArticleEdit } from '@/types'
-import { reactive, watch } from 'vue'
+import { onMounted, reactive, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import EditTag from '@/components/EditTag.vue'
 import marked from '@/utils/markdown'
@@ -11,7 +11,6 @@ import { Edit } from '@element-plus/icons-vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import type { AxiosResponse } from 'axios'
 import { computed } from '@vue/reactivity'
-
 
 const route = useRoute()
 const router = useRouter()
@@ -65,33 +64,38 @@ const saveArticle = async () => {
     }
     data.isLoading = true
     let response: AxiosResponse<any, any>
-    if (route.params.id) {
-        response = await req.request({
-            url: `articles/${route.params.id}`, method: 'put', data: data.article
-        })
-    } else {
-        response = await req.request({
-            url: 'articles', method: 'post', data: data.article
-        })
-    }
-    if (response.status == 200 || response.status == 201) {
-        data.isLoading = false
-        ElMessageBox.confirm('保存成功', '成功', {
+    try {
+        if (route.params.id) {
+            response = await req.request({
+                url: `articles/${route.params.id}`, method: 'put', data: data.article
+            })
+        } else {
+            response = await req.request({
+                url: 'articles', method: 'post', data: data.article
+            })
+        }
+        if (response.status == 200 || response.status == 201) {
+            data.isLoading = false
+            ElMessageBox.confirm('保存成功', '成功', {
                 confirmButtonText: '跳转',
                 cancelButtonText: '关闭',
                 type: 'success',
             })
-            .then(() => {
-                if (route.params.id) {
-                    router.push({ name: 'articleDetail', params: { id: route.params.id } })
-                } else {
-                    router.push({ name: 'articleDetail', params: { id: response.data.id } })
-                }
-            })
-            .catch((e) => {
-                console.log(e)
-            })
-        return
+                .then(() => {
+                    if (route.params.id) {
+                        router.push({ name: 'articleDetail', params: { id: route.params.id } })
+                    } else {
+                        router.push({ name: 'articleDetail', params: { id: response.data.id } })
+                    }
+                })
+                .catch((e) => {
+                    console.log(e)
+                })
+            return
+        }
+    } catch (ex: any) {
+        data.isLoading = false
+        ElMessage({ message: '保存失败', type: 'error' })
     }
 }
 </script>
@@ -102,13 +106,13 @@ const saveArticle = async () => {
         <div class="main">
             <div class="left">
                 <div class="tag-wrapper">
-                    <el-input class="category" v-model="data.article.category" placeholder="请输入文章分类" clearable />
+                    <el-input class="category" v-model="data.article.category" placeholder="输入分类" clearable />
                     <EditTag class="tags" v-model="data.article.tags"></EditTag>
-                    <el-button type="primary" class="save" size="small" :icon="Edit" @click="saveArticle">保存</el-button>
+                    <el-button type="primary" class="save" plain :icon="Edit" @click="saveArticle">保存</el-button>
                 </div>
-                <el-input class="content" v-model="data.article.content" type="textarea"/>
+                <el-input class="content" v-model="data.article.content" type="textarea" />
             </div>
-            <div class="right">
+            <div class="right regular-scrollbar">
                 <div class="note-view" v-html="noteHtml"></div>
             </div>
         </div>
@@ -116,26 +120,33 @@ const saveArticle = async () => {
 </template>
 <style scoped>
 .editor-wrapper {
-    height: calc(100vh - 6.25rem);
+    height: calc(100vh - 80px);
+    width: 100%;
+    margin-top: 10px;
 }
 
 .title {
+    box-sizing: border-box;
     display: block;
-    width: 96%;
+    width: 100%;
     font-size: 2rem;
-    color: #566;
+    color: var(--el-text-color-regular);
+    background-color: var(--el-bg-color);
     border: 0px;
     padding: 0 1rem 1rem;
     outline: none;
+    overflow: hidden;
 }
 
 .main {
-    background-color: #E7E9EB;
+    background-color: var(--el-bg-color-page);
     width: 100%;
-    height: calc(100vh - 9.6rem);
+    height: calc(100vh - 143px);
+    border-radius: 6px;
 }
 
-.left, .right {
+.left,
+.right {
     box-sizing: border-box;
     width: 50%;
     height: 100%;
@@ -144,10 +155,12 @@ const saveArticle = async () => {
 }
 
 .left {
-    border-right: 1px solid #bcc;
+    border-right: 1px solid var(--el-border-color-light);
 }
+
 .right {
     overflow: auto;
+    padding: 12px;
 }
 
 .left>.tag-wrapper {
@@ -155,13 +168,15 @@ const saveArticle = async () => {
     display: flex;
     align-items: baseline;
 }
-.tag-wrapper > .category {
+
+.tag-wrapper>.category {
     width: 200px;
+    flex-shrink: 0;
 }
 
 .tag-wrapper>.tags {
     flex-grow: 1;
-    margin-left: 6px;
+    margin: 0 6px;
 }
 
 .tag-wrapper .save {
@@ -169,7 +184,29 @@ const saveArticle = async () => {
 }
 
 .left>.content {
-    height: calc(100vh - 13.475rem)
+    height: calc(100vh - 210px);
 }
 
+@media only screen and (max-width: 768px) {
+    .tag-wrapper>.category {
+        width: 100px !important;
+    }
+
+    .left,
+    .right {
+        display: inline;
+        box-sizing: border-box;
+        width: 100%;
+        height: 50%;
+        padding: 10px;
+    }
+
+    .left {
+        border-bottom: 1px solid var(--el-border-color-light);
+    }
+
+    .left>.content {
+        height: calc(100% - 48px);
+    }
+}
 </style>

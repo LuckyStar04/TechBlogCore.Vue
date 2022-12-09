@@ -4,62 +4,13 @@
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" href="/favicon.ico" />
+  <link href="/src/assets/index.css" rel="stylesheet" type="text/css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#409eff">
+  <meta name="theme-color" content="#16161e">
   <title>TechBlogCore.Vue</title>
-  <style>
-    @font-face {
-      font-family: 'Trebuchet MS';
-      src: url('/src/assets/trebuc.ttf')
-    }
-
-    pre {
-      border-radius: 6px !important;
-    }
-
-    .hljs {
-      font-family: 'Courier New', monospace;
-    }
-
-    #app {
-      height: 100%;
-    }
-
-    html,
-    body {
-      margin: 0;
-      min-height: 100vh;
-    }
-
-    body::-webkit-scrollbar {
-      width: 6px;
-    }
-
-    body::-webkit-scrollbar-thumb {
-      background-color: #0003;
-      border-radius: 10px;
-      transition: all .2s ease-in-out;
-    }
-
-    body::-webkit-scrollbar-track {
-      border-radius: 10px;
-    }
-
-    .el-drawer__body {
-      padding: .2rem !important;
-    }
-
-    html {
-      --header-shadow: 0px 0px 12px rgba(0, 0, 0, .12);
-    }
-
-    html.dark {
-      --header-shadow: 0px 0px;
-    }
-  </style>
 </head>
 
-<body>
+<body class="regular-scrollbar">
   <div id="app"></div>
   <script type="module" src="/src/main.ts"></script>
 </body>

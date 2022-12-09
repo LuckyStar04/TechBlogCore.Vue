@@ -6,6 +6,11 @@ textarea::-webkit-scrollbar-thumb {
     border-radius: 10px;
     transition: all .2s ease-in-out;
 }
+
+html.dark textarea::-webkit-scrollbar-thumb {
+    background-color: #FFF3 !important;
+}
+
 textarea::-webkit-scrollbar-track {
     border-radius: 10px;
 }
@@ -15,5 +20,6 @@ textarea::-webkit-scrollbar-track {
 }
 
 textarea {
+    resize: none !important;
     overflow: auto;
 }

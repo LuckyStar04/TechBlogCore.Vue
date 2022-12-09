@@ -21,7 +21,12 @@
 </template>
 <script lang="ts" setup>
 import StarryBackground from '@/components/StarryBackground.vue';
+import { onMounted } from 'vue';
 import avatar from '../assets/avatar-2.png'
+
+onMounted(() => {
+  document.querySelector('meta[name="theme-color"]')!.setAttribute("content", "#16161e");
+})
 
 </script>
 <style scoped>

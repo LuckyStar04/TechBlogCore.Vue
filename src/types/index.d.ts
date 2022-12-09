@@ -40,10 +40,13 @@ export interface ArticleParam {
 
 export interface Comment {
     id: number,
+    parentId: number,
+    articleId: number,
     userName: string,
     email: string,
     role: string,
     content: string,
+    replyTo: string,
     commentTime: Date,
     modifyTime: Date | any,
     children: Array<Comment>

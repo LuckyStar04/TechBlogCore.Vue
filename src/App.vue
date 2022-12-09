@@ -19,6 +19,7 @@ import { ElContainer, ElHeader, ElMain } from 'element-plus'
 <style scoped>
 #app,
 .el-container {
+  display: block;
   min-height: 100vh;
 }
 
@@ -50,22 +51,22 @@ import { ElContainer, ElHeader, ElMain } from 'element-plus'
 
 @media only screen and (min-width: 1440px) {
   .flex-main {
-    width: 1400px;
+    width: 1150px;
   }
 
   .grow-1 {
-    width: 400px;
+    width: 360px;
     flex-shrink: 0;
   }
 }
 
 @media only screen and (min-width: 1024px) and (max-width: 1440px) {
   .flex-main {
-    width: 1000px;
+    width: 960px;
   }
 
   .grow-1 {
-    width: 350px;
+    width: 320px;
     flex-shrink: 0;
   }
 }
@@ -76,7 +77,7 @@ import { ElContainer, ElHeader, ElMain } from 'element-plus'
   }
 
   .grow-1 {
-    width: 300px;
+    width: 280px;
     flex-shrink: 0;
   }
 }
