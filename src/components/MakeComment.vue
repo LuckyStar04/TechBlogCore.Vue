@@ -82,11 +82,19 @@ const commitComment = async () => {
     }
 }
 
+const showExtraEmoji = () => {
+    if(userStore.info.role) {
+        showExtra.value = true
+    } else {
+        userStore.isShowLoginForm = true
+    }
+}
 
 </script>
 <template>
-    <div class="mc-wrapper" v-loading.fullscreen="data.isLoading" @click.stop="showExtra=true">
-        <input type="text" ref="input" class="comment" v-model="data.comment" :placeholder="placeholder" />
+    <div class="mc-wrapper" v-loading.fullscreen="data.isLoading" @click.stop="showExtraEmoji">
+        <input v-if="userStore.info.role" type="text" ref="input" class="comment" v-model="data.comment" :placeholder="placeholder" />
+        <input v-else type="text" ref="input" class="comment" disabled v-model="data.comment" placeholder="您还未登录，先去登录"/>
         <div class="extra" v-if="showExtra">
             <div class="emojis">
                 <el-popover :width="380" trigger="click"

@@ -5,16 +5,12 @@ import LoginForm from './LoginForm.vue'
 import { useUserStore } from '@/stores/UserStore'
 const store = useUserStore()
 
-const data = reactive({
-    showLoginForm: false,
-})
-
 const toggleLogin = () => {
-    data.showLoginForm = !data.showLoginForm
+    store.isShowLoginForm = !store.isShowLoginForm
 }
 
 const loginSuccess = async () => {
-    data.showLoginForm = false
+    store.isShowLoginForm = false
     await store.getStatus()
 }
 const logout = async () => {
@@ -24,7 +20,7 @@ const logout = async () => {
 </script>
 <template>
     <Teleport to="body">
-        <div class="pos-fixed" v-show="data.showLoginForm" @click="toggleLogin">
+        <div class="pos-fixed" v-show="store.isShowLoginForm" @click="toggleLogin">
             <LoginForm @callback="loginSuccess"></LoginForm>
         </div>
     </Teleport>

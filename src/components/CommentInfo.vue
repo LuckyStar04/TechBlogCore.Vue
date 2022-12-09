@@ -43,6 +43,14 @@ const addComment = (comment: Comment) => {
     }
     data.showReply = false
 }
+
+const showMakeComment = () => {
+    if (!userStore.info.role) {
+        userStore.isShowLoginForm = true
+    } else {
+        data.showReply = !data.showReply
+    }
+}
 </script>
 <template>
     <div class="comment-info">
@@ -56,10 +64,10 @@ const addComment = (comment: Comment) => {
                 <span class="time-span">{{ getDateSpan(new Date(comment.commentTime)) }}</span>
                 <div class="buttons">
                     <!-- <el-button type="info" link v-if="(userStore.info.role == 'Admin' || comment.email == userStore.info.email)" @click="deleteComment(comment.id)">删除</el-button> -->
-                    <el-button type="info" link @click="(data.showReply = !data.showReply)">回复</el-button>
+                    <el-button type="info" link @click="showMakeComment">回复</el-button>
                 </div>
             </div>
-            <MakeComment v-show="data.showReply" :placeholder="`回复 ${comment.userName}：`" :articleId="props.comment.articleId.toString()"
+            <MakeComment class="make-comment" v-show="data.showReply" :placeholder="`回复 ${comment.userName}：`" :articleId="props.comment.articleId.toString()"
                 :parentId="comment.parentId ? comment.parentId : comment.id" :replyTo="comment.userName"  @comment-success="addComment"></MakeComment>
             <Comments v-if="(comment.children.length > 0)" :comments="comment.children"></Comments>
         </div>
@@ -106,5 +114,9 @@ const addComment = (comment: Comment) => {
 
 .meta > .time-span {
     color: var(--el-color-info);
+}
+
+.make-comment {
+    margin-bottom: 10px;
 }
 </style>

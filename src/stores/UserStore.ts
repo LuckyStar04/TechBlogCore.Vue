@@ -8,6 +8,7 @@ import userpng from '@/assets/panda.png'
 
 export const useUserStore = defineStore('user', () => {
   const welcome = ref('')
+  const isShowLoginForm = ref(false)
   const info: UserInfo = reactive({
     user: '',
     email: '',
@@ -65,5 +66,5 @@ export const useUserStore = defineStore('user', () => {
       info.avatar = nologinpng
     }
   }
-  return { info, welcome, getStatus }
+  return { info, welcome, getStatus, isShowLoginForm }
 })
