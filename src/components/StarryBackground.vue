@@ -47,7 +47,14 @@
 	pointer-events: none;
 	width: 100vw;
 	height: 100vh;
-	background: linear-gradient(#16161d, #1f1f3a, #3b2f4a);
+	// background: linear-gradient(#16161d, #1f1f3a, #3b2f4a);
+	
+    // background: url(/src/assets/NotFound/bg_purple.png);
+    // background-repeat: repeat-x;
+    // background-size: cover;
+    // background-position: left top;
+
+	background: radial-gradient(ellipse at bottom, #5c346a, #3c3062);
 	overflow: hidden;
 }
 

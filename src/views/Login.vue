@@ -1,14 +1,14 @@
 <script lang="ts" setup>
 import LoginForm from '@/components/LoginForm.vue'
 import StarryBackground from '@/components/StarryBackground.vue'
-import { onMounted } from 'vue'
+import { onBeforeMount } from 'vue'
 import { useRouter } from 'vue-router'
 
-onMounted(() => {
+onBeforeMount(() => {
     let classes = document.querySelector('body')!.classList
     classes.remove('not-found')
     classes.add('fixed')
-    document.querySelector('meta[name="theme-color"]')!.setAttribute("content", "#16161e")
+    document.querySelector('meta[name="theme-color"]')!.setAttribute("content", "#403163")
 })
 
 const router = useRouter()

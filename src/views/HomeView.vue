@@ -1,13 +1,13 @@
 <script lang="ts" setup>
 import StarryBackground from '@/components/StarryBackground.vue';
-import { onMounted } from 'vue';
-import avatar from '@/assets/avatar-2.png'
+import { onBeforeMount } from 'vue';
+import avatar from '@/assets/avatar-1.png'
 
-onMounted(() => {
+onBeforeMount(() => {
     let classes = document.querySelector('body')!.classList
     classes.remove('not-found')
     classes.add('fixed')
-  document.querySelector('meta[name="theme-color"]')!.setAttribute("content", "#16161e");
+    document.querySelector('meta[name="theme-color"]')!.setAttribute("content", "#403163")
 })
 
 </script>
@@ -23,12 +23,13 @@ onMounted(() => {
     </div>
     <p class="title">TechBlogCore.Vue</p>
     <div class="navigations">
-      <RouterLink :to="{ name: 'login' }">登录</RouterLink>
-      <RouterLink :to="{ name: 'articles' }">文章</RouterLink>
-      <RouterLink :to="{ name: 'editArticle', params: { id: 2 } }">编辑</RouterLink>
-      <RouterLink :to="{ name: 'createArticle' }">新建</RouterLink>
+      <RouterLink :to="{ name: 'login' }">登&nbsp;&nbsp;&nbsp;录</RouterLink>
+      <RouterLink :to="{ name: 'articles' }">文&nbsp;&nbsp;&nbsp;章</RouterLink>
+      <!-- <RouterLink :to="{ name: 'editArticle', params: { id: 2 } }">编辑</RouterLink>
+      <RouterLink :to="{ name: 'createArticle' }">新建</RouterLink> -->
+      <a href="https://github.com/LuckyStar04/TechBlogCore.Vue" target="_blank">Github</a>
     </div>
-    <p class="description">A tech Blog focus on full-stack Web development.</p>
+    <p class="description">A tech Blog focus on Linux & full-stack Web development.</p>
   </div>
 </template>
 <style scoped>
@@ -71,6 +72,7 @@ onMounted(() => {
   animation: avataranime .6s;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
+  background-color: #3b2e5c;
 }
 
 @keyframes avataranime {
@@ -104,7 +106,6 @@ onMounted(() => {
   font-family: '微软雅黑', Verdana, Geneva, Tahoma, sans-serif;
   font-size: 1.6rem;
   font-weight: lighter;
-  letter-spacing: 1rem;
 }
 
 .navigations a:hover {
@@ -138,8 +139,7 @@ onMounted(() => {
   }
 
   .navigations a {
-    font-size: 1rem;
-    letter-spacing: .6rem;
+    font-size: 1.2rem;
   }
 }
 </style>

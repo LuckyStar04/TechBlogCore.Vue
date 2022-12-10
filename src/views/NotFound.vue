@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-import { onMounted } from 'vue'
+import { onBeforeMount } from 'vue'
 import _404 from '@/assets/NotFound/404.png'
 import astronaut from '@/assets/NotFound/astronaut.svg'
 import earth from '@/assets/NotFound/earth.svg'
 import moon from '@/assets/NotFound/moon.svg'
 import rocket from '@/assets/NotFound/rocket.svg'
 
-onMounted(() => {
+onBeforeMount(() => {
     let classes = document.querySelector('body')!.classList
     classes.remove('fixed')
     classes.add('not-found')
@@ -94,10 +94,11 @@ onMounted(() => {
   position: fixed;
   top: 0;
   left: 0;
-    background: url(/src/assets/NotFound/bg_purple.png);
+    /* background: url(/src/assets/NotFound/bg_purple.png);
     background-repeat: repeat-x;
     background-size: cover;
-    background-position: left top;
+    background-position: left top; */
+    background: radial-gradient(ellipse at bottom, #5c346a, #3c3062);
     height: 100vh;
     width: 100vw;
     overflow: hidden;
@@ -163,7 +164,7 @@ li a:hover {
 .btn-go-home{
     position: relative;
     z-index: 200;
-    margin: 15px auto;
+    margin: 40px auto 15px;
     width: 100px;
     padding: 10px 15px;
     border: 1px solid #FFCB39;
