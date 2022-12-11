@@ -11,7 +11,7 @@ marked.setOptions({
     pedantic: false,
     gfm: true,
     breaks: true,
-    sanitize: false,
+    sanitize: true,
     smartypants: false,
     xhtml: false
 })
