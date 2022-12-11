@@ -10,7 +10,7 @@ marked.setOptions({
     langPrefix: 'hljs language-',
     pedantic: false,
     gfm: true,
-    breaks: false,
+    breaks: true,
     sanitize: false,
     smartypants: false,
     xhtml: false

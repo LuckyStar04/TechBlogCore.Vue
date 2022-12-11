@@ -100,8 +100,7 @@ const showMakeComment = () => {
 }
 
 .right > .content {
-    line-height: 0;
-    margin-top: 1rem;
+    margin: .5rem 0;
     font-size: var(--el-font-size-medium);
     color: var(--el-text-color-secondary);
 }

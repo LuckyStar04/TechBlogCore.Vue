@@ -33,6 +33,15 @@ const router = createRouter({
       }
     },
     {
+      path: '/archived',
+      name: 'archived',
+      components: {
+        default: () => import('../views/Archived.vue'),
+        rightSide: SidebarRight,
+        navigation: TheNavigation,
+      }
+    },
+    {
       path: '/articles/:id',
       name: 'articleDetail',
       components: {

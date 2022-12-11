@@ -59,7 +59,7 @@ const noteHtml = computed(() => {
     <div v-loading.fullscreen="data.isLoading" class="wrapper">
         <div class="article-title">
             <h1>{{ data.article.title }}</h1>
-            <RouterLink :to="{ name: 'editArticle', params: { id: route.params.id } }"><el-button type="primary" plain :icon="EditPen">编辑文章</el-button></RouterLink>
+            <RouterLink v-if="userStore.info.role=='Admin'" :to="{ name: 'editArticle', params: { id: route.params.id } }"><el-button type="primary" plain :icon="EditPen">编辑文章</el-button></RouterLink>
         </div>
         <table class="meta-table">
             <tbody>
@@ -116,7 +116,7 @@ a {
 }
 .article-title>h1{
     display: inline-block;
-    line-height: 0;
+    margin: 0;
 }
 .article-title {
     border-bottom: 1px solid var(--el-border-color-light);

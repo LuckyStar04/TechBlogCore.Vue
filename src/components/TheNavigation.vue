@@ -2,12 +2,12 @@
 import { ElMenu } from 'element-plus'
 import { MoreFilled, Sunny, Moon } from '@element-plus/icons-vue'
 import logopng from '@/assets/logo-2.png'
-import { reactive, watch } from 'vue';
+import { computed, reactive, watch } from 'vue';
 import Categories from '@/components/Categories.vue'
 import Tags from '@/components/Tags.vue'
 import SearchInput from '@/components/SearchInput.vue'
 import UserAvatar from '@/components/UserAvatar.vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useDark } from '@vueuse/core'
 
 const isDark = useDark({
@@ -23,6 +23,7 @@ const isDark = useDark({
 })
 
 const route = useRoute()
+const router = useRouter()
 
 const data = reactive({
     drawer: false,
@@ -42,9 +43,10 @@ watch(() => route.query, () => {
         </div>
         <div class="right-dock">
             <SearchInput style="width: 160px;margin-right:1rem;"></SearchInput>
-            <el-menu id="navi-menu" default-active="1" class="el-menu-demo" mode="horizontal" :ellipsis="false" router>
-                <el-menu-item index="0" route="/">首页</el-menu-item>
-                <el-menu-item index="1" route="/articles">文章</el-menu-item>
+            <el-menu id="navi-menu" :default-active="router.currentRoute.value.fullPath.split('?')[0].toLowerCase()" class="el-menu-demo" mode="horizontal" :ellipsis="false" router>
+                <el-menu-item index="/" route="/">封面</el-menu-item>
+                <el-menu-item index="/articles" route="/articles">文章</el-menu-item>
+                <el-menu-item index="/archived" route="/archived">归档</el-menu-item>
             </el-menu>
             <el-switch v-model="isDark" :inline-prompt="true" :active-icon="Sunny" :inactive-icon="Moon"
                 style="margin: 0 1.7rem;" />

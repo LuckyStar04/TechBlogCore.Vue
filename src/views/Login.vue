@@ -8,7 +8,7 @@ onBeforeMount(() => {
     let classes = document.querySelector('body')!.classList
     classes.remove('not-found')
     classes.add('fixed')
-    document.querySelector('meta[name="theme-color"]')!.setAttribute("content", "#403163")
+    document.querySelector('meta[name="theme-color"]')!.setAttribute("content", "#16161e")
 })
 
 const router = useRouter()

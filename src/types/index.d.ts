@@ -21,6 +21,11 @@ export interface ArticleList {
     createTime: Date,
 }
 
+export interface GroupedArticleList {
+    year: number,
+    articles: Array<ArticleList>,
+}
+
 export interface ArticleEdit {
     title: string,
     content: string,

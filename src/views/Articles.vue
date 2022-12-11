@@ -6,7 +6,9 @@ import { useRoute } from 'vue-router'
 import { parseDateTime } from '@/utils/dates'
 import markdownToTxt from 'markdown-to-txt'
 import { Plus } from '@element-plus/icons-vue'
+import { useUserStore } from '@/stores/UserStore';
 
+const userStore = useUserStore()
 const route = useRoute()
 
 const data = reactive({
@@ -48,7 +50,7 @@ fetchData()
             <h2 v-else-if="route.query.category" class="color-primary"># 文章分类：{{ route.query.category }}</h2>
             <h2 v-else-if="route.query.keyword" class="color-purple"># 关键字搜索：{{route.query.keyword}}</h2>
             <h2 v-else>文章列表</h2>
-            <RouterLink :to="{ name: 'createArticle' }"><el-button type="primary" plain :icon="Plus">创建文章</el-button></RouterLink>
+            <RouterLink v-if="userStore.info.role=='Admin'" :to="{ name: 'createArticle' }"><el-button type="primary" plain :icon="Plus">创建文章</el-button></RouterLink>
         </div>
         <div class="articles">
             <div class="article" v-for="article in data.articles">

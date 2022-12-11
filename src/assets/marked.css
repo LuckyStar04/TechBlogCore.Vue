@@ -126,6 +126,9 @@ html.dark .note-view blockquote{
     margin:16px 0;
     overflow:visible
 }
+.note-view li blockquote p {
+    margin: 0 0 25px;
+}
 .note-view p{
     margin:0 0 25px;
     word-break:break-word

@@ -10,7 +10,7 @@ onBeforeMount(() => {
     let classes = document.querySelector('body')!.classList
     classes.remove('fixed')
     classes.add('not-found')
-    document.querySelector('meta[name="theme-color"]')!.setAttribute("content", "#403163")
+    document.querySelector('meta[name="theme-color"]')!.setAttribute("content", "#16161e")
 })
 </script>
 <template>
@@ -98,7 +98,9 @@ onBeforeMount(() => {
     background-repeat: repeat-x;
     background-size: cover;
     background-position: left top; */
-    background: radial-gradient(ellipse at bottom, #5c346a, #3c3062);
+
+    /* background: radial-gradient(ellipse at bottom, #5c346a, #3c3062); */
+    background: linear-gradient(#16161d, #1f1f3a, #3b2f4a);
     height: 100vh;
     width: 100vw;
     overflow: hidden;

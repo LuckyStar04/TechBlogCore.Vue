@@ -7,7 +7,7 @@ onBeforeMount(() => {
     let classes = document.querySelector('body')!.classList
     classes.remove('not-found')
     classes.add('fixed')
-    document.querySelector('meta[name="theme-color"]')!.setAttribute("content", "#403163")
+    document.querySelector('meta[name="theme-color"]')!.setAttribute("content", "#16161e")
 })
 
 </script>
@@ -25,11 +25,13 @@ onBeforeMount(() => {
     <div class="navigations">
       <RouterLink :to="{ name: 'login' }">登&nbsp;&nbsp;&nbsp;录</RouterLink>
       <RouterLink :to="{ name: 'articles' }">文&nbsp;&nbsp;&nbsp;章</RouterLink>
+      <RouterLink :to="{ name: 'archived' }">归&nbsp;&nbsp;&nbsp;档</RouterLink>
       <!-- <RouterLink :to="{ name: 'editArticle', params: { id: 2 } }">编辑</RouterLink>
       <RouterLink :to="{ name: 'createArticle' }">新建</RouterLink> -->
       <a href="https://github.com/LuckyStar04/TechBlogCore.Vue" target="_blank">Github</a>
     </div>
     <p class="description">A tech Blog focus on Linux & full-stack Web development.</p>
+    <div class="block-div"></div>
   </div>
 </template>
 <style scoped>
@@ -40,6 +42,18 @@ onBeforeMount(() => {
   flex-flow: column;
   align-items: center;
   overflow: auto;
+  animation: mainanime 1.2s;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+}
+
+@keyframes mainanime {
+  from {
+    transform: scale(.9);
+  }
+  to {
+    transform: scale(1.12);
+  }
 }
 
 .home-main>.title {
@@ -53,7 +67,6 @@ onBeforeMount(() => {
 .home-main>.description {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 1rem;
-  line-height: 0;
   text-shadow: 0 0 4px lightgray;
   line-height: 3rem;
 }
@@ -121,6 +134,12 @@ onBeforeMount(() => {
   left: 0;
 }
 
+.block-div {
+  width: 100px;
+  height: 100px;
+  display: none;
+}
+
 @media only screen and (max-width: 768px) {
   .avatar {
     width: 10rem;
@@ -140,6 +159,9 @@ onBeforeMount(() => {
 
   .navigations a {
     font-size: 1.2rem;
+  }
+  .block-div {
+    display: block;
   }
 }
 </style>
