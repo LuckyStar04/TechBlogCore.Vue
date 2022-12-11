@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import req from '@/utils/request'
-import { reactive, watch } from 'vue';
+import { onBeforeUnmount, onMounted, reactive, watch } from 'vue';
 import type { ArticleDetail, Comment } from '@/types'
 import { useRoute } from 'vue-router'
 import marked from '@/utils/markdown'
@@ -57,6 +57,9 @@ const noteHtml = computed(() => {
 </script>
 <template>
     <div v-loading.fullscreen="data.isLoading" class="wrapper">
+        <Teleport to="#navi-article-title">
+            <h1>{{ data.article.title }}</h1>
+        </Teleport>
         <div class="article-title">
             <h1>{{ data.article.title }}</h1>
             <RouterLink v-if="userStore.info.role=='Admin'" :to="{ name: 'editArticle', params: { id: route.params.id } }"><el-button type="primary" plain :icon="EditPen">编辑文章</el-button></RouterLink>
@@ -99,7 +102,15 @@ const noteHtml = computed(() => {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    overflow: hidden;
 }
+
+.article-title>h1{
+    overflow: hidden;
+    white-space: wrap;
+    text-overflow: ellipsis;
+}
+
 .article-title, .meta-table {
     font-family: 'Trebuchet MS';
 }
