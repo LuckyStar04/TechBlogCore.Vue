@@ -2,6 +2,8 @@
 
 ----
 
+## 简介 | Introduction
+
 基于 **Vue3全家桶 + TypeScript + Element-Plus + marked.js** 的 **简约时尚风格博客**。
 
 需要项目预览，请移步 [这里](https://lhyy2022.xyz/)：
