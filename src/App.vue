@@ -85,5 +85,9 @@ import { ElContainer, ElHeader, ElMain } from 'element-plus'
   .grow-1 {
     display: none;
   }
+  
+  .flex-main {
+    padding: 60px 0 0;
+  }
 }
 </style>

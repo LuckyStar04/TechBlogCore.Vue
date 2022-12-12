@@ -8,7 +8,7 @@ const data = reactive({
     totalCount: 0,
     currentPage: 1,
     totalPages: 1,
-    pageSize: 10,
+    pageSize: 50,
     pageNumber: 1,
     isLoading: true,
     groupedArticles: [] as Array<GroupedArticleList>,

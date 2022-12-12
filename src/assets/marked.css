@@ -229,6 +229,16 @@ html.dark .note-view code{
 html.dark .note-view .image-package img{
     opacity:.85
 }
+.note-view img{
+    max-width:100%;
+    width:auto;
+    height:auto;
+    vertical-align:middle;
+    border:0
+}
+html.dark .note-view img{
+    opacity:.85
+}
 .note-view .image-package .image-caption{
     min-width:20%;
     max-width:80%;

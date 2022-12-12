@@ -107,7 +107,7 @@ const noteHtml = computed(() => {
 
 .article-title>h1{
     overflow: hidden;
-    white-space: wrap;
+    white-space: pre-line;
     text-overflow: ellipsis;
 }
 
