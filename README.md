@@ -24,6 +24,12 @@ If you want a preview please visit [here](https://lhyy2022.xyz/)
 npm install
 ```
 
+### Change back-end IP address & port in `/src/utils/request.ts`
+
+```js
+this.baseURL = import.meta.env.MODE === 'development' ? 'http://192.168.2.233:7084/api/' : '/api/'
+```
+
 ### Compile and Hot-Reload for Development
 
 ```sh
