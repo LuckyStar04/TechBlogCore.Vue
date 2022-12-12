@@ -4,7 +4,9 @@
 
 ## 简介 | Introduction
 
-基于 **Vue3全家桶 + TypeScript + Element-Plus + marked.js** 的 **简约时尚风格博客**。
+基于 **Vue3全家桶 + TypeScript + Element-Plus + marked.js** 的博客前端。
+
+采用简约风格，实现了包括PC/移动端适配，Dark模式切换。
 
 后端采用 ASP.NET Core RestAPI + JWT 鉴权，项目地址：https://github.com/LuckyStar04/TechBlogCore
 
