@@ -6,9 +6,13 @@
 
 基于 **Vue3全家桶 + TypeScript + Element-Plus + marked.js** 的 **简约时尚风格博客**。
 
+后端采用 ASP.NET Core RestAPI + JWT 鉴权，项目地址：https://github.com/LuckyStar04/TechBlogCore
+
 需要项目预览，请移步 [这里](https://lhyy2022.xyz/)：
 
 A front-end minimalist style blog based on **Vue3 + TypeScript + Element-Plus + marked.js**.
+
+Back-end based on ASP.NET Core RestAPI + JWT Authorization, see https://github.com/LuckyStar04/TechBlogCore
 
 If you want a preview please visit [here](https://lhyy2022.xyz/):
 
