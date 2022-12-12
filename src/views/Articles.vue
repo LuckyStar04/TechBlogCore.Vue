@@ -44,7 +44,7 @@ fetchData()
 </script>
 
 <template>
-    <div v-loading.fullscreen="data.isLoading" class="wrapper">
+    <div v-loading.fullscreen.lock="data.isLoading" class="wrapper">
         <div class="article-title">
             <h2 v-if="route.query.tag" class="color-success"># 标签：{{ route.query.tag }}</h2>
             <h2 v-else-if="route.query.category" class="color-primary"># 文章分类：{{ route.query.category }}</h2>

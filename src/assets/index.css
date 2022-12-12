@@ -11,14 +11,12 @@ pre {
     font-family: 'Courier New', monospace;
 }
 
-#app {
-    height: 100%;
-}
-
 html,
-body {
+body,
+#app {
     margin: 0;
-    min-height: 100vh;
+    padding: 0;
+    height: 100%;
 }
 
 .regular-scrollbar::-webkit-scrollbar,

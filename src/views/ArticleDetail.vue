@@ -56,7 +56,7 @@ const noteHtml = computed(() => {
 
 </script>
 <template>
-    <div v-loading.fullscreen="data.isLoading" class="wrapper">
+    <div v-loading.fullscreen.lock="data.isLoading" class="wrapper">
         <Teleport to="#navi-article-title">
             <h1>{{ data.article.title }}</h1>
         </Teleport>
@@ -130,6 +130,7 @@ a {
     margin: 0;
 }
 .article-title {
+    height: 40px;
     border-bottom: 1px solid var(--el-border-color-light);
 }
 .meta-table {

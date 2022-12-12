@@ -18,8 +18,8 @@ import { ElContainer, ElHeader, ElMain } from 'element-plus'
 <style scoped>
 #app,
 .el-container {
-  display: block;
-  min-height: 100vh;
+  display: inline;
+  height: 100%;
 }
 
 .el-header {
@@ -37,8 +37,8 @@ import { ElContainer, ElHeader, ElMain } from 'element-plus'
 .flex-main {
   display: flex;
   width: 100%;
-  padding: 0;
-  margin: 60px auto 0;
+  padding-top: 60px;
+  margin: 0 auto;
   justify-content: space-around;
   align-items: stretch;
   overflow: auto;

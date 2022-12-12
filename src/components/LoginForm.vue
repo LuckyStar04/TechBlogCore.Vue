@@ -117,7 +117,7 @@ const register = async () => {
     }
     catch (e: any) {
         data.isLoading = false
-        ElMessage({ message: `登录失败：${e.response.data.msg}`, type: 'error' })
+        ElMessage({ message: `注册失败：${e.response.data.msg}`, type: 'error' })
     }
 }
 </script>
