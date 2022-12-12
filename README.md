@@ -8,17 +8,13 @@
 
 后端采用 ASP.NET Core RestAPI + JWT 鉴权，项目地址：https://github.com/LuckyStar04/TechBlogCore
 
-需要项目预览，请移步 [这里](https://lhyy2022.xyz/)：
+需要项目预览，请移步 [这里](https://lhyy2022.xyz/)
 
 A front-end minimalist style blog based on **Vue3 + TypeScript + Element-Plus + marked.js**.
 
 Back-end based on ASP.NET Core RestAPI + JWT Authorization, see https://github.com/LuckyStar04/TechBlogCore
 
-If you want a preview please visit [here](https://lhyy2022.xyz/):
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+If you want a preview please visit [here](https://lhyy2022.xyz/)
 
 ## Project Setup
 
