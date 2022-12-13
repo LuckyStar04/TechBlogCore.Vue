@@ -40,7 +40,7 @@ const logout = async () => {
             <template v-else>
                 <div class="ul">
                     <div class="li welcome">{{ store.welcome }}{{ store.info.user }}</div>
-                    <div class="li cur-p"><el-icon>
+                    <div class="li cur-p" style="cursor:not-allowed;"><el-icon>
                             <Document />
                         </el-icon> 个人信息</div>
                     <div class="li cur-p" @click="logout"><el-icon>

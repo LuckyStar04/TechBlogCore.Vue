@@ -147,6 +147,7 @@ onUnmounted(() => {
     height: 60px;
     overflow: hidden;
     padding-right: 6px;
+    font-family: 'Trebuchet MS';
 }
 
 #navi-article-title>>>* {
