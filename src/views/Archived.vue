@@ -130,8 +130,7 @@ h3 {
     animation-name: showLeft;
     animation-duration: 1.8s;
     animation-fill-mode: forwards;
-    /* animation-timing-function: cubic-bezier(.15,1.05,.02,.99); */
-    animation-timing-function: cubic-bezier(.13,1.57,.37,1.01);
+    animation-timing-function: cubic-bezier(.09,1.13,.26,.98);
 }
 
 @keyframes showLeft {
