@@ -64,6 +64,8 @@ const handleScroll = () => {
     })
 }
 
+let key = 1
+
 onMounted(() => {
     fetchData()
     window.addEventListener("scroll", handleScroll, false)
@@ -85,7 +87,7 @@ onUnmounted(() => {
                     plain :icon="Plus">创建文章</el-button></RouterLink>
         </div>
         <div class="articles">
-            <div v-for="article in data.articles" class="article hidden" :key="article.id">
+            <div v-for="article in data.articles" class="article hidden" :key="key++">
                 <RouterLink :to="{ name: 'articleDetail', params: { id: article.id } }">{{ article.title }}</RouterLink>
                 <br />
                 <span class="create-time">{{ parseDateTime(article.createTime, true) }}</span> | <router-link
