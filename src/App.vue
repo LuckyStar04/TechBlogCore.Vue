@@ -41,7 +41,7 @@ import { ElContainer, ElHeader, ElMain } from 'element-plus'
   margin: 0 auto;
   justify-content: space-around;
   align-items: stretch;
-  overflow: auto;
+  overflow: hidden;
 }
 
 .grow-2 {
