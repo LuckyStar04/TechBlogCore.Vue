@@ -167,7 +167,6 @@ h3 {
     100% {
         transform: none;
         opacity: 1;
-        visibility: visible;
     }
 }
 
