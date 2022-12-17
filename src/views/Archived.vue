@@ -14,6 +14,8 @@ const data = reactive({
     groupedArticles: [] as Array<GroupedArticleList>,
 })
 
+let i = 1
+
 const groupArticle = (articles: Array<ArticleList>) => {
     let g = [] as Array<GroupedArticleList>
     let p = -1
@@ -42,6 +44,7 @@ const fetchData = async () => {
         data.totalPages = a.totalPages
         data.isLoading = false
         data.groupedArticles = groupArticle(data.articles)
+        i = 1
     }
 }
 
@@ -56,17 +59,19 @@ fetchData()
         <div class="article-title">
             <h2>文章归档</h2>
         </div>
-        <el-timeline>
+        <transition name="el-zoom-in-top">
+        <el-timeline v-show="data.groupedArticles.length > 0">
             <el-timeline-item v-for="group in data.groupedArticles" :key="group.year" :timestamp="group.year.toString()"
                 type="primary" :hollow="true" size="large" placement="top">
                 <div class="articles">
-                    <div class="article" v-for="article in group.articles">
+                    <div class="article" v-for="article in group.articles" :style="{ 'animation-delay': (i++) * 70 + 'ms' }">
                         <RouterLink :to="{ name: 'articleDetail', params: { id: article.id } }">{{ article.title }}
                         </RouterLink>
                     </div>
                 </div>
             </el-timeline-item>
         </el-timeline>
+        </transition>
         <el-divider v-if="data.pageNumber < data.totalPages"><el-button @click="data.pageNumber++"
                 link>查看更多</el-button></el-divider>
         <el-divider v-else>已经到底啦</el-divider>
@@ -121,16 +126,39 @@ h3 {
 
 .article {
     margin: 8px 0;
+    opacity: 0;
+    animation-name: showLeft;
+    animation-duration: 1.8s;
+    animation-fill-mode: forwards;
+    /* animation-timing-function: cubic-bezier(.15,1.05,.02,.99); */
+    animation-timing-function: cubic-bezier(.13,1.57,.37,1.01);
+}
+
+@keyframes showLeft {
+    0% {
+        transform: translateX(40%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: none;
+        opacity: 1;
+    }
 }
 
 .article>a {
     text-decoration: none;
     font-size: 25px;
     color: var(--el-text-color-regular);
+    display: block;
+    transition: transform .6s;
+    /* transition-timing-function: ease-out; */
+    transform: none;
 }
 
 .article>a:hover {
     color: var(--el-text-color-secondary);
+    transform: translateX(18px);
 }
 
 .create-time {
