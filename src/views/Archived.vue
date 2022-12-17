@@ -59,12 +59,12 @@ fetchData()
         <div class="article-title">
             <h2>文章归档</h2>
         </div>
-        <transition name="el-zoom-in-top">
+        <transition name="expand-top">
         <el-timeline v-show="data.groupedArticles.length > 0">
             <el-timeline-item v-for="group in data.groupedArticles" :key="group.year" :timestamp="group.year.toString()"
                 type="primary" :hollow="true" size="large" placement="top">
                 <div class="articles">
-                    <div class="article" v-for="article in group.articles" :style="{ 'animation-delay': (i++) * 70 + 'ms' }">
+                    <div class="article" v-for="article in group.articles" :style="{ 'animation-delay': (i++ * 70 + 250) + 'ms' }">
                         <RouterLink :to="{ name: 'articleDetail', params: { id: article.id } }">{{ article.title }}
                         </RouterLink>
                     </div>
@@ -80,6 +80,20 @@ fetchData()
 <style scoped>
 * {
     font-family: 'Trebuchet MS';
+}
+
+.expand-top-enter-active,
+.expand-top-leave-active {
+  opacity: 1;
+  transform: scaleY(1);
+  transition: all 700ms cubic-bezier(.23,1.06,.7,.94);
+  transform-origin: center top;
+}
+
+.expand-top-enter-from,
+.expand-top-leave-active {
+  opacity: 0;
+  transform: scaleY(0);
 }
 
 .article-title {
@@ -191,6 +205,10 @@ h3 {
     width: var(--el-font-size-extra-large);
     height: var(--el-font-size-extra-large);
     left: -5px;
+}
+
+.el-timeline>>>.el-timeline-item:last-child .el-timeline-item__tail {
+    display: block;
 }
 
 .show-more {
