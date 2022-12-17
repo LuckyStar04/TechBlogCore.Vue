@@ -85,7 +85,7 @@ onUnmounted(() => {
                     plain :icon="Plus">创建文章</el-button></RouterLink>
         </div>
         <div class="articles">
-            <div v-for="article in data.articles" class="article hidden">
+            <div v-for="article in data.articles" class="article hidden" :key="article.id">
                 <RouterLink :to="{ name: 'articleDetail', params: { id: article.id } }">{{ article.title }}</RouterLink>
                 <br />
                 <span class="create-time">{{ parseDateTime(article.createTime, true) }}</span> | <router-link
@@ -155,7 +155,7 @@ h3 {
     animation-name: showUp;
     animation-duration: 1.8s;
     animation-fill-mode: forwards;
-    animation-timing-function: cubic-bezier(.21,1.05,.02,.99);
+    animation-timing-function: cubic-bezier(.15,1.05,.02,.99);
 }
 
 @keyframes showUp {
