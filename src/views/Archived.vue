@@ -5,8 +5,6 @@ import type { ArticleList, GroupedArticleList } from '@/types'
 import { useArticleStore } from '@/stores/ArticleStore'
 
 const articleStore = useArticleStore()
-articleStore.store.category = ''
-articleStore.store.tags = []
 
 const data = reactive({
     articles: [] as Array<ArticleList>,
@@ -37,6 +35,8 @@ const groupArticle = (articles: Array<ArticleList>) => {
 }
 
 const fetchData = async () => {
+    articleStore.store.category = ''
+    articleStore.store.tags = []
     data.isLoading = true
     let response = await req.request({
         url: 'articles', method: 'get', params: { pageSize: data.pageSize, pageNumber: data.pageNumber }

@@ -43,8 +43,8 @@ const fetchData = async () => {
     if (response.status == 200) {
         data.article = response.data as ArticleDetail
         data.isLoading = false
-        articleStore.store.category = data.article.category
-        articleStore.store.tags = data.article.tags
+        articleStore.store.category = response.data.category
+        articleStore.store.tags = response.data.tags
     }
 }
 

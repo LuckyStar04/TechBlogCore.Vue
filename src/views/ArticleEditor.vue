@@ -27,6 +27,7 @@ const data = reactive({
 })
 
 const fetchData = async () => {
+    if (route.name != 'editArticle') return
     if (!route.params.id) return
     data.isLoading = true
     let response = await req.request({

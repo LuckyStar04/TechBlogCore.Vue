@@ -24,6 +24,7 @@ const data = reactive({
 })
 
 const fetchData = async () => {
+    if (route.name != 'articles') return
     data.isLoading = true
     let response = await req.request({
         url: 'articles', method: 'get', params: { tag: route.query.tag, category: route.query.category, keyword: route.query.keyword, pageSize: data.pageSize, pageNumber: data.pageNumber }
@@ -35,8 +36,8 @@ const fetchData = async () => {
         data.currentPage = a.currentPage
         data.totalPages = a.totalPages
         data.isLoading = false
-        articleStore.store.category = route.query.category as string
-        articleStore.store.tags = [ route.query.tag as string ]
+        articleStore.store.category = route.query.category ? route.query.category as string : ''
+        articleStore.store.tags = route.query.tag ? [ route.query.tag as string ] : []
         nextTick(() => {
             handleScroll()
         })
