@@ -3,12 +3,14 @@ import type { CategoryModel } from '@/types';
 import { reactive } from 'vue';
 import req from '@/utils/request'
 import { useRoute, useRouter } from 'vue-router'
+import { useArticleStore } from '@/stores/ArticleStore'
 
 const route = useRoute()
 const router = useRouter()
 const data = reactive({
     categories: [] as Array<CategoryModel>,
 })
+const articleStore = useArticleStore()
 
 const fetchData = async () => {
     let response = await req.request({
@@ -28,7 +30,7 @@ const jumpCategory = (category: string) => {
     <div class="wrapper">
         <div class="category-title"><h2>文章分类</h2></div>
         <ul class="categories">
-            <li v-for="category in data.categories" @click="jumpCategory(category.name)" :class="(route.query.category==category.name?'active':'')">
+            <li v-for="category in data.categories" @click="jumpCategory(category.name)" :class="(articleStore.store.category==category.name?'active':'')">
                 {{ category.name }} ({{category.count}})
             </li>
         </ul>

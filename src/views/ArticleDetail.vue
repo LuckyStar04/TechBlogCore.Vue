@@ -1,19 +1,21 @@
 <script lang="ts" setup>
 import req from '@/utils/request'
-import { onBeforeUnmount, onMounted, reactive, watch } from 'vue';
+import { onBeforeUnmount, onMounted, reactive, watch } from 'vue'
 import type { ArticleDetail, Comment } from '@/types'
 import { useRoute } from 'vue-router'
 import { parseMarkdown } from '@/utils/markdown'
-import "highlight.js/styles/atom-one-dark.css";
+import "highlight.js/styles/atom-one-dark.css"
 import { computed } from '@vue/reactivity'
 import { parseDateTime } from '@/utils/dates'
 import { EditPen } from '@element-plus/icons-vue'
 import Comments from '@/components/Comments.vue'
 import MakeComment from '@/components/MakeComment.vue'
 import { useUserStore } from '@/stores/UserStore'
+import { useArticleStore } from '@/stores/ArticleStore'
 
 const route = useRoute()
 const userStore = useUserStore()
+const articleStore = useArticleStore()
 
 
 const data = reactive({
@@ -33,6 +35,7 @@ const data = reactive({
 })
 
 const fetchData = async () => {
+    if (!route.params.id) return
     data.isLoading = true
     let response = await req.request({
         url: `articles/${route.params.id}`, method: 'get',
@@ -40,6 +43,8 @@ const fetchData = async () => {
     if (response.status == 200) {
         data.article = response.data as ArticleDetail
         data.isLoading = false
+        articleStore.store.category = data.article.category
+        articleStore.store.tags = data.article.tags
     }
 }
 
@@ -48,7 +53,7 @@ const addComment = (comment: Comment) => {
 }
 
 watch(() => route.params.id, fetchData)
-fetchData()
+onMounted(() => fetchData())
 const noteHtml = computed(() => {
     if (!data.article.content) return ''
     return parseMarkdown(data.article.content)

@@ -3,6 +3,7 @@ import type { TagModel } from '@/types';
 import { reactive } from 'vue';
 import req from '@/utils/request'
 import { useRoute } from 'vue-router'
+import { useArticleStore } from '@/stores/ArticleStore'
 
 const route = useRoute()
 //const colors = ['primary', 'success', 'info', 'warning', 'danger']
@@ -10,6 +11,7 @@ const route = useRoute()
 const data = reactive({
     tags: [] as Array<TagModel>,
 })
+const articleStore = useArticleStore()
 
 const fetchData = async () => {
     let response = await req.request({
@@ -27,7 +29,7 @@ fetchData()
         <div class="tags">
             <template v-for="(tag, index) in data.tags">
                 <RouterLink :to="{ name: 'articles', query: { tag: tag.name } }">
-                    <el-button v-if="(route.query.tag == tag.name)" type="success" round>{{ tag.name }}({{ tag.count }})</el-button>
+                    <el-button v-if="(articleStore.store.tags.includes(tag.name))" type="success" round>{{ tag.name }}({{ tag.count }})</el-button>
                     <el-button v-else type="info" link>{{ tag.name }}({{ tag.count }})</el-button>
                 </RouterLink>
             </template>

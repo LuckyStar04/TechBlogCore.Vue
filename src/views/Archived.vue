@@ -1,7 +1,12 @@
 <script lang="ts" setup>
 import req from '@/utils/request'
-import { reactive, watch } from 'vue';
+import { onMounted, reactive, watch } from 'vue';
 import type { ArticleList, GroupedArticleList } from '@/types'
+import { useArticleStore } from '@/stores/ArticleStore'
+
+const articleStore = useArticleStore()
+articleStore.store.category = ''
+articleStore.store.tags = []
 
 const data = reactive({
     articles: [] as Array<ArticleList>,
@@ -50,7 +55,7 @@ const fetchData = async () => {
 
 watch(() => [data.pageNumber, data.pageSize], fetchData)
 
-fetchData()
+onMounted(() => fetchData())
 
 </script>
 

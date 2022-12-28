@@ -1,15 +1,17 @@
 <script lang="ts" setup>
 import req from '@/utils/request'
-import { nextTick, onMounted, onUnmounted, reactive, watch } from 'vue';
+import { nextTick, onMounted, onUnmounted, reactive, watch } from 'vue'
 import type { ArticleList } from '@/types'
 import { useRoute } from 'vue-router'
 import { parseDateTime } from '@/utils/dates'
 import markdownToTxt from 'markdown-to-txt'
 import { Plus } from '@element-plus/icons-vue'
-import { useUserStore } from '@/stores/UserStore';
+import { useUserStore } from '@/stores/UserStore'
+import { useArticleStore } from '@/stores/ArticleStore'
 
 const userStore = useUserStore()
 const route = useRoute()
+const articleStore = useArticleStore()
 
 const data = reactive({
     articles: [] as Array<ArticleList>,
@@ -33,6 +35,8 @@ const fetchData = async () => {
         data.currentPage = a.currentPage
         data.totalPages = a.totalPages
         data.isLoading = false
+        articleStore.store.category = route.query.category as string
+        articleStore.store.tags = [ route.query.tag as string ]
         nextTick(() => {
             handleScroll()
         })
