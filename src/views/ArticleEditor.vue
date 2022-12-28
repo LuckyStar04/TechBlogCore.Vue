@@ -5,7 +5,7 @@ import type { ArticleEdit } from '@/types'
 import { reactive, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import EditTag from '@/components/EditTag.vue'
-import marked from '@/utils/markdown'
+import { parseMarkdown } from '@/utils/markdown'
 import "highlight.js/styles/atom-one-dark.css"
 import { Edit } from '@element-plus/icons-vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
@@ -45,7 +45,7 @@ watch(() => route.params, fetchData)
 fetchData()
 const noteHtml = computed(() => {
     if (!data.article.content) return ''
-    return marked.parse(data.article.content)
+    return parseMarkdown(data.article.content)
 })
 
 const saveArticle = async () => {

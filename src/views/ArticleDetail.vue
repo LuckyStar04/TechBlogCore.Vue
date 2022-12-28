@@ -3,7 +3,7 @@ import req from '@/utils/request'
 import { onBeforeUnmount, onMounted, reactive, watch } from 'vue';
 import type { ArticleDetail, Comment } from '@/types'
 import { useRoute } from 'vue-router'
-import marked from '@/utils/markdown'
+import { parseMarkdown } from '@/utils/markdown'
 import "highlight.js/styles/atom-one-dark.css";
 import { computed } from '@vue/reactivity'
 import { parseDateTime } from '@/utils/dates'
@@ -51,7 +51,7 @@ watch(() => route.params.id, fetchData)
 fetchData()
 const noteHtml = computed(() => {
     if (!data.article.content) return ''
-    return marked.parse(data.article.content)
+    return parseMarkdown(data.article.content)
 })
 
 </script>
