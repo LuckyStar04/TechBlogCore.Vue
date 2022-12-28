@@ -3,10 +3,10 @@ import Categories from './Categories.vue'
 import Tags from './Tags.vue'
 </script>
 <template>
-    <div class="sidebars">
+    <el-affix :offset="59.8">
         <Categories></Categories>
         <Tags></Tags>
-    </div>
+    </el-affix>
 </template>
 <style scoped>
 </style>
