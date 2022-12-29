@@ -3,7 +3,7 @@ import Categories from './Categories.vue'
 import Tags from './Tags.vue'
 </script>
 <template>
-    <el-affix :offset="59.8">
+    <el-affix :offset="59.98">
         <Categories></Categories>
         <Tags></Tags>
     </el-affix>
