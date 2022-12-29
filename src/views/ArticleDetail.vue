@@ -54,7 +54,7 @@ const fetchData = async () => {
     }
 }
 
-const makeNav = () => {
+const makeNav = async () => {
     let nav = document.querySelectorAll('.note-view *[id]') as NodeListOf<HTMLElement>
     if (nav.length <= 0) return
     let newItem : NavItem = { level: nav[0].tagName, id: nav[0].id, title: nav[0].innerText, children: [], parent: null }
@@ -87,6 +87,7 @@ const makeNav = () => {
         }
     }
     data.hasNav = true
+    setTimeout(switchNav, 150)
 }
 
 const switchNav = () => {
