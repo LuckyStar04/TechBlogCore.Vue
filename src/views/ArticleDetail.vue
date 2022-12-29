@@ -144,7 +144,7 @@ const noteHtml = computed(() => {
                 <el-empty description="快来坐沙发吧~" :image-size="200" v-else style="height: 380px;padding-top: 0;"></el-empty>
             </div>
         </div>
-        <div v-if="data.hasNav" class="navi-wrapper regular-scrollbar">
+        <div v-if="data.hasNav" class="navi-wrapper autohide-scrollbar">
             <div class="navi-title">文章目录</div>
             <ArticleNavi :items="data.navItems"></ArticleNavi>
         </div>
@@ -284,20 +284,30 @@ a {
 }
 
 @media only screen and (min-width: 1440px) {
-    .navi-wrapper, .navi-title {
+    .navi-wrapper {
         left: calc(5vw - 57px);
         width: calc(47vw - 535px);
     }
-}
 
-@media only screen and (min-width: 1024px) and (max-width: 1440px) {
-    .navi-wrapper, .navi-title {
-        left: calc(4vw - 40px);
-        width: calc(47vw - 430px);
+    .navi-title {
+        left: calc(5vw - 57px);
+        width: calc(47vw - 542px);
     }
 }
 
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
+@media only screen and (min-width: 1280px) and (max-width: 1440px) {
+    .navi-wrapper {
+        left: calc(4vw - 40px);
+        width: calc(47vw - 430px);
+    }
+
+    .navi-title {
+        left: calc(4vw - 40px);
+        width: calc(47vw - 437px);
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
     .navi-wrapper, .navi-title {
         display: none;
     }

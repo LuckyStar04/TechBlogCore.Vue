@@ -77,6 +77,35 @@ html.dark .thin-scrollbar::-webkit-scrollbar-thumb {
     border-radius: 10px;
 }
 
+.autohide-scrollbar {
+    visibility: hidden;
+}
+
+.autohide-scrollbar > *,
+.autohide-scrollbar:hover,
+.autohide-scrollbar:focus {
+    visibility: visible;
+}
+
+.autohide-scrollbar::-webkit-scrollbar {
+    height: 6px;
+    width: 6px;
+}
+
+.autohide-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #0003;
+    border-radius: 10px;
+    transition: all .2s ease-in-out;
+}
+
+html.dark .autohide-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #FFF3 !important;
+}
+
+.autohide-scrollbar::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
 textarea::-webkit-scrollbar {
     width: 6px;
 }
