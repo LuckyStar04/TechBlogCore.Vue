@@ -77,7 +77,21 @@ const router = createRouter({
         //navigation: TheNavigation,
       },
     },
-  ]
+  ],
+  scrollBehavior (to, from, savedPosition) {
+    if (to.hash) {
+      return {
+        el: to.hash,
+        top: 70,
+        behavior: 'smooth',
+      }
+    }
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { top: 0 }
+    }
+  }
 })
 
 router.afterEach((to, from) => {

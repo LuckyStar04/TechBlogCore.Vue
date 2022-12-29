@@ -86,3 +86,11 @@ export interface UserInfo {
     role: string,
     avatar: string,
 }
+
+export interface NavItem {
+    level: string,
+    id: string,
+    title: string,
+    children: Array<NavItem>,
+    parent: NavItem|null,
+}

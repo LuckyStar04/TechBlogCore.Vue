@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import req from '@/utils/request'
-import { onBeforeUnmount, onMounted, reactive, watch } from 'vue'
-import type { ArticleDetail, Comment } from '@/types'
+import { nextTick, onBeforeUnmount, onMounted, reactive, watch } from 'vue'
+import type { ArticleDetail, Comment, NavItem } from '@/types'
 import { useRoute } from 'vue-router'
 import { parseMarkdown } from '@/utils/markdown'
 import "highlight.js/styles/atom-one-dark.css"
@@ -10,6 +10,7 @@ import { parseDateTime } from '@/utils/dates'
 import { EditPen } from '@element-plus/icons-vue'
 import Comments from '@/components/Comments.vue'
 import MakeComment from '@/components/MakeComment.vue'
+import ArticleNavi from '@/components/ArticleNavi.vue'
 import { useUserStore } from '@/stores/UserStore'
 import { useArticleStore } from '@/stores/ArticleStore'
 
@@ -32,6 +33,8 @@ const data = reactive({
         comments: [],
     } as ArticleDetail,
     isLoading: true,
+    hasNav: false,
+    navItems: [] as Array<NavItem>,
 })
 
 const fetchData = async () => {
@@ -45,7 +48,44 @@ const fetchData = async () => {
         data.isLoading = false
         articleStore.store.category = response.data.category
         articleStore.store.tags = response.data.tags
+        await nextTick()
+        makeNav()
     }
+}
+
+const makeNav = () => {
+    let nav = document.querySelectorAll('.note-view *[id]') as NodeListOf<HTMLElement>
+    if (nav.length <= 0) return
+    let newItem : NavItem = { level: nav[0].tagName, id: nav[0].id, title: nav[0].innerText, children: [], parent: null }
+    let oldItem = newItem
+    for (let i = 0; i < nav.length; i++) {
+        newItem = { level: nav[i].tagName, id: nav[i].id, title: nav[i].innerText, children: [], parent: null }
+        if (newItem.level > oldItem.level) {
+            newItem.parent = oldItem
+            oldItem.children.push(newItem)
+            oldItem = newItem
+        } else if (newItem.level == oldItem.level) {
+            if (oldItem.parent != null) {
+                newItem.parent = oldItem.parent
+                oldItem.parent.children.push(newItem)
+            } else {
+                data.navItems.push(newItem)
+            }
+            oldItem = newItem
+        } else {
+            let pointer : NavItem|null = oldItem
+            while (pointer != null && pointer.level != newItem.level) {
+                pointer = pointer.parent
+            }
+            if (pointer?.parent != null) {
+                pointer?.parent.children.push(newItem)
+            } else {
+                data.navItems.push(newItem)
+            }
+            oldItem = newItem
+        }
+    }
+    data.hasNav = true
 }
 
 const addComment = (comment: Comment) => {
@@ -99,6 +139,10 @@ const noteHtml = computed(() => {
                 <Comments v-if="(data.article.comments.length > 0)" :comments="data.article.comments"></Comments>
                 <el-empty description="快来坐沙发吧~" :image-size="200" v-else style="height: 380px;padding-top: 0;"></el-empty>
             </div>
+        </div>
+        <div v-if="data.hasNav" class="navi-wrapper regular-scrollbar">
+            <div class="navi-title">文章目录</div>
+            <ArticleNavi :items="data.navItems"></ArticleNavi>
         </div>
     </div>
 </template>
@@ -209,5 +253,55 @@ a {
 }
 .comment-body {
     min-height: 300px;
+}
+
+.navi-wrapper {
+    position: fixed;
+    top: 80px;
+    z-index: 998;
+    max-height: calc(100vh - 120px);
+    overflow: auto;
+    overflow-y: scroll;
+    /* box-shadow: var(--el-box-shadow); */
+    padding: 50px 20px 20px;
+    box-sizing: border-box;
+}
+
+.navi-wrapper > ul {
+    padding-left: 4px;
+}
+
+.navi-title {
+    position: fixed;
+    top: 80px;
+    padding: 19px 20px 10px;
+    box-sizing: border-box;
+    background-color: white;
+}
+
+@media only screen and (min-width: 1440px) {
+    .navi-wrapper, .navi-title {
+        left: calc(5vw - 57px);
+        width: calc(47vw - 535px);
+    }
+}
+
+@media only screen and (min-width: 1024px) and (max-width: 1440px) {
+    .navi-wrapper, .navi-title {
+        left: calc(4vw - 40px);
+        width: calc(47vw - 430px);
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    .navi-wrapper, .navi-title {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .navi-wrapper, .navi-title {
+        display: none;
+    }
 }
 </style>
