@@ -34,6 +34,7 @@ const data = reactive({
     } as ArticleDetail,
     isLoading: true,
     hasNav: false,
+    expandNav: false,
     navItems: [] as Array<NavItem>,
 })
 
@@ -86,6 +87,10 @@ const makeNav = () => {
         }
     }
     data.hasNav = true
+}
+
+const switchNav = () => {
+    data.expandNav = !data.expandNav
 }
 
 const addComment = (comment: Comment) => {
@@ -144,8 +149,8 @@ const noteHtml = computed(() => {
                 <el-empty description="快来坐沙发吧~" :image-size="200" v-else style="height: 380px;padding-top: 0;"></el-empty>
             </div>
         </div>
-        <div v-if="data.hasNav" class="navi-wrapper autohide-scrollbar">
-            <div class="navi-title"><font-awesome-icon icon="fa-solid fa-list-ul" class="more-emojis-icon" />&nbsp;&nbsp;文章目录</div>
+        <div v-if="data.hasNav" class="navi-wrapper autohide-scrollbar" :class="{ shrink: !data.expandNav }">
+            <div class="navi-title" @click.stop="switchNav"><font-awesome-icon icon="fa-solid fa-list-ul" class="more-emojis-icon" />&nbsp;&nbsp;文章目录</div>
             <ArticleNavi class="navi-body" :items="data.navItems"></ArticleNavi>
         </div>
     </div>
@@ -263,13 +268,23 @@ a {
     position: fixed;
     top: 80px;
     z-index: 998;
-    max-height: calc(100vh - 120px);
+    max-height: calc(100vh - 160px);
     overflow: auto;
     overflow-y: scroll;
     /* border-radius: 8px; */
     /* box-shadow: 0px 0px 12px rgba(0, 0, 0, .12); */
-    padding: 50px 20px 20px;
-    box-sizing: border-box;
+    margin: 50px 20px 20px;
+    /* box-sizing: border-box; */
+    transition: max-height 1s;
+}
+
+.navi-body {
+    overflow: hidden;
+}
+
+.navi-wrapper.shrink {
+    max-height: 0px;
+    overflow: hidden;
 }
 
 .navi-wrapper > ul {
@@ -279,34 +294,35 @@ a {
 .navi-title {
     position: fixed;
     top: 80px;
-    padding: 19px 20px 10px;
+    margin: 19px 20px 10px;
     /* border-radius: 8px; */
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
     background-color: white;
     color: var(--el-text-color-regular);
+    cursor: pointer;
 }
 
 @media only screen and (min-width: 1440px) {
     .navi-wrapper {
         left: calc(5vw - 57px);
-        width: calc(47vw - 535px);
+        width: calc(47vw - 575px);
     }
 
     .navi-title {
         left: calc(5vw - 57px);
-        width: calc(47vw - 542px);
+        width: calc(47vw - 582px);
     }
 }
 
 @media only screen and (min-width: 1280px) and (max-width: 1440px) {
     .navi-wrapper {
         left: calc(4vw - 40px);
-        width: calc(47vw - 430px);
+        width: calc(47vw - 470px);
     }
 
     .navi-title {
         left: calc(4vw - 40px);
-        width: calc(47vw - 437px);
+        width: calc(47vw - 477px);
     }
 }
 
