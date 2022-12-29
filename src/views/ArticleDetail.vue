@@ -92,6 +92,10 @@ const addComment = (comment: Comment) => {
     data.article.comments.push(comment)
 }
 
+const backTop = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+}
+
 watch(() => route.params.id, fetchData)
 onMounted(() => fetchData())
 const noteHtml = computed(() => {
@@ -103,7 +107,7 @@ const noteHtml = computed(() => {
 <template>
     <div v-loading.fullscreen.lock="data.isLoading" class="wrapper">
         <Teleport to="#navi-article-title">
-            <h1>{{ data.article.title }}</h1>
+            <h1 style="cursor: pointer;" @click.stop="backTop">{{ data.article.title }}</h1>
         </Teleport>
         <div class="article-title">
             <h1>{{ data.article.title }}</h1>
