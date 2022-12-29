@@ -145,8 +145,8 @@ const noteHtml = computed(() => {
             </div>
         </div>
         <div v-if="data.hasNav" class="navi-wrapper autohide-scrollbar">
-            <div class="navi-title">文章目录</div>
-            <ArticleNavi :items="data.navItems"></ArticleNavi>
+            <div class="navi-title"><font-awesome-icon icon="fa-solid fa-list-ul" class="more-emojis-icon" />&nbsp;&nbsp;文章目录</div>
+            <ArticleNavi class="navi-body" :items="data.navItems"></ArticleNavi>
         </div>
     </div>
 </template>
@@ -266,7 +266,8 @@ a {
     max-height: calc(100vh - 120px);
     overflow: auto;
     overflow-y: scroll;
-    /* box-shadow: var(--el-box-shadow); */
+    /* border-radius: 8px; */
+    /* box-shadow: 0px 0px 12px rgba(0, 0, 0, .12); */
     padding: 50px 20px 20px;
     box-sizing: border-box;
 }
@@ -279,8 +280,10 @@ a {
     position: fixed;
     top: 80px;
     padding: 19px 20px 10px;
+    /* border-radius: 8px; */
     box-sizing: border-box;
     background-color: white;
+    color: var(--el-text-color-regular);
 }
 
 @media only screen and (min-width: 1440px) {

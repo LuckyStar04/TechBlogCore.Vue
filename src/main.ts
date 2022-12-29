@@ -10,10 +10,11 @@ import { createPinia } from 'pinia'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faFaceSmile } from '@fortawesome/free-regular-svg-icons'
+import { faListUl } from '@fortawesome/free-solid-svg-icons'
 
 const app = createApp(App)
 
-library.add(faFaceSmile)
+library.add(faFaceSmile, faListUl)
 
 const pinia = createPinia()
 app.use(pinia)
