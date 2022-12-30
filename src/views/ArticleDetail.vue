@@ -99,6 +99,10 @@ const switchNavDrawer = () => {
     data.navDrawer = !data.navDrawer
 }
 
+const closeNavDrawer = () => {
+    data.navDrawer = false
+}
+
 const addComment = (comment: Comment) => {
     data.article.comments.push(comment)
 }
@@ -108,7 +112,7 @@ const backTop = () => {
 }
 
 watch(() => route.params.id, fetchData)
-watch(() => route.hash, switchNavDrawer)
+watch(() => route.hash, closeNavDrawer)
 onMounted(() => fetchData())
 const noteHtml = computed(() => {
     if (!data.article.content) return ''
