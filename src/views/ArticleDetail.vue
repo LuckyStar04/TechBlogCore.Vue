@@ -151,7 +151,7 @@ const noteHtml = computed(() => {
             </div>
         </div>
         <div v-if="data.hasNav" class="navi-wrapper autohide-scrollbar" :class="{ shrink: !data.expandNav }">
-            <div class="navi-title" @click.stop="switchNav"><font-awesome-icon icon="fa-solid fa-list-ul" class="more-emojis-icon" />&nbsp;&nbsp;文章目录</div>
+            <div class="navi-title" @click.stop="switchNav"><font-awesome-icon icon="fa-solid fa-list-ul" class="more-emojis-icon" />&nbsp;&nbsp;文章目录&nbsp;&nbsp;<font-awesome-icon icon="fa-solid fa-angle-down" /></div>
             <ArticleNavi class="navi-body" :items="data.navItems"></ArticleNavi>
         </div>
     </div>
@@ -286,6 +286,14 @@ a {
 .navi-wrapper.shrink {
     max-height: 0px;
     overflow: hidden;
+}
+
+.fa-angle-down {
+    transition: transform .5s;
+}
+
+.navi-wrapper.shrink .fa-angle-down {
+    transform: rotateZ(-90deg);
 }
 
 .navi-wrapper > ul {
