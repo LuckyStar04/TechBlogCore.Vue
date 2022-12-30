@@ -332,7 +332,7 @@ a {
     color: var(--el-text-color-regular);
     writing-mode: vertical-rl;
     letter-spacing: 5px;
-    background-color: white;
+    background-color: var(--el-bg-color);
     padding: 5px;
     border: 1px solid var(--el-border-color-light);
     border-radius: 0 6px 6px 0;
