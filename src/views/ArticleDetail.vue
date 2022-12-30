@@ -323,7 +323,7 @@ a {
     margin: 19px 20px 10px;
     /* border-radius: 8px; */
     /* box-sizing: border-box; */
-    background-color: white;
+    background-color: var(--el-bg-color);
     color: var(--el-text-color-regular);
     cursor: pointer;
 }
