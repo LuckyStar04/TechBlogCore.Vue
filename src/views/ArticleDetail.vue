@@ -36,6 +36,7 @@ const data = reactive({
     hasNav: false,
     expandNav: false,
     navItems: [] as Array<NavItem>,
+    navDrawer: false,
 })
 
 const fetchData = async () => {
@@ -94,6 +95,10 @@ const switchNav = () => {
     data.expandNav = !data.expandNav
 }
 
+const switchNavDrawer = () => {
+    data.navDrawer = !data.navDrawer
+}
+
 const addComment = (comment: Comment) => {
     data.article.comments.push(comment)
 }
@@ -103,6 +108,7 @@ const backTop = () => {
 }
 
 watch(() => route.params.id, fetchData)
+watch(() => route.hash, switchNavDrawer)
 onMounted(() => fetchData())
 const noteHtml = computed(() => {
     if (!data.article.content) return ''
@@ -154,6 +160,14 @@ const noteHtml = computed(() => {
             <div class="navi-title" @click.stop="switchNav"><font-awesome-icon icon="fa-solid fa-list-ul" class="more-emojis-icon" />&nbsp;&nbsp;文章目录&nbsp;&nbsp;<font-awesome-icon icon="fa-solid fa-angle-down" /></div>
             <ArticleNavi class="navi-body" :items="data.navItems"></ArticleNavi>
         </div>
+        <div class="navi-drawer-button" @click.stop="switchNavDrawer"><font-awesome-icon icon="fa-solid fa-list-ul" class="more-emojis-icon" />&nbsp;目录</div>
+        <el-drawer class="navi-drawer" v-model="data.navDrawer" title="侧边目录" direction="ltr" :with-header="false" size="70%"
+            :close-on-click-modal="true">
+            <div class="drawer-wrapper">
+                <div class="drawer-title"><font-awesome-icon icon="fa-solid fa-list-ul" class="more-emojis-icon" />&nbsp;&nbsp;文章目录</div>
+                <ArticleNavi class="navi-body" :items="data.navItems"></ArticleNavi>
+            </div>
+        </el-drawer>
     </div>
 </template>
 <style scoped>
@@ -311,6 +325,25 @@ a {
     cursor: pointer;
 }
 
+.navi-drawer-button {
+    position: fixed;
+    bottom: 30px;
+    left: 0px;
+    color: var(--el-text-color-regular);
+    writing-mode: vertical-rl;
+    letter-spacing: 5px;
+    background-color: white;
+    padding: 5px;
+    border: 1px solid var(--el-border-color-light);
+    border-radius: 0 6px 6px 0;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.drawer-wrapper {
+    margin: 30px;
+}
+
 @media only screen and (min-width: 1440px) {
     .navi-wrapper {
         left: calc(5vw - 57px);
@@ -320,6 +353,10 @@ a {
     .navi-title {
         left: calc(5vw - 57px);
         width: calc(47vw - 582px);
+    }
+
+    .navi-drawer-button {
+        display: none;
     }
 }
 
@@ -333,17 +370,29 @@ a {
         left: calc(4vw - 40px);
         width: calc(47vw - 477px);
     }
+    
+    .navi-drawer-button {
+        display: none;
+    }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1280px) {
     .navi-wrapper, .navi-title {
         display: none;
     }
+
+    .navi-drawer-button {
+        display: block;
+    }
 }
 
 @media only screen and (max-width: 768px) {
     .navi-wrapper, .navi-title {
         display: none;
+    }
+
+    .navi-drawer-button {
+        display: block;
     }
 }
 </style>
