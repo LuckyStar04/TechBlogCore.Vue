@@ -1,18 +1,21 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
-import { ElContainer, ElHeader, ElMain } from 'element-plus'
+import { ElConfigProvider } from 'element-plus'
+import zhCn from 'element-plus/es/locale/lang/zh-cn'
 </script>
 
 <template>
-  <el-container>
-    <el-header>
-      <RouterView name="navigation"></RouterView>
-    </el-header>
-    <el-main class="flex-main">
-      <RouterView class="grow-2"></RouterView>
-      <RouterView name="rightSide" class="grow-1"></RouterView>
-    </el-main>
-  </el-container>
+  <el-config-provider :locale="zhCn">
+    <el-container>
+      <el-header>
+        <RouterView name="navigation"></RouterView>
+      </el-header>
+      <el-main class="flex-main">
+        <RouterView class="grow-2"></RouterView>
+        <RouterView name="rightSide" class="grow-1"></RouterView>
+      </el-main>
+    </el-container>
+  </el-config-provider>
 </template>
 
 <style scoped>
@@ -85,7 +88,7 @@ import { ElContainer, ElHeader, ElMain } from 'element-plus'
   .grow-1 {
     display: none;
   }
-  
+
   .flex-main {
     padding: 60px 0 0;
   }
