@@ -22,10 +22,10 @@ onBeforeMount(() => {
                 <h1 class="title">BlogCore.Vue</h1>
             </div>
             <div class="navigations">
-                <RouterLink :to="{ name: 'login' }">登&nbsp;&nbsp;&nbsp;录</RouterLink>
-                <RouterLink :to="{ name: 'articles' }">文&nbsp;&nbsp;&nbsp;章</RouterLink>
-                <RouterLink :to="{ name: 'archived' }">归&nbsp;&nbsp;&nbsp;档</RouterLink>
-                <a href="https://github.com/LuckyStar04/TechBlogCore.Vue" target="_blank">Github</a>
+                <RouterLink class="underlineHover" :to="{ name: 'login' }">登&nbsp;&nbsp;&nbsp;录</RouterLink>
+                <RouterLink class="underlineHover" :to="{ name: 'articles' }">文&nbsp;&nbsp;&nbsp;章</RouterLink>
+                <RouterLink class="underlineHover" :to="{ name: 'archived' }">归&nbsp;&nbsp;&nbsp;档</RouterLink>
+                <a class="underlineHover" href="https://github.com/LuckyStar04/TechBlogCore.Vue" target="_blank">Github</a>
             </div>
         </div>
         <div class="space"></div>
@@ -140,6 +140,21 @@ p {
 .navigations>a:hover {
     text-shadow: 0 0 4px lightgray;
     transform: scale(1.1);
+}
+
+.underlineHover:after {
+    display: block;
+    left: 0;
+    bottom: -10px;
+    width: 0;
+    height: 2px;
+    background-color: #fff;
+    content: "";
+    transition: width 0.2s;
+}
+
+.underlineHover:hover:after {
+    width: 100%;
 }
 
 .content {
