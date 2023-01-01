@@ -9,7 +9,7 @@ const router = createRouter({
       path: '/',
       name: 'home',
       components: {
-        default: () => import('@/views/HomeView.vue'),
+        default: () => import('@/views/HomeViewWave.vue'),
         //rightSide: SidebarRight,
         //navigation: TheNavigation,
       }

@@ -40,6 +40,7 @@ declare module '@vue/runtime-core' {
     Tags: typeof import('./src/components/Tags.vue')['default']
     TheNavigation: typeof import('./src/components/TheNavigation.vue')['default']
     UserAvatar: typeof import('./src/components/UserAvatar.vue')['default']
+    WaveBackground: typeof import('./src/components/WaveBackground.vue')['default']
   }
   export interface ComponentCustomProperties {
     vLoading: typeof import('element-plus/es')['ElLoadingDirective']

@@ -26,8 +26,6 @@ onBeforeMount(() => {
       <RouterLink :to="{ name: 'login' }">登&nbsp;&nbsp;&nbsp;录</RouterLink>
       <RouterLink :to="{ name: 'articles' }">文&nbsp;&nbsp;&nbsp;章</RouterLink>
       <RouterLink :to="{ name: 'archived' }">归&nbsp;&nbsp;&nbsp;档</RouterLink>
-      <!-- <RouterLink :to="{ name: 'editArticle', params: { id: 2 } }">编辑</RouterLink>
-      <RouterLink :to="{ name: 'createArticle' }">新建</RouterLink> -->
       <a href="https://github.com/LuckyStar04/TechBlogCore.Vue" target="_blank">Github</a>
     </div>
     <p class="description">A tech Blog focus on Linux & full-stack Web development.</p>
