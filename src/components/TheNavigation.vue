@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { ElMenu } from 'element-plus'
 import { MoreFilled, Sunny, Moon } from '@element-plus/icons-vue'
 import logopng from '@/assets/logo-2.png'
 import { computed, onMounted, onUnmounted, reactive, ref, watch } from 'vue';

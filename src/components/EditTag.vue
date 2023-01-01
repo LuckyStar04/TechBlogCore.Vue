@@ -13,7 +13,7 @@
 </template>
 <script lang="ts" setup>
 import { nextTick, ref } from 'vue'
-import { ElTag, ElInput, ElButton } from 'element-plus'
+import { ElInput } from 'element-plus'
 const props = defineProps({
   modelValue: {
     type: Array<string>,
