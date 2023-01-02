@@ -18,7 +18,7 @@ onBeforeMount(() => {
     <div class="header">
         <div class="inner-header">
             <div class="flex">
-                <img class="logo" src="@/assets/logo-white.png" />
+                <div class="logo"><img src="@/assets/logo-white.png" /></div>
                 <h1 class="title">BlogCore.Vue</h1>
             </div>
             <div class="navigations">
@@ -70,10 +70,20 @@ p {
 
 .logo {
     width: 120px;
+    height: 120px;
     padding-right: 10px;
     display: inline-block;
     vertical-align: middle;
     animation: logo-anime .9s cubic-bezier(.46,.14,0,1);
+}
+
+.logo>img {
+    width: 100%;
+    transition: transform .9s ease;
+}
+
+.logo:hover>img {
+    transform: rotateY(180deg);
 }
 
 @keyframes logo-anime {
@@ -172,6 +182,7 @@ p {
 
     .logo {
         width: 48px;
+        height: 48px;
         padding-right: 4px;
     }
 
