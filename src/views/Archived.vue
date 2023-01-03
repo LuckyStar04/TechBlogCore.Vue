@@ -176,7 +176,7 @@ h3 {
 
 .article>a:hover {
     color: var(--el-text-color-secondary);
-    transform: translateX(18px);
+    transform: translateX(8px);
 }
 
 .create-time {
