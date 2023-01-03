@@ -4,6 +4,11 @@ import astronaut from '@/assets/NotFound/astronaut.svg'
 import earth from '@/assets/NotFound/earth.svg'
 import moon from '@/assets/NotFound/moon.svg'
 import rocket from '@/assets/NotFound/rocket.svg'
+import { onBeforeMount } from 'vue'
+
+onBeforeMount(() => {
+    document.querySelector('meta[name="theme-color"]')!.setAttribute("content", "#16161e")
+})
 </script>
 <template>
     <Teleport to="#teleport">

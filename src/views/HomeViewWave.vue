@@ -1,5 +1,10 @@
 <script lang="ts" setup>
 import WaveBackground from '@/components/WaveBackground.vue'
+import { onBeforeMount } from 'vue'
+
+onBeforeMount(() => {
+    document.querySelector('meta[name="theme-color"]')!.setAttribute("content", "#188dbf")
+})
 </script>
 <template>
     <Teleport to="#teleport">

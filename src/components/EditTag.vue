@@ -49,7 +49,6 @@ const handleInputConfirm = () => {
 <style scoped>
 .wrapper {
   display: flex;
-  flex-grow: row nowrap;
   overflow: auto;
   overflow-x: scroll;
 }
