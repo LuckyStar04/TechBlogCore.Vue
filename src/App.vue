@@ -38,7 +38,7 @@ const isShowHeader = computed(() => {
 
 #app,
 .el-container {
-  /* display: inline; */
+  display: inline-block;
   height: 100%;
 }
 
