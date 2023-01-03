@@ -94,12 +94,4 @@ const router = createRouter({
   }
 })
 
-router.afterEach((to, from) => {
-  if (to.path != '/' && to.path != '/login') {
-    let classes = document.querySelector('body')?.classList
-    classes?.remove('fixed')
-    classes?.remove('not-found')
-  }
-})
-
 export default router

@@ -2,15 +2,25 @@
 import { RouterView } from 'vue-router'
 import { ElConfigProvider } from 'element-plus'
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
+import { useRoute } from 'vue-router'
+import { computed } from 'vue'
+
+const route = useRoute()
+const showHeaderRoute = ['articles', 'archived', 'articleDetail', 'editArticle', 'createArticle']
+
+const isShowHeader = computed(() => {
+  return showHeaderRoute.includes(route.name!.toString())
+})
 </script>
 
 <template>
   <el-config-provider :locale="zhCn">
+    <div id="teleport"></div>
     <el-container>
-      <el-header>
+      <el-header v-show="isShowHeader">
         <RouterView name="navigation"></RouterView>
       </el-header>
-      <el-main class="flex-main">
+      <el-main class="flex-main" :class="{ pt0: !isShowHeader }">
         <RouterView class="grow-2"></RouterView>
         <RouterView name="rightSide" class="grow-1"></RouterView>
       </el-main>
@@ -19,9 +29,16 @@ import zhCn from 'element-plus/es/locale/lang/zh-cn'
 </template>
 
 <style scoped>
+#teleport {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
 #app,
 .el-container {
-  display: inline;
+  /* display: inline; */
   height: 100%;
 }
 
@@ -45,6 +62,10 @@ import zhCn from 'element-plus/es/locale/lang/zh-cn'
   justify-content: space-around;
   align-items: stretch;
   overflow: hidden;
+}
+
+.pt0 {
+  padding-top: 0 !important;
 }
 
 .grow-2 {

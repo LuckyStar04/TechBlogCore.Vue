@@ -1,116 +1,178 @@
 <script lang="ts" setup>
-import { onBeforeMount } from 'vue'
 import _404 from '@/assets/NotFound/404.png'
 import astronaut from '@/assets/NotFound/astronaut.svg'
 import earth from '@/assets/NotFound/earth.svg'
 import moon from '@/assets/NotFound/moon.svg'
 import rocket from '@/assets/NotFound/rocket.svg'
-
-onBeforeMount(() => {
-    let classes = document.querySelector('body')!.classList
-    classes.remove('fixed')
-    classes.add('not-found')
-    document.querySelector('meta[name="theme-color"]')!.setAttribute("content", "#16161e")
-})
 </script>
 <template>
-    <Teleport to="body">
-        <div class="bg-purple"></div>
+    <Teleport to="#teleport">
+        <div class="bg-purple">
+            <div class="stars">
+                <div class="central-body">
+                    <img class="image-404" :src="_404">
+                    <RouterLink :to="{ name: 'home' }" class="btn-go-home">返回首页</RouterLink>
+                </div>
+                <div class="objects">
+                    <img class="object_rocket" :src="rocket">
+                    <div class="earth-moon">
+                        <img class="object_earth" :src="earth">
+                        <img class="object_moon" :src="moon">
+                    </div>
+                    <div class="box_astronaut">
+                        <img class="object_astronaut" :src="astronaut">
+                    </div>
+                </div>
+                <div class="glowing_stars">
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+
+                </div>
+
+            </div>
+        </div>
     </Teleport>
-<div class="stars">
-      <div class="central-body">
-          <img class="image-404" :src="_404">
-          <RouterLink :to="{ name: 'home' }" class="btn-go-home">返回首页</RouterLink>
-      </div>
-      <div class="objects">
-          <img class="object_rocket" :src="rocket">
-          <div class="earth-moon">
-              <img class="object_earth" :src="earth">
-              <img class="object_moon" :src="moon">
-          </div>
-          <div class="box_astronaut">
-              <img class="object_astronaut" :src="astronaut">
-          </div>
-      </div>
-      <div class="glowing_stars">
-          <div class="star"></div>
-          <div class="star"></div>
-          <div class="star"></div>
-          <div class="star"></div>
-          <div class="star"></div>
-
-      </div>
-
-  </div>
 </template>
 <style scoped>
-@-moz-keyframes rocket-movement { 100% {-moz-transform: translate(1200px,-600px);} }
-@-webkit-keyframes rocket-movement {100% {-webkit-transform: translate(1200px,-600px); } }
-@keyframes rocket-movement { 100% {transform: translate(1200px,-600px);} }
-@-moz-keyframes spin-earth { 100% { -moz-transform: rotate(-360deg); transition: transform 20s;  } }
-@-webkit-keyframes spin-earth { 100% { -webkit-transform: rotate(-360deg); transition: transform 20s;  } }
-@keyframes spin-earth{ 100% { -webkit-transform: rotate(-360deg); transform:rotate(-360deg); transition: transform 20s; } }
+@-moz-keyframes rocket-movement {
+    100% {
+        -moz-transform: translate(1200px, -600px);
+    }
+}
+
+@-webkit-keyframes rocket-movement {
+    100% {
+        -webkit-transform: translate(1200px, -600px);
+    }
+}
+
+@keyframes rocket-movement {
+    100% {
+        transform: translate(1200px, -600px);
+    }
+}
+
+@-moz-keyframes spin-earth {
+    100% {
+        -moz-transform: rotate(-360deg);
+        transition: transform 20s;
+    }
+}
+
+@-webkit-keyframes spin-earth {
+    100% {
+        -webkit-transform: rotate(-360deg);
+        transition: transform 20s;
+    }
+}
+
+@keyframes spin-earth {
+    100% {
+        -webkit-transform: rotate(-360deg);
+        transform: rotate(-360deg);
+        transition: transform 20s;
+    }
+}
 
 @-moz-keyframes move-astronaut {
-    100% { -moz-transform: translate(-160px, -160px);}
+    100% {
+        -moz-transform: translate(-160px, -160px);
+    }
 }
+
 @-webkit-keyframes move-astronaut {
-    100% { -webkit-transform: translate(-160px, -160px);}
+    100% {
+        -webkit-transform: translate(-160px, -160px);
+    }
 }
-@keyframes move-astronaut{
-    100% { -webkit-transform: translate(-160px, -160px); transform:translate(-160px, -160px); }
+
+@keyframes move-astronaut {
+    100% {
+        -webkit-transform: translate(-160px, -160px);
+        transform: translate(-160px, -160px);
+    }
 }
+
 @-moz-keyframes rotate-astronaut {
-    100% { -moz-transform: rotate(-720deg);}
+    100% {
+        -moz-transform: rotate(-720deg);
+    }
 }
+
 @-webkit-keyframes rotate-astronaut {
-    100% { -webkit-transform: rotate(-720deg);}
+    100% {
+        -webkit-transform: rotate(-720deg);
+    }
 }
-@keyframes rotate-astronaut{
-    100% { -webkit-transform: rotate(-720deg); transform:rotate(-720deg); }
+
+@keyframes rotate-astronaut {
+    100% {
+        -webkit-transform: rotate(-720deg);
+        transform: rotate(-720deg);
+    }
 }
 
 @-moz-keyframes glow-star {
-    40% { -moz-opacity: 0.3;}
-    90%,100% { -moz-opacity: 1; -moz-transform: scale(1.2);}
-}
-@-webkit-keyframes glow-star {
-    40% { -webkit-opacity: 0.3;}
-    90%,100% { -webkit-opacity: 1; -webkit-transform: scale(1.2);}
-}
-@keyframes glow-star{
-    40% { -webkit-opacity: 0.3; opacity: 0.3;  }
-    90%,100% { -webkit-opacity: 1; opacity: 1; -webkit-transform: scale(1.2); transform: scale(1.2); border-radius: 999999px;}
+    40% {
+        -moz-opacity: 0.3;
+    }
+
+    90%,
+    100% {
+        -moz-opacity: 1;
+        -moz-transform: scale(1.2);
+    }
 }
 
-.spin-earth-on-hover{
-    
+@-webkit-keyframes glow-star {
+    40% {
+        -webkit-opacity: 0.3;
+    }
+
+    90%,
+    100% {
+        -webkit-opacity: 1;
+        -webkit-transform: scale(1.2);
+    }
+}
+
+@keyframes glow-star {
+    40% {
+        -webkit-opacity: 0.3;
+        opacity: 0.3;
+    }
+
+    90%,
+    100% {
+        -webkit-opacity: 1;
+        opacity: 1;
+        -webkit-transform: scale(1.2);
+        transform: scale(1.2);
+        border-radius: 999999px;
+    }
+}
+
+.spin-earth-on-hover {
+
     transition: ease 200s !important;
     transform: rotate(-3600deg) !important;
 }
 
-.bg-purple{
-  z-index: -999;
-  position: fixed;
-  top: 0;
-  left: 0;
-    /* background: url(/src/assets/NotFound/bg_purple.png);
-    background-repeat: repeat-x;
-    background-size: cover;
-    background-position: left top; */
-
-    /* background: radial-gradient(ellipse at bottom, #5c346a, #3c3062); */
+.bg-purple {
     background: linear-gradient(#16161d, #1f1f3a, #3b2f4a);
     height: 100vh;
     width: 100vw;
     overflow: hidden;
 }
 
-.custom-navbar{
+.custom-navbar {
     padding-top: 15px;
 }
 
-.brand-logo{
+.brand-logo {
     margin-left: 25px;
     margin-top: 5px;
     display: inline-block;
@@ -120,9 +182,9 @@ ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
-/*    overflow: hidden;*/
-    display: flex; 
-    align-items: center; 
+    /*    overflow: hidden;*/
+    display: flex;
+    align-items: center;
 }
 
 li {
@@ -135,9 +197,9 @@ li a {
     color: white;
     text-align: center;
     text-decoration: none;
-    letter-spacing : 2px;
+    letter-spacing: 2px;
     font-size: 12px;
-    
+
     -webkit-transition: all 0.3s ease-in;
     -moz-transition: all 0.3s ease-in;
     -ms-transition: all 0.3s ease-in;
@@ -149,21 +211,21 @@ li a:hover {
     color: #ffcb39;
 }
 
-.btn-request{
+.btn-request {
     padding: 10px 25px;
     border: 1px solid #FFCB39;
     border-radius: 100px;
     font-weight: 400;
 }
 
-.btn-request:hover{
+.btn-request:hover {
     background-color: #FFCB39;
     color: #fff;
     transform: scale(1.05);
-    box-shadow: 0px 20px 20px rgba(0,0,0,0.1);
+    box-shadow: 0px 20px 20px rgba(0, 0, 0, 0.1);
 }
 
-.btn-go-home{
+.btn-go-home {
     position: relative;
     z-index: 200;
     margin: 40px auto 15px;
@@ -176,9 +238,9 @@ li a:hover {
     color: white;
     text-align: center;
     text-decoration: none;
-    letter-spacing : 2px;
+    letter-spacing: 2px;
     font-size: 11px;
-    
+
     -webkit-transition: all 0.3s ease-in;
     -moz-transition: all 0.3s ease-in;
     -ms-transition: all 0.3s ease-in;
@@ -186,25 +248,25 @@ li a:hover {
     transition: all 0.3s ease-in;
 }
 
-.btn-go-home:hover{
+.btn-go-home:hover {
     background-color: #FFCB39;
     color: #fff;
     transform: scale(1.05);
-    box-shadow: 0px 20px 20px rgba(0,0,0,0.1);
+    box-shadow: 0px 20px 20px rgba(0, 0, 0, 0.1);
 }
 
-.central-body{
-/*    width: 100%;*/
+.central-body {
+    /*    width: 100%;*/
     padding: 13% 5% 10% 5%;
     text-align: center;
 }
 
-.objects img{
+.objects img {
     z-index: 90;
     pointer-events: none;
 }
 
-.object_rocket{
+.object_rocket {
     width: 40px;
     z-index: 95;
     position: absolute;
@@ -214,32 +276,32 @@ li a:hover {
     animation: rocket-movement 200s linear infinite both running;
 }
 
-.object_earth{
+.object_earth {
     width: 100px;
     position: absolute;
     top: 20%;
     left: 15%;
     z-index: 90;
-/*    animation: spin-earth 100s infinite linear both;*/
+    /*    animation: spin-earth 100s infinite linear both;*/
 }
 
-.object_moon{
+.object_moon {
     width: 80px;
     position: absolute;
     top: 12%;
     left: 25%;
-/*
+    /*
     transform: rotate(0deg);
     transition: transform ease-in 99999999999s;
 */
 }
 
-.object_astronaut{
+.object_astronaut {
     width: 140px;
     animation: rotate-astronaut 200s infinite linear both alternate;
 }
 
-.box_astronaut{
+.box_astronaut {
     z-index: 110 !important;
     position: absolute;
     top: 60%;
@@ -248,21 +310,21 @@ li a:hover {
     animation: move-astronaut 50s infinite linear both alternate;
 }
 
-.image-404{
+.image-404 {
     width: max(28vw, 360px);
     position: relative;
     z-index: 100;
     pointer-events: none;
 }
 
-.stars{
+.stars {
     background: url(/src/assets/NotFound/overlay_stars.svg);
     background-repeat: repeat;
     background-size: contain;
     background-position: left top;
 }
 
-.glowing_stars .star{
+.glowing_stars .star {
     position: absolute;
     border-radius: 100%;
     background-color: #fff;
@@ -272,50 +334,54 @@ li a:hover {
     will-change: opacity;
 }
 
-.glowing_stars .star:nth-child(1){
+.glowing_stars .star:nth-child(1) {
     top: 80%;
     left: 25%;
     animation: glow-star 2s infinite ease-in-out alternate 1s;
 }
-.glowing_stars .star:nth-child(2){
+
+.glowing_stars .star:nth-child(2) {
     top: 20%;
     left: 40%;
     animation: glow-star 2s infinite ease-in-out alternate 3s;
 }
-.glowing_stars .star:nth-child(3){
+
+.glowing_stars .star:nth-child(3) {
     top: 25%;
     left: 25%;
     animation: glow-star 2s infinite ease-in-out alternate 5s;
 }
-.glowing_stars .star:nth-child(4){
+
+.glowing_stars .star:nth-child(4) {
     top: 75%;
     left: 80%;
     animation: glow-star 2s infinite ease-in-out alternate 7s;
 }
-.glowing_stars .star:nth-child(5){
+
+.glowing_stars .star:nth-child(5) {
     top: 90%;
     left: 50%;
     animation: glow-star 2s infinite ease-in-out alternate 9s;
 }
 
-@media only screen and (max-width: 600px){
-    .navbar-links{
+@media only screen and (max-width: 600px) {
+    .navbar-links {
         display: none;
     }
-    
-    .custom-navbar{
+
+    .custom-navbar {
         text-align: center;
     }
-    
-    .brand-logo img{
+
+    .brand-logo img {
         width: 120px;
     }
-    
-    .box_astronaut{
+
+    .box_astronaut {
         top: 70%;
     }
-    
-    .central-body{
+
+    .central-body {
         padding-top: 25%;
     }
 }

@@ -120,7 +120,7 @@ html.dark textarea::-webkit-scrollbar-thumb {
     background-color: #FFF3 !important;
 }
 
-body.fixed {
+/* body.fixed {
     position: fixed;
     top: 0;
     left: 0;
@@ -138,7 +138,6 @@ body.fixed .el-header {
 }
 
 body.fixed .el-main {
-    /* padding: 0; */
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -163,7 +162,7 @@ body.not-found .el-main {
     background-color: transparent;
     width: 100vw !important;
     height: 100vh !important;
-}
+} */
 
 @media only screen and (min-width: 768px) and (max-width: 1280px) {
     .navi-drawer {

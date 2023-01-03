@@ -19,21 +19,8 @@ const jumpHome = () => {
 }
 </script>
 <template>
-    <Teleport to="body">
-        <div class="bg-wrapper">
-            <WaveBackground></WaveBackground>
-        </div>
+    <Teleport to="#teleport">
+        <WaveBackground><div style="height:65vh;"></div></WaveBackground>
     </Teleport>
     <LoginForm @callback="jumpHome"></LoginForm>
 </template>
-<style>
-.bg-wrapper {
-    z-index: -999;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: white;
-}
-</style>
