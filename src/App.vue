@@ -9,7 +9,7 @@ const route = useRoute()
 const showHeaderRoute = ['articles', 'archived', 'articleDetail', 'editArticle', 'createArticle']
 
 const isShowHeader = computed(() => {
-  return showHeaderRoute.includes(route.name!.toString())
+  return showHeaderRoute.includes(route.name as string)
 })
 </script>
 
