@@ -67,6 +67,7 @@ const handleScroll = () => {
 
 onMounted(() => {
     fetchData()
+    handleScroll()
     window.addEventListener("scroll", handleScroll, false)
 })
 
