@@ -34,9 +34,6 @@ export const useUserStore = defineStore('user', () => {
     getStatus()
   }
   getWelcome()
-  timer = setTimeout(
-    getWelcome, (60 - new Date().getMinutes()) * 60000
-  )
   async function getStatus() {
     try {
       let response = await req.request({
