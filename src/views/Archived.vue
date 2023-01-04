@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import req from '@/utils/request'
-import { onMounted, reactive, watch } from 'vue';
+import { onMounted, onUnmounted, reactive, watch } from 'vue'
 import type { ArticleList, GroupedArticleList } from '@/types'
 import { useArticleStore } from '@/stores/ArticleStore'
 
@@ -11,13 +11,13 @@ const data = reactive({
     totalCount: 0,
     currentPage: 1,
     totalPages: 1,
-    pageSize: 50,
+    pageSize: 20,
     pageNumber: 1,
     isLoading: true,
     groupedArticles: [] as Array<GroupedArticleList>,
 })
 
-let i = 1
+let i = 0
 
 const groupArticle = (articles: Array<ArticleList>) => {
     let g = [] as Array<GroupedArticleList>
@@ -35,13 +35,14 @@ const groupArticle = (articles: Array<ArticleList>) => {
 }
 
 const fetchData = async () => {
+    data.isLoading = true
     articleStore.store.category = ''
     articleStore.store.tags = []
-    data.isLoading = true
     let response = await req.request({
         url: 'articles', method: 'get', params: { pageSize: data.pageSize, pageNumber: data.pageNumber }
     })
     if (response.status == 200) {
+        i = 0 - data.articles.length
         data.articles = [...data.articles, ...response.data]
         let a = JSON.parse(response.headers['x-pagination'] as string)
         data.totalCount = a.totalCount
@@ -49,13 +50,29 @@ const fetchData = async () => {
         data.totalPages = a.totalPages
         data.isLoading = false
         data.groupedArticles = groupArticle(data.articles)
-        i = 1
     }
 }
 
 watch(() => [data.pageNumber, data.pageSize], fetchData)
 
-onMounted(() => fetchData())
+const handleScroll = () => {
+    const scrollTop = document.body.scrollTop || document.documentElement.scrollTop
+    const pageBottom = scrollTop + window.innerHeight
+    const dividerBottom = document.querySelector('#divider-btm') as HTMLElement
+    console.log(dividerBottom.offsetTop, pageBottom)
+    if (dividerBottom.offsetTop < pageBottom && data.pageNumber < data.totalPages && !data.isLoading) {
+        data.pageNumber++
+    }
+}
+
+onMounted(() => {
+    fetchData()
+    window.addEventListener("scroll", handleScroll, false)
+})
+
+onUnmounted(() => {
+    window.removeEventListener("scroll", handleScroll, false)
+})
 
 </script>
 
@@ -77,9 +94,8 @@ onMounted(() => fetchData())
             </el-timeline-item>
         </el-timeline>
         </transition>
-        <el-divider v-if="data.pageNumber < data.totalPages"><el-button @click="data.pageNumber++"
-                link>查看更多</el-button></el-divider>
-        <el-divider v-else>已经到底啦</el-divider>
+        <el-divider id="divider-btm" v-if="data.pageNumber < data.totalPages">加载中…</el-divider>
+        <el-divider id="divider-btm" v-else>已经到底啦</el-divider>
     </div>
 </template>
 <style scoped>
