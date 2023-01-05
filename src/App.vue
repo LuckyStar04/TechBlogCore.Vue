@@ -49,11 +49,11 @@ const isShowHeader = computed(() => {
   left: 0;
   right: 0;
   z-index: 999;
-  /* background-color: var(--el-bg-color); */
-  background-image: radial-gradient(transparent 1px,var(--el-bg-color) 1px);
+  background-color: var(--el-bg-color);
+  /* background-image: radial-gradient(transparent 1px,var(--el-bg-color) 1px);
   background-size: 4px 4px;
   backdrop-filter: saturate(50%) blur(4px);
-  -webkit-backdrop-filter: saturate(50%) blur(4px);
+  -webkit-backdrop-filter: saturate(50%) blur(4px); */
   padding: 0;
   border-bottom: solid 1px var(--el-menu-border-color);
   box-shadow: var(--header-shadow);
