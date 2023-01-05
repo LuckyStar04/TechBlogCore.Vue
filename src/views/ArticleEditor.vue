@@ -90,7 +90,7 @@ const saveArticle = async () => {
                     }
                 })
                 .catch((e) => {
-                    console.log(e)
+                    //console.log(e)
                     if (!route.params.id) {
                         router.push({ name: 'editArticle', params: { id: response.data.id } })
                     }

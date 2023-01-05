@@ -59,7 +59,7 @@ const handleScroll = () => {
     const scrollTop = document.body.scrollTop || document.documentElement.scrollTop
     const pageBottom = scrollTop + window.innerHeight
     const dividerBottom = document.querySelector('#divider-btm') as HTMLElement
-    console.log(dividerBottom.offsetTop, pageBottom)
+    //console.log(dividerBottom.offsetTop, pageBottom)
     if (dividerBottom.offsetTop < pageBottom && data.pageNumber < data.totalPages && !data.isLoading) {
         data.pageNumber++
     }
