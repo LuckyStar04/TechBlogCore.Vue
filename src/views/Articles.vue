@@ -27,6 +27,9 @@ const data = reactive({
 const fetchData = async () => {
     if (route.name != 'articles') return
     data.isLoading = true
+    if (route.query.page && route.query.page != '1') {
+        data.pageNumber = parseInt(route.query.page.toString())
+    }
     let response = await req.request({
         url: 'articles', method: 'get', params: { tag: route.query.tag, category: route.query.category, keyword: route.query.keyword, pageSize: data.pageSize, pageNumber: route.query.page??1 }
     })
@@ -46,6 +49,7 @@ const fetchData = async () => {
 }
 
 const changePage = () => {
+    if (!route.query.page && data.pageNumber == 1) return
     router.replace({ name: route.name as RouteRecordName|undefined, query: { ...route.query, page: data.pageNumber }})
 }
 
