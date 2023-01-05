@@ -122,15 +122,15 @@ const saveArticle = async () => {
     </div>
 </template>
 <style scoped>
-.content >>> textarea::-webkit-scrollbar-track {
+.content :deep(textarea::-webkit-scrollbar-track) {
     border-radius: 10px;
 }
 
-.content >>> .el-textarea__inner {
+.content :deep(.el-textarea__inner) {
     height: 100%;
 }
 
-.content >>> textarea {
+.content :deep(textarea) {
     resize: none !important;
     overflow: auto;
 }

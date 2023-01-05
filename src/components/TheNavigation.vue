@@ -149,7 +149,7 @@ onUnmounted(() => {
     font-family: 'Trebuchet MS';
 }
 
-#navi-article-title>>>* {
+#navi-article-title :deep(*) {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;

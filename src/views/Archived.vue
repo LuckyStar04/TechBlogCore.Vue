@@ -219,17 +219,17 @@ h3 {
     padding: 1.6rem 1.6rem 0;
 }
 
-.el-timeline>>>.el-timeline-item__timestamp {
+.el-timeline :deep(.el-timeline-item__timestamp) {
     font-size: var(--el-font-size-extra-large);
 }
 
-.el-timeline>>>.el-timeline-item__node--large {
+.el-timeline :deep(.el-timeline-item__node--large) {
     width: var(--el-font-size-extra-large);
     height: var(--el-font-size-extra-large);
     left: -5px;
 }
 
-.el-timeline>>>.el-timeline-item:last-child .el-timeline-item__tail {
+.el-timeline :deep(.el-timeline-item:last-child .el-timeline-item__tail) {
     display: block;
 }
 
