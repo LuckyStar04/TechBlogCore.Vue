@@ -2,7 +2,7 @@
 import req from '@/utils/request'
 import { nextTick, onMounted, onUnmounted, reactive, watch } from 'vue'
 import type { ArticleList } from '@/types'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter, type RouteRecordName } from 'vue-router'
 import { parseDateTime } from '@/utils/dates'
 import markdownToTxt from 'markdown-to-txt'
 import { Plus } from '@element-plus/icons-vue'
@@ -11,6 +11,7 @@ import { useArticleStore } from '@/stores/ArticleStore'
 
 const userStore = useUserStore()
 const route = useRoute()
+const router = useRouter()
 const articleStore = useArticleStore()
 
 const data = reactive({
@@ -27,7 +28,7 @@ const fetchData = async () => {
     if (route.name != 'articles') return
     data.isLoading = true
     let response = await req.request({
-        url: 'articles', method: 'get', params: { tag: route.query.tag, category: route.query.category, keyword: route.query.keyword, pageSize: data.pageSize, pageNumber: data.pageNumber }
+        url: 'articles', method: 'get', params: { tag: route.query.tag, category: route.query.category, keyword: route.query.keyword, pageSize: data.pageSize, pageNumber: route.query.page??1 }
     })
     if (response.status == 200) {
         data.articles = response.data
@@ -44,8 +45,11 @@ const fetchData = async () => {
     }
 }
 
+const changePage = () => {
+    router.replace({ name: route.name as RouteRecordName|undefined, query: { ...route.query, page: data.pageNumber }})
+}
+
 watch(() => route.query, fetchData)
-watch(() => [data.pageNumber, data.pageSize], fetchData)
 
 const handleScroll = () => {
     const scrollTop = document.body.scrollTop || document.documentElement.scrollTop
@@ -101,7 +105,7 @@ onUnmounted(() => {
                 <p class="content">{{ markdownToTxt(article.content) }}</p>
             </div>
             <el-pagination style="margin-top:10px;" layout="total, prev, pager, next" :total="data.totalCount"
-                v-model:currentPage="data.pageNumber" />
+                v-model:currentPage="data.pageNumber" @update:current-page="changePage" />
         </div>
     </div>
 </template>
