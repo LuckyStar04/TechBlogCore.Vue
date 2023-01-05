@@ -1,8 +1,21 @@
 import { marked } from 'marked'
 import hljs from 'highlight.js'
 
+const renderer = new marked.Renderer()
+renderer.link = function (href, title, text) {
+    if (href === null) {
+        return text
+    }
+    let out = '<a href="' + href + '" target="_blank"'
+    if (title) {
+        out += ' title="' + title + '"'
+    }
+    out += '>' + text + '</a>'
+    return out
+}
+
 marked.setOptions({
-    renderer: new marked.Renderer(),
+    renderer: renderer,
     highlight: function (code, lang) {
         const language = hljs.getLanguage(lang) ? lang : 'plaintext'
         return hljs.highlight(code, { language }).value
