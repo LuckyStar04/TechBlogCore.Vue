@@ -4,18 +4,18 @@ import Tags from './Tags.vue'
 </script>
 <template>
     <div class="wrapper">
-        <div class="sidebars autohide-scrollbar">
+        <div class="sidebars">
+            <el-scrollbar height="calc(100vh - 60px)">
             <Categories></Categories>
             <Tags></Tags>
+            </el-scrollbar>
         </div>
     </div>
 </template>
 <style scoped>
 .sidebars {
     position: fixed;
-    height: calc(100vh - 60px);
-    overflow: auto;
-    overflow-y: scroll;
+    overflow: hidden;
 }
 
 @media only screen and (min-width: 1440px) {
