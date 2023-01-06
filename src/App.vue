@@ -86,10 +86,6 @@ const isShowHeader = computed(() => {
     width: 360px;
     flex-shrink: 0;
   }
-
-  .grow-1 :deep(.sidebars) {
-    width: 360px;
-  }
 }
 
 @media only screen and (min-width: 1024px) and (max-width: 1440px) {
@@ -100,10 +96,6 @@ const isShowHeader = computed(() => {
   .grow-1 {
     width: 320px;
     flex-shrink: 0;
-  }
-
-  .grow-1 :deep(.sidebars) {
-    width: 320px;
   }
 }
 
@@ -116,10 +108,6 @@ const isShowHeader = computed(() => {
     width: 280px;
     flex-shrink: 0;
   }
-
-.grow-1 :deep(.sidebars) {
-  width: 280px;
-}
 }
 
 @media only screen and (max-width: 768px) {
