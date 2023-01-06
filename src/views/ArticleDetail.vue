@@ -37,6 +37,7 @@ const data = reactive({
     expandNav: false,
     navItems: [] as Array<NavItem>,
     navDrawer: false,
+    showModal: false,
 })
 
 const fetchData = async () => {
@@ -52,6 +53,7 @@ const fetchData = async () => {
         articleStore.store.tags = response.data.tags
         await nextTick()
         makeNav()
+        setImageModal()
     }
 }
 
@@ -91,6 +93,17 @@ const makeNav = async () => {
     setTimeout(switchNav, 150)
 }
 
+const setImageModal = () => {
+    const imgs = document.querySelectorAll('.note-view img') as NodeListOf<HTMLElement>
+    const modalImg = document.querySelector('#modal-img')
+    imgs.forEach((e) => {
+        e.onclick = function () {
+            modalImg!.setAttribute('src', e.getAttribute('src')??'')
+            data.showModal = true
+        }
+    })
+}
+
 const switchNav = () => {
     data.expandNav = !data.expandNav
 }
@@ -101,6 +114,10 @@ const switchNavDrawer = () => {
 
 const closeNavDrawer = () => {
     data.navDrawer = false
+}
+
+const toggleModal = () => {
+    data.showModal = !data.showModal
 }
 
 const addComment = (comment: Comment) => {
@@ -124,6 +141,11 @@ const noteHtml = computed(() => {
     <div v-loading.fullscreen.lock="data.isLoading" class="wrapper">
         <Teleport to="#navi-article-title">
             <h1 style="cursor: pointer;" @click.stop="backTop">{{ data.article.title }}</h1>
+        </Teleport>
+        <Teleport to="body">
+            <div class="pos-fixed" v-show="data.showModal" @click="toggleModal">
+                <img id="modal-img" src="" />
+            </div>
         </Teleport>
         <div class="article-title">
             <h1>{{ data.article.title }}</h1>
@@ -177,6 +199,49 @@ const noteHtml = computed(() => {
     </div>
 </template>
 <style scoped>
+.pos-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.pos-fixed>img {
+    background-color: rgba(255, 255, 255, 0.8);
+    max-height: 95%;
+    max-width: 99%;
+    animation: enlarge-anime .5s ease;
+}
+
+.note-view :deep(.img-flex) {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.note-view :deep(.img-flex>p) {
+    font-family: var(--el-font-family);
+    font-size: var(--el-font-size-small);
+    font-style: italic;
+}
+
+@keyframes enlarge-anime {
+    0% {
+        transform: scale(.6);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
 .article-title {
     display: flex;
     justify-content: space-between;

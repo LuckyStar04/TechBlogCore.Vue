@@ -14,6 +14,23 @@ renderer.link = function (href, title, text) {
     return out
 }
 
+renderer.image = function (href, title, text) {
+    if (href === null) {
+        return text
+    }
+
+    let out = `<div class="img-flex"><img src="${href}" alt="${text}"`
+    if (title) {
+        out += ` title="${title}"`
+    }
+    out += '/>'
+    if (text) {
+        out += `<p>${text}</p>`
+    }
+    out += '</div>'
+    return out;
+}
+
 marked.setOptions({
     renderer: renderer,
     highlight: function (code, lang) {

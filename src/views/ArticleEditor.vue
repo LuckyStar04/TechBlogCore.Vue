@@ -178,6 +178,19 @@ const saveArticle = async () => {
     padding: 12px;
 }
 
+.note-view :deep(.img-flex) {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.note-view :deep(.img-flex>p) {
+    font-family: var(--el-font-family);
+    font-size: var(--el-font-size-small);
+    font-style: italic;
+}
+
 .left>.tag-wrapper {
     padding: 0 2px 10px 0;
     display: flex;
