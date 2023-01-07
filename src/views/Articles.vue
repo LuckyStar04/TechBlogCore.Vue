@@ -119,14 +119,21 @@ onUnmounted(() => {
 }
 
 .article-title {
+    min-height: 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    overflow: hidden;
 }
 
 .article-title>h2 {
-    display: inline;
-    line-height: 0;
+    display: inline-block;
+    /* line-height: 0; */
+    margin: 0;
+    overflow-wrap: normal;
+    overflow: hidden;
+    white-space: pre-line;
+    text-overflow: ellipsis;
 }
 
 a {
