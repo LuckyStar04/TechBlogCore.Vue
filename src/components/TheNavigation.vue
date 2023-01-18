@@ -227,7 +227,7 @@ onUnmounted(() => {
     }
 }
 
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
     .navigations-wrapper {
         width: 768px;
     }
