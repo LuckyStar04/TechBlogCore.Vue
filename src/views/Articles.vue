@@ -5,7 +5,7 @@ import type { ArticleList } from '@/types'
 import { useRoute, useRouter, type RouteRecordName } from 'vue-router'
 import { parseDateTime } from '@/utils/dates'
 import markdownToTxt from 'markdown-to-txt'
-import { Plus } from '@element-plus/icons-vue'
+import { Plus, Calendar, TakeawayBox } from '@element-plus/icons-vue'
 import { useUserStore } from '@/stores/UserStore'
 import { useArticleStore } from '@/stores/ArticleStore'
 
@@ -31,7 +31,7 @@ const fetchData = async () => {
         data.pageNumber = parseInt(route.query.page.toString())
     }
     let response = await req.request({
-        url: 'articles', method: 'get', params: { tag: route.query.tag, category: route.query.category, keyword: route.query.keyword, pageSize: data.pageSize, pageNumber: route.query.page??1 }
+        url: 'articles', method: 'get', params: { tag: route.query.tag, category: route.query.category, keyword: route.query.keyword, pageSize: data.pageSize, pageNumber: route.query.page ?? 1 }
     })
     if (response.status == 200) {
         data.articles = response.data
@@ -41,7 +41,7 @@ const fetchData = async () => {
         data.totalPages = a.totalPages
         data.isLoading = false
         articleStore.store.category = route.query.category ? route.query.category as string : ''
-        articleStore.store.tags = route.query.tag ? [ route.query.tag as string ] : []
+        articleStore.store.tags = route.query.tag ? [route.query.tag as string] : []
         nextTick(() => {
             handleScroll()
         })
@@ -50,7 +50,7 @@ const fetchData = async () => {
 
 const changePage = () => {
     if (!route.query.page && data.pageNumber == 1) return
-    router.replace({ name: route.name as RouteRecordName|undefined, query: { ...route.query, page: data.pageNumber }})
+    router.replace({ name: route.name as RouteRecordName | undefined, query: { ...route.query, page: data.pageNumber } })
 }
 
 watch(() => route.query, fetchData)
@@ -82,10 +82,12 @@ let key = 1
 onMounted(() => {
     fetchData()
     window.addEventListener("scroll", handleScroll, false)
+    window.addEventListener("resize", handleScroll, false)
 })
 
 onUnmounted(() => {
     window.removeEventListener("scroll", handleScroll, false)
+    window.removeEventListener("resize", handleScroll, false)
 })
 </script>
 
@@ -101,11 +103,12 @@ onUnmounted(() => {
         </div>
         <div class="articles">
             <div v-for="article in data.articles" class="article hidden" :key="key++">
-                <RouterLink :to="{ name: 'articleDetail', params: { id: article.id } }">{{ article.title }}</RouterLink>
+                <RouterLink class="article-link" :to="{ name: 'articleDetail', params: { id: article.id } }">{{ article.title }}</RouterLink>
                 <br />
-                <span class="create-time">{{ parseDateTime(article.createTime, true) }}</span> | <router-link
-                    class="category" :to="{ name: 'articles', query: { category: article.category } }">
-                    {{ article.category }}</router-link>
+                <div class="article-meta">
+                    <span class="create-time"><el-icon><Calendar /></el-icon> {{ parseDateTime(article.createTime, true) }}</span>
+                    <router-link class="category" :to="{ name: 'articles', query: { category: article.category } }"><el-icon><TakeawayBox /></el-icon> {{ article.category }}</router-link>
+                </div>
                 <p class="content">{{ markdownToTxt(article.content) }}</p>
             </div>
             <el-pagination style="margin-top:10px;" layout="total, prev, pager, next" :total="data.totalCount"
@@ -119,7 +122,7 @@ onUnmounted(() => {
 }
 
 .article-title {
-    min-height: 40px;
+    min-height: 39px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -177,7 +180,7 @@ h3 {
     animation-name: showUp;
     animation-duration: 1.8s;
     animation-fill-mode: forwards;
-    animation-timing-function: cubic-bezier(.15,1.05,.02,.99);
+    animation-timing-function: cubic-bezier(.15, 1.05, .02, .99);
 }
 
 @keyframes showUp {
@@ -232,32 +235,70 @@ h3 {
     animation-delay: 1000ms;
 }
 
-.article>a {
+.article a {
     text-decoration: none;
-    font-size: 2rem;
     color: var(--el-text-color-regular);
 }
 
-.article>a:hover {
+.article a:hover {
     color: var(--el-text-color-secondary);
+}
+
+.article-link {
+    font-size: 1.8rem;
 }
 
 .create-time {
-    font-size: .9rem;
     color: var(--el-text-color-regular);
 }
 
-.content {
-    margin: 1.5rem 0;
-    color: var(--el-text-color-secondary);
+.create-time .el-icon {
+    position: relative;
+    top: 2px;
 }
 
 .category {
-    font-size: 1.02rem !important;
-    cursor: pointer;
+    margin-left: 1rem;
+}
+
+.category .el-icon {
+    position: relative;
+    top: 2px;
+}
+
+.article-meta {
+    font-size: 1rem;
+    margin: .16rem 0 1rem;
+}
+
+.content {
+    margin: 1rem 0;
+    color: var(--el-text-color-secondary);
+    line-height: 1.3rem;
+    max-height: 3.9rem;
+    overflow: hidden;
 }
 
 .wrapper {
     margin: .5rem;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    .article-link {
+        font-size: 1.6rem;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .article-title {
+        min-height: 1rem;
+    }
+    .article-title>h2 {
+        font-size: 1.35rem;
+    }
+
+    .article-link {
+        font-size: 1.5rem;
+    }
 }
 </style>

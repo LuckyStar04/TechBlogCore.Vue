@@ -105,7 +105,7 @@ const isShowHeader = computed(() => {
   }
 
   .grow-1 {
-    width: 280px;
+    width: 240px;
     flex-shrink: 0;
   }
 }

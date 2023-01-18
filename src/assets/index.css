@@ -19,6 +19,10 @@ body,
     height: 100%;
 }
 
+body a {
+    transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
 .regular-scrollbar::-webkit-scrollbar,
 code::-webkit-scrollbar {
     height: 6px;
