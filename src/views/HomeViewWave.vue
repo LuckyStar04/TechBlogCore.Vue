@@ -18,7 +18,7 @@ onBeforeMount(() => {
                     <RouterLink class="underlineHover" :to="{ name: 'login' }">登&nbsp;&nbsp;&nbsp;录</RouterLink>
                     <RouterLink class="underlineHover" :to="{ name: 'articles' }">文&nbsp;&nbsp;&nbsp;章</RouterLink>
                     <RouterLink class="underlineHover" :to="{ name: 'archived' }">归&nbsp;&nbsp;&nbsp;档</RouterLink>
-                    <a href="https://github.com/LuckyStar04/TechBlogCore.Vue" target="_blank">Github</a>
+                    <a class="underlineHover" href="https://github.com/LuckyStar04/TechBlogCore.Vue" target="_blank">Github</a>
                 </div>
             </div>
         </WaveBackground>
