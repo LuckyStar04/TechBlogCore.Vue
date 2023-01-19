@@ -161,9 +161,12 @@ h3 {
     color: #626aef;
 }
 
-.article-title,
-.articles {
+.article-title {
     padding: 1rem;
+}
+
+.articles {
+    padding: 0 1rem 1rem;
 }
 
 .article-title {
@@ -171,8 +174,8 @@ h3 {
 }
 
 .article {
-    border-bottom: 1px solid var(--el-border-color-light);
-    margin-top: .6rem;
+    /* border-bottom: 1px solid var(--el-border-color-light); */
+    margin: 1.6rem 0 3rem;
     opacity: 0;
 }
 
@@ -272,7 +275,7 @@ h3 {
 }
 
 .content {
-    margin: 1rem 0;
+    margin: 1rem 0 1.5rem;
     color: var(--el-text-color-secondary);
     line-height: 1.3rem;
     max-height: 3.9rem;
