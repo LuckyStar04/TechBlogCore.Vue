@@ -7,7 +7,7 @@ import { parseMarkdown } from '@/utils/markdown'
 import "highlight.js/styles/atom-one-dark.css"
 import { computed } from '@vue/reactivity'
 import { parseDateTime } from '@/utils/dates'
-import { EditPen } from '@element-plus/icons-vue'
+import { EditPen, Calendar, Histogram, Reading, Clock, TakeawayBox, PriceTag, Comment as CommentIcon } from '@element-plus/icons-vue'
 import Comments from '@/components/Comments.vue'
 import MakeComment from '@/components/MakeComment.vue'
 import ArticleNavi from '@/components/ArticleNavi.vue'
@@ -128,6 +128,16 @@ const backTop = () => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
 }
 
+const calcLength = (length: number): string => {
+    if (length < 1000) return length.toString()
+    if (length < 1000000) return (length / 1000).toFixed(1) + 'k'
+    return (length / 1000000).toFixed(1) + 'm'
+}
+
+const calcReadMinutes = (length: number): string => {
+    return (length / 900).toFixed(0)
+}
+
 watch(() => route.params.id, fetchData)
 watch(() => route.hash, closeNavDrawer)
 onMounted(() => fetchData())
@@ -151,25 +161,22 @@ const noteHtml = computed(() => {
             <h1>{{ data.article.title }}</h1>
             <RouterLink v-if="userStore.info.role=='Admin'" :to="{ name: 'editArticle', params: { id: route.params.id } }"><el-button type="primary" plain :icon="EditPen">编辑文章</el-button></RouterLink>
         </div>
-        <table class="meta-table">
-            <tbody>
-                <tr>
-                    <td>分类</td><td><RouterLink :to="{ name: 'articles', query: { category: data.article.category } }">{{data.article.category}}</RouterLink></td>
-                </tr>
-                <tr>
-                    <td>创建于</td><td>{{ parseDateTime(data.article.createTime, true) }}&nbsp;&nbsp;&nbsp;&nbsp;{{ data.article.viewCount }} 人阅读</td>
-                </tr>
-                <tr>
-                    <td>标签</td><td><div class="tags">
-                <RouterLink v-for="(tag, index) in data.article.tags" :to="{ name: 'articles', query: { tag: tag } }">
-                    <el-tag :key="tag" class="mx-1">{{ tag }}</el-tag>
-                </RouterLink>
-            </div></td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="meta">
+            <span><el-icon><Calendar /></el-icon> {{ parseDateTime(data.article.createTime, true) }}</span>
+            <span><RouterLink :to="{ name: 'articles', query: { category: data.article.category } }"><el-icon><TakeawayBox /></el-icon> {{data.article.category}}</RouterLink></span>
+            <br />
+            <span><el-icon><Reading /></el-icon> {{ data.article.viewCount }} 次阅读</span>
+            <span><el-icon><CommentIcon /></el-icon> {{ data.article.comments.length }} 条评论</span>
+            <br />
+            <span><el-icon><Histogram /></el-icon> {{ calcLength(data.article.content.length) }} 字</span>
+            <span><el-icon><Clock /></el-icon> {{ calcReadMinutes(data.article.content.length) }} 分钟</span>
+        </div>
         <div class="articles">
             <div class="note-view" v-html="noteHtml"></div>
+            <div class="category">
+                <span><RouterLink :to="{ name: 'articles', query: { category: data.article.category } }"><el-icon><TakeawayBox /></el-icon> {{ data.article.category }}</RouterLink></span>
+                <span v-for="tag in data.article.tags"><RouterLink :to="{ name: 'articles', query: { tag: tag } }"><el-icon><PriceTag /></el-icon> {{ tag }}</RouterLink></span>
+            </div>
             <div class="make-comment">
                 <div class="make-comment-avatar">
                     <img class="avatar" :src="userStore.info.avatar" />
@@ -277,50 +284,48 @@ a {
     height: 40px;
     border-bottom: 1px solid var(--el-border-color-light);
 }
-.meta-table {
-    width: 100%;
-    color: #8590a6;
+
+.meta {
     padding: 1rem;
+    color: #8590a6;
     border-bottom: 1px solid var(--el-border-color-light);
 }
-.meta-table a {
-    color: var(--el-text-color-regular);
-}
-.meta-table td {
-    text-align: left;
-    vertical-align: middle;
-}
-.meta-table a:hover {
-    color: var(--el-text-color-secondary);
-}
-.meta-table tr>td:first-child {
-    width: 60px;
-}
-.meta-info {
-    padding: 1rem;
-    border-bottom: 1px solid var(--el-border-color-light);
-}
-.meta-info a {
-    color: var(--el-text-color-regular);
-}
-.meta-info a:hover {
-    color: var(--el-text-color-secondary);
-}
-.subtitle {
-    margin-bottom: 1rem;
+
+.meta a {
     color: #8590a6;
 }
-.subtitle>span {
-    margin-right: 1rem;
+
+.meta a:hover {
+    color: #bfc8d9;
 }
 
-.tags {
-    display: flex;
-    flex-wrap: wrap;
+.category {
+    padding: 1.6rem 0 0;
+    color: var(--el-text-color-regular);
+    font-size: 1.1em;
+    border-top: 1px solid var(--el-border-color-light);
 }
 
-.tags>a {
-    margin: 0 .5rem 0 0;
+.category a {
+    color: var(--el-text-color-regular);
+}
+
+.category a:hover {
+    color: var(--el-text-color-secondary);
+}
+
+.meta span, .category span {
+    line-height: 1.6rem;
+    white-space: nowrap;
+}
+
+.meta span + span, .category span + span {
+    margin-left: 1rem;
+}
+
+.meta .el-icon, .category .el-icon {
+    position: relative;
+    top: 1px;
 }
 
 .comment-title {
