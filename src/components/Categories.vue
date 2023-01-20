@@ -139,6 +139,7 @@ li {
     cursor: pointer;
     color: var(--el-color-info);
     border-radius: 8px;
+    -webkit-tap-highlight-color: transparent;
 }
 li.active {
     font-weight: 600;
