@@ -26,7 +26,7 @@
                 </div>
 
                 <form>
-                    <input type="text" id="email" class="fadeIn third" name="email" v-model="data.email"
+                    <input type="text" id="email" class="fadeIn second" name="email" v-model="data.email"
                         placeholder="输入注册邮箱" autocomplete="off" maxlength="50">
                     <input type="text" id="login" class="fadeIn second" name="login" v-model="data.username"
                         placeholder="输入用户名" autocomplete="off" maxlength="50">
@@ -385,27 +385,27 @@ input[type=password]:placeholder {
 }
 
 .fadeIn.first {
-    -webkit-animation-delay: 0.4s;
-    -moz-animation-delay: 0.4s;
-    animation-delay: 0.4s;
+    -webkit-animation-delay: 0.05s;
+    -moz-animation-delay: 0.05s;
+    animation-delay: 0.05s;
 }
 
 .fadeIn.second {
-    -webkit-animation-delay: 0.6s;
-    -moz-animation-delay: 0.6s;
-    animation-delay: 0.6s;
+    -webkit-animation-delay: 0.15s;
+    -moz-animation-delay: 0.15s;
+    animation-delay: 0.15s;
 }
 
 .fadeIn.third {
-    -webkit-animation-delay: 0.8s;
-    -moz-animation-delay: 0.8s;
-    animation-delay: 0.8s;
+    -webkit-animation-delay: 0.25s;
+    -moz-animation-delay: 0.25s;
+    animation-delay: 0.25s;
 }
 
 .fadeIn.fourth {
-    -webkit-animation-delay: 1s;
-    -moz-animation-delay: 1s;
-    animation-delay: 1s;
+    -webkit-animation-delay: .35s;
+    -moz-animation-delay: .35s;
+    animation-delay: .35s;
 }
 
 /* Simple CSS3 Fade-in Animation */
