@@ -47,9 +47,7 @@ const moveBg = () => {
 }
 
 const hideBg = () => {
-    let e = document.querySelector('.categories') as HTMLElement|null
-    if (!e) return
-    bg.X = `${e.clientWidth / 2}px`
+    bg.X = `${categories.value.clientWidth / 2}px`
     bg.Y = `0px`
     bg.Width = '0px'
     bg.Height = '0px'
