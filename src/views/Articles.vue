@@ -26,6 +26,8 @@ const data = reactive({
 
 const fetchData = async () => {
     if (route.name != 'articles') return
+    articleStore.store.category = route.query.category ? route.query.category as string : ''
+    articleStore.store.tags = route.query.tag ? [route.query.tag as string] : []
     data.isLoading = true
     if (route.query.page && route.query.page != '1') {
         data.pageNumber = parseInt(route.query.page.toString())
@@ -40,8 +42,6 @@ const fetchData = async () => {
         data.currentPage = a.currentPage
         data.totalPages = a.totalPages
         data.isLoading = false
-        articleStore.store.category = route.query.category ? route.query.category as string : ''
-        articleStore.store.tags = route.query.tag ? [route.query.tag as string] : []
         nextTick(() => {
             handleScroll()
         })

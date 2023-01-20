@@ -1,16 +1,59 @@
 <script lang="ts" setup>
 import type { CategoryModel } from '@/types';
-import { reactive } from 'vue';
+import { nextTick, onMounted, onUnmounted, reactive, watch, ref } from 'vue';
 import req from '@/utils/request'
 import { useRoute, useRouter } from 'vue-router'
 import { useArticleStore } from '@/stores/ArticleStore'
 
 const route = useRoute()
 const router = useRouter()
+const articleStore = useArticleStore()
 const data = reactive({
     categories: [] as Array<CategoryModel>,
 })
-const articleStore = useArticleStore()
+
+const categories = ref()
+const bg = reactive({
+    X: '100px',
+    Y: '0px',
+    Width: '0px',
+    Height: '0px',
+})
+
+const initBg = () => {
+    let e = categories.value.querySelector('.active') as HTMLElement|null
+    if (!e) {
+        hideBg()
+        return
+    }
+    bg.X = `${e.offsetLeft}px`
+    bg.Y = `${e.offsetTop}px`
+    bg.Width = `${e.clientWidth}px`
+    bg.Height = `${e.clientHeight}px`
+}
+
+const moveBg = () => {
+    if (!articleStore.store.category) {
+        hideBg()
+        return
+    }
+    const id = data.categories.find(c => c.name === articleStore.store.category)?.id
+    if (!id) return
+    let e = document.querySelector(`#ca-${id}`) as HTMLElement
+    bg.X = `${e.offsetLeft}px`
+    bg.Y = `${e.offsetTop}px`
+    bg.Width = `${e.clientWidth}px`
+    bg.Height = `${e.clientHeight}px`
+}
+
+const hideBg = () => {
+    let e = document.querySelector('.categories') as HTMLElement|null
+    if (!e) return
+    bg.X = `${e.clientWidth / 2}px`
+    bg.Y = `0px`
+    bg.Width = '0px'
+    bg.Height = '0px'
+}
 
 const fetchData = async () => {
     let response = await req.request({
@@ -18,19 +61,36 @@ const fetchData = async () => {
     })
     if (response.status == 200) {
         data.categories = response.data
+        nextTick(() => {
+            initBg()
+        })
     }
 }
-fetchData()
+
+const handleResize = () => {
+    bg.Width = `${(categories.value as HTMLElement).firstElementChild?.clientWidth??0}px`
+}
+
+onMounted(() => {
+    fetchData()
+    window.addEventListener('resize', handleResize, false)
+})
+onUnmounted(() => {
+    window.removeEventListener('resize', handleResize, false)
+})
 
 const jumpCategory = (category: string) => {
+    moveBg()
     router.push({ name: 'articles', query: { category: category }})
 }
+
+watch(() => articleStore.store.category, moveBg)
 </script>
 <template>
     <div class="wrapper">
         <div class="category-title"><h2>文章分类</h2></div>
-        <ul class="categories">
-            <li v-for="category in data.categories" @click="jumpCategory(category.name)" :class="(articleStore.store.category==category.name?'active':'')">
+        <ul class="categories" ref="categories">
+            <li v-for="category in data.categories" @click="jumpCategory(category.name)" :class="(articleStore.store.category==category.name?'active':'')" :id="`ca-${category.id}`">
                 {{ category.name }} ({{category.count}})
             </li>
         </ul>
@@ -51,6 +111,20 @@ a {
 }
 .categories {
     margin: 0;
+    position: relative;
+}
+
+.categories::after {
+    content: " ";
+    position: absolute;
+    top: v-bind('bg.Y');
+    left: v-bind('bg.X');
+    width: v-bind('bg.Width');
+    height: v-bind('bg.Height');
+    display: block;
+    border-radius: .5rem;
+    background-color: rgba(var(--el-color-primary-rgb), .18);
+    transition: all .3s cubic-bezier(.12,1.01,.66,1.09);
 }
 .category-title {
     border-bottom: 1px solid var(--el-border-color-light);
@@ -72,6 +146,6 @@ li.active {
     font-weight: 600;
     color: var(--el-color-primary);
     transition: color .25s;
-    background-color: rgba(var(--el-color-primary-rgb), .1);
+    /* background-color: rgba(var(--el-color-primary-rgb), .1); */
 }
 </style>
