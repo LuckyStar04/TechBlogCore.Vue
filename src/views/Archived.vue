@@ -238,6 +238,10 @@ h3 {
     justify-content: center;
 }
 
+#divider-btm :deep(*) {
+    color: var(--el-text-color-secondary);
+}
+
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
     .el-timeline {
         padding: 1.6rem .8rem;
