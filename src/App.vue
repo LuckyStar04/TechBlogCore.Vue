@@ -57,6 +57,19 @@ const isShowHeader = computed(() => {
   padding: 0;
   border-bottom: solid 1px var(--el-menu-border-color);
   box-shadow: var(--header-shadow);
+  animation: header-anime .5s cubic-bezier(.17,.67,.57,.93);
+}
+
+@keyframes header-anime {
+  0% {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .flex-main {
