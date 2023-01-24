@@ -14,12 +14,14 @@ renderer.link = function (href, title, text) {
     return out
 }
 
+let imgId = 1
+
 renderer.image = function (href, title, text) {
     if (href === null) {
         return text
     }
 
-    let out = `<div class="img-flex"><img src="${href}" alt="${text}"`
+    let out = `<div class="img-flex"><img id="img-${imgId++}" src="${href}" alt="${text}"`
     if (title) {
         out += ` title="${title}"`
     }
@@ -47,5 +49,6 @@ marked.setOptions({
 })
 
 export function parseMarkdown(content: string) {
+    imgId = 1
     return marked.parse(content)
 }

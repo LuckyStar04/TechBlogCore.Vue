@@ -80,6 +80,9 @@ const router = createRouter({
   ],
   scrollBehavior (to, from, savedPosition) {
     if (to.hash) {
+      if (to.hash.startsWith('#img-')) {
+        return {}
+      }
       return {
         el: to.hash,
         top: 70,

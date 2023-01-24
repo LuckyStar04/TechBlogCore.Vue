@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import req from '@/utils/request'
-import { nextTick, onBeforeUnmount, onMounted, reactive, watch } from 'vue'
+import { nextTick, onMounted, reactive, watch } from 'vue'
 import type { ArticleDetail, Comment, NavItem } from '@/types'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { parseMarkdown } from '@/utils/markdown'
 import "highlight.js/styles/atom-one-dark.css"
 import { computed } from '@vue/reactivity'
@@ -11,10 +11,12 @@ import { EditPen, Calendar, Histogram, Reading, Clock, TakeawayBox, PriceTag, Co
 import Comments from '@/components/Comments.vue'
 import MakeComment from '@/components/MakeComment.vue'
 import ArticleNavi from '@/components/ArticleNavi.vue'
+import PopupCarousel from '@/components/PopupCarousel.vue'
 import { useUserStore } from '@/stores/UserStore'
 import { useArticleStore } from '@/stores/ArticleStore'
 
 const route = useRoute()
+const router = useRouter()
 const userStore = useUserStore()
 const articleStore = useArticleStore()
 
@@ -38,6 +40,8 @@ const data = reactive({
     navItems: [] as Array<NavItem>,
     navDrawer: false,
     showModal: false,
+    pics: [] as Array<HTMLElement>,
+    currPic: 0,
 })
 
 const fetchData = async () => {
@@ -93,16 +97,38 @@ const makeNav = async () => {
     setTimeout(switchNav, 150)
 }
 
+let imgs: Array<HTMLElement> = []
+
 const setImageModal = () => {
-    const imgs = document.querySelectorAll('.note-view img') as NodeListOf<HTMLElement>
-    const modalImg = document.querySelector('#modal-img')
-    imgs.forEach((e) => {
+    imgs = [...document.querySelectorAll('.note-view img') as NodeListOf<HTMLElement>]
+    data.pics = imgs
+    imgs.forEach((e, i) => {
         e.onclick = function () {
-            modalImg!.setAttribute('src', e.getAttribute('src')??'')
-            data.showModal = true
+            router.push({ name: 'articleDetail', params: { id: route.params.id }, hash: `#${e.id}` })
         }
     })
 }
+
+const handleModal = () => {
+    if (!route.hash.startsWith('#img-')) {
+        data.showModal = false
+        return
+    }
+    const img = document.querySelector(route.hash) as HTMLElement
+    if (!img) {
+        data.showModal = false
+        return
+    }
+    let i = imgs.indexOf(img)
+    if (i < 0) {
+        data.showModal = false
+        return
+    }
+    data.currPic = i
+    data.showModal = true
+}
+
+watch(() => route.hash, handleModal)
 
 const switchNav = () => {
     data.expandNav = !data.expandNav
@@ -116,8 +142,9 @@ const closeNavDrawer = () => {
     data.navDrawer = false
 }
 
-const toggleModal = () => {
-    data.showModal = !data.showModal
+const closeModal = () => {
+    data.showModal = false
+    if (route.hash) router.back()
 }
 
 const addComment = (comment: Comment) => {
@@ -152,11 +179,7 @@ const noteHtml = computed(() => {
         <Teleport to="#navi-article-title">
             <h1 style="cursor: pointer;" @click.stop="backTop">{{ data.article.title }}</h1>
         </Teleport>
-        <Teleport to="body">
-            <div class="pos-fixed" v-show="data.showModal" @click="toggleModal">
-                <img id="modal-img" src="" />
-            </div>
-        </Teleport>
+        <PopupCarousel :show="data.showModal" :pic-items="data.pics" :current="data.currPic" @hide="closeModal"></PopupCarousel>
         <div class="article-title">
             <h1>{{ data.article.title }}</h1>
             <RouterLink v-if="userStore.info.role=='Admin'" :to="{ name: 'editArticle', params: { id: route.params.id } }"><el-button type="primary" plain :icon="EditPen">编辑文章</el-button></RouterLink>
@@ -206,31 +229,15 @@ const noteHtml = computed(() => {
     </div>
 </template>
 <style scoped>
-.pos-fixed {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.5);
-}
-
-.pos-fixed>img {
-    background-color: rgba(255, 255, 255, 0.8);
-    max-height: 95%;
-    max-width: 99%;
-    animation: enlarge-anime .5s ease;
-}
-
 .note-view :deep(.img-flex) {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.note-view :deep(.img-flex>img) {
+    cursor: pointer;
 }
 
 .note-view :deep(.img-flex>p) {
@@ -265,6 +272,7 @@ const noteHtml = computed(() => {
 .article-title, .meta-table {
     font-family: 'Trebuchet MS';
 }
+
 a {
     text-decoration: none !important;
 }
@@ -273,13 +281,16 @@ a {
     margin: .5rem;
     width: calc(100% - 400px);
 }
+
 .article-title, .articles {
     padding: 1rem;
 }
+
 .article-title>h1{
     display: inline-block;
     margin: 0;
 }
+
 .article-title {
     height: 40px;
     border-bottom: 1px solid var(--el-border-color-light);
