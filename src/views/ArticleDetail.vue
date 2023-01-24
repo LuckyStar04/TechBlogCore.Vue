@@ -98,12 +98,14 @@ const makeNav = async () => {
 }
 
 let imgs: Array<HTMLElement> = []
+let canGoBack = false
 
 const setImageModal = () => {
     imgs = [...document.querySelectorAll('.note-view img') as NodeListOf<HTMLElement>]
     data.pics = imgs
     imgs.forEach((e, i) => {
         e.onclick = function () {
+            canGoBack = true
             router.push({ name: 'articleDetail', params: { id: route.params.id }, hash: `#${e.id}` })
         }
     })
@@ -145,7 +147,14 @@ const closeNavDrawer = () => {
 
 const closeModal = () => {
     data.showModal = false
-    if (route.hash) router.back()
+    if (route.hash) {
+        if (canGoBack) {
+            canGoBack = false
+            router.back()
+        } else {
+            router.replace({ name: 'articleDetail', params: { id: route.params.id }})
+        }
+    }
 }
 
 const addComment = (comment: Comment) => {
