@@ -107,6 +107,7 @@ const setImageModal = () => {
             router.push({ name: 'articleDetail', params: { id: route.params.id }, hash: `#${e.id}` })
         }
     })
+    handleModal()
 }
 
 const handleModal = () => {
