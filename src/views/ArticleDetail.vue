@@ -11,7 +11,7 @@ import { EditPen, Calendar, Histogram, Reading, Clock, TakeawayBox, PriceTag, Co
 import Comments from '@/components/Comments.vue'
 import MakeComment from '@/components/MakeComment.vue'
 import ArticleNavi from '@/components/ArticleNavi.vue'
-import PopupCarousel from '@/components/PopupCarousel.vue'
+import ModalCarousel from '@/components/ModalCarousel.vue'
 import { useUserStore } from '@/stores/UserStore'
 import { useArticleStore } from '@/stores/ArticleStore'
 
@@ -189,7 +189,7 @@ const noteHtml = computed(() => {
         <Teleport to="#navi-article-title">
             <h1 style="cursor: pointer;" @click.stop="backTop">{{ data.article.title }}</h1>
         </Teleport>
-        <PopupCarousel :show="data.showModal" :pic-items="data.pics" :current="data.currPic" @hide="closeModal"></PopupCarousel>
+        <ModalCarousel :show="data.showModal" :pic-items="data.pics" :current="data.currPic" @hide="closeModal"></ModalCarousel>
         <div class="article-title">
             <h1>{{ data.article.title }}</h1>
             <RouterLink v-if="userStore.info.role=='Admin'" :to="{ name: 'editArticle', params: { id: route.params.id } }"><el-button type="primary" plain :icon="EditPen">编辑文章</el-button></RouterLink>

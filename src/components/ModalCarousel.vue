@@ -175,7 +175,7 @@ onBeforeUnmount(() => {
 .child>img {
     max-width: 92%;
     max-height: 92%;
-    background-color: rgba(255, 255, 255, 0.75);
+    background-color: var(--el-bg-color);
 }
 
 .pos-fixed.hidden .child>img {
@@ -184,7 +184,7 @@ onBeforeUnmount(() => {
 
 .child>p {
     font-size: calc(var(--size) * 0.25);
-    color: rgba(255, 255, 255, 0.85);
+    color: rgba(255, 255, 255, 0.65);
     margin-bottom: 0;
     max-width: 100vw;
     white-space: nowrap;

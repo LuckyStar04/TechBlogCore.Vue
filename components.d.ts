@@ -32,7 +32,7 @@ declare module '@vue/runtime-core' {
     ElTimelineItem: typeof import('element-plus/es')['ElTimelineItem']
     LoginForm: typeof import('./src/components/LoginForm.vue')['default']
     MakeComment: typeof import('./src/components/MakeComment.vue')['default']
-    PopupCarousel: typeof import('./src/components/PopupCarousel.vue')['default']
+    ModalCarousel: typeof import('./src/components/ModalCarousel.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SearchInput: typeof import('./src/components/SearchInput.vue')['default']
