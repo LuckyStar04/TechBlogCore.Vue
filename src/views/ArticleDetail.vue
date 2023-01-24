@@ -62,7 +62,7 @@ const fetchData = async () => {
 }
 
 const makeNav = async () => {
-    let nav = document.querySelectorAll('.note-view *[id]') as NodeListOf<HTMLElement>
+    let nav = document.querySelectorAll('.note-view h1[id],.note-view h2[id],.note-view h3[id],.note-view h4[id],.note-view h5[id],.note-view h6[id]') as NodeListOf<HTMLElement>
     if (nav.length <= 0) return
     let newItem : NavItem = { level: nav[0].tagName, id: nav[0].id, title: nav[0].innerText, children: [], parent: null }
     let oldItem = newItem
