@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed, onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue'
 import { ArrowLeftBold, ArrowRightBold } from '@element-plus/icons-vue'
 
 const props = defineProps<{
@@ -36,13 +36,51 @@ const index = computed(() => {
     return `-${data.curPic * 100}vw`
 })
 
+const carousel = ref()
+
+const addTranslate = (i: number) => {
+    if (!props.picItems) return
+    const from = props.picItems[i] as HTMLImageElement | undefined
+    const to = document.querySelector(`#modalimg-${i}`) as HTMLImageElement | null
+    if (!from || !to) return
+
+    const fromRect = from.getBoundingClientRect()
+    const toRect = to.getBoundingClientRect()
+    const scale = fromRect.width / toRect.width
+    to.style.transition = '0s'
+
+    let x = 0, y = 0
+    if (scale == 1) {
+        x = fromRect.x - toRect.x
+        y = fromRect.y - toRect.y
+    } else {
+        x = fromRect.x - toRect.x + (from.width - to.width) / 2
+        y = fromRect.y - toRect.y + (from.height - to.height) / 2
+    }
+
+    const transform = `translate(${x}px,${y}px) scale(${scale},${scale})`
+    to.style.transform = transform
+    setTimeout(() => {
+        to.style.transition = 'transform .4s cubic-bezier(.2,.91,.65,.98)'
+        to.style.transform = 'none'
+    }, 10)
+}
+
+const removeTranslate = (i: number) => {
+    const to = document.querySelector(`#modalimg-${i}`) as HTMLImageElement | null
+    if (!to) return
+    to.style.removeProperty('transform')
+}
+
 watch(() => props.show, () => {
     const body = document.querySelector('body') as HTMLElement
     if (props.show) {
         body.style.overflow = 'hidden'
         data.curPic = props.current
+        nextTick(() => addTranslate(props.current))
     } else {
         body.style.overflow = 'auto'
+        nextTick(() => removeTranslate(props.current))
     }
 })
 
@@ -56,7 +94,6 @@ watch(() => props.current, () => {
     }
 })
 
-const carousel = ref()
 const start = reactive({
     X: 0,
 })
@@ -85,11 +122,18 @@ onBeforeUnmount(() => {
 <template>
     <Teleport to="body">
         <div class="pos-fixed" :class="{ visible: show, hidden: !show }" @click="$emit('hide')" ref="carousel">
-            <div class="btn btn-left" :class="{ disabled: data.curPic <= 0 }" @click.stop="goPrev"><el-icon><ArrowLeftBold /></el-icon></div>
-            <div class="children">
-                <div class="child" v-for="item in picItems" :class="{ active: picItems && item === picItems[current] }"><img :src="item.getAttribute('src')??''" /><p v-if="item.getAttribute('alt')">{{ item.getAttribute('alt') }}</p></div>
+            <div class="btn btn-left" :class="{ disabled: data.curPic <= 0 }" @click.stop="goPrev">
+                <el-icon><ArrowLeftBold /></el-icon>
             </div>
-            <div class="btn btn-right" :class="{ disabled: !picItems || data.curPic >= (picItems.length - 1) }" @click.stop="goNext"><el-icon><ArrowRightBold /></el-icon></div>
+            <div class="children">
+                <div class="child" v-for="item, idx in picItems" :class="{ active: picItems && item === picItems[current] }">
+                    <img :id="`modalimg-${idx}`" :src="item.getAttribute('src') ?? ''" />
+                    <!-- <p v-if="item.getAttribute('alt')">{{ item.getAttribute('alt') }}</p> -->
+                </div>
+            </div>
+            <div class="btn btn-right" :class="{ disabled: !picItems || data.curPic >= (picItems.length - 1) }" @click.stop="goNext">
+                <el-icon><ArrowRightBold /></el-icon>
+            </div>
         </div>
     </Teleport>
 </template>
@@ -108,14 +152,17 @@ onBeforeUnmount(() => {
     bottom: 0;
     z-index: 999;
     background-color: rgba(0, 0, 0, 0.5);
-    visibility: hidden;
-    opacity: 0;
     transition: all .4s ease;
 }
 
+.pos-fixed.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
 .pos-fixed.visible {
-    visibility: visible;
     opacity: 1;
+    visibility: visible;
 }
 
 .children {
@@ -176,13 +223,16 @@ onBeforeUnmount(() => {
     max-width: 92%;
     max-height: 92%;
     background-color: var(--el-bg-color);
+    transform: none;
+    transition: transform .4s cubic-bezier(.2,.91,.65,.98);
+    visibility: visible;
 }
 
 .pos-fixed.hidden .child>img {
     display: none;
 }
 
-.child>p {
+/* .child>p {
     font-size: calc(var(--size) * 0.25);
     color: rgba(255, 255, 255, 0.65);
     margin-bottom: 0;
@@ -190,5 +240,5 @@ onBeforeUnmount(() => {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-}
+} */
 </style>
