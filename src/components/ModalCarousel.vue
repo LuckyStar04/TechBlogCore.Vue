@@ -50,15 +50,17 @@ const addTranslate = (i: number) => {
     to.style.transition = '0s'
 
     let x = 0, y = 0
+    let transform = ''
     if (scale == 1) {
         x = fromRect.x - toRect.x
         y = fromRect.y - toRect.y
+        transform = `translate(${x}px,${y}px)`
     } else {
         x = fromRect.x - toRect.x + (from.width - to.width) / 2
         y = fromRect.y - toRect.y + (from.height - to.height) / 2
+        transform = `translate(${x}px,${y}px) scale(${scale},${scale})`
     }
 
-    const transform = `translate(${x}px,${y}px) scale(${scale},${scale})`
     to.style.transform = transform
     setTimeout(() => {
         to.style.transition = 'transform .4s cubic-bezier(.2,.91,.65,.98)'
@@ -156,7 +158,7 @@ onBeforeUnmount(() => {
 }
 
 .pos-fixed.hidden {
-    opacity: 0;
+    opacity: .4;
     visibility: hidden;
 }
 
