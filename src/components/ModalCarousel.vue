@@ -27,9 +27,16 @@ const goNext = () => {
     }
 }
 
+const touch = reactive({ X: 0, moveX: 0 })
+const mouse = reactive({ X: 0, moveX: 0 })
+
 const width = computed(() => {
     if (!props.picItems) return '0'
     return `${props.picItems.length * 100}vw`
+})
+
+const touchIndex = computed(() => {
+    return `${touch.moveX}px`
 })
 
 const index = computed(() => {
@@ -37,6 +44,7 @@ const index = computed(() => {
 })
 
 const carousel = ref()
+const children = ref()
 
 const addTranslate = (i: number) => {
     if (!props.picItems) return
@@ -96,29 +104,40 @@ watch(() => props.current, () => {
     }
 })
 
-const start = reactive({
-    X: 0,
-})
-
-const handleStart = (evt: TouchEvent) => {
-    start.X = evt.changedTouches[0].clientX
+const handleTouchStart = (evt: TouchEvent) => {
+    children.value.style.transition = '0s'
+    touch.X = evt.changedTouches[0].clientX
 }
 
-const handleEnd = (evt: TouchEvent) => {
-    if (evt.changedTouches[0].clientX > start.X) goPrev()
-    else if (evt.changedTouches[0].clientX < start.X) goNext()
+const handleTouchEnd = (evt: TouchEvent) => {
+    children.value.style.transition = 'transform .4s ease'
+    const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+    const threshold = vw * 0.3
+    if (touch.moveX >= threshold) {
+        goPrev()
+    } else if (touch.moveX <= -threshold) {
+        goNext()
+    }
+    touch.moveX = 0
+}
+
+const handleTouchMove = (evt: TouchEvent) => {
+    touch.moveX = (evt.changedTouches[0].clientX - touch.X)
 }
 
 onMounted(() => {
-    carousel.value.addEventListener('touchstart', handleStart)
-    carousel.value.addEventListener('touchend', handleEnd)
-    carousel.value.addEventListener('touchcancel', handleEnd)
+    carousel.value.addEventListener('touchstart', handleTouchStart)
+    carousel.value.addEventListener('touchend', handleTouchEnd)
+    carousel.value.addEventListener('touchcancel', handleTouchEnd)
+    carousel.value.addEventListener('touchmove', handleTouchMove)
+
 })
 
 onBeforeUnmount(() => {
-    carousel.value.removeEventListener('touchstart', handleStart)
-    carousel.value.removeEventListener('touchend', handleEnd)
-    carousel.value.removeEventListener('touchcancel', handleEnd)
+    carousel.value.removeEventListener('touchstart', handleTouchStart)
+    carousel.value.removeEventListener('touchend', handleTouchEnd)
+    carousel.value.removeEventListener('touchcancel', handleTouchEnd)
+    carousel.value.removeEventListener('touchmove', handleTouchMove)
 })
 </script>
 <template>
@@ -127,7 +146,7 @@ onBeforeUnmount(() => {
             <div class="btn btn-left" :class="{ disabled: data.curPic <= 0 }" @click.stop="goPrev">
                 <el-icon><ArrowLeftBold /></el-icon>
             </div>
-            <div class="children">
+            <div class="children" ref="children">
                 <div class="child" v-for="item, idx in picItems" :class="{ active: picItems && item === picItems[current] }">
                     <img :id="`modalimg-${idx}`" :src="item.getAttribute('src') ?? ''" />
                     <!-- <p v-if="item.getAttribute('alt')">{{ item.getAttribute('alt') }}</p> -->
@@ -171,7 +190,7 @@ onBeforeUnmount(() => {
     display: inline-flex;
     width: v-bind('width');
     height: 100%;
-    transform: translateX(v-bind('index'));
+    transform: translateX(calc(v-bind('index') + v-bind('touchIndex')));
     transition: transform .4s ease;
 }
 
