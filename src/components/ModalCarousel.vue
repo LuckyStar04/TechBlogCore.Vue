@@ -27,7 +27,7 @@ const goNext = () => {
     }
 }
 
-const touch = reactive({ X: 0, moveX: 0 })
+const touch = reactive({ X: 0, moveX: 0, zoom: 1 })
 const mouse = reactive({ X: 0, moveX: 0 })
 
 const width = computed(() => {
@@ -104,25 +104,46 @@ watch(() => props.current, () => {
     }
 })
 
+let isZoom: boolean = false
+let zoomObj: HTMLImageElement
+
 const handleTouchStart = (evt: TouchEvent) => {
     children.value.style.transition = '0s'
-    touch.X = evt.changedTouches[0].clientX
+    if (evt.touches.length == 1) {
+        touch.X = evt.changedTouches[0].clientX
+        isZoom = false
+    } else if (evt.touches.length == 2) {
+        isZoom = true
+        zoomObj = document.querySelector(`#modalimg-${data.curPic}`) as HTMLImageElement
+        touch.zoom = Math.hypot(evt.touches[0].pageX - evt.touches[1].pageX,
+                                 evt.touches[0].pageY - evt.touches[1].pageY)
+    }
 }
 
 const handleTouchEnd = (evt: TouchEvent) => {
     children.value.style.transition = 'transform .4s ease'
-    const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
-    const threshold = vw * 0.3
-    if (touch.moveX >= threshold) {
-        goPrev()
-    } else if (touch.moveX <= -threshold) {
-        goNext()
+    if (isZoom) {
+        zoomObj.style.transform = `scale(1,1)`
+    } else {
+        const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+        const threshold = vw * 0.2
+        if (touch.moveX >= threshold) {
+            goPrev()
+        } else if (touch.moveX <= -threshold) {
+            goNext()
+        }
+        touch.moveX = 0
     }
-    touch.moveX = 0
 }
 
 const handleTouchMove = (evt: TouchEvent) => {
-    touch.moveX = (evt.changedTouches[0].clientX - touch.X)
+    if (isZoom) {
+        const scale = Math.hypot(evt.touches[0].pageX - evt.touches[1].pageX,
+                                 evt.touches[0].pageY - evt.touches[1].pageY)
+        zoomObj.style.transform = `scale(${scale/touch.zoom},${scale/touch.zoom})`
+    } else {
+        touch.moveX = (evt.changedTouches[0].clientX - touch.X)
+    }
 }
 
 onMounted(() => {
