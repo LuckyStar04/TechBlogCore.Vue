@@ -452,6 +452,10 @@ input[type=password]:placeholder {
     color: #0d0d0d;
 }
 
+.loginform-wrapper.dark .underlineHover:hover {
+    color: var(--el-text-color-primary);
+}
+
 .underlineHover:hover:after {
     width: 100%;
 }
