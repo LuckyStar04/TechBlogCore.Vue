@@ -20,7 +20,7 @@ const logout = async () => {
 <template>
     <Teleport to="body">
         <div class="pos-fixed" v-show="store.isShowLoginForm" @click="toggleLogin">
-            <LoginForm @callback="loginSuccess"></LoginForm>
+            <LoginForm :use-dark="true" @callback="loginSuccess"></LoginForm>
         </div>
     </Teleport>
     <el-popover :width="180"

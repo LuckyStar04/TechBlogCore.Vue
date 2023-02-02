@@ -19,5 +19,5 @@ const jumpHome = () => {
     <Teleport to="#teleport">
         <WaveBackground><div style="height:65vh;"></div></WaveBackground>
     </Teleport>
-    <LoginForm @callback="jumpHome"></LoginForm>
+    <LoginForm :use-dark="false" @callback="jumpHome"></LoginForm>
 </template>

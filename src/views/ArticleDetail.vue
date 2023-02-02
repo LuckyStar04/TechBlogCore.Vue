@@ -412,6 +412,10 @@ a {
     padding-left: 4px;
 }
 
+:deep(.el-drawer__body) {
+    padding: .2rem !important;
+}
+
 .navi-title {
     position: fixed;
     top: 80px;

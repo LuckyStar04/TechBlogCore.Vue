@@ -1,5 +1,5 @@
 <template>
-    <div class="wrapper fadeInDown" v-loading.fullscreen="data.isLoading">
+    <div class="loginform-wrapper fadeInDown" :class="{ dark: useDark }" v-loading.fullscreen="data.isLoading">
         <div id="formContent" @click.stop>
             <template v-if="data.login">
                 <h2 class="active"> 登&nbsp;&nbsp;录 </h2>
@@ -49,6 +49,13 @@ import { reactive } from '@vue/reactivity'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import req from '@/utils/request'
 
+const props = defineProps({
+    useDark: {
+        type: Boolean,
+        default: false,
+        required: true,
+    }
+})
 const emit = defineEmits(['callback'])
 
 const data = reactive({
@@ -128,8 +135,24 @@ const register = async () => {
   background-color: #56baed;
 } */
 
-.wrapper {
+.loginform-wrapper {
     font-family: '黑体', '微软雅黑', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.loginform-wrapper.dark #formContent {
+    background-color: var(--el-bg-color);
+}
+
+.loginform-wrapper.dark #formFooter {
+    background-color: var(--bg-color-secondary);
+    border-top: 1px solid var(--border-color-secondary);
 }
 
 input {
@@ -170,16 +193,6 @@ h2 {
     margin: auto;
 }
 
-.wrapper {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    width: 100%;
-    min-height: 100vh;
-    padding: 20px;
-}
-
 #formContent {
     -webkit-border-radius: 10px 10px 10px 10px;
     border-radius: 10px 10px 10px 10px;
@@ -214,6 +227,14 @@ h2.inactive {
 h2.active {
     color: #0d0d0d;
     border-bottom: 2px solid #5fbae9;
+}
+
+.loginform-wrapper.dark h2.active {
+    color: var(--el-text-color-primary);
+}
+
+.loginform-wrapper.dark h2.inactive {
+    color: var(--el-text-color-placeholder);
 }
 
 
@@ -283,6 +304,13 @@ input[type=password] {
     transition: all 0.5s ease-in-out;
     -webkit-border-radius: 5px 5px 5px 5px;
     border-radius: 5px 5px 5px 5px;
+}
+
+.loginform-wrapper.dark input[type=text],
+.loginform-wrapper.dark input[type=password] {
+    background-color: var(--bg-color-secondary);
+    border: 2px solid var(--bg-color-secondary);
+    color: var(--el-text-color-primary);
 }
 
 input[type=text]:focus,

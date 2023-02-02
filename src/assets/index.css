@@ -11,6 +11,11 @@ pre {
     font-family: 'Courier New', monospace;
 }
 
+code:not(.hljs) {
+    font-family: initial;
+    vertical-align: baseline !important;
+}
+
 html,
 body,
 #app {
@@ -50,16 +55,16 @@ code::-webkit-scrollbar-track {
     border-radius: 10px;
 }
 
-.el-drawer__body {
-    padding: .2rem !important;
-}
-
 :root {
     --header-shadow: 0px 0px 12px rgba(0, 0, 0, .12);
+    --bg-color-secondary: #f6f6f6;
+    --border-color-secondary: #dce8f1;
 }
 
 html.dark {
     --header-shadow: 0px 0px;
+    --bg-color-secondary: #2a2a2a;
+    --border-color-secondary: #23170f;
 }
 
 .thin-scrollbar::-webkit-scrollbar {
@@ -108,16 +113,6 @@ html.dark .autohide-scrollbar::-webkit-scrollbar-thumb {
 
 .autohide-scrollbar::-webkit-scrollbar-track {
     border-radius: 10px;
-}
-
-textarea::-webkit-scrollbar {
-    width: 6px;
-}
-
-textarea::-webkit-scrollbar-thumb {
-    background-color: #0003;
-    border-radius: 10px;
-    transition: all .2s ease-in-out;
 }
 
 html.dark textarea::-webkit-scrollbar-thumb {

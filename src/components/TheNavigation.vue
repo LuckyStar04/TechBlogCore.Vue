@@ -12,10 +12,10 @@ import { useDark } from '@vueuse/core'
 const isDark = useDark({
   onChanged(dark: boolean) {
     if (dark) {
-        document.querySelector('html')!.classList.add('dark')
+        document.documentElement.classList.add('dark')
         document.querySelector('meta[name="theme-color"]')!.setAttribute('content', '#121212')
     } else {
-        document.querySelector('html')!.classList.remove('dark')
+        document.documentElement.classList.remove('dark')
         document.querySelector('meta[name="theme-color"]')!.setAttribute('content', '#ffffff')
     }
   },
@@ -195,6 +195,10 @@ onUnmounted(() => {
     display: flex;
     align-items: center;
     flex-shrink: 0;
+}
+
+:deep(.el-drawer__body) {
+    padding: .2rem !important;
 }
 
 .drawer-top {

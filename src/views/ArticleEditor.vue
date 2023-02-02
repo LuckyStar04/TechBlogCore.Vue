@@ -134,6 +134,17 @@ const saveArticle = async () => {
     resize: none !important;
     overflow: auto;
 }
+
+.content :deep(textarea::-webkit-scrollbar) {
+    width: 6px;
+}
+
+.content :deep(textarea::-webkit-scrollbar-thumb) {
+    background-color: #0003;
+    border-radius: 10px;
+    transition: all .2s ease-in-out;
+}
+
 .editor-wrapper {
     height: calc(100vh - 80px);
     width: 100%;
