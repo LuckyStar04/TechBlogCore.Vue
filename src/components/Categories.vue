@@ -32,18 +32,23 @@ const initBg = () => {
     bg.Height = `${e.clientHeight}px`
 }
 
-const moveBg = () => {
-    if (!articleStore.store.category) {
-        hideBg()
-        return
+const moveBg = (to?: HTMLElement, category?: string) => {
+    if (!to) {
+        if (!category) {
+            hideBg()
+            return
+        }
+        const id = data.categories.find(c => c.name === articleStore.store.category)?.id
+        if (!id) {
+            hideBg()
+            return
+        }
+        to = document.querySelector(`#ca-${id}`) as HTMLElement
     }
-    const id = data.categories.find(c => c.name === articleStore.store.category)?.id
-    if (!id) return
-    let e = document.querySelector(`#ca-${id}`) as HTMLElement
-    bg.X = `${e.offsetLeft}px`
-    bg.Y = `${e.offsetTop}px`
-    bg.Width = `${e.clientWidth}px`
-    bg.Height = `${e.clientHeight}px`
+    bg.X = `${to.offsetLeft}px`
+    bg.Y = `${to.offsetTop}px`
+    bg.Width = `${to.clientWidth}px`
+    bg.Height = `${to.clientHeight}px`
 }
 
 const hideBg = () => {
@@ -77,18 +82,20 @@ onUnmounted(() => {
     window.removeEventListener('resize', handleResize, false)
 })
 
-const jumpCategory = (category: string) => {
-    moveBg()
+const jumpCategory = (category: string, e: MouseEvent) => {
+    moveBg(e.target as HTMLElement)
     router.push({ name: 'articles', query: { category: category }})
 }
 
-watch(() => articleStore.store.category, moveBg)
+watch(() => articleStore.store.category, function() {
+    moveBg(undefined, articleStore.store.category)
+})
 </script>
 <template>
     <div class="wrapper">
         <div class="category-title"><h2>文章分类</h2></div>
         <ul class="categories" ref="categories">
-            <li v-for="category in data.categories" @click="jumpCategory(category.name)" :class="(articleStore.store.category==category.name?'active':'')" :id="`ca-${category.id}`">
+            <li v-for="category in data.categories" @click="jumpCategory(category.name, $event)" :class="(articleStore.store.category==category.name?'active':'')" :id="`ca-${category.id}`">
                 {{ category.name }} ({{category.count}})
             </li>
         </ul>
@@ -135,7 +142,9 @@ h1, h2, h3 {
 }
 li {
     list-style-type: none;
-    padding: .6rem 0 .6rem .8rem;
+    font-size: 1rem;
+    line-height: 2.4rem;
+    padding-left: .8rem;
     cursor: pointer;
     color: var(--el-color-info);
     border-radius: 8px;

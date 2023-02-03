@@ -10,15 +10,15 @@ import { useRoute, useRouter } from 'vue-router'
 import { useDark } from '@vueuse/core'
 
 const isDark = useDark({
-  onChanged(dark: boolean) {
-    if (dark) {
-        document.documentElement.classList.add('dark')
-        document.querySelector('meta[name="theme-color"]')!.setAttribute('content', '#121212')
-    } else {
-        document.documentElement.classList.remove('dark')
-        document.querySelector('meta[name="theme-color"]')!.setAttribute('content', '#ffffff')
-    }
-  },
+    onChanged(dark: boolean) {
+        if (dark) {
+            document.documentElement.classList.add('dark')
+            document.querySelector('meta[name="theme-color"]')!.setAttribute('content', '#121212')
+        } else {
+            document.documentElement.classList.remove('dark')
+            document.querySelector('meta[name="theme-color"]')!.setAttribute('content', '#ffffff')
+        }
+    },
 })
 
 const route = useRoute()
@@ -81,18 +81,18 @@ onUnmounted(() => {
                 style="margin: 0 1.7rem;" />
             <UserAvatar></UserAvatar>
         </div>
+        <el-drawer class="drawer" v-model="data.drawer" title="侧边栏" direction="ltr" :with-header="false" size="70%"
+            :close-on-click-modal="true">
+            <div class="drawer-top">
+                <SearchInput></SearchInput>
+                <el-switch v-model="isDark" :inline-prompt="true" :active-icon="Sunny" :inactive-icon="Moon"
+                    style="margin-left:1.5rem;" />
+            </div>
+            <el-divider style="margin: 0;" />
+            <Categories></Categories>
+            <Tags></Tags>
+        </el-drawer>
     </div>
-    <el-drawer class="drawer" v-model="data.drawer" title="侧边栏" direction="ltr" :with-header="false" size="70%"
-        :close-on-click-modal="true">
-        <div class="drawer-top">
-            <SearchInput></SearchInput>
-            <el-switch v-model="isDark" :inline-prompt="true" :active-icon="Sunny" :inactive-icon="Moon"
-                style="margin-left:1.5rem;" />
-        </div>
-        <el-divider style="margin: 0;" />
-        <Categories></Categories>
-        <Tags></Tags>
-    </el-drawer>
 </template>
 <style scoped>
 .flex-grow {
@@ -135,7 +135,7 @@ onUnmounted(() => {
     transition-timing-function: ease;
     transition-delay: 0s;
     transition-property: transform;
-    transition: transform .3s,-webkit-transform .3s;
+    transition: transform .3s, -webkit-transform .3s;
     transition-duration: 0.3s, 0.3s;
     transition-timing-function: ease, ease;
     transition-delay: 0s, 0s;
@@ -161,7 +161,7 @@ onUnmounted(() => {
     -webkit-transition: -webkit-transform .3s;
     transition: -webkit-transform .3s;
     transition: transform .3s;
-    transition: transform .3s,-webkit-transform .3s;
+    transition: transform .3s, -webkit-transform .3s;
 }
 
 /* .scroll #navi-article-title {
