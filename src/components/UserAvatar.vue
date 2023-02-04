@@ -11,18 +11,18 @@ const toggleLogin = () => {
 const loginSuccess = async () => {
     store.isShowLoginForm = false
     await store.getStatus()
-    window.scrollTo({ top: 1, left: 0, behavior: 'smooth'}) //fixed Articles.vue article disappeared after login/logout bug
+    window.scrollTo({ top: window.scrollY <= 0 ? 1 : window.scrollY-1, left: 0 }) //fixed Articles.vue article disappeared after login/logout bug
 }
 const logout = async () => {
     localStorage.removeItem('token')
     await store.getStatus()
-    window.scrollTo({ top: 1, left: 0, behavior: 'smooth'})
+    window.scrollTo({ top: window.scrollY <= 0 ? 1 : window.scrollY-1, left: 0 })
 }
 </script>
 <template>
     <Teleport to="body">
         <div class="pos-fixed" v-show="store.isShowLoginForm" @click="toggleLogin">
-            <LoginForm :use-dark="true" @callback="loginSuccess"></LoginForm>
+            <LoginForm :use-dark="true" @onSuccess="loginSuccess"></LoginForm>
         </div>
     </Teleport>
     <el-popover :width="180"

@@ -56,7 +56,7 @@ const props = defineProps({
         required: true,
     }
 })
-const emit = defineEmits(['callback'])
+const emit = defineEmits(['onSuccess'])
 
 const data = reactive({
     login: true,
@@ -87,7 +87,7 @@ const login = async () => {
             data.password = ''
             data.password2 = ''
             data.email = ''
-            ElMessage({ message: '登录成功', type: 'success', duration: 1500, onClose: () => emit('callback') })
+            ElMessage({ message: '登录成功', type: 'success', duration: 1500, onClose: () => emit('onSuccess') })
         }
     }
     catch (e: any) {
@@ -119,7 +119,7 @@ const register = async () => {
             localStorage.setItem('token', 'Bearer ' + response.data.data)
             data.isLoading = false
             ElMessage({ message: '注册成功', type: 'success', duration: 4000 })
-            emit('callback')
+            emit('onSuccess')
         }
     }
     catch (e: any) {
