@@ -32,7 +32,7 @@ const toggleShowInfo = () => {
         <div class="pos-fixed" v-show="store.isShowLoginForm" @click="toggleLogin">
             <LoginForm :use-dark="true" @onSuccess="loginSuccess"></LoginForm>
         </div>
-        <div class="pos-fixed" v-show="isShowInfo" @click="toggleShowInfo">
+        <div class="pos-fixed" v-show="isShowInfo">
             <LoginInfoForm @close="toggleShowInfo"></LoginInfoForm>
         </div>
     </Teleport>
