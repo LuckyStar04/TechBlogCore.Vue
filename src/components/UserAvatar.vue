@@ -1,7 +1,9 @@
 <script lang="ts" setup>
-import { Document, Key } from '@element-plus/icons-vue'
+import { Document, Key, Avatar } from '@element-plus/icons-vue'
 import LoginForm from './LoginForm.vue'
+import LoginInfoForm from './LoginInfoForm.vue'
 import { useUserStore } from '@/stores/UserStore'
+import { ref } from 'vue'
 const store = useUserStore()
 
 const toggleLogin = () => {
@@ -18,11 +20,20 @@ const logout = async () => {
     await store.getStatus()
     window.scrollTo({ top: window.scrollY <= 0 ? 1 : window.scrollY-1, left: 0 })
 }
+
+const isShowInfo = ref(false)
+
+const toggleShowInfo = () => {
+    isShowInfo.value = !isShowInfo.value
+}
 </script>
 <template>
     <Teleport to="body">
         <div class="pos-fixed" v-show="store.isShowLoginForm" @click="toggleLogin">
             <LoginForm :use-dark="true" @onSuccess="loginSuccess"></LoginForm>
+        </div>
+        <div class="pos-fixed" v-show="isShowInfo" @click="toggleShowInfo">
+            <LoginInfoForm @close="toggleShowInfo"></LoginInfoForm>
         </div>
     </Teleport>
     <el-popover :width="180"
@@ -42,12 +53,8 @@ const logout = async () => {
             <template v-else>
                 <div class="ul">
                     <div class="li welcome">{{ store.welcome }}{{ store.info.user }}</div>
-                    <div class="li cur-p" style="cursor:not-allowed;"><el-icon>
-                            <Document />
-                        </el-icon> 个人信息</div>
-                    <div class="li cur-p" @click="logout"><el-icon>
-                            <Key />
-                        </el-icon> 退出登录</div>
+                    <div class="li cur-p" @click="toggleShowInfo"><el-icon><Document /></el-icon> 个人信息</div>
+                    <div class="li cur-p" @click="logout"><el-icon><Avatar /></el-icon> 退出登录</div>
                 </div>
             </template>
         </template>
@@ -85,6 +92,10 @@ const logout = async () => {
     padding: .4rem 0;
     color: var(--el-text-color-secondary);
     font-family: var(--el-font-family);
+}
+
+.li :deep(>.el-icon) {
+    transform: translateY(2px) scale(1.3);
 }
 
 .welcome {
