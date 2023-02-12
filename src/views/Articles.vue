@@ -77,6 +77,12 @@ const handleScroll = () => {
     })
 }
 
+watch(() => userStore.info.user, () => {
+    nextTick(() => {
+        handleScroll()
+    })
+})
+
 let key = 1
 
 onMounted(() => {

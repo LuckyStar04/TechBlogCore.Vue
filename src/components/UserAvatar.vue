@@ -13,12 +13,10 @@ const toggleLogin = () => {
 const loginSuccess = async () => {
     store.isShowLoginForm = false
     await store.getStatus()
-    window.scrollTo({ top: window.scrollY <= 0 ? 1 : window.scrollY-1, left: 0 }) //fixed Articles.vue article disappeared after login/logout bug
 }
 const logout = async () => {
     localStorage.removeItem('token')
     await store.getStatus()
-    window.scrollTo({ top: window.scrollY <= 0 ? 1 : window.scrollY-1, left: 0 })
 }
 
 const isShowInfo = ref(false)
