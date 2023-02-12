@@ -96,7 +96,7 @@ const showMakeComment = () => {
     margin-top: 5px;
     font-size: var(--el-font-size-medium);
     color: var(--el-text-color-regular);
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .right > .content {

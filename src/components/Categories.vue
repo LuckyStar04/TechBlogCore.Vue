@@ -201,7 +201,7 @@ li {
     -webkit-tap-highlight-color: transparent;
 }
 li.active {
-    font-weight: 600;
+    font-weight: 700;
     color: var(--el-color-primary);
     transition: color .25s;
     /* background-color: rgba(var(--el-color-primary-rgb), .1); */

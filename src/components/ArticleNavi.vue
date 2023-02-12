@@ -22,7 +22,7 @@ ul {
 }
 
 a {
-    font-weight: 500;
+    font-weight: 400;
     text-decoration: none !important;
     color: var(--el-text-color-secondary);
     /* color: var(--el-color-info); */

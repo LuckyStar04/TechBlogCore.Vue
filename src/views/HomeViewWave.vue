@@ -72,7 +72,7 @@ p {
 
 .title {
     font-family: 'Trebuchet MS';
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 2px;
     font-size: 96px;
 }
@@ -140,7 +140,7 @@ p {
     }
 
     .title {
-        font-weight: 600;
+        font-weight: 700;
         letter-spacing: 2px;
         font-size: 38.4px;
     }

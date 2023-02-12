@@ -350,7 +350,7 @@ a {
 }
 
 .comment-title {
-    font-weight: 600;
+    font-weight: 700;
     font-size: var(--el-font-size-large);
     color: var(--el-text-color-regular);
     line-height: 0;
