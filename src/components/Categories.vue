@@ -19,6 +19,12 @@ const bg = reactive({
     Width: '0px',
     Height: '0px',
 })
+const hoverBg = reactive({
+    X: '100px',
+    Y: '0px',
+    Width: '0px',
+    Height: '0px',
+})
 
 const initBg = () => {
     let e = categories.value.querySelector('.active') as HTMLElement|null
@@ -58,6 +64,20 @@ const hideBg = () => {
     bg.Height = '0px'
 }
 
+const moveHoverBg = (to: HTMLElement) => {
+    hoverBg.X = `${to.offsetLeft}px`
+    hoverBg.Y = `${to.offsetTop}px`
+    hoverBg.Width = `${to.clientWidth}px`
+    hoverBg.Height = `${to.clientHeight}px`
+}
+
+const hideHoverBg = (e: MouseEvent) => {
+    hoverBg.X = `${e.offsetX}px`
+    hoverBg.Y = `${e.offsetY}px`
+    hoverBg.Width = '0px'
+    hoverBg.Height = '0px'
+}
+
 const fetchData = async () => {
     let response = await req.request({
         url: 'categories', method: 'get', params: { size: 30 }
@@ -72,6 +92,17 @@ const fetchData = async () => {
 
 const handleResize = () => {
     bg.Width = `${(categories.value as HTMLElement).firstElementChild?.clientWidth??0}px`
+}
+
+const onHover = (e: MouseEvent) => {
+    const to = e.target as HTMLElement
+    moveHoverBg(to)
+    to.classList.add('c-blue')
+}
+
+const onLeave = (e: MouseEvent) => {
+    const to = e.target as HTMLElement
+    to.classList.remove('c-blue')
 }
 
 onMounted(() => {
@@ -94,8 +125,8 @@ watch(() => articleStore.store.category, function() {
 <template>
     <div class="wrapper">
         <div class="category-title"><h2>文章分类</h2></div>
-        <ul class="categories" ref="categories">
-            <li v-for="category in data.categories" @click="jumpCategory(category.name, $event)" :class="(articleStore.store.category==category.name?'active':'')" :id="`ca-${category.id}`">
+        <ul class="categories" ref="categories" @mouseleave="hideHoverBg($event)">
+            <li v-for="category in data.categories" @click="jumpCategory(category.name, $event)" @mouseenter="onHover($event)" @mouseleave="onLeave($event)" :class="(articleStore.store.category==category.name?'active':'')" :id="`ca-${category.id}`">
                 {{ category.name }} ({{category.count}})
             </li>
         </ul>
@@ -119,17 +150,36 @@ a {
     position: relative;
 }
 
+.categories::before {
+    content: " ";
+    position: absolute;
+    z-index: -2;
+    top: v-bind('hoverBg.Y');
+    left: v-bind('hoverBg.X');
+    width: v-bind('hoverBg.Width');
+    height: v-bind('hoverBg.Height');
+    display: block;
+    border-radius: .5rem;
+    background-color: rgba(var(--el-color-info-rgb), .08);
+    transition: all .3s cubic-bezier(.12,1.01,.66,1.09);
+}
+
 .categories::after {
     content: " ";
     position: absolute;
+    z-index: -1;
     top: v-bind('bg.Y');
     left: v-bind('bg.X');
     width: v-bind('bg.Width');
     height: v-bind('bg.Height');
     display: block;
     border-radius: .5rem;
-    background-color: rgba(var(--el-color-primary-rgb), .18);
+    background-color: rgba(var(--el-color-primary-rgb), .2);
     transition: all .3s cubic-bezier(.12,1.01,.66,1.09);
+}
+
+.c-blue {
+    color: rgba(var(--el-color-primary-rgb), .95);
 }
 .category-title {
     border-bottom: 1px solid var(--el-border-color-light);
