@@ -25,6 +25,10 @@ onBeforeMount(() => {
     </Teleport>
 </template>
 <style scoped>
+* {
+    user-select: none;
+}
+
 p {
     font-family: 'Trebuchet MS';
     letter-spacing: 1px;
