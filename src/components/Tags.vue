@@ -8,6 +8,45 @@ import { useArticleStore } from '@/stores/ArticleStore'
 const route = useRoute()
 //const colors = ['primary', 'success', 'info', 'warning', 'danger']
 
+const hoverBg = reactive({
+    X: '100px',
+    Y: '0px',
+    Width: '0px',
+    Height: '0px',
+})
+
+const moveHoverBg = (to: HTMLElement) => {
+    if (to.classList.contains('el-button--success')) {
+        hoverBg.X = `${to.offsetLeft}px`
+        hoverBg.Y = `${to.offsetTop}px`
+        hoverBg.Width = `${to.clientWidth}px`
+        hoverBg.Height = `${to.clientHeight}px`
+    } else {
+        hoverBg.X = `${to.offsetLeft - 7}px`
+        hoverBg.Y = `${to.offsetTop - 7}px`
+        hoverBg.Width = `${to.clientWidth + 14}px`
+        hoverBg.Height = `${to.clientHeight + 14}px`
+    }
+}
+
+const hideHoverBg = (e: MouseEvent) => {
+    hoverBg.X = `${e.offsetX}px`
+    hoverBg.Y = `${e.offsetY}px`
+    hoverBg.Width = '0px'
+    hoverBg.Height = '0px'
+}
+
+const onHover = (e: MouseEvent) => {
+    const to = e.target as HTMLElement
+    moveHoverBg(to)
+    if (!to.classList.contains('el-button--success')) to.classList.add('c-green')
+}
+
+const onLeave = (e: MouseEvent) => {
+    const to = e.target as HTMLElement
+    to.classList.remove('c-green')
+}
+
 const data = reactive({
     tags: [] as Array<TagModel>,
 })
@@ -26,11 +65,11 @@ fetchData()
 <template>
     <div class="wrapper">
         <div class="tag-title"><h2>文章标签</h2></div>
-        <div class="tags">
+        <div class="tags" @mouseleave="hideHoverBg($event)">
             <template v-for="(tag, index) in data.tags">
                 <RouterLink :to="{ name: 'articles', query: { tag: tag.name } }">
-                    <el-button v-if="(articleStore.store.tags.includes(tag.name))" type="success" round>{{ tag.name }}({{ tag.count }})</el-button>
-                    <el-button v-else type="info" link>{{ tag.name }}({{ tag.count }})</el-button>
+                    <el-button v-if="(articleStore.store.tags.includes(tag.name))" type="success" @mouseenter="onHover($event)" @mouseleave="onLeave($event)" round>{{ tag.name }}({{ tag.count }})</el-button>
+                    <el-button v-else type="info" @mouseenter="onHover($event)" @mouseleave="onLeave($event)" link>{{ tag.name }}({{ tag.count }})</el-button>
                 </RouterLink>
             </template>
         </div>
@@ -60,6 +99,7 @@ a {
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
+    position: relative;
 }
 
 .tags>a {
@@ -68,5 +108,23 @@ a {
 
 h1, h2, h3 {
     color: var(--el-text-color-regular);
+}
+
+.tags::before {
+    content: " ";
+    position: absolute;
+    z-index: -2;
+    top: v-bind('hoverBg.Y');
+    left: v-bind('hoverBg.X');
+    width: v-bind('hoverBg.Width');
+    height: v-bind('hoverBg.Height');
+    display: block;
+    border-radius: 16px;
+    background-color: rgba(var(--el-color-info-rgb), .11);
+    transition: all .3s cubic-bezier(.12,1.01,.66,1.09);
+}
+
+.el-button.c-green {
+    color: rgba(var(--el-color-success-rgb), .95);
 }
 </style>

@@ -160,7 +160,7 @@ a {
     height: v-bind('hoverBg.Height');
     display: block;
     border-radius: .5rem;
-    background-color: rgba(var(--el-color-info-rgb), .08);
+    background-color: rgba(var(--el-color-info-rgb), .11);
     transition: all .3s cubic-bezier(.12,1.01,.66,1.09);
 }
 
