@@ -266,9 +266,10 @@ h3 {
 }
 
 .article a.article-link:hover {
-    color: var(--el-color-primary-dark-2);
+    color: var(--el-color-primary);
     transform: translate(4px, 0px);
-    text-shadow: -4px 0 3px var(--el-color-primary-light-8);
+    /* text-shadow: -4px 0 3px var(--el-color-primary-light-8); */
+    text-shadow: -4px 0 3px var(--el-color-info-light-7);
 }
 
 .create-time {
