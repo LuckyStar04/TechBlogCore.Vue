@@ -100,10 +100,10 @@ onUnmounted(() => {
 <template>
     <div v-loading.fullscreen.lock="data.isLoading" class="wrapper">
         <div class="article-title">
-            <h2 v-if="route.query.tag" class="color-success"># 标签：{{ route.query.tag }}</h2>
-            <h2 v-else-if="route.query.category" class="color-primary"># 文章分类：{{ route.query.category }}</h2>
-            <h2 v-else-if="route.query.keyword" class="color-purple"># 关键字搜索：{{ route.query.keyword }}</h2>
-            <h2 v-else>文章列表</h2>
+            <h2 v-if="route.query.tag" class="color-success fw-600"># 标签：{{ route.query.tag }}</h2>
+            <h2 v-else-if="route.query.category" class="color-primary fw-600"># 文章分类：{{ route.query.category }}</h2>
+            <h2 v-else-if="route.query.keyword" class="color-purple fw-600"># 关键字搜索：{{ route.query.keyword }}</h2>
+            <h2 v-else>文章列表<span> / Articles</span></h2>
             <RouterLink v-if="userStore.info.role == 'Admin'" :to="{ name: 'createArticle' }"><el-button type="primary"
                     plain :icon="Plus">创建文章</el-button></RouterLink>
         </div>
@@ -143,6 +143,15 @@ onUnmounted(() => {
     overflow: hidden;
     white-space: pre-line;
     text-overflow: ellipsis;
+    font-weight: 400;
+}
+
+.article-title>h2.fw-600 {
+    font-weight: 600;
+}
+
+.article-title>h2>span {
+    font-size: 0.8em;
 }
 
 a {
@@ -246,15 +255,20 @@ h3 {
 
 .article a {
     text-decoration: none;
-    color: var(--el-text-color-regular);
+    color: var(--el-text-color-primary);
 }
 
-.article a:hover {
-    color: var(--el-text-color-secondary);
+.article a.article-link {
+    display: inline-block;
+    font-size: 1.6rem;
+    transform: translate(0px);
+    transition: all .3s ease;
 }
 
-.article-link {
-    font-size: 1.8rem;
+.article a.article-link:hover {
+    color: var(--el-color-primary-dark-2);
+    transform: translate(4px, 0px);
+    text-shadow: -4px 0 3px var(--el-color-primary-light-8);
 }
 
 .create-time {
