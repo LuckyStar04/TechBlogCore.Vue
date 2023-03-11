@@ -321,10 +321,10 @@ a {
 }
 
 .category {
-    padding: 1.6rem 0 0;
+    padding: 1.6rem 0 1.6rem;
     color: var(--el-text-color-regular);
     font-size: 1.1em;
-    border-top: 1px solid var(--el-border-color-light);
+    border-bottom: 1px solid var(--el-border-color-light);
 }
 
 .category a {
@@ -352,10 +352,10 @@ a {
 .comment-title {
     font-weight: 700;
     font-size: var(--el-font-size-large);
-    color: var(--el-text-color-regular);
+    color: var(--el-text-color-primary);
     line-height: 0;
-    padding: 15px 0 30px 0;
-    border-bottom: 1px solid var(--el-border-color-light);
+    padding: 15px 0 0 0;
+    /* border-bottom: 1px solid var(--el-border-color-light); */
 }
 
 .make-comment {

@@ -103,7 +103,7 @@ onUnmounted(() => {
             <h2 v-if="route.query.tag" class="color-success fw-600"># 标签：{{ route.query.tag }}</h2>
             <h2 v-else-if="route.query.category" class="color-primary fw-600"># 文章分类：{{ route.query.category }}</h2>
             <h2 v-else-if="route.query.keyword" class="color-purple fw-600"># 关键字搜索：{{ route.query.keyword }}</h2>
-            <h2 v-else>文章列表<span> / Articles</span></h2>
+            <h2 v-else>文章列表<span>Articles</span></h2>
             <RouterLink v-if="userStore.info.role == 'Admin'" :to="{ name: 'createArticle' }"><el-button type="primary"
                     plain :icon="Plus">创建文章</el-button></RouterLink>
         </div>
@@ -144,6 +144,7 @@ onUnmounted(() => {
     white-space: pre-line;
     text-overflow: ellipsis;
     font-weight: 400;
+    color: var(--el-text-color-primary);
 }
 
 .article-title>h2.fw-600 {
@@ -151,6 +152,8 @@ onUnmounted(() => {
 }
 
 .article-title>h2>span {
+    color: var(--el-text-color-secondary);
+    margin-left: .6rem;
     font-size: 0.8em;
 }
 
@@ -164,15 +167,15 @@ h3 {
     color: var(--el-text-color-regular);
 }
 
-.color-success {
+.article-title>h2.color-success {
     color: var(--el-color-success);
 }
 
-.color-primary {
+.article-title>h2.color-primary {
     color: var(--el-color-primary);
 }
 
-.color-purple {
+.article-title>h2.color-purple {
     color: #626aef;
 }
 
@@ -269,7 +272,7 @@ h3 {
     color: var(--el-color-primary);
     transform: translate(4px, 0px);
     /* text-shadow: -4px 0 3px var(--el-color-primary-light-8); */
-    text-shadow: -4px 0 3px var(--el-color-info-light-7);
+    text-shadow: -4px 0 3px var(--el-color-info-light-8);
 }
 
 .create-time {

@@ -124,7 +124,7 @@ watch(() => articleStore.store.category, function() {
 </script>
 <template>
     <div class="wrapper">
-        <div class="category-title"><h2>文章分类<span> / Categories</span></h2></div>
+        <div class="category-title"><h2>文章分类<span>Categories</span></h2></div>
         <ul class="categories" ref="categories" @mouseleave="hideHoverBg($event)">
             <li v-for="category in data.categories" @click="jumpCategory(category.name, $event)" @mouseenter="onHover($event)" @mouseleave="onLeave($event)" :class="(articleStore.store.category==category.name?'active':'')" :id="`ca-${category.id}`">
                 {{ category.name }} ({{category.count}})
@@ -187,9 +187,12 @@ a {
 .category-title>h2 {
     line-height: 0;
     font-weight: 400;
+    color: var(--el-text-color-primary);
 }
 
 .category-title>h2>span {
+    color: var(--el-text-color-secondary);
+    margin-left: .6rem;
     font-size: 0.8em;
 }
 h1, h2, h3 {

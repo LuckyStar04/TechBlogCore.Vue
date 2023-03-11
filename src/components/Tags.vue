@@ -64,7 +64,7 @@ fetchData()
 </script>
 <template>
     <div class="wrapper">
-        <div class="tag-title"><h2>文章标签<span> / Tags</span></h2></div>
+        <div class="tag-title"><h2>文章标签<span>Tags</span></h2></div>
         <div class="tags" @mouseleave="hideHoverBg($event)">
             <template v-for="(tag, index) in data.tags">
                 <RouterLink :to="{ name: 'articles', query: { tag: tag.name } }">
@@ -94,8 +94,11 @@ a {
 .tag-title>h2 {
     line-height: 0;
     font-weight: 400;
+    color: var(--el-text-color-primary);
 }
 .tag-title>h2>span {
+    color: var(--el-text-color-secondary);
+    margin-left: .6rem;
     font-size: 0.8em;
 }
 .tags {

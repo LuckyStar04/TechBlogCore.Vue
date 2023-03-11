@@ -80,7 +80,7 @@ onUnmounted(() => {
 <template>
     <div v-loading.fullscreen="data.isLoading" class="wrapper">
         <div class="article-title">
-            <h2>文章归档</h2>
+            <h2>文章归档<span>Archived</span></h2>
         </div>
         <transition name="expand-top">
         <el-timeline v-show="data.groupedArticles.length > 0">
@@ -127,6 +127,14 @@ onUnmounted(() => {
 .article-title>h2 {
     display: inline;
     line-height: 0;
+    font-weight: 400;
+    color: var(--el-text-color-primary);
+}
+
+.article-title>h2>span {
+    color: var(--el-text-color-secondary);
+    margin-left: .6rem;
+    font-size: 0.8em;
 }
 
 a {
