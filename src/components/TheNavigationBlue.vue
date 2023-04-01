@@ -113,8 +113,8 @@ onUnmounted(() => {
                     style="margin-left:1.5rem;" />
             </div>
             <el-divider style="margin: 0;" />
-            <Categories :showShadow="false"></Categories>
-            <Tags :showShadow="false"></Tags>
+            <Categories :showShadow="false" class="trans"></Categories>
+            <Tags :showShadow="false" class="trans"></Tags>
         </el-drawer>
     </div>
 </template>
@@ -231,6 +231,10 @@ onUnmounted(() => {
 .logo,
 .logo img {
     height: 50px;
+}
+
+.trans {
+    transition: all var(--el-transition-duration);
 }
 
 @media only screen and (min-width: 1440px) {
