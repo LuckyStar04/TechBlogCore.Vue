@@ -1,8 +1,10 @@
 <script lang="ts" setup>
 import { MoreFilled, Sunny, Moon } from '@element-plus/icons-vue'
 import logopng from '@/assets/logo-2.png'
-import { computed, onMounted, onUnmounted, reactive, ref, watch } from 'vue';
+import { computed, onMounted, onUnmounted, reactive, ref, watch } from 'vue'
 import Categories from '@/components/Categories.vue'
+import Menu from '@/components/Menu.vue'
+import MenuItem from '@/components/MenuItem.vue'
 import Tags from '@/components/Tags.vue'
 import SearchInput from '@/components/SearchInput.vue'
 import UserAvatar from '@/components/UserAvatar.vue'
@@ -71,12 +73,12 @@ onUnmounted(() => {
             <div id="navi-article-title"></div>
         </div>
         <div class="right-dock">
-            <SearchInput style="width: 160px;margin-right:1rem;"></SearchInput>
-            <el-menu id="navi-menu" :default-active="router.currentRoute.value.fullPath.split('?')[0].toLowerCase()" class="el-menu-demo" mode="horizontal" :ellipsis="false" router>
-                <el-menu-item index="/" route="/">封面</el-menu-item>
-                <el-menu-item index="/articles" route="/articles">文章</el-menu-item>
-                <el-menu-item index="/archived" route="/archived">归档</el-menu-item>
-            </el-menu>
+            <SearchInput class="search" style="width: 160px;margin-right:1rem;"></SearchInput>
+            <Menu id="navi-menu">
+                <MenuItem index="/" route="/">封面</MenuItem>
+                <MenuItem index="/articles" route="/articles">文章</MenuItem>
+                <MenuItem index="/archived" route="/archived">归档</MenuItem>
+            </Menu>
             <el-switch v-model="isDark" :inline-prompt="true" :active-icon="Sunny" :inactive-icon="Moon"
                 style="margin: 0 1.7rem;" />
             <UserAvatar></UserAvatar>
@@ -156,8 +158,8 @@ onUnmounted(() => {
 }
 
 .scroll .logo-wrapper {
-    -webkit-transform: translateY(-59%);
-    transform: translateY(-59%);
+    -webkit-transform: translateY(-54%);
+    transform: translateY(-54%);
     -webkit-transition: -webkit-transform .3s;
     transition: -webkit-transform .3s;
     transition: transform .3s;
@@ -215,6 +217,7 @@ onUnmounted(() => {
     flex-grow: 1;
 }
 
+.logo,
 .logo img {
     height: 50px;
 }
@@ -257,7 +260,7 @@ onUnmounted(() => {
         display: flex;
     }
 
-    .right-dock>.el-input,
+    .right-dock>.search,
     #navi-menu,
     .right-dock>.el-switch {
         display: none !important;

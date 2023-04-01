@@ -69,7 +69,6 @@ const isShowBanner = computed(() => {
   backdrop-filter: saturate(50%) blur(4px);
   -webkit-backdrop-filter: saturate(50%) blur(4px); */
   padding: 0;
-  border-bottom: solid 1px var(--el-menu-border-color);
   box-shadow: var(--header-shadow);
   animation: header-anime .5s cubic-bezier(.17,.67,.57,.93);
 }

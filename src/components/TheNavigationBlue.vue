@@ -4,6 +4,8 @@ import logopng from '@/assets/logo-2.png'
 import logowhitepng from '@/assets/logo-reverse-2.png'
 import { computed, onMounted, onUnmounted, reactive, ref, watch } from 'vue';
 import Categories from '@/components/Categories.vue'
+import Menu from '@/components/Menu.vue'
+import MenuItem from '@/components/MenuItem.vue'
 import Tags from '@/components/Tags.vue'
 import SearchInput from '@/components/SearchInput.vue'
 import UserAvatar from '@/components/UserAvatar.vue'
@@ -36,14 +38,14 @@ watch(() => route.query, () => {
 
 const showTitle = ref(false)
 const handleScroll = () => {
-        const scrollTop = document.body.scrollTop || document.documentElement.scrollTop
-        console.log('scrollTop',scrollTop);
-        
-        if (scrollTop > 200) {
-            showTitle.value = true
-        } else {
-            showTitle.value = false
-        }
+    const scrollTop = document.body.scrollTop || document.documentElement.scrollTop
+    console.log('scrollTop', scrollTop);
+
+    if (scrollTop > 200) {
+        showTitle.value = true
+    } else {
+        showTitle.value = false
+    }
 }
 
 onMounted(() => {
@@ -59,50 +61,47 @@ onUnmounted(() => {
         <div class="navi-scroll" :class="{ scroll: showTitle }">
             <div class="navi-scroll-blue">
                 <div class="navi-scroll-wrapper">
-                <el-button id="navi-button" type="primary" plain :icon="MoreFilled" style="font-size: 22px;"
-                    @click="data.drawer = true" />
-                <div class="logo-wrapper">
-                    <div class="logo">
-                        <router-link :to="{ name: 'home' }"><img :src="logowhitepng" /></router-link>
+                    <el-button id="navi-button" type="primary" plain :icon="MoreFilled" style="font-size: 22px;"
+                        @click="data.drawer = true" />
+                    <div class="logo-wrapper">
+                        <div class="logo">
+                            <router-link :to="{ name: 'home' }"><img :src="logowhitepng" /></router-link>
+                        </div>
+                    </div>
+                    <div class="right-dock">
+                        <SearchInput class="search" :bgcolor="'var(--bg-sky-color-light-9)'" style="width: 160px;margin-right:1rem;"></SearchInput>
+                        <Menu id="navi-menu" background-color="var(--bg-sky-color)" hover-bg-color="var(--bg-sky-color-light-3)"
+                        text-color="#fff" active-text-color="#fff" selected-text-color="#fff">
+                            <MenuItem index="/" route="/">封面</MenuItem>
+                            <MenuItem index="/articles" route="/articles">文章</MenuItem>
+                            <MenuItem index="/archived" route="/archived">归档</MenuItem>
+                        </Menu>
+                        <el-switch v-model="isDark" :inline-prompt="true" :active-icon="Sunny" :inactive-icon="Moon"
+                            style="margin: 0 1.7rem;" />
+                        <UserAvatar></UserAvatar>
                     </div>
                 </div>
-                <div class="right-dock">
-                    <SearchInput style="width: 160px;margin-right:1rem;"></SearchInput>
-                    <el-menu id="navi-menu" :default-active="router.currentRoute.value.fullPath.split('?')[0].toLowerCase()"
-                        background-color="var(--bg-sky-color)" hover-bg-color="var(--bg-sky-hover-color)"
-                        text-color="#fff" active-text-color="#fff"
-                        class="el-menu-demo" mode="horizontal" :ellipsis="false" router>
-                        <el-menu-item index="/" route="/">封面</el-menu-item>
-                        <el-menu-item index="/articles" route="/articles">文章</el-menu-item>
-                        <el-menu-item index="/archived" route="/archived">归档</el-menu-item>
-                    </el-menu>
-                    <el-switch v-model="isDark" :inline-prompt="true" :active-icon="Sunny" :inactive-icon="Moon"
-                        style="margin: 0 1.7rem;" />
-                    <UserAvatar></UserAvatar>
-                </div>
-            </div>
             </div>
             <div class="navi-scroll-white">
                 <div class="navi-scroll-wrapper">
-                <el-button id="navi-button" type="primary" plain :icon="MoreFilled" style="font-size: 22px;"
-                    @click="data.drawer = true" />
-                <div class="logo-wrapper">
-                    <div class="logo">
-                        <router-link :to="{ name: 'home' }"><img :src="logopng" /></router-link>
+                    <el-button id="navi-button" type="primary" plain :icon="MoreFilled" style="font-size: 22px;"
+                        @click="data.drawer = true" />
+                    <div class="logo-wrapper">
+                        <div class="logo">
+                            <router-link :to="{ name: 'home' }"><img :src="logopng" /></router-link>
+                        </div>
                     </div>
-                </div>
-                <div class="right-dock">
-                    <SearchInput style="width: 160px;margin-right:1rem;"></SearchInput>
-                    <el-menu id="navi-menu" :default-active="router.currentRoute.value.fullPath.split('?')[0].toLowerCase()"
-                        class="el-menu-demo" mode="horizontal" :ellipsis="false" router>
-                        <el-menu-item index="/" route="/">封面</el-menu-item>
-                        <el-menu-item index="/articles" route="/articles">文章</el-menu-item>
-                        <el-menu-item index="/archived" route="/archived">归档</el-menu-item>
-                    </el-menu>
-                    <el-switch v-model="isDark" :inline-prompt="true" :active-icon="Sunny" :inactive-icon="Moon"
-                        style="margin: 0 1.7rem;" />
-                    <UserAvatar></UserAvatar>
-                </div>
+                    <div class="right-dock">
+                        <SearchInput class="search" style="width: 160px;margin-right:1rem;"></SearchInput>
+                        <Menu id="navi-menu">
+                            <MenuItem index="/" route="/">封面</MenuItem>
+                            <MenuItem index="/articles" route="/articles">文章</MenuItem>
+                            <MenuItem index="/archived" route="/archived">归档</MenuItem>
+                        </Menu>
+                        <el-switch v-model="isDark" :inline-prompt="true" :active-icon="Sunny" :inactive-icon="Moon"
+                            style="margin: 0 1.7rem;" />
+                        <UserAvatar></UserAvatar>
+                    </div>
                 </div>
             </div>
         </div>
@@ -159,7 +158,7 @@ onUnmounted(() => {
 }
 
 .navi-scroll-blue {
-  background: var(--bg-sky-color);
+    background: var(--bg-sky-color);
 }
 
 .navi-scroll-wrapper {
@@ -201,11 +200,6 @@ onUnmounted(() => {
     transition: transform .3s, -webkit-transform .3s;
 }
 
-.right-dock>.el-input,
-#navi-menu {
-    display: block;
-}
-
 .right-dock>.el-switch {
     display: inline-flex;
 }
@@ -234,7 +228,8 @@ onUnmounted(() => {
     flex-grow: 1;
 }
 
-.logo, .logo img {
+.logo,
+.logo img {
     height: 50px;
 }
 
@@ -276,7 +271,7 @@ onUnmounted(() => {
         display: flex;
     }
 
-    .right-dock>.el-input,
+    .right-dock>.search,
     #navi-menu,
     .right-dock>.el-switch {
         display: none !important;

@@ -75,7 +75,9 @@ code::-webkit-scrollbar-track {
     --bg-color-secondary: #f6f6f6;
     --border-color-secondary: #dce8f1;
     --bg-sky-color: var(--el-color-primary);
-    --bg-sky-hover-color: var(--el-color-primary-dark-2);
+    --bg-sky-color-dark: var(--el-color-primary-dark-2);
+    --bg-sky-color-light-3: var(--el-color-primary-light-3);
+    --bg-sky-color-light-9: var(--el-color-primary-light-9);
 }
 
 html.dark {
@@ -84,7 +86,9 @@ html.dark {
     --bg-color-secondary: #2a2a2a;
     --border-color-secondary: #23170f;
     --bg-sky-color: #0159b2;
-    --bg-sky-hover-color: #01478c;
+    --bg-sky-color-dark: #01478c;
+    --bg-sky-color-light-3: #054280;
+    --bg-sky-color-light-9: #d0e2f5;
 }
 
 .thin-scrollbar::-webkit-scrollbar {

@@ -35,6 +35,8 @@ declare module '@vue/runtime-core' {
     LoginForm: typeof import('./src/components/LoginForm.vue')['default']
     LoginInfoForm: typeof import('./src/components/LoginInfoForm.vue')['default']
     MakeComment: typeof import('./src/components/MakeComment.vue')['default']
+    Menu: typeof import('./src/components/Menu.vue')['default']
+    MenuItem: typeof import('./src/components/MenuItem.vue')['default']
     ModalCarousel: typeof import('./src/components/ModalCarousel.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
