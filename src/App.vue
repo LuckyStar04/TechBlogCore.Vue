@@ -4,7 +4,7 @@ import { ElConfigProvider } from 'element-plus'
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
 import { useRoute } from 'vue-router'
 import { computed } from 'vue'
-import bannerpng from '@/assets/little_prince.png'
+import Banner from './components/Banner.vue'
 
 const route = useRoute()
 const showHeaderRoute = ['articles', 'archived', 'articleDetail', 'editArticle', 'createArticle']
@@ -27,12 +27,7 @@ const isShowBanner = computed(() => {
         <RouterView name="navigation"></RouterView>
       </el-header>
       <el-main :class="{ pt0: !isShowHeader }" style="padding: var(--el-main-padding) 0;">
-        <div class="banner" :class="{ pt60: isShowBanner }" v-if="isShowBanner">
-          <div class="banner-img">
-            <img :src="bannerpng" alt="Little Prince"/>
-          </div>
-          <div class="banner-overflow"></div>
-        </div>
+        <Banner v-if="isShowBanner"></Banner>
         <div class="flex-main" :class="{ pt60: !isShowBanner }">
           <RouterView class="grow-2"></RouterView>
           <RouterView name="rightSide" class="grow-1"></RouterView>
@@ -93,29 +88,6 @@ const isShowBanner = computed(() => {
   padding-top: 60px;
 }
 
-.banner {
-  height: 11rem;
-  background: var(--bg-sky-color);
-  overflow: visible;
-}
-
-.banner-img {
-  display: flex;
-  justify-content: center;
-}
-
-.banner-img>img {
-  height: 11rem;
-  width: auto;
-  transform: translate(0, 2.08rem);
-}
-
-.banner-overflow {
-  width: 100%;
-  height: 3rem;
-  background: var(--bg-sky-color);
-}
-
 .flex-main {
   display: flex;
   width: 100%;
@@ -169,10 +141,6 @@ const isShowBanner = computed(() => {
 @media only screen and (max-width: 768px) {
   .grow-1 {
     display: none;
-  }
-
-  .flex-main {
-    /* padding: 60px 0 0; */
   }
 }
 </style>

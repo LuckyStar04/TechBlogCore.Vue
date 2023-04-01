@@ -8,6 +8,7 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     ArticleNavi: typeof import('./src/components/ArticleNavi.vue')['default']
+    Banner: typeof import('./src/components/Banner.vue')['default']
     Categories: typeof import('./src/components/Categories.vue')['default']
     CommentInfo: typeof import('./src/components/CommentInfo.vue')['default']
     Comments: typeof import('./src/components/Comments.vue')['default']
