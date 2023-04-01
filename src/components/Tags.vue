@@ -126,6 +126,7 @@ a {
 
 .tags>a {
     margin: 0 0 .5rem .5rem;
+    z-index: 2;
 }
 
 h1, h2, h3 {
@@ -135,7 +136,7 @@ h1, h2, h3 {
 .tags::before {
     content: " ";
     position: absolute;
-    z-index: -2;
+    z-index: 1;
     top: v-bind('hoverBg.Y');
     left: v-bind('hoverBg.X');
     width: v-bind('hoverBg.Width');

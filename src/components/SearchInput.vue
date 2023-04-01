@@ -69,6 +69,7 @@ const search = () => {
     width: 100%;
     flex-grow: 1;
     -webkit-appearance: none;
+    appearance: none;
     color: var(--el-text-color-regular);
     height: 32px;
     line-height: var(--el-input-inner-height);

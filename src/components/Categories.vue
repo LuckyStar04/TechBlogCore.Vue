@@ -167,7 +167,7 @@ a {
 .categories::before {
     content: " ";
     position: absolute;
-    z-index: -2;
+    z-index: 1;
     top: v-bind('hoverBg.Y');
     left: v-bind('hoverBg.X');
     width: v-bind('hoverBg.Width');
@@ -181,7 +181,7 @@ a {
 .categories::after {
     content: " ";
     position: absolute;
-    z-index: -1;
+    z-index: 2;
     top: v-bind('bg.Y');
     left: v-bind('bg.X');
     width: v-bind('bg.Width');
@@ -202,6 +202,7 @@ a {
     line-height: 0;
     font-weight: 400;
     color: var(--el-text-color-primary);
+    white-space: nowrap;
 }
 
 .category-title>h2>span {
@@ -221,6 +222,8 @@ li {
     color: var(--el-color-info);
     border-radius: 8px;
     -webkit-tap-highlight-color: transparent;
+    position: relative;
+    z-index: 3;
 }
 li.active {
     font-weight: 700;
