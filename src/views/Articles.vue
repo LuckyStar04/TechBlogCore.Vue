@@ -127,6 +127,12 @@ onUnmounted(() => {
     font-family: 'Trebuchet MS';
 }
 
+.wrapper {
+    border-radius: 6px;
+    background-color: var(--bg-color-primary);
+    box-shadow: var(--header-shadow);
+}
+
 .article-title {
     min-height: 39px;
     display: flex;
@@ -269,10 +275,10 @@ h3 {
 }
 
 .article a.article-link:hover {
-    color: var(--el-color-primary);
+    color: var(--el-text-color-regular);
     transform: translate(4px, 0px);
     /* text-shadow: -4px 0 3px var(--el-color-primary-light-8); */
-    text-shadow: -4px 0 3px var(--el-color-info-light-8);
+    text-shadow: -4px 0 3px var(--el-color-info-light-7);
 }
 
 .create-time {

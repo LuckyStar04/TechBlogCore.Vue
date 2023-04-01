@@ -63,7 +63,7 @@ const toggleShowInfo = () => {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    border: 1px solid var(--el-border-color);
+    border: 1px solid var(--el-color-primary);
 }
 
 .pos-fixed {

@@ -290,6 +290,9 @@ a {
 .wrapper {
     margin: .5rem;
     width: calc(100% - 400px);
+    border-radius: 6px;
+    background-color: var(--bg-color-primary);
+    box-shadow: var(--header-shadow);
 }
 
 .article-title, .articles {
@@ -422,7 +425,7 @@ a {
     margin: 19px 20px 10px;
     /* border-radius: 8px; */
     /* box-sizing: border-box; */
-    background-color: var(--el-bg-color);
+    background-color: var(--bg-color-secondary);
     color: var(--el-text-color-regular);
     cursor: pointer;
 }

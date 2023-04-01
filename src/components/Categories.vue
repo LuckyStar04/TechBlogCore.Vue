@@ -5,6 +5,13 @@ import req from '@/utils/request'
 import { useRoute, useRouter } from 'vue-router'
 import { useArticleStore } from '@/stores/ArticleStore'
 
+const props = defineProps({
+    showShadow: {
+        Type: Boolean,
+        required: false,
+        default: true,
+    }
+})
 const route = useRoute()
 const router = useRouter()
 const articleStore = useArticleStore()
@@ -123,7 +130,7 @@ watch(() => articleStore.store.category, function() {
 })
 </script>
 <template>
-    <div class="wrapper">
+    <div class="wrapper" :class="{ shadow : props.showShadow }">
         <div class="category-title"><h2>文章分类<span>Categories</span></h2></div>
         <ul class="categories" ref="categories" @mouseleave="hideHoverBg($event)">
             <li v-for="category in data.categories" @click="jumpCategory(category.name, $event)" @mouseenter="onHover($event)" @mouseleave="onLeave($event)" :class="(articleStore.store.category==category.name?'active':'')" :id="`ca-${category.id}`">
@@ -141,7 +148,14 @@ a {
 }
 .wrapper {
     margin: .5rem;
+    border-radius: 6px;
+    background-color: var(--bg-color-primary);
 }
+
+.wrapper.shadow {
+    box-shadow: var(--header-shadow);
+}
+
 .category-title, .categories {
     padding: 1rem;
 }

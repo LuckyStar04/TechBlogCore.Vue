@@ -71,14 +71,20 @@ code::-webkit-scrollbar-track {
 
 :root {
     --header-shadow: 0px 0px 12px rgba(0, 0, 0, .12);
+    --bg-color-primary: #fff;
     --bg-color-secondary: #f6f6f6;
     --border-color-secondary: #dce8f1;
+    --bg-sky-color: var(--el-color-primary);
+    --bg-sky-hover-color: var(--el-color-primary-dark-2);
 }
 
 html.dark {
-    --header-shadow: 0px 0px;
+    --header-shadow: 0px 0px 12px rgba(0, 0, 0, .3);
+    --bg-color-primary: var(--el-bg-color);
     --bg-color-secondary: #2a2a2a;
     --border-color-secondary: #23170f;
+    --bg-sky-color: #0159b2;
+    --bg-sky-hover-color: #01478c;
 }
 
 .thin-scrollbar::-webkit-scrollbar {

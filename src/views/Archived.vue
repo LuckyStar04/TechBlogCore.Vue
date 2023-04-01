@@ -104,6 +104,12 @@ onUnmounted(() => {
     font-family: 'Trebuchet MS';
 }
 
+.wrapper {
+    border-radius: 6px;
+    background-color: var(--bg-color-primary);
+    box-shadow: var(--header-shadow);
+}
+
 .expand-top-enter-active,
 .expand-top-leave-active {
   opacity: 1;

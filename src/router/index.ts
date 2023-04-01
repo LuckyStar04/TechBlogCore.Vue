@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import SidebarRight from '@/components/SidebarRight.vue'
 import TheNavigation from '@/components/TheNavigation.vue'
+import TheNavigationBlue from '@/components/TheNavigationBlue.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -29,7 +30,7 @@ const router = createRouter({
       components: {
         default: () => import('../views/Articles.vue'),
         rightSide: SidebarRight,
-        navigation: TheNavigation,
+        navigation: TheNavigationBlue,
       }
     },
     {
@@ -38,7 +39,7 @@ const router = createRouter({
       components: {
         default: () => import('../views/Archived.vue'),
         rightSide: SidebarRight,
-        navigation: TheNavigation,
+        navigation: TheNavigationBlue,
       }
     },
     {

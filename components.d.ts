@@ -43,6 +43,7 @@ declare module '@vue/runtime-core' {
     StarryBackground: typeof import('./src/components/StarryBackground.vue')['default']
     Tags: typeof import('./src/components/Tags.vue')['default']
     TheNavigation: typeof import('./src/components/TheNavigation.vue')['default']
+    TheNavigationBlue: typeof import('./src/components/TheNavigationBlue.vue')['default']
     UserAvatar: typeof import('./src/components/UserAvatar.vue')['default']
     WaveBackground: typeof import('./src/components/WaveBackground.vue')['default']
   }

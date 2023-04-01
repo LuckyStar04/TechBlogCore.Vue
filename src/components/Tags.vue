@@ -5,6 +5,14 @@ import req from '@/utils/request'
 import { useRoute } from 'vue-router'
 import { useArticleStore } from '@/stores/ArticleStore'
 
+const props = defineProps({
+    showShadow: {
+        Type: Boolean,
+        required: false,
+        default: true,
+    }
+})
+
 const route = useRoute()
 //const colors = ['primary', 'success', 'info', 'warning', 'danger']
 
@@ -63,7 +71,7 @@ const fetchData = async () => {
 fetchData()
 </script>
 <template>
-    <div class="wrapper">
+    <div class="wrapper" :class="{ shadow : props.showShadow }">
         <div class="tag-title"><h2>文章标签<span>Tags</span></h2></div>
         <div class="tags" @mouseleave="hideHoverBg($event)">
             <template v-for="(tag, index) in data.tags">
@@ -84,7 +92,14 @@ a {
 }
 .wrapper {
     margin: .5rem;
+    border-radius: 6px;
+    background-color: var(--bg-color-primary);
 }
+
+.wrapper.shadow {
+    box-shadow: var(--header-shadow);
+}
+
 .tag-title, .tags {
     padding: 1rem;
 }

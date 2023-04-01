@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { MoreFilled, Sunny, Moon } from '@element-plus/icons-vue'
 import logopng from '@/assets/logo-2.png'
+import logowhitepng from '@/assets/logo-reverse-2.png'
 import { computed, onMounted, onUnmounted, reactive, ref, watch } from 'vue';
 import Categories from '@/components/Categories.vue'
 import Tags from '@/components/Tags.vue'
@@ -35,21 +36,14 @@ watch(() => route.query, () => {
 
 const showTitle = ref(false)
 const handleScroll = () => {
-    if (route.name != 'articleDetail') {
-        showTitle.value = false
-        return
-    }
-    const navi = document.getElementById('navi-button')!
-    if (window.getComputedStyle(navi).display === "none") {
         const scrollTop = document.body.scrollTop || document.documentElement.scrollTop
+        console.log('scrollTop',scrollTop);
+        
         if (scrollTop > 200) {
             showTitle.value = true
         } else {
             showTitle.value = false
         }
-    } else {
-        showTitle.value = false
-    }
 }
 
 onMounted(() => {
@@ -61,25 +55,56 @@ onUnmounted(() => {
 })
 </script>
 <template>
-    <div class="navigations-wrapper" :class="{ scroll: showTitle }">
-        <el-button id="navi-button" type="primary" plain :icon="MoreFilled" style="font-size: 22px;"
-            @click="data.drawer = true" />
-        <div class="logo-wrapper">
-            <div class="logo">
-                <router-link :to="{ name: 'home' }"><img :src="logopng" /></router-link>
+    <div class="navigations-wrapper">
+        <div class="navi-scroll" :class="{ scroll: showTitle }">
+            <div class="navi-scroll-blue">
+                <div class="navi-scroll-wrapper">
+                <el-button id="navi-button" type="primary" plain :icon="MoreFilled" style="font-size: 22px;"
+                    @click="data.drawer = true" />
+                <div class="logo-wrapper">
+                    <div class="logo">
+                        <router-link :to="{ name: 'home' }"><img :src="logowhitepng" /></router-link>
+                    </div>
+                </div>
+                <div class="right-dock">
+                    <SearchInput style="width: 160px;margin-right:1rem;"></SearchInput>
+                    <el-menu id="navi-menu" :default-active="router.currentRoute.value.fullPath.split('?')[0].toLowerCase()"
+                        background-color="var(--bg-sky-color)" hover-bg-color="var(--bg-sky-hover-color)"
+                        text-color="#fff" active-text-color="#fff"
+                        class="el-menu-demo" mode="horizontal" :ellipsis="false" router>
+                        <el-menu-item index="/" route="/">封面</el-menu-item>
+                        <el-menu-item index="/articles" route="/articles">文章</el-menu-item>
+                        <el-menu-item index="/archived" route="/archived">归档</el-menu-item>
+                    </el-menu>
+                    <el-switch v-model="isDark" :inline-prompt="true" :active-icon="Sunny" :inactive-icon="Moon"
+                        style="margin: 0 1.7rem;" />
+                    <UserAvatar></UserAvatar>
+                </div>
             </div>
-            <div id="navi-article-title"></div>
-        </div>
-        <div class="right-dock">
-            <SearchInput style="width: 160px;margin-right:1rem;"></SearchInput>
-            <el-menu id="navi-menu" :default-active="router.currentRoute.value.fullPath.split('?')[0].toLowerCase()" class="el-menu-demo" mode="horizontal" :ellipsis="false" router>
-                <el-menu-item index="/" route="/">封面</el-menu-item>
-                <el-menu-item index="/articles" route="/articles">文章</el-menu-item>
-                <el-menu-item index="/archived" route="/archived">归档</el-menu-item>
-            </el-menu>
-            <el-switch v-model="isDark" :inline-prompt="true" :active-icon="Sunny" :inactive-icon="Moon"
-                style="margin: 0 1.7rem;" />
-            <UserAvatar></UserAvatar>
+            </div>
+            <div class="navi-scroll-white">
+                <div class="navi-scroll-wrapper">
+                <el-button id="navi-button" type="primary" plain :icon="MoreFilled" style="font-size: 22px;"
+                    @click="data.drawer = true" />
+                <div class="logo-wrapper">
+                    <div class="logo">
+                        <router-link :to="{ name: 'home' }"><img :src="logopng" /></router-link>
+                    </div>
+                </div>
+                <div class="right-dock">
+                    <SearchInput style="width: 160px;margin-right:1rem;"></SearchInput>
+                    <el-menu id="navi-menu" :default-active="router.currentRoute.value.fullPath.split('?')[0].toLowerCase()"
+                        class="el-menu-demo" mode="horizontal" :ellipsis="false" router>
+                        <el-menu-item index="/" route="/">封面</el-menu-item>
+                        <el-menu-item index="/articles" route="/articles">文章</el-menu-item>
+                        <el-menu-item index="/archived" route="/archived">归档</el-menu-item>
+                    </el-menu>
+                    <el-switch v-model="isDark" :inline-prompt="true" :active-icon="Sunny" :inactive-icon="Moon"
+                        style="margin: 0 1.7rem;" />
+                    <UserAvatar></UserAvatar>
+                </div>
+                </div>
+            </div>
         </div>
         <el-drawer class="drawer" v-model="data.drawer" title="侧边栏" direction="ltr" :with-header="false" size="70%"
             :close-on-click-modal="true">
@@ -101,22 +126,13 @@ onUnmounted(() => {
 
 .navigations-wrapper {
     height: 60px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    width: 100%;
     overflow: hidden;
 }
 
-#navi-button {
-    display: none;
-    width: 45px;
-    height: 40px;
-}
-
-.logo-wrapper {
+.navi-scroll {
+    margin: 0 auto;
     height: 120px;
-    flex-grow: 1;
     display: flex;
     flex-flow: column nowrap;
     overflow: hidden;
@@ -142,6 +158,27 @@ onUnmounted(() => {
     transition-property: transform, -webkit-transform;
 }
 
+.navi-scroll-blue {
+  background: var(--bg-sky-color);
+}
+
+.navi-scroll-wrapper {
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+#navi-button {
+    display: none;
+    width: 45px;
+    height: 40px;
+}
+
+.logo-wrapper {
+    flex-grow: 1;
+}
+
 #navi-article-title {
     height: 60px;
     overflow: hidden;
@@ -155,32 +192,14 @@ onUnmounted(() => {
     text-overflow: ellipsis;
 }
 
-.scroll .logo-wrapper {
-    -webkit-transform: translateY(-59%);
-    transform: translateY(-59%);
+.navi-scroll.scroll {
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
     -webkit-transition: -webkit-transform .3s;
     transition: -webkit-transform .3s;
     transition: transform .3s;
     transition: transform .3s, -webkit-transform .3s;
 }
-
-/* .scroll #navi-article-title {
-    -webkit-transform: translateY(-100%);
-    transform: translateY(-100%);
-    -webkit-transition: -webkit-transform .3s;
-    transition: -webkit-transform .3s;
-    transition: transform .3s;
-    transition: transform .3s,-webkit-transform .3s;
-}
-
-.scroll .logo {
-    -webkit-transform: translateY(-100%);
-    transform: translateY(-100%);
-    -webkit-transition: -webkit-transform .3s;
-    transition: -webkit-transform .3s;
-    transition: transform .3s;
-    transition: transform .3s,-webkit-transform .3s;
-} */
 
 .right-dock>.el-input,
 #navi-menu {
@@ -215,30 +234,30 @@ onUnmounted(() => {
     flex-grow: 1;
 }
 
-.logo img {
+.logo, .logo img {
     height: 50px;
 }
 
 @media only screen and (min-width: 1440px) {
-    .navigations-wrapper {
+    .navi-scroll-wrapper {
         width: 1150px;
     }
 }
 
 @media only screen and (min-width: 1024px) and (max-width: 1440px) {
-    .navigations-wrapper {
+    .navi-scroll-wrapper {
         width: 960px;
     }
 }
 
 @media only screen and (min-width: 769px) and (max-width: 1024px) {
-    .navigations-wrapper {
+    .navi-scroll-wrapper {
         width: 768px;
     }
 }
 
 @media only screen and (max-width: 768px) {
-    .navigations-wrapper {
+    .navi-scroll-wrapper {
         padding: 0 10px;
         align-items: center;
     }
