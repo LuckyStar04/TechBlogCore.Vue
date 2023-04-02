@@ -292,7 +292,7 @@ a {
     width: calc(100% - 400px);
     border-radius: 6px;
     background-color: var(--bg-color-primary);
-    box-shadow: var(--header-shadow);
+    box-shadow: var(--content-shadow);
 }
 
 .article-title, .articles {

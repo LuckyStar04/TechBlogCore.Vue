@@ -130,7 +130,7 @@ onUnmounted(() => {
 .wrapper {
     border-radius: 6px;
     background-color: var(--bg-color-primary);
-    box-shadow: var(--header-shadow);
+    box-shadow: var(--content-shadow);
 }
 
 .article-title {
