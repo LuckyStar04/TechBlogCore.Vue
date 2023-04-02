@@ -61,17 +61,19 @@ onUnmounted(() => {
         <div class="navi-scroll" :class="{ scroll: showTitle }">
             <div class="navi-scroll-blue">
                 <div class="navi-scroll-wrapper">
-                    <el-button id="navi-button" type="primary" plain :icon="MoreFilled" style="font-size: 22px;"
-                        @click="data.drawer = true" />
+                    <el-button id="navi-button" type="primary" style="font-size: 22px; border: 1px solid var(--bg-sky-color-light-9);"
+                        @click="data.drawer = true"><font-awesome-icon icon="fa-solid fa-bars" /></el-button>
                     <div class="logo-wrapper">
                         <div class="logo">
                             <router-link :to="{ name: 'home' }"><img :src="logowhitepng" /></router-link>
                         </div>
                     </div>
                     <div class="right-dock">
-                        <SearchInput class="search" :bgcolor="'var(--bg-sky-color-light-9)'" style="width: 160px;margin-right:1rem;"></SearchInput>
-                        <Menu id="navi-menu" background-color="var(--bg-sky-color)" hover-bg-color="var(--bg-sky-color-light-3)"
-                        text-color="#fff" active-text-color="#fff" selected-text-color="#fff">
+                        <SearchInput class="search" :bgcolor="'var(--bg-sky-color-light-9)'"
+                            style="width: 160px;margin-right:1rem;"></SearchInput>
+                        <Menu id="navi-menu" background-color="var(--bg-sky-color)"
+                            hover-bg-color="var(--bg-sky-color-light-3)" text-color="#fff" active-text-color="#fff"
+                            selected-text-color="#fff">
                             <MenuItem index="/" route="/">封面</MenuItem>
                             <MenuItem index="/articles" route="/articles">文章</MenuItem>
                             <MenuItem index="/archived" route="/archived">归档</MenuItem>
@@ -84,8 +86,8 @@ onUnmounted(() => {
             </div>
             <div class="navi-scroll-white">
                 <div class="navi-scroll-wrapper">
-                    <el-button id="navi-button" type="primary" plain :icon="MoreFilled" style="font-size: 22px;"
-                        @click="data.drawer = true" />
+                    <el-button id="navi-button" type="primary" plain style="font-size: 22px;"
+                        @click="data.drawer = true"><font-awesome-icon icon="fa-solid fa-bars" /></el-button>
                     <div class="logo-wrapper">
                         <div class="logo">
                             <router-link :to="{ name: 'home' }"><img :src="logopng" /></router-link>

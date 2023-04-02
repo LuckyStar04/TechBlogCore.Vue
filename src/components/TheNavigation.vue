@@ -64,8 +64,8 @@ onUnmounted(() => {
 </script>
 <template>
     <div class="navigations-wrapper" :class="{ scroll: showTitle }">
-        <el-button id="navi-button" type="primary" plain :icon="MoreFilled" style="font-size: 22px;"
-            @click="data.drawer = true" />
+        <el-button id="navi-button" type="primary" plain style="font-size: 22px;"
+            @click="data.drawer = true" ><font-awesome-icon icon="fa-solid fa-bars" /></el-button>
         <div class="logo-wrapper">
             <div class="logo">
                 <router-link :to="{ name: 'home' }"><img :src="logopng" /></router-link>

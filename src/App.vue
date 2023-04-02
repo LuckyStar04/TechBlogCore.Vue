@@ -28,7 +28,7 @@ const isShowBanner = computed(() => {
       </el-header>
       <el-main :class="{ pt0: !isShowHeader }" style="padding: var(--el-main-padding) 0;">
         <Banner v-if="isShowBanner"></Banner>
-        <div class="flex-main" :class="{ pt60: !isShowBanner }">
+        <div class="flex-main" :class="{ pt60: !isShowBanner && isShowHeader }">
           <RouterView class="grow-2"></RouterView>
           <RouterView name="rightSide" class="grow-1"></RouterView>
         </div>
