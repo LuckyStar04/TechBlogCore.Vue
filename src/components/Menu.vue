@@ -8,7 +8,7 @@ const props = defineProps({
     backgroundColor: {
         type: String,
         required: false,
-        default: 'var(--el-bg-color)',
+        default: 'var(--el-bg-color-overlay)',
     },
     hoverBgColor: {
         type: String,

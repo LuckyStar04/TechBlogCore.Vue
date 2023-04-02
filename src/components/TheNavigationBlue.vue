@@ -163,6 +163,10 @@ onUnmounted(() => {
     background: var(--bg-sky-color);
 }
 
+.navi-scroll-white {
+    background: var(--el-bg-color-overlay);
+}
+
 .navi-scroll-wrapper {
     margin: 0 auto;
     display: flex;
