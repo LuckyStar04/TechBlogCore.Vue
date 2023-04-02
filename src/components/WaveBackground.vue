@@ -24,7 +24,7 @@
 
         <!--Content starts-->
         <div class="content flex">
-            <p>A tech Blog focus on Linux & full-stack Web development.</p>
+            <p>© LuckyStar 2023.</p>
         </div>
     </Teleport>
 </template>

@@ -10,15 +10,22 @@ onBeforeMount(() => {
     <Teleport to="#teleport">
         <WaveBackground>
             <div class="inner-header">
-                <div class="flex">
-                    <div class="logo"><img src="@/assets/logo-white.png" /></div>
-                    <h1 class="title">BlogCore.Vue</h1>
-                </div>
-                <div class="navigations">
-                    <RouterLink class="underlineHover" :to="{ name: 'login' }">登&nbsp;&nbsp;&nbsp;录</RouterLink>
-                    <RouterLink class="underlineHover" :to="{ name: 'articles' }">文&nbsp;&nbsp;&nbsp;章</RouterLink>
-                    <RouterLink class="underlineHover" :to="{ name: 'archived' }">归&nbsp;&nbsp;&nbsp;档</RouterLink>
-                    <a class="underlineHover" href="https://github.com/LuckyStar04/TechBlogCore.Vue" target="_blank">Github</a>
+                <div class="inner-wrapper">
+                    <div class="flex">
+                        <div class="logo"><img src="@/assets/logo-white-star.png" /></div>
+                        <h1 class="title">Hello,<br />I'm Star.</h1>
+                    </div>
+                    <p class="intro">Web Developer,<br />major focus on back-end.</p>
+                    <div class="navigations">
+                        <a class="github" href="https://github.com/LuckyStar04/" target="_blank"><font-awesome-icon
+                                icon="fa-brands fa-github" /> Github</a>
+                        <RouterLink :to="{ name: 'articles' }"><font-awesome-icon icon="fa-solid fa-book" /> Blog
+                        </RouterLink>
+                        <RouterLink :to="{ name: 'archived' }"><font-awesome-icon icon="fa-solid fa-box" /> Archives
+                        </RouterLink>
+                        <RouterLink :to="{ name: 'login' }"><font-awesome-icon icon="fa-solid fa-unlock-keyhole" /> Login
+                        </RouterLink>
+                    </div>
                 </div>
             </div>
         </WaveBackground>
@@ -37,8 +44,8 @@ p {
 }
 
 .logo {
-    width: 120px;
-    height: 120px;
+    width: 132px;
+    height: 132px;
     padding-right: 10px;
     display: inline-block;
     vertical-align: middle;
@@ -78,7 +85,10 @@ p {
     font-family: 'Trebuchet MS';
     font-weight: 700;
     letter-spacing: 2px;
-    font-size: 96px;
+    font-size: 64px;
+    text-align: left;
+    padding: 0 30px 0 30px;
+    margin: 0;
 }
 
 .inner-header {
@@ -87,10 +97,17 @@ p {
     margin: 0;
     padding: 0;
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     animation: header-anime 1.5s ease;
+}
+
+.inner-wrapper {
+    max-width: 70vw;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
 }
 
 .flex {
@@ -101,24 +118,43 @@ p {
     text-align: center;
 }
 
+.intro {
+    color: white;
+    text-align: left;
+    font-size: 18px;
+}
+
 .navigations {
-    width: 720px;
+    width: 100%;
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     align-items: baseline;
 }
 
 .navigations>a {
     color: white;
+    background-color: var(--bg-sky-color-dark);
+    padding: 6px 9px;
+    margin-right: 8px;
+    border-radius: 4px;
     text-decoration: none;
     font-family: 'Trebuchet MS', '微软雅黑', Arial, Helvetica, sans-serif;
-    font-size: 24px;
-    transition: all .3s;
+    font-size: 18px;
+    transition: color .3s, background-color .3s;
+}
+
+.navigations>a.github {
+    background-color: var(--bg-sky-color-light-9);
+    color: var(--el-color-primary);
 }
 
 .navigations>a:hover {
-    text-shadow: 0 0 4px lightgray;
-    transform: scale(1.1);
+    background-color: var(--bg-sky-color-light-9);
+    color: var(--el-color-primary);
+}
+
+.navigations>a.github:hover {
+    background-color: var(--el-color-primary-light-7);
 }
 
 .underlineHover:after {
@@ -137,10 +173,14 @@ p {
 }
 
 @media only screen and (max-width: 768px) {
+    .inner-wrapper {
+        max-width: 100%;
+    }
+
     .logo {
-        width: 48px;
-        height: 48px;
-        padding-right: 4px;
+        width: 86px;
+        height: 86px;
+        padding-right: 0px;
     }
 
     .title {
@@ -154,7 +194,9 @@ p {
     }
 
     .navigations>a {
-        font-size: 19px;
+        font-size: 15px;
+        padding: 3px 5px;
+        margin-right: 4px;
     }
 }
 </style>

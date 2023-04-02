@@ -157,7 +157,7 @@ const saveArticle = async () => {
     width: 100%;
     font-size: 2rem;
     color: var(--el-text-color-regular);
-    background-color: var(--el-bg-color);
+    background-color: var(--bg-color-secondary);
     border: 0px;
     padding: 0 1rem 1rem;
     outline: none;
@@ -165,7 +165,7 @@ const saveArticle = async () => {
 }
 
 .main {
-    background-color: var(--el-bg-color-page);
+    background-color: var(--el-fill-color-darker);
     width: 100%;
     height: calc(100vh - 143px);
     border-radius: 6px;
