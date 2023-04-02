@@ -55,13 +55,14 @@ import bannerpng from '@/assets/little_prince.png'
 }
 
 .bg-wrapper-1 {
-    height: 11.5rem;
+    height: 12rem;
     width: 100%;
+    transform: translateY(-0.5rem);
     overflow: hidden;
 }
 
 .night {
-    height: 11rem;
+    height: 12rem;
     width: 100%;
 }
 
