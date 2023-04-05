@@ -80,7 +80,7 @@ const isShowBanner = computed(() => {
   }
 }
 
-.el-main {
+.el-main, .el-container {
   background-color: var(--bg-color-secondary);
 }
 
@@ -103,6 +103,14 @@ const isShowBanner = computed(() => {
 
 .grow-2 {
   flex-grow: 1;
+}
+
+.grow-2 {
+  margin: 15px;
+}
+
+.grow-1 {
+  margin: 15px 15px 15px 0;
 }
 
 @media only screen and (min-width: 1440px) {

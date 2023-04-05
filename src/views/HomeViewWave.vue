@@ -21,7 +21,7 @@ onBeforeMount(() => {
                                 icon="fa-brands fa-github" /> Github</a>
                         <RouterLink :to="{ name: 'articles' }"><font-awesome-icon icon="fa-solid fa-book" /> Blog
                         </RouterLink>
-                        <RouterLink :to="{ name: 'archived' }"><font-awesome-icon icon="fa-solid fa-box" /> Archives
+                        <RouterLink :to="{ name: 'archived' }"><font-awesome-icon icon="fa-solid fa-box" /> Archived
                         </RouterLink>
                         <RouterLink :to="{ name: 'login' }"><font-awesome-icon icon="fa-solid fa-unlock-keyhole" /> Login
                         </RouterLink>
@@ -129,13 +129,15 @@ p {
     display: flex;
     /* justify-content: space-between; */
     align-items: baseline;
+    flex-wrap: wrap;
+    margin-left: -8px;
 }
 
 .navigations>a {
     color: white;
     background-color: var(--bg-sky-color-dark);
     padding: 6px 9px;
-    margin-right: 8px;
+    margin: 0 0 5px 6px;
     border-radius: 4px;
     text-decoration: none;
     font-family: 'Trebuchet MS', '微软雅黑', Arial, Helvetica, sans-serif;
@@ -190,13 +192,13 @@ p {
     }
 
     .navigations {
-        width: 296px;
+        max-width: 100%;
     }
 
     .navigations>a {
         font-size: 15px;
         padding: 3px 5px;
-        margin-right: 4px;
+        /* margin-right: 4px; */
     }
 }
 </style>

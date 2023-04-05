@@ -225,10 +225,6 @@ h3 {
     cursor: pointer;
 }
 
-.wrapper {
-    margin: .5rem;
-}
-
 .el-timeline {
     padding: 1.6rem 1.6rem 0;
 }

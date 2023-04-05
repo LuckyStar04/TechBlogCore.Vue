@@ -181,7 +181,7 @@ const saveArticle = async () => {
 }
 
 .left {
-    border-right: 1px solid var(--el-border-color-light);
+    border-right: 1px solid var(--el-border-color-darker);
 }
 
 .right {
@@ -241,7 +241,7 @@ const saveArticle = async () => {
     }
 
     .left {
-        border-bottom: 1px solid var(--el-border-color-light);
+        border-bottom: 1px solid var(--el-border-color-darker);
     }
 
     .left>.content {

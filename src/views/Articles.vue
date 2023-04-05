@@ -103,7 +103,7 @@ onUnmounted(() => {
             <h2 v-if="route.query.tag" class="color-success fw-600"># 标签：{{ route.query.tag }}</h2>
             <h2 v-else-if="route.query.category" class="color-primary fw-600"># 文章分类：{{ route.query.category }}</h2>
             <h2 v-else-if="route.query.keyword" class="color-purple fw-600"># 关键字搜索：{{ route.query.keyword }}</h2>
-            <h2 v-else>文章列表<span>Articles</span></h2>
+            <h2 v-else>文章列表<span>Blog Articles</span></h2>
             <RouterLink v-if="userStore.info.role == 'Admin'" :to="{ name: 'createArticle' }"><el-button type="primary"
                     plain :icon="Plus">创建文章</el-button></RouterLink>
         </div>
@@ -310,10 +310,6 @@ h3 {
     line-height: 1.3rem;
     max-height: 3.9rem;
     overflow: hidden;
-}
-
-.wrapper {
-    margin: .5rem;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1024px) {

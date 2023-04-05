@@ -147,7 +147,6 @@ a {
     text-decoration: none !important;
 }
 .wrapper {
-    margin: .5rem;
     border-radius: 6px;
     background-color: var(--bg-color-primary);
 }

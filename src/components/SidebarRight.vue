@@ -7,7 +7,7 @@ import Tags from './Tags.vue'
         <!-- <div class="sidebars">
             <el-scrollbar height="calc(100vh - 60px)"> -->
             <Categories></Categories>
-            <Tags></Tags>
+            <Tags class="mt-15"></Tags>
             <!-- </el-scrollbar>
         </div> -->
     </div>
@@ -16,6 +16,10 @@ import Tags from './Tags.vue'
 .sidebars {
     /* position: fixed; */
     /* overflow: hidden; */
+}
+
+.mt-15 {
+    margin-top: 15px;
 }
 
 @media only screen and (min-width: 1440px) {

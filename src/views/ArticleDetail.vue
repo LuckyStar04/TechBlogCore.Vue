@@ -288,7 +288,6 @@ a {
 }
 
 .wrapper {
-    margin: .5rem;
     width: calc(100% - 400px);
     border-radius: 6px;
     background-color: var(--bg-color-primary);
