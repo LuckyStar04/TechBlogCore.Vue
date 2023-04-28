@@ -67,7 +67,7 @@ $yellow: #EFE894
     position: absolute
     top: 0
     right: 25px
-    @include size(100px,100px)
+    @include size(75px,75px)
     background: $l-grey
     border-radius: 50%
     box-shadow: inset -15px 0 6px $grey, 0 0 8px $l-grey
@@ -135,7 +135,7 @@ $yellow: #EFE894
     position: absolute
     top: 0
     right: -4rem
-    @include size(200px,300px)
+    @include size(150px,225px)
 
     .top
         position: absolute
