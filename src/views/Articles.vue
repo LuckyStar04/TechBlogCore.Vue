@@ -95,10 +95,24 @@ onUnmounted(() => {
     window.removeEventListener("scroll", handleScroll, false)
     window.removeEventListener("resize", handleScroll, false)
 })
+
+// const onMouseEnter = (e: MouseEvent) => {
+//     let ele: HTMLElement = e.target as HTMLElement
+//     if (ele.classList.contains('wrapper')) {
+//         ele.classList.add('hovered')
+//     }
+// }
+
+// const onMouseLeave = (e: MouseEvent) => {
+//     let ele: HTMLElement = e.target as HTMLElement
+//     if (ele.classList.contains('wrapper')) {
+//         ele.classList.remove('hovered')
+//     }
+// }
 </script>
 
 <template>
-    <div v-loading.fullscreen.lock="data.isLoading" class="wrapper">
+    <div v-loading.fullscreen.lock="data.isLoading" class="wrapper"><!-- @mouseenter="onMouseEnter" @mouseleave="onMouseLeave"-->
         <div class="article-title">
             <h2 v-if="route.query.tag" class="color-success fw-600"># 标签：{{ route.query.tag }}</h2>
             <h2 v-else-if="route.query.category" class="color-primary fw-600"># 文章分类：{{ route.query.category }}</h2>
@@ -131,7 +145,13 @@ onUnmounted(() => {
     border-radius: 6px;
     background-color: var(--bg-color-primary);
     box-shadow: var(--content-shadow);
+    /* transition: box-shadow .4s ease,transform .4s ease; */
 }
+
+/* .wrapper.hovered {
+    box-shadow: 0px 16px 40px rgba(0, 0, 0, .32);
+    transform: translateY(-2px);
+} */
 
 .article-title {
     min-height: 39px;

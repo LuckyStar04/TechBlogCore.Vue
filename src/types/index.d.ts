@@ -94,3 +94,9 @@ export interface NavItem {
     children: Array<NavItem>,
     parent: NavItem|null,
 }
+
+export interface Chat {
+    isMe: Boolean,
+    content: string,
+    time: Date,
+}

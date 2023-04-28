@@ -70,6 +70,14 @@ const router = createRouter({
       },
     },
     {
+      path: '/chat',
+      name: 'chat',
+      components: {
+        default: () => import('../views/Chat.vue'),
+        navigation: TheNavigation,
+      }
+    },
+    {
       path: '/:pathMatch(.*)*',
       name: 'NotFound',
       components: {

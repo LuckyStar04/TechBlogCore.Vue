@@ -2,7 +2,7 @@
 import req from '@/utils/request'
 import { getNow } from '@/utils/dates'
 import type { ArticleEdit } from '@/types'
-import { reactive, watch } from 'vue'
+import { onBeforeUnmount, reactive, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import EditTag from '@/components/EditTag.vue'
 import { parseMarkdown } from '@/utils/markdown'
@@ -24,6 +24,7 @@ const data = reactive({
         tags: [],
     } as ArticleEdit,
     isLoading: false,
+    isChanged: false,
 })
 
 const fetchData = async () => {
@@ -47,6 +48,20 @@ fetchData()
 const noteHtml = computed(() => {
     if (!data.article.content) return ''
     return parseMarkdown(data.article.content)
+})
+
+const handleChange = () => {
+    if (data.isChanged) return
+    data.isChanged = true
+    window.onbeforeunload = function (e) {
+        var dialogText = 'Dialog text here';
+        e.returnValue = dialogText;
+        return dialogText;
+    }
+}
+
+onBeforeUnmount(() => {
+    window.onbeforeunload = null
 })
 
 const saveArticle = async () => {
@@ -105,15 +120,16 @@ const saveArticle = async () => {
 </script>
 <template>
     <div class="editor-wrapper" v-loading.fullscreen="data.isLoading">
-        <input class="title" type="text" v-model="data.article.title" placeholder="请输入文章标题" />
+        <input class="title" type="text" v-model="data.article.title" placeholder="请输入文章标题" @input="handleChange" />
         <div class="main">
             <div class="left">
                 <div class="tag-wrapper">
-                    <el-input class="category" v-model="data.article.category" placeholder="输入分类" clearable />
+                    <el-input class="category" v-model="data.article.category" placeholder="输入分类" clearable
+                        @input="handleChange" />
                     <EditTag class="tags" v-model="data.article.tags"></EditTag>
                     <el-button type="primary" class="save" plain :icon="Edit" @click="saveArticle">保存</el-button>
                 </div>
-                <el-input class="content" v-model="data.article.content" type="textarea" />
+                <el-input class="content" v-model="data.article.content" type="textarea" @input="handleChange" />
             </div>
             <div class="right regular-scrollbar">
                 <div class="note-view" v-html="noteHtml"></div>

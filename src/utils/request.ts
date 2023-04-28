@@ -5,7 +5,7 @@ class Request {
     timeout: number
     constructor() {
         this.baseURL = import.meta.env.MODE === 'development' ? 'http://192.168.2.233:7084/api/' : '/api/'
-        this.timeout = 10000
+        this.timeout = 1000000
     }
     request(config: AxiosRequestConfig<any>) {
         const instance = axios.create({
