@@ -27,7 +27,7 @@ const data = reactive({
     transition: width .5s ease, height .5s ease;
     background-color: var(--el-bg-color);
     border-radius: 1rem;
-    z-index: 999;
+    z-index: 998;
     box-shadow: var(--el-box-shadow-light);
     overflow: hidden;
 }

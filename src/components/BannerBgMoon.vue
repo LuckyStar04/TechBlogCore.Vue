@@ -63,6 +63,25 @@ $yellow: #EFE894
     box-shadow: inset 2px 0 $d-grey
     border-radius: 50%
 
+
+@keyframes rising
+    0%
+        transform: translate3d(0, 15rem, 0)
+    100%
+        transform: none
+
+@keyframes fall
+    0%
+        transform: none
+    100%
+        transform: translate3d(0, 15rem, 0)
+
+.show .moon
+    visibility: visible
+    animation: rising 1s 1s ease both
+
+.show .stars
+    visibility: visible
 .moon
     position: absolute
     top: 0
@@ -71,7 +90,9 @@ $yellow: #EFE894
     background: $l-grey
     border-radius: 50%
     box-shadow: inset -15px 0 6px $grey, 0 0 8px $l-grey
-    animation: floating 5s linear infinite 0s
+    animation: floating 5s linear infinite 0s, fall 1s ease both
+    visibility: hidden
+    transition: visibility 1s
     z-index: 10
 
     .craters
@@ -135,6 +156,7 @@ $yellow: #EFE894
     position: absolute
     top: 0
     right: -4rem
+    visibility: hidden
     @include size(150px,225px)
 
     .top

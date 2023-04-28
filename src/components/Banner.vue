@@ -1,8 +1,8 @@
 <template>
     <div class="banner pt60">
+        <BannerBgMoon :class="{ show: isDark }" />
+        <BannerBgSun :class="{ show: !isDark }" />
         <BannerBgStar v-if="isDark"/>
-        <BannerBgMoon v-show="isDark" />
-        <BannerBgSun v-show="!isDark"/>
         <div class="banner-img">
             <img :src="bannerpng" alt="Little Prince" />
         </div>

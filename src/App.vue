@@ -102,6 +102,8 @@ const isShowBanner = computed(() => {
   justify-content: space-around;
   align-items: stretch;
   overflow: hidden;
+  position: relative;
+  z-index: 3;
 }
 
 .pt0 {

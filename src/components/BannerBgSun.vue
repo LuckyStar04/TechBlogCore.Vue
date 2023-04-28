@@ -55,25 +55,55 @@ $blue: #85C7F2;
     border-radius: $radius;
 }
 
+.show .sun {
+    visibility: visible;
+    animation: rising 1s 1s ease both;
+}
+
 .sun {
     height: $size;
     width: $size;
     position: absolute;
     top: 0;
     right: 25px;
+    animation: fall 1s ease both;
+    visibility: hidden;
+    transition: visibility 1s;
 
     .sunrays {
         @include animate(spin, 15s, linear, infinite);
         box-shadow: 0px 0px 100px lighten($yellow, 10%);
         height: $size;
         width: $size;
+        position: relative;
+        z-index: -3;
+    }
+}
+
+@keyframes rising {
+    0% {
+        transform: translate3d(0, 15rem, 0);
+    }
+
+    100% {
+        transform: none;
+    }
+}
+
+@keyframes fall {
+    0% {
+        transform: none;
+    }
+
+    100% {
+        transform: translate3d(0, 15rem, 0);
     }
 }
 
 .circle {
     height: $size;
     width: $size;
-    z-index: 1;
+    z-index: -2;
     background: lighten($yellow, 10%);
     position: absolute;
     border-radius: 50%;
@@ -97,7 +127,7 @@ $blue: #85C7F2;
 .eyes {
     position: relative;
     top: 20px;
-    z-index: 2;
+    z-index: -1;
 
     .left,
     .right {
