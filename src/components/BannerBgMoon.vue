@@ -78,7 +78,7 @@ $yellow: #EFE894
 
 .show .moon
     visibility: visible
-    animation: rising 1s 1s ease both
+    animation: rising 1s .6s ease both
 
 .show .stars
     visibility: visible

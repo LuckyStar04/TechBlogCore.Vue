@@ -9,9 +9,7 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     ArticleNavi: typeof import('./src/components/ArticleNavi.vue')['default']
     Banner: typeof import('./src/components/Banner.vue')['default']
-    BannerBgDay: typeof import('./src/components/BannerBgDay.vue')['default']
     BannerBgMoon: typeof import('./src/components/BannerBgMoon.vue')['default']
-    BannerBgNight: typeof import('./src/components/BannerBgNight.vue')['default']
     BannerBgStar: typeof import('./src/components/BannerBgStar.vue')['default']
     BannerBgSun: typeof import('./src/components/BannerBgSun.vue')['default']
     Categories: typeof import('./src/components/Categories.vue')['default']

@@ -13,6 +13,7 @@
                     <span></span>
                 </div>
             </div>
+            <div class="cloud"></div>
         </div>
     </div>
 </template>
@@ -28,6 +29,63 @@
     margin: 0 auto;
     transform: translateY(-0.5rem);
     overflow: visible;
+}
+
+.show .cloud {
+    display: block;
+}
+
+@keyframes floating {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateX(100%);
+        transform: translateX(100%);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+    }
+}
+
+.cloud {
+    position: absolute;
+    top: 50px;
+    right: 1px;
+    width: 60px;
+    height: 20px;
+    // background-color: white;
+    background: linear-gradient(top, #f2f9fe 5%, #d6f0fd 100%);
+    background: -webkit-linear-gradient(top, #f2f9fe 5%, #d6f0fd 100%);
+	background: -moz-linear-gradient(top, #f2f9fe 5%, #d6f0fd 100%);
+	background: -ms-linear-gradient(top, #f2f9fe 5%, #d6f0fd 100%);
+	background: -o-linear-gradient(top, #f2f9fe 5%, #d6f0fd 100%);
+    border-radius: 17px;
+    display: none;
+    animation: floating 1s ease both;
+}
+
+.cloud::after, .cloud::before {
+    content: "";
+    position: relative;
+    display: inline-block;
+    background: inherit;
+    border-radius: inherit;
+}
+
+.cloud::after {
+    width: 17px;
+    height: 17px;
+    top: -22px;
+    left: -18px;
+}
+
+.cloud::before {
+    width: 31px;
+    height: 31px;
+    top: -12px;
+    left: 22px;
 }
 
 //variables
@@ -57,7 +115,7 @@ $blue: #85C7F2;
 
 .show .sun {
     visibility: visible;
-    animation: rising 1s 1s ease both;
+    animation: rising 1s .6s ease both;
 }
 
 .sun {
