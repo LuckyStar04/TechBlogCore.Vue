@@ -135,7 +135,7 @@ p {
 
 .navigations>a {
     color: white;
-    background-color: var(--bg-sky-color-dark);
+    background-color: #337ecc;
     padding: 6px 9px;
     margin: 0 0 5px 6px;
     border-radius: 4px;
@@ -146,17 +146,17 @@ p {
 }
 
 .navigations>a.github {
-    background-color: var(--bg-sky-color-light-9);
-    color: var(--el-color-primary);
+    background-color: #ecf5ff;
+    color: #409eff;
 }
 
 .navigations>a:hover {
-    background-color: var(--bg-sky-color-light-9);
-    color: var(--el-color-primary);
+    background-color: #ecf5ff;
+    color: #409eff;
 }
 
 .navigations>a.github:hover {
-    background-color: var(--el-color-primary-light-7);
+    background-color: #213d5b;
 }
 
 .underlineHover:after {

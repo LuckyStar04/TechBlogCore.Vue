@@ -107,7 +107,6 @@ onUnmounted(() => {
 .wrapper {
     border-radius: 6px;
     background-color: var(--bg-color-primary);
-    box-shadow: var(--content-shadow);
 }
 
 .expand-top-enter-active,

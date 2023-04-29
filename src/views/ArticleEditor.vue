@@ -162,9 +162,9 @@ const saveArticle = async () => {
 }
 
 .editor-wrapper {
-    height: calc(100vh - 80px);
+    height: 100%;
     width: 100%;
-    margin-top: 10px;
+    margin: 0px;
 }
 
 .title {
@@ -173,18 +173,20 @@ const saveArticle = async () => {
     width: 100%;
     font-size: 2rem;
     color: var(--el-text-color-regular);
-    background-color: var(--bg-color-secondary);
+    background-color: var(--bg-color-primary);
     border: 0px;
-    padding: 0 1rem 1rem;
+    padding-left: 1rem;
+    line-height: 4rem;
     outline: none;
     overflow: hidden;
 }
 
 .main {
-    background-color: var(--el-fill-color-darker);
+    background-color: var(--bg-color-regular);
     width: 100%;
     height: calc(100vh - 143px);
     border-radius: 6px;
+    /* box-shadow: var(--content-shadow); */
 }
 
 .left,
@@ -197,7 +199,7 @@ const saveArticle = async () => {
 }
 
 .left {
-    border-right: 1px solid var(--el-border-color-darker);
+    border-right: 1px solid var(--el-border-color);
 }
 
 .right {

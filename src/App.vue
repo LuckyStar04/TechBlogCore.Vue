@@ -30,7 +30,7 @@ const isShowBanner = computed(() => {
       <el-main :class="{ pt0: !isShowHeader }">
         <Banner v-if="isShowBanner"></Banner>
         <div class="flex-main" :class="{ pt60: !isShowBanner && isShowHeader }">
-          <RouterView class="grow-2"></RouterView>
+          <RouterView class="grow-2 main-shadow"></RouterView>
           <RouterView name="rightSide" class="grow-1"></RouterView>
         </div>
       </el-main>
@@ -60,7 +60,7 @@ const isShowBanner = computed(() => {
   left: 0;
   right: 0;
   z-index: 999;
-  background-color: var(--el-bg-color);
+  background-color: var(--bg-color-primary);
   /* background-image: radial-gradient(transparent 1px,var(--el-bg-color) 1px);
   background-size: 4px 4px;
   backdrop-filter: saturate(50%) blur(4px);
@@ -101,7 +101,7 @@ const isShowBanner = computed(() => {
   margin: 0 auto;
   justify-content: space-around;
   align-items: stretch;
-  overflow: hidden;
+  /* overflow: hidden; */
   position: relative;
   z-index: 3;
 }

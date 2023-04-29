@@ -71,7 +71,7 @@ const fetchData = async () => {
 fetchData()
 </script>
 <template>
-    <div class="wrapper" :class="{ shadow : props.showShadow }">
+    <div class="wrapper" :class="{ noshadow : !props.showShadow }">
         <div class="tag-title"><h2>文章标签<span>Tags</span></h2></div>
         <div class="tags" @mouseleave="hideHoverBg($event)">
             <template v-for="(tag, index) in data.tags">
@@ -95,8 +95,8 @@ a {
     background-color: var(--bg-color-primary);
 }
 
-.wrapper.shadow {
-    box-shadow: var(--header-shadow);
+.wrapper.noshadow {
+    box-shadow: none !important;
 }
 
 .tag-title, .tags {

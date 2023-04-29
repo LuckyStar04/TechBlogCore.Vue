@@ -99,7 +99,7 @@
     background: -ms-linear-gradient(top, #f2f9fe 5%, #d6f0fd 100%);
     background: -o-linear-gradient(top, #f2f9fe 5%, #d6f0fd 100%);
     border-radius: 17px;
-    box-shadow: 7px 7px 17px 3px rgba(0, 0, 0, 0.32);
+    box-shadow: 4px 4px 17px 3px rgba(0, 0, 0, 0.24);
     animation: cloud-hide .6s ease forwards;
 }
 

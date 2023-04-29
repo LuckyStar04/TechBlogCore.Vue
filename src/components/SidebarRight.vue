@@ -6,8 +6,8 @@ import Tags from './Tags.vue'
     <div class="wrapper">
         <!-- <div class="sidebars">
             <el-scrollbar height="calc(100vh - 60px)"> -->
-            <Categories></Categories>
-            <Tags class="mt-15"></Tags>
+            <Categories class="main-shadow"></Categories>
+            <Tags class="main-shadow mt-15"></Tags>
             <!-- </el-scrollbar>
         </div> -->
     </div>

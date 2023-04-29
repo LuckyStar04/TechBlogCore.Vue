@@ -163,7 +163,7 @@ $yellow: #EFE894
 .stars
     position: absolute
     top: 0
-    right: -4rem
+    right: -1.8rem
     visibility: hidden
     @include size(150px,225px)
 

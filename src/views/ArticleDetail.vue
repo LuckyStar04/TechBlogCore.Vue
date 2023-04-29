@@ -223,10 +223,12 @@ const noteHtml = computed(() => {
             </div>
         </div>
         <template v-if="data.hasNav">
+            <Teleport to="body">
             <div class="navi-wrapper autohide-scrollbar" :class="{ shrink: !data.expandNav }">
                 <div class="navi-title" @click.stop="switchNav"><font-awesome-icon icon="fa-solid fa-list-ul" class="more-emojis-icon" />&nbsp;&nbsp;文章目录&nbsp;&nbsp;<font-awesome-icon icon="fa-solid fa-angle-down" /></div>
                 <ArticleNavi class="navi-body" :items="data.navItems"></ArticleNavi>
             </div>
+            </Teleport>
             <div class="navi-drawer-button" @click.stop="switchNavDrawer"><font-awesome-icon icon="fa-solid fa-list-ul" class="more-emojis-icon" />&nbsp;目录</div>
             <el-drawer class="navi-drawer" v-model="data.navDrawer" title="侧边目录" direction="ltr" :with-header="false" size="70%"
                 :close-on-click-modal="true">
@@ -291,7 +293,6 @@ a {
     width: calc(100% - 400px);
     border-radius: 6px;
     background-color: var(--bg-color-primary);
-    box-shadow: var(--content-shadow);
 }
 
 .article-title, .articles {
