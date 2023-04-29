@@ -17,6 +17,10 @@ html.dark img.math-block,html.dark img.math-inline{
     color: var(--el-text-color-primary);
 }
 
+.gpt-view code:not(.hljs){
+    color: lightgray;
+}
+
 .gpt-view ol,.gpt-view ul{
     padding-left:0
 }

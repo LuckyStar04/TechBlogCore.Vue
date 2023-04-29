@@ -15,6 +15,7 @@ const data = reactive({
 })
 
 const send = async () => {
+    data.input = data.input.trim()
     if (!data.input) return
     data.isLoading = true
     try {
@@ -57,7 +58,7 @@ const scroll = async () => {
     <div class="chat-wrapper">
         <div class="chat-title">
             <div class="title-icon">
-                <el-icon size="1.6rem"><OpenAI/></el-icon>
+                <el-icon size="1.8rem"><OpenAI/></el-icon>
             </div>
             <div class="titles">
                 <h1>ChatGPT</h1>
@@ -154,7 +155,7 @@ h2 {
 }
 
 .chat-input {
-    height: 2rem;
+    height: 3.6rem;
     flex-shrink: 0;
     display: flex;
     align-items: center;
