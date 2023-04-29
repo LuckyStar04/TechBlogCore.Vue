@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, nextTick } from 'vue'
 import ChatGPTForm from './ChatGPTForm.vue'
 import OpenAI from '@/icons/OpenAI.vue'
 import { Close } from '@element-plus/icons-vue'
@@ -12,17 +12,24 @@ const data = reactive({
     prev_y: -1,
 })
 
+const open = async () => {
+    data.showForm = true
+    await nextTick()
+    setTimeout(() => form.value!.style.transition = 'none', 500)
+}
+
 const close = () => {
     form.value!.style.width = ''
     form.value!.style.height = ''
     data.showForm = false
+    form.value!.style.transition = 'width .4s ease, height .4s ease'
 }
 </script>
 <template>
     <div class="form-wrapper" ref="form" :class="{ show: data.showForm }">
         <div class="inside-wrapper">
             <ChatGPTForm v-show="data.showForm"></ChatGPTForm>
-            <div v-if="!data.showForm" @click="data.showForm = true" class="openai">
+            <div v-if="!data.showForm" @click="open" class="openai">
                 <el-icon size="2.8rem" color="var(--el-text-color-primary)">
                     <OpenAI />
                 </el-icon>
@@ -40,12 +47,12 @@ const close = () => {
     bottom: 1.1rem;
     width: 3.6rem;
     height: 3.6rem;
-    transition: width .4s ease, height .4s ease;
     background-color: var(--el-bg-color);
     border-radius: 1rem;
     z-index: 1000;
     overflow: hidden;
     box-shadow: var(--content-shadow-high);
+    transition: width .4s ease, height .4s ease;
     transform: rotateZ(180deg);
 }
 
