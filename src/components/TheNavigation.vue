@@ -91,8 +91,8 @@ onUnmounted(() => {
                     style="margin-left:1.5rem;" />
             </div>
             <el-divider style="margin: 0;" />
-            <Categories :showShadow="false" class="trans mg-10"></Categories>
-            <Tags :showShadow="false" class="trans mg-10"></Tags>
+            <Categories :showShadow="false" class="trans"></Categories>
+            <Tags :showShadow="false" class="trans"></Tags>
         </el-drawer>
     </div>
 </template>

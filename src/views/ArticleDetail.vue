@@ -273,12 +273,16 @@ const noteHtml = computed(() => {
     justify-content: space-between;
     align-items: center;
     overflow: hidden;
+    border-bottom: 1px solid var(--el-border-color-light);
+    margin: 0 1rem;
 }
 
 .article-title>h1{
     overflow: hidden;
     white-space: pre-line;
     text-overflow: ellipsis;
+    line-height: 2rem;
+    display: inline-block;
 }
 
 .article-title, .meta-table {
@@ -295,22 +299,13 @@ a {
     background-color: var(--bg-color-primary);
 }
 
-.article-title, .articles {
+.articles {
     padding: 1rem;
-}
-
-.article-title>h1{
-    display: inline-block;
-    margin: 0;
-}
-
-.article-title {
-    height: 40px;
-    border-bottom: 1px solid var(--el-border-color-light);
 }
 
 .meta {
-    padding: 1rem;
+    padding: 1rem 0;
+    margin: 0 1rem;
     color: #8590a6;
     border-bottom: 1px solid var(--el-border-color-light);
 }

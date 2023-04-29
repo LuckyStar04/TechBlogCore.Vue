@@ -147,17 +147,16 @@ onUnmounted(() => {
 }
 
 .article-title {
-    min-height: 39px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     overflow: hidden;
+    margin: 0 1rem;
 }
 
 .article-title>h2 {
     display: inline-block;
-    /* line-height: 0; */
-    margin: 0;
+    line-height: 2rem;
     overflow-wrap: normal;
     overflow: hidden;
     white-space: pre-line;
@@ -196,10 +195,6 @@ h3 {
 
 .article-title>h2.color-purple {
     color: #626aef;
-}
-
-.article-title {
-    padding: 1rem;
 }
 
 .articles {

@@ -155,7 +155,7 @@ a {
     box-shadow: none !important;
 }
 
-.category-title, .categories {
+.categories {
     padding: 1rem;
 }
 .categories {
@@ -195,10 +195,12 @@ a {
     color: rgba(var(--el-color-primary-rgb), .95);
 }
 .category-title {
+    margin: 0 1rem;
+    padding-top: 0.1px;
     border-bottom: 1px solid var(--el-border-color-light);
 }
 .category-title>h2 {
-    line-height: 0;
+    line-height: 2rem;
     font-weight: 400;
     color: var(--el-text-color-primary);
     white-space: nowrap;

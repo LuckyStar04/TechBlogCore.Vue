@@ -99,14 +99,16 @@ a {
     box-shadow: none !important;
 }
 
-.tag-title, .tags {
+.tags {
     padding: 1rem;
 }
 .tag-title {
+    margin: 0 1rem;
+    padding-top: 0.1px;
     border-bottom: 1px solid var(--el-border-color-light);
 }
 .tag-title>h2 {
-    line-height: 0;
+    line-height: 2rem;
     font-weight: 400;
     color: var(--el-text-color-primary);
 }

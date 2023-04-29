@@ -127,11 +127,12 @@ onUnmounted(() => {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin: 0 1rem;
 }
 
 .article-title>h2 {
     display: inline;
-    line-height: 0;
+    line-height: 2rem;
     font-weight: 400;
     color: var(--el-text-color-primary);
 }
@@ -164,7 +165,6 @@ h3 {
     color: #626aef;
 }
 
-.article-title,
 .articles {
     padding: 1rem;
 }

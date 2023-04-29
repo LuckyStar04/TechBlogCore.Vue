@@ -13,11 +13,6 @@ import Tags from './Tags.vue'
     </div>
 </template>
 <style scoped>
-.sidebars {
-    /* position: fixed; */
-    /* overflow: hidden; */
-}
-
 .mt-15 {
     margin-top: 15px;
 }
