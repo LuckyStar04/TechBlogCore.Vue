@@ -32,7 +32,7 @@
 }
 
 .show .cloud {
-    display: block;
+    animation: floating .6s 1s ease both;
 }
 
 @keyframes floating {
@@ -49,6 +49,20 @@
     }
 }
 
+@keyframes floating-hide {
+    0% {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+    }
+
+    100% {
+        opacity: 0;
+        -webkit-transform: translateX(100%);
+        transform: translateX(100%);
+    }
+}
+
 .cloud {
     position: absolute;
     top: 50px;
@@ -62,8 +76,7 @@
 	background: -ms-linear-gradient(top, #f2f9fe 5%, #d6f0fd 100%);
 	background: -o-linear-gradient(top, #f2f9fe 5%, #d6f0fd 100%);
     border-radius: 17px;
-    display: none;
-    animation: floating 1s ease both;
+    animation: floating-hide .6s ease forwards;
 }
 
 .cloud::after, .cloud::before {
