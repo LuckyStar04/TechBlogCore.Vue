@@ -7,6 +7,12 @@
                     <span class="left"></span>
                     <span class="right"></span>
                 </div>
+                <div class="sunshine">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
                 <div class="sunrays">
                     <span></span>
                     <span></span>
@@ -32,34 +38,52 @@
 }
 
 .show .cloud {
-    animation: floating .6s 1s ease both;
+    animation: cloud-show .6s .9s ease both, floating 7s 1.6s ease infinite;
+}
+
+.show .sun .sunshine {
+    visibility: visible;
+}
+
+@keyframes cloud-show {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateX(100%);
+        transform: translateX(100%);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+    }
+}
+
+@keyframes cloud-hide {
+    0% {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+    }
+
+    100% {
+        opacity: 0;
+        -webkit-transform: translateX(100%);
+        transform: translateX(100%);
+    }
 }
 
 @keyframes floating {
-    0% {
-        opacity: 0;
-        -webkit-transform: translateX(100%);
-        transform: translateX(100%);
-    }
 
+    0%,
     100% {
-        opacity: 1;
-        -webkit-transform: none;
-        transform: none;
-    }
-}
-
-@keyframes floating-hide {
-    0% {
-        opacity: 1;
         -webkit-transform: none;
         transform: none;
     }
 
-    100% {
-        opacity: 0;
-        -webkit-transform: translateX(100%);
-        transform: translateX(100%);
+    50% {
+        -webkit-transform: translateX(20px);
+        transform: translateX(20px);
     }
 }
 
@@ -69,17 +93,18 @@
     right: 1px;
     width: 60px;
     height: 20px;
-    // background-color: white;
     background: linear-gradient(top, #f2f9fe 5%, #d6f0fd 100%);
     background: -webkit-linear-gradient(top, #f2f9fe 5%, #d6f0fd 100%);
-	background: -moz-linear-gradient(top, #f2f9fe 5%, #d6f0fd 100%);
-	background: -ms-linear-gradient(top, #f2f9fe 5%, #d6f0fd 100%);
-	background: -o-linear-gradient(top, #f2f9fe 5%, #d6f0fd 100%);
+    background: -moz-linear-gradient(top, #f2f9fe 5%, #d6f0fd 100%);
+    background: -ms-linear-gradient(top, #f2f9fe 5%, #d6f0fd 100%);
+    background: -o-linear-gradient(top, #f2f9fe 5%, #d6f0fd 100%);
     border-radius: 17px;
-    animation: floating-hide .6s ease forwards;
+    box-shadow: 7px 7px 17px 3px rgba(0, 0, 0, 0.32);
+    animation: cloud-hide .6s ease forwards;
 }
 
-.cloud::after, .cloud::before {
+.cloud::after,
+.cloud::before {
     content: "";
     position: relative;
     display: inline-block;
@@ -141,11 +166,19 @@ $blue: #85C7F2;
     visibility: hidden;
     transition: visibility 1s;
 
-    .sunrays {
-        @include animate(spin, 15s, linear, infinite);
-        box-shadow: 0px 0px 100px lighten($yellow, 10%);
+    .sunshine {
         height: $size;
         width: $size;
+        position: relative;
+        z-index: -4;
+        visibility: hidden;
+    }
+
+    .sunrays {
+        @include animate(spin, 15s, linear, infinite);
+        height: $size;
+        width: $size;
+        top: -100%;
         position: relative;
         z-index: -3;
     }
@@ -153,21 +186,33 @@ $blue: #85C7F2;
 
 @keyframes rising {
     0% {
-        transform: translate3d(0, 15rem, 0);
+        transform: translateY(15rem);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: .8;
     }
 
     100% {
-        transform: none;
+        transform: translateY(0);
+        opacity: 1;
     }
 }
 
 @keyframes fall {
     0% {
-        transform: none;
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    50% {
+        opacity: .3;
     }
 
     100% {
-        transform: translate3d(0, 15rem, 0);
+        transform: translateY(15rem);
+        opacity: 0;
     }
 }
 
@@ -192,6 +237,43 @@ $blue: #85C7F2;
 
     &:nth-child(2) {
         @include rotate(60deg);
+    }
+}
+
+.sunshine span {
+    border-radius: 50%;
+    position: absolute;
+
+    &:nth-child(1) {
+        height: $size * 2;
+        width: $size * 2;
+        background-color: transparentize(lighten($yellow, 10%), .66);
+        top: -50%;
+        left: -50%;
+    }
+
+    &:nth-child(2) {
+        height: $size * 3.2;
+        width: $size * 3.2;
+        background: linear-gradient(to right, transparentize(lighten($yellow, 15%), .72), transparentize(lighten($yellow, 15%), .86));
+        top: -110%;
+        left: -110%;
+    }
+
+    &:nth-child(3) {
+        height: $size * 5;
+        width: $size * 5;
+        background: linear-gradient(to right, transparentize(lighten($yellow, 20%), .8) 70%, transparentize(lighten($yellow, 20%), 1));
+        top: -200%;
+        left: -200%;
+    }
+
+    &:nth-child(4) {
+        height: $size * 7.8;
+        width: $size * 7.8;
+        background: linear-gradient(to right, transparentize(lighten($yellow, 30%), .9) 55%, transparentize(lighten($yellow, 30%), 1));
+        top: -340%;
+        left: -340%;
     }
 }
 

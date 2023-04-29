@@ -76,7 +76,7 @@ code::-webkit-scrollbar-track {
     --bg-color-secondary: #f6f6f6;
     --border-color-secondary: #dce8f1;
     --bg-sky-color: var(--el-color-primary);
-    --bg-banner-sky-color: var(--el-color-primary);
+    --bg-banner-sky-color: linear-gradient(0deg, var(--el-color-primary-light-3), var(--el-color-primary));
     --bg-sky-color-dark: var(--el-color-primary-dark-2);
     --bg-sky-color-light-3: var(--el-color-primary-light-3);
     --bg-sky-color-light-9: var(--el-color-primary-light-9);

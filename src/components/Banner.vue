@@ -31,12 +31,14 @@ const isDark = useDark()
     display: flex;
     justify-content: center;
     background: var(--bg-banner-sky-color);
-    height: 14rem;
+    height: 14.4rem;
 }
 
 .banner-img>img {
     height: 11rem;
     width: auto;
     transform: translate(0, 2.08rem);
+    position: relative;
+    z-index: 4;
 }
 </style>

@@ -66,15 +66,23 @@ $yellow: #EFE894
 
 @keyframes rising
     0%
-        transform: translate3d(0, 15rem, 0)
+        transform: translateY(15rem)
+        opacity: 0
+    50%
+        opacity: .8
     100%
-        transform: none
+        transform: translateY(0)
+        opacity: 1
 
 @keyframes fall
     0%
-        transform: none
+        transform: translateY(0)
+        opacity: 1
+    50%
+        opacity: .3
     100%
-        transform: translate3d(0, 15rem, 0)
+        transform: translateY(15rem)
+        opacity: 0
 
 .show .moon
     visibility: visible
