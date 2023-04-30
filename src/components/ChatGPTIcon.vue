@@ -51,7 +51,7 @@ const close = () => {
     border-radius: 1rem;
     z-index: 1000;
     overflow: hidden;
-    box-shadow: var(--content-shadow-high);
+    box-shadow: var(--content-shadow-high-rev);
     transition: width .4s ease, height .4s ease;
     transform: rotateZ(180deg);
 }
