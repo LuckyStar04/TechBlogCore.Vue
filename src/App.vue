@@ -9,6 +9,7 @@ import ChatGPTIcon from './components/ChatGPTIcon.vue'
 
 const route = useRoute()
 const showHeaderRoute = ['articles', 'archived', 'articleDetail', 'editArticle', 'createArticle', 'chat']
+const showChatIconRoute = ['articles', 'archived', 'articleDetail', 'editArticle', 'createArticle']
 const showBannerRoute = ['articles', 'archived']
 
 const isShowHeader = computed(() => {
@@ -17,6 +18,10 @@ const isShowHeader = computed(() => {
 
 const isShowBanner = computed(() => {
   return showBannerRoute.includes(route.name as string)
+})
+
+const isShowChatIcon = computed(() => {
+  return showChatIconRoute.includes(route.name as string)
 })
 </script>
 
@@ -34,7 +39,7 @@ const isShowBanner = computed(() => {
           <RouterView name="rightSide" class="grow-1"></RouterView>
         </div>
       </el-main>
-      <ChatGPTIcon v-show="isShowHeader"></ChatGPTIcon>
+      <ChatGPTIcon v-show="isShowChatIcon"></ChatGPTIcon>
     </el-container>
   </el-config-provider>
 </template>

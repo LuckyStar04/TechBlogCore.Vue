@@ -1,17 +1,38 @@
 <script lang="ts" setup>
 import req from '@/utils/request'
-import { nextTick, reactive } from 'vue'
+import { nextTick, reactive, onMounted } from 'vue'
 import { Promotion } from '@element-plus/icons-vue'
 import type { Chat } from '@/types'
+import { calcTime } from '@/utils/dates'
 import OpenAI from '@/icons/OpenAI.vue'
 import { parseMarkdown } from '@/utils/markdown'
 import "highlight.js/styles/atom-one-dark.css"
 import "@/assets/marked-gpt.css"
 
 const data = reactive({
+    model: 'gpt-3.5-turbo-0301',
     input: '',
     chats: [] as Array<Chat>,
     isLoading: false,
+})
+
+const parse = (s: string) : string => {
+    return JSON.parse(s).choices[0].message.content
+}
+
+const fetchData = async () => {
+    let response = await req.request({
+        url: `chat`, method: 'get'
+    })
+    if (response.status == 200 && response.data.length > 0) {
+        response.data.map((d : Chat) => !d.isMe ? d.content = parse(d.content) : null)
+        data.chats = response.data
+        await scroll()
+    }
+}
+
+onMounted(() => {
+    fetchData()
 })
 
 const send = async () => {
@@ -30,7 +51,7 @@ const send = async () => {
         let response = await req.request({
             url: `chat`, method: 'post', data: { content: input }
         })
-        // console.log(response);
+        data.model = response.data.model
         data.chats.push({
             isMe: false,
             content: response.data.choices[0].message.content,
@@ -53,16 +74,19 @@ const scroll = async () => {
     let body = document.querySelector('.chat-container')!
     body.scrollIntoView({ behavior: "smooth", block: "end" })
 }
+
 </script>
 <template>
     <div class="chat-wrapper">
         <div class="chat-title">
             <div class="title-icon">
-                <el-icon size="1.8rem"><OpenAI/></el-icon>
+                <el-icon>
+                    <OpenAI />
+                </el-icon>
             </div>
             <div class="titles">
                 <h1>ChatGPT</h1>
-                <h2>gpt-3.5-turbo-0301</h2>
+                <h2>{{ data.model }}</h2>
             </div>
         </div>
         <div class="chat-body regular-scrollbar">
@@ -72,18 +96,25 @@ const scroll = async () => {
                         <span>{{ 'L' }}</span>
                     </div>
                     <div v-else class="avatar avatar-openai">
-                        <el-icon size="1.6rem" color="var(--el-text-color-primary)"><OpenAI/></el-icon>
+                        <el-icon size="1.6rem" color="var(--el-text-color-primary)">
+                            <OpenAI />
+                        </el-icon>
                     </div>
                     <div class="gap"></div>
                     <div class="content">
-                        <span v-if="chat.isMe">{{ chat.content }}</span>
-                        <div v-else class="gpt-view" v-html="parseMarkdown(chat.content)"></div>
+                        <div class="content-1">
+                            <span>{{ calcTime(chat.time) }}</span>
+                            <span v-if="chat.isMe">{{ chat.content }}</span>
+                            <div v-else class="gpt-view" v-html="parseMarkdown(chat.content)"></div>
+                        </div>
                     </div>
                     <div class="gap2"></div>
                 </div>
                 <div class="chat" v-if="data.isLoading">
                     <div class="avatar avatar-openai">
-                        <el-icon size="1.6rem" color="var(--el-text-color-primary)"><OpenAI/></el-icon>
+                        <el-icon size="1.6rem" color="var(--el-text-color-primary)">
+                            <OpenAI />
+                        </el-icon>
                     </div>
                     <div class="gap"></div>
                     <div class="content">
@@ -111,17 +142,25 @@ const scroll = async () => {
 }
 
 .chat-title {
-    height: 2rem;
+    box-sizing: border-box;
+    height: 3.6rem;
     flex-shrink: 0;
-    padding: .8rem;
+    padding: .4rem;
+    padding-left: .8rem;
     display: flex;
-    align-items: center;
+    align-items: stretch;
+    --icon-size: 2.4rem;
 }
 
 .chat-title>.title-icon {
     flex-shrink: 0;
-    width: 1.6rem;
-    height: 1.6rem;
+    width: var(--icon-size);
+    height: var(--icon-size);
+    font-size: var(--icon-size);
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .chat-title>.titles {
@@ -132,18 +171,18 @@ const scroll = async () => {
 h1,
 h2 {
     font-weight: normal;
-    font-size: 14px;
     margin: 0;
     padding: 0;
 }
 
 h1 {
     color: var(--el-text-color-regular);
+    font-size: 20px;
 }
 
 h2 {
     color: var(--el-text-color-disabled);
-    font-size: 8px;
+    font-size: 12px;
     letter-spacing: 1px;
 }
 
@@ -164,7 +203,7 @@ h2 {
 .chat-input>input {
     flex-grow: 1;
     border: none;
-    font-size: 14px;
+    font-size: 16px;
     height: 100%;
     padding-left: .8rem;
     min-width: 0;
@@ -199,23 +238,42 @@ h2 {
 }
 
 .gap2 {
-    width: 2.1rem;
+    width: 2.6rem;
     height: 10px;
     flex-shrink: 0;
 }
 
 .chat .content {
+    max-width: calc(100% - 6rem);
+}
+
+.chat .content .content-1 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.chat.me .content .content-1 {
+    align-items: flex-end;
+}
+
+.chat .content .content-1>*:nth-child(1) {
+    font-size: 10px;
+    color: var(--el-text-color-disabled);
+    margin-bottom: 4px;
+}
+
+.chat .content .content-1>*:nth-child(2) {
     background-color: var(--el-bg-color);
-    padding: 4px 8px;
-    font-size: 14px;
     border-radius: 6px;
     overflow-wrap: break-word;
-    max-width: calc(100% - 5rem);
+    padding: 4px 8px;
+    font-size: 14px;
 }
 
 .avatar {
-    width: 1.6rem;
-    height: 1.6rem;
+    width: 2.6rem;
+    height: 2.6rem;
     flex-shrink: 0;
     border-radius: 50%;
     display: flex;

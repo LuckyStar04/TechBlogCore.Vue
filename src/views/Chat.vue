@@ -10,6 +10,7 @@ import ChatGPTForm from '@/components/ChatGPTForm.vue'
     border-radius: 1rem;
     overflow: hidden;
     box-shadow: var(--el-box-shadow);
+    background-color: var(--el-bg-color);
     margin: 1rem;
 }
 
