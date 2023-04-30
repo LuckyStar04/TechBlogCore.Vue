@@ -78,7 +78,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <div v-loading.fullscreen="data.isLoading" class="wrapper">
+    <div v-loading="data.isLoading" class="wrapper">
         <div class="article-title">
             <h2>文章归档<span>Archived</span></h2>
         </div>

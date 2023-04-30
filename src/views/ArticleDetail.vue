@@ -185,7 +185,7 @@ const noteHtml = computed(() => {
 
 </script>
 <template>
-    <div v-loading.fullscreen.lock="data.isLoading" class="wrapper">
+    <div v-loading="data.isLoading" class="wrapper">
         <Teleport to="#navi-article-title">
             <h1 style="cursor: pointer;" @click.stop="backTop">{{ data.article.title }}</h1>
         </Teleport>
