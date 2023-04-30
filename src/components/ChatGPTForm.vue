@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import req from '@/utils/request'
-import { nextTick, reactive, onMounted } from 'vue'
+import { nextTick, reactive, onMounted, computed } from 'vue'
 import { Promotion } from '@element-plus/icons-vue'
 import type { Chat } from '@/types'
 import { calcTime } from '@/utils/dates'
@@ -8,6 +8,7 @@ import OpenAI from '@/icons/OpenAI.vue'
 import { parseMarkdown } from '@/utils/markdown'
 import "highlight.js/styles/atom-one-dark.css"
 import "@/assets/marked-gpt.css"
+import { useUserStore } from '@/stores/UserStore'
 
 const data = reactive({
     model: 'gpt-3.5-turbo-0301',
@@ -15,6 +16,10 @@ const data = reactive({
     chats: [] as Array<Chat>,
     isLoading: false,
 })
+
+const userStore = useUserStore()
+
+const letter = computed(() => userStore.info.user[0].toUpperCase())
 
 const parse = (s: string) : string => {
     return JSON.parse(s).choices[0].message.content
@@ -93,7 +98,7 @@ const scroll = async () => {
             <div class="chat-container">
                 <div v-for="chat in data.chats" class="chat" :class="{ me: chat.isMe }">
                     <div v-if="chat.isMe" class="avatar avatar-user">
-                        <span>{{ 'L' }}</span>
+                        <span>{{ letter }}</span>
                     </div>
                     <div v-else class="avatar avatar-openai">
                         <el-icon size="1.6rem" color="var(--el-text-color-primary)">

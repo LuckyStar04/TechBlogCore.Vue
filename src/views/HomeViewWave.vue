@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import WaveBackground from '@/components/WaveBackground.vue'
 import { onBeforeMount } from 'vue'
+import OpenAI from '@/icons/OpenAI.vue'
 
 onBeforeMount(() => {
     document.querySelector('meta[name="theme-color"]')!.setAttribute("content", "#188dbf")
@@ -22,6 +23,8 @@ onBeforeMount(() => {
                         <RouterLink :to="{ name: 'articles' }"><font-awesome-icon icon="fa-solid fa-book" /> Blog
                         </RouterLink>
                         <RouterLink :to="{ name: 'archived' }"><font-awesome-icon icon="fa-solid fa-box" /> Archived
+                        </RouterLink>
+                        <RouterLink :to="{ name: 'chat' }"><el-icon><OpenAI/></el-icon> ChatGPT
                         </RouterLink>
                         <RouterLink :to="{ name: 'login' }"><font-awesome-icon icon="fa-solid fa-unlock-keyhole" /> Login
                         </RouterLink>
@@ -148,6 +151,10 @@ p {
 .navigations>a.github {
     background-color: #ecf5ff;
     color: #409eff;
+}
+
+.navigations>a>.el-icon {
+    transform: translateY(2px);
 }
 
 .navigations>a:hover {

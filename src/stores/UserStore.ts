@@ -1,6 +1,6 @@
 import { ref, reactive } from 'vue'
 import { defineStore } from 'pinia'
-import type { UserInfo } from '@/types'
+import type { UserInfo, MenuInfo } from '@/types'
 import req from '@/utils/request'
 import nologinpng from '@/assets/nologin.png'
 import adminpng from '@/assets/user.png'
@@ -15,6 +15,28 @@ export const useUserStore = defineStore('user', () => {
     role: '',
     avatar: nologinpng,
   })
+  const menu: Array<MenuInfo> = reactive([
+    {
+      name: '封面',
+      route: '/',
+      index: '/',
+    },
+    {
+      name: '文章',
+      route: '/articles',
+      index: '/articles',
+    },
+    {
+      name: '归档',
+      route: '/archived',
+      index: '/archived',
+    },
+    // {
+    //   name: 'Chat',
+    //   route: '/chat',
+    //   index: '/chat',
+    // },
+  ])
   let timer: number = 0
   const getWelcome = () => {
     let h = new Date().getHours()
@@ -63,5 +85,5 @@ export const useUserStore = defineStore('user', () => {
       info.avatar = nologinpng
     }
   }
-  return { info, welcome, getStatus, isShowLoginForm }
+  return { info, menu, welcome, getStatus, isShowLoginForm }
 })

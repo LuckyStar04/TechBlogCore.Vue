@@ -10,6 +10,7 @@ import SearchInput from '@/components/SearchInput.vue'
 import UserAvatar from '@/components/UserAvatar.vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useDark } from '@vueuse/core'
+import { useUserStore } from '@/stores/UserStore'
 
 const isDark = useDark({
     onChanged(dark: boolean) {
@@ -25,6 +26,8 @@ const isDark = useDark({
 
 const route = useRoute()
 const router = useRouter()
+
+const userStore = useUserStore()
 
 const data = reactive({
     drawer: false,
@@ -75,9 +78,7 @@ onUnmounted(() => {
         <div class="right-dock">
             <SearchInput class="search" style="width: 160px;margin-right:1rem;"></SearchInput>
             <Menu id="navi-menu">
-                <MenuItem index="/" route="/">封面</MenuItem>
-                <MenuItem index="/articles" route="/articles">文章</MenuItem>
-                <MenuItem index="/archived" route="/archived">归档</MenuItem>
+                <MenuItem v-for="item in userStore.menu" :index="item.index" :route="item.route">{{ item.name }}</MenuItem>
             </Menu>
             <el-switch v-model="isDark" :inline-prompt="true" :active-icon="Sunny" :inactive-icon="Moon"
                 style="margin: 0 1.7rem;" />

@@ -87,6 +87,12 @@ export interface UserInfo {
     avatar: string,
 }
 
+export interface MenuInfo {
+    name: string,
+    route: string,
+    index: string,
+}
+
 export interface NavItem {
     level: string,
     id: string,
