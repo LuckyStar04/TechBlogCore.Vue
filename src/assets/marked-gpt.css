@@ -18,6 +18,7 @@ html.dark img.math-block,html.dark img.math-inline{
 }
 
 .gpt-view code:not(.hljs){
+    font-family: 'Courier New', monospace;
     color: lightgray;
 }
 

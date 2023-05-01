@@ -2,7 +2,6 @@
 import { ref, reactive, nextTick } from 'vue'
 import ChatGPTForm from './ChatGPTForm.vue'
 import OpenAI from '@/icons/OpenAI.vue'
-import { Close } from '@element-plus/icons-vue'
 
 const form = ref<HTMLElement|null>(null)
 
@@ -28,15 +27,12 @@ const close = () => {
 <template>
     <div class="form-wrapper" ref="form" :class="{ show: data.showForm }">
         <div class="inside-wrapper">
-            <ChatGPTForm v-show="data.showForm"></ChatGPTForm>
+            <ChatGPTForm v-show="data.showForm" @close="close"></ChatGPTForm>
             <div v-if="!data.showForm" @click="open" class="openai">
                 <el-icon size="2.8rem" color="var(--el-text-color-primary)">
                     <OpenAI />
                 </el-icon>
             </div>
-            <el-icon v-if="data.showForm" class="close-icon" @click="close">
-                <Close />
-            </el-icon>
         </div>
     </div>
 </template>
@@ -47,9 +43,9 @@ const close = () => {
     bottom: 1.1rem;
     width: 3.6rem;
     height: 3.6rem;
-    background-color: var(--el-bg-color);
+    background-color: var(--bg-color-chat-primary);
     border-radius: 1rem;
-    z-index: 1000;
+    z-index: 998;
     overflow: hidden;
     box-shadow: var(--content-shadow-high-rev);
     transition: width .4s ease, height .4s ease;
@@ -60,8 +56,8 @@ const close = () => {
     resize: both;
     width: 32rem;
     height: 50rem;
-    max-width: 90vw;
-    max-height: 90vh;
+    max-width: 91vw;
+    max-height: 91vh;
 }
 
 .inside-wrapper {
@@ -122,17 +118,10 @@ const close = () => {
     }
 }
 
-.close-icon {
-    position: absolute;
-    top: 1.4rem;
-    right: 1rem;
-    cursor: pointer;
-}
-
 @media only screen and (max-width: 768px) {
     .form-wrapper.show {
-        width: 90vw;
-        height: 90vh;
+        width: 91vw;
+        height: 91vh;
     }
 }
 </style>

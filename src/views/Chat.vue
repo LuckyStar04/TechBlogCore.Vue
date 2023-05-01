@@ -1,23 +1,35 @@
 <script lang="ts" setup>
 import ChatGPTForm from '@/components/ChatGPTForm.vue'
+import { onMounted, onUnmounted } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const documentHeight = () => {
+    document.documentElement
+            .style.setProperty('--doc-height', `${window.innerHeight}px`)
+}
+
+onMounted(() => {
+    window.addEventListener('resize', documentHeight)
+    documentHeight()
+})
+
+onUnmounted(() => {
+    window.removeEventListener('resize', documentHeight)
+})
 </script>
 <template>
-    <ChatGPTForm class="form" />
+    <ChatGPTForm class="form" @close="router.back()" />
 </template>
 <style scoped>
 .form {
-    height: calc(100vh - 120px);
     border-radius: 1rem;
     overflow: hidden;
     box-shadow: var(--el-box-shadow);
-    background-color: var(--el-bg-color);
-    margin: 1rem;
-}
-
-.bg {
-    width: 100%;
+    background-color: var(--bg-color-chat-primary);
+    margin: 0;
     height: 100vh;
-    background-color: var(--el-bg-color);
-    z-index: -20;
+    height: var(--doc-height);
 }
 </style>

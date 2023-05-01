@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import req from '@/utils/request'
-import { nextTick, reactive, onMounted, computed } from 'vue'
-import { Promotion } from '@element-plus/icons-vue'
+import { nextTick, reactive, onMounted, computed, defineEmits, watch } from 'vue'
+import { Promotion, Close } from '@element-plus/icons-vue'
 import type { Chat } from '@/types'
 import { calcTime } from '@/utils/dates'
 import OpenAI from '@/icons/OpenAI.vue'
@@ -10,6 +10,14 @@ import "highlight.js/styles/atom-one-dark.css"
 import "@/assets/marked-gpt.css"
 import { useUserStore } from '@/stores/UserStore'
 
+const emit = defineEmits(['close'])
+
+const userStore = useUserStore()
+
+const toggleLogin = () => {
+    userStore.isShowLoginForm = !userStore.isShowLoginForm
+}
+
 const data = reactive({
     model: 'gpt-3.5-turbo-0301',
     input: '',
@@ -17,24 +25,25 @@ const data = reactive({
     isLoading: false,
 })
 
-const userStore = useUserStore()
-
 const letter = computed(() => userStore.info.user[0].toUpperCase())
 
-const parse = (s: string) : string => {
+const parse = (s: string): string => {
     return JSON.parse(s).choices[0].message.content
 }
 
 const fetchData = async () => {
+    if (!userStore.info.user) return
     let response = await req.request({
         url: `chat`, method: 'get'
     })
     if (response.status == 200 && response.data.length > 0) {
-        response.data.map((d : Chat) => !d.isMe ? d.content = parse(d.content) : null)
+        response.data.map((d: Chat) => !d.isMe ? d.content = parse(d.content) : null)
         data.chats = response.data
         await scroll()
     }
 }
+
+watch(() => userStore.info.user, fetchData)
 
 onMounted(() => {
     fetchData()
@@ -93,44 +102,57 @@ const scroll = async () => {
                 <h1>ChatGPT</h1>
                 <h2>{{ data.model }}</h2>
             </div>
+            <div class="close" @click="emit('close')">
+                <el-icon>
+                    <Close />
+                </el-icon>
+            </div>
         </div>
         <div class="chat-body regular-scrollbar">
             <div class="chat-container">
-                <div v-for="chat in data.chats" class="chat" :class="{ me: chat.isMe }">
-                    <div v-if="chat.isMe" class="avatar avatar-user">
-                        <span>{{ letter }}</span>
-                    </div>
-                    <div v-else class="avatar avatar-openai">
-                        <el-icon size="1.6rem" color="var(--el-text-color-primary)">
-                            <OpenAI />
-                        </el-icon>
-                    </div>
-                    <div class="gap"></div>
-                    <div class="content">
-                        <div class="content-1">
-                            <span>{{ calcTime(chat.time) }}</span>
-                            <span v-if="chat.isMe">{{ chat.content }}</span>
-                            <div v-else class="gpt-view" v-html="parseMarkdown(chat.content)"></div>
+                <template v-if="userStore.info.user">
+                    <div v-for="chat in data.chats" class="chat" :class="{ me: chat.isMe }">
+                        <div v-if="chat.isMe" class="avatar avatar-user">
+                            <span>{{ letter }}</span>
                         </div>
+                        <div v-else class="avatar avatar-openai">
+                            <el-icon size="1.6rem" color="var(--el-text-color-primary)">
+                                <OpenAI />
+                            </el-icon>
+                        </div>
+                        <div class="gap"></div>
+                        <div class="content">
+                            <div class="content-1">
+                                <span>{{ calcTime(chat.time) }}</span>
+                                <span v-if="chat.isMe">{{ chat.content }}</span>
+                                <div v-else class="gpt-view" v-html="parseMarkdown(chat.content)"></div>
+                            </div>
+                        </div>
+                        <div class="gap2"></div>
                     </div>
-                    <div class="gap2"></div>
-                </div>
-                <div class="chat" v-if="data.isLoading">
-                    <div class="avatar avatar-openai">
-                        <el-icon size="1.6rem" color="var(--el-text-color-primary)">
-                            <OpenAI />
-                        </el-icon>
+                    <div class="chat" v-if="data.isLoading">
+                        <div class="avatar avatar-openai">
+                            <el-icon size="1.6rem" color="var(--el-text-color-primary)">
+                                <OpenAI />
+                            </el-icon>
+                        </div>
+                        <div class="gap"></div>
+                        <div class="content">
+                            <div class="content-1">
+                                <span>{{ calcTime(new Date()) }}</span>
+                                <span>思考中...</span>
+                            </div>
+                        </div>
+                        <div class="gap2"></div>
                     </div>
-                    <div class="gap"></div>
-                    <div class="content">
-                        <span>......</span>
-                    </div>
-                    <div class="gap2"></div>
+                </template>
+                <div v-else class="no-login">
+                    <span>您尚未登录，先去 <a @click="toggleLogin">登录</a></span>
                 </div>
             </div>
         </div>
         <div class="chat-input">
-            <input v-model="data.input" @keyup.enter="send" placeholder="输入问题" />
+            <input v-model="data.input" @keyup.enter="send" placeholder="输入问题" :disabled="!userStore.info.user" />
             <el-icon @click="send">
                 <Promotion />
             </el-icon>
@@ -155,6 +177,21 @@ const scroll = async () => {
     display: flex;
     align-items: stretch;
     --icon-size: 2.4rem;
+}
+
+.chat-title>.close {
+    width: 2.4rem;
+    height: 2.4rem;
+    font-size: 1.6rem;
+    color: var(--el-text-color-secondary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.chat-title>.close>i {
+    transform: translate(-6px, 3px);
 }
 
 .chat-title>.title-icon {
@@ -193,7 +230,7 @@ h2 {
 
 .chat-body {
     flex-grow: 1;
-    background-color: var(--el-color-info-light-8);
+    background-color: var(--bg-color-chat-secondary);
     overflow: auto;
     overflow-y: scroll;
 }
@@ -212,7 +249,7 @@ h2 {
     height: 100%;
     padding-left: .8rem;
     min-width: 0;
-    background-color: var(--el-bg-color);
+    background-color: var(--bg-color-chat-primary);
 }
 
 .chat-input>input:focus {
@@ -229,7 +266,7 @@ h2 {
 .chat {
     display: flex;
     justify-content: flex-start;
-    margin: 1rem .8em;
+    padding: 1rem .8em;
 }
 
 .chat.me {
@@ -255,11 +292,13 @@ h2 {
 .chat .content .content-1 {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
+    max-width: 100%;
 }
 
 .chat.me .content .content-1 {
     align-items: flex-end;
+    color: var(--text-color-chat-primary);
 }
 
 .chat .content .content-1>*:nth-child(1) {
@@ -269,7 +308,7 @@ h2 {
 }
 
 .chat .content .content-1>*:nth-child(2) {
-    background-color: var(--el-bg-color);
+    background-color: var(--bg-color-chat-primary);
     border-radius: 6px;
     overflow-wrap: break-word;
     padding: 4px 8px;
@@ -293,10 +332,34 @@ h2 {
 }
 
 .avatar.avatar-openai {
-    background-color: var(--el-bg-color);
+    background-color: var(--bg-color-chat-primary);
 }
 
 .avatar>span {
     font-size: 1.2rem;
+}
+
+.no-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 12px;
+}
+
+.no-login>span {
+    display: inline-block;
+    font-size: 14px;
+    color: var(--el-text-color-placeholder);
+}
+
+.no-login>span>a {
+    color: rgba(var(--el-color-primary-rgb), 0.8);
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.chat-input input[disabled] {
+    cursor: not-allowed;
 }
 </style>

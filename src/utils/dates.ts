@@ -61,14 +61,15 @@ export function calcTime (time: Date): string {
   let curr = new Date()
   time = new Date(time)
   let timeStr = `${padTime(time.getHours())}:${padTime(time.getMinutes())}`
-  if (time.getFullYear() == curr.getFullYear() && time.getMonth() == curr.getMonth()) {
-      if (time.getDate() == curr.getDate()) {
-          return `${getHourTime(time.getHours())}${timeStr}`
-      } else if (time.getDate() == curr.getDate() - 1) {
-          return `昨天 ${getHourTime(time.getHours())}${timeStr}`
-      }
+  let diffDays = (new Date(curr.toLocaleDateString()).getTime() - new Date(time.toLocaleDateString()).getTime()) / 86400000
+  console.log('curr', curr, 'time', time, diffDays)
+  if (time.getFullYear() == curr.getFullYear() && time.getMonth() == curr.getMonth() && time.getDate() == curr.getDate()) {
+    return `${getHourTime(time.getHours())}${timeStr}`
   }
-  if ((new Date(curr.toLocaleDateString()).getMilliseconds() - new Date(time.toLocaleDateString()).getMilliseconds()) / 86400000 <= 7) {
+  if (diffDays == 1) {
+    return `昨天 ${getHourTime(time.getHours())}${timeStr}`
+  }
+  if (diffDays <= 7) {
       return `${weeks[time.getDay()]} ${getHourTime(time.getHours())}${timeStr}`
   }
   return `${time.getFullYear()}年${time.getMonth() + 1}月${time.getDate()}日 ${timeStr}`

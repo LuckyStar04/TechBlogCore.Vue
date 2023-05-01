@@ -143,7 +143,7 @@ p {
     margin: 0 0 5px 6px;
     border-radius: 4px;
     text-decoration: none;
-    font-family: 'Trebuchet MS', '微软雅黑', Arial, Helvetica, sans-serif;
+    font-family: 'Trebuchet MS';
     font-size: 18px;
     transition: color .3s, background-color .3s;
 }
@@ -184,6 +184,7 @@ p {
 @media only screen and (max-width: 768px) {
     .inner-wrapper {
         max-width: 100%;
+        width: 336px;
     }
 
     .logo {

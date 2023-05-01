@@ -8,7 +8,7 @@ import Banner from './components/Banner.vue'
 import ChatGPTIcon from './components/ChatGPTIcon.vue'
 
 const route = useRoute()
-const showHeaderRoute = ['articles', 'archived', 'articleDetail', 'editArticle', 'createArticle', 'chat']
+const showHeaderRoute = ['articles', 'archived', 'articleDetail', 'editArticle', 'createArticle']
 const showChatIconRoute = ['articles', 'archived', 'articleDetail', 'editArticle', 'createArticle']
 const showBannerRoute = ['articles', 'archived']
 
@@ -64,7 +64,7 @@ const isShowChatIcon = computed(() => {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 999;
+  z-index: 997;
   background-color: var(--bg-color-primary);
   /* background-image: radial-gradient(transparent 1px,var(--el-bg-color) 1px);
   background-size: 4px 4px;

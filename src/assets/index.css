@@ -75,6 +75,7 @@ code::-webkit-scrollbar-track {
 }
 
 :root {
+    --doc-height: 100%;
     --header-shadow: 0px 0px 12px rgba(0, 0, 0, .12);
     --content-shadow: 0px 0px .5rem rgba(0, 0, 0, .12);
     --content-shadow-high: 0px 16px 40px -15px rgba(0, 0, 0, .5);
@@ -82,6 +83,10 @@ code::-webkit-scrollbar-track {
     --bg-color-primary: #fff;
     --bg-color-secondary: #f8f8f8;
     --bg-color-regular: #eee;
+    --bg-color-chat-primary: #fff;
+    --bg-color-chat-secondary: #efeff0;
+    --bg-color-chat-regular: #eee;
+    --text-color-chat-primary: var(--el-text-color-primary);
     --border-color-secondary: #dce8f1;
     --bg-sky-color: var(--el-color-primary);
     --bg-banner-sky-color: linear-gradient(0deg, var(--el-color-primary-light-3), var(--el-color-primary));
@@ -98,6 +103,10 @@ html.dark {
     --bg-color-primary: #1e1e1e;
     --bg-color-secondary: #121212;
     --bg-color-regular: #060606;
+    --bg-color-chat-primary: #26282c;
+    --bg-color-chat-secondary: #121212;
+    --bg-color-chat-regular: #060606;
+    --text-color-chat-primary: #b3b3b3;
     --border-color-secondary: #23170f;
     /* --bg-sky-color: #0159b2; */
     --bg-sky-color: #141b4d;
