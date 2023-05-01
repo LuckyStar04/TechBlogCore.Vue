@@ -192,6 +192,11 @@ const scroll = async () => {
 
 .chat-title>.close>i {
     transform: translate(-6px, 3px);
+    transition: transform .4s ease;
+}
+
+.chat-title>.close>i:hover {
+    transform: translate(-6px, 3px) rotateZ(180deg);
 }
 
 .chat-title>.title-icon {
@@ -304,15 +309,19 @@ h2 {
 .chat .content .content-1>*:nth-child(1) {
     font-size: 10px;
     color: var(--el-text-color-disabled);
-    margin-bottom: 4px;
+    margin-bottom: 1px;
 }
 
 .chat .content .content-1>*:nth-child(2) {
     background-color: var(--bg-color-chat-primary);
-    border-radius: 6px;
+    border-radius: 0px 10px 10px 10px;
     overflow-wrap: break-word;
     padding: 4px 8px;
     font-size: 14px;
+}
+
+.chat.me .content .content-1>*:nth-child(2) {
+    border-radius: 10px 0px 10px 10px;
 }
 
 .avatar {
