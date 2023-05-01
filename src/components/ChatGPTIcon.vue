@@ -27,7 +27,7 @@ const close = () => {
 <template>
     <div class="form-wrapper" ref="form" :class="{ show: data.showForm }">
         <div class="inside-wrapper">
-            <ChatGPTForm v-show="data.showForm" @close="close"></ChatGPTForm>
+            <ChatGPTForm :show-expand="true" v-show="data.showForm" @close="close"></ChatGPTForm>
             <div v-if="!data.showForm" @click="open" class="openai">
                 <el-icon size="2.8rem" color="var(--el-text-color-primary)">
                     <OpenAI />

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import req from '@/utils/request'
-import { nextTick, reactive, onMounted, computed, defineEmits, watch } from 'vue'
-import { Promotion, Close } from '@element-plus/icons-vue'
+import { nextTick, reactive, onMounted, computed, defineProps, defineEmits, watch } from 'vue'
+import { Promotion, Close, CopyDocument } from '@element-plus/icons-vue'
 import type { Chat } from '@/types'
 import { calcTime } from '@/utils/dates'
 import OpenAI from '@/icons/OpenAI.vue'
@@ -9,10 +9,19 @@ import { parseMarkdown } from '@/utils/markdown'
 import "highlight.js/styles/atom-one-dark.css"
 import "@/assets/marked-gpt.css"
 import { useUserStore } from '@/stores/UserStore'
+import { useRouter } from 'vue-router'
 
+const props = defineProps({
+    showExpand: {
+        type: Boolean,
+        required: false,
+        default: false,
+    }
+})
 const emit = defineEmits(['close'])
 
 const userStore = useUserStore()
+const router = useRouter()
 
 const toggleLogin = () => {
     userStore.isShowLoginForm = !userStore.isShowLoginForm
@@ -102,10 +111,11 @@ const scroll = async () => {
                 <h1>ChatGPT</h1>
                 <h2>{{ data.model }}</h2>
             </div>
+            <div v-if="props.showExpand" class="expand" @click="router.push('/chat')">
+                <el-icon><CopyDocument /></el-icon>
+            </div>
             <div class="close" @click="emit('close')">
-                <el-icon>
-                    <Close />
-                </el-icon>
+                <el-icon><Close /></el-icon>
             </div>
         </div>
         <div class="chat-body regular-scrollbar">
@@ -179,6 +189,21 @@ const scroll = async () => {
     --icon-size: 2.4rem;
 }
 
+.chat-title>.expand {
+    width: 2.4rem;
+    height: 2.4rem;
+    font-size: 1.6rem;
+    color: var(--el-text-color-secondary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.chat-title>.expand>i {
+    transform: translate(-6px, 2px) rotateZ(180deg);
+}
+
 .chat-title>.close {
     width: 2.4rem;
     height: 2.4rem;
@@ -192,11 +217,6 @@ const scroll = async () => {
 
 .chat-title>.close>i {
     transform: translate(-6px, 3px);
-    transition: transform .4s ease;
-}
-
-.chat-title>.close>i:hover {
-    transform: translate(-6px, 3px) rotateZ(180deg);
 }
 
 .chat-title>.title-icon {
