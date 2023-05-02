@@ -56,19 +56,24 @@ const changePage = () => {
 watch(() => route.query, fetchData)
 
 const handleScroll = () => {
-    const scrollTop = document.body.scrollTop || document.documentElement.scrollTop
-    const pageBottom = scrollTop + window.innerHeight
+    // const scrollTop = document.body.scrollTop || document.documentElement.scrollTop
+    const pageBottom = window.innerHeight// + scrollTop
     document.querySelectorAll('.article.visible').forEach(function (e) {
         let element = e as HTMLElement
-        if (element.offsetTop >= pageBottom) {
+        if (element.getBoundingClientRect().top >= pageBottom) {
             element.classList.remove('visible')
+            for (let i = 0; i < element.classList.length; i++) {
+                let className = element.classList[i]
+                if (className.startsWith('delay-'))
+                    element.classList.remove(className)
+            }
             element.classList.add('hidden')
         }
     })
     let i = 1
     document.querySelectorAll('.article.hidden').forEach(function (e) {
         let element = e as HTMLElement
-        if (element.offsetTop < pageBottom) {
+        if (element.getBoundingClientRect().top < pageBottom) {
             element.classList.remove('hidden')
             element.classList.add('visible')
             element.classList.add('delay-' + i)
