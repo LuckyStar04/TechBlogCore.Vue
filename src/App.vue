@@ -50,13 +50,21 @@ const isShowChatIcon = computed(() => {
   top: 0;
   left: 0;
   width: 100%;
+  height: 100%;
 }
 
 #app,
 .el-container {
   display: inline-block;
   width: 100%;
+}
+
+#app {
   height: 100%;
+}
+
+.el-container {
+  height: 99%;
 }
 
 .el-header {

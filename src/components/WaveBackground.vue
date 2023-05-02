@@ -1,8 +1,10 @@
 <template>
     <Teleport to="#teleport">
-        <div class="header">
-            <slot></slot>
-            <div class="waves-wrapper">
+        <div class="wrapper">
+            <div class="header">
+                <div class="inner-header">
+                    <slot></slot>
+                </div>
                 <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                     viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
                     <defs>
@@ -16,19 +18,25 @@
                         <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
                     </g>
                 </svg>
+                <!--Waves end-->
+
             </div>
-            <!--Waves end-->
+            <!--Header ends-->
 
-        </div>
-        <!--Header ends-->
-
-        <!--Content starts-->
-        <div class="content flex">
-            <p>© LuckyStar 2023.</p>
+            <!--Content starts-->
+            <div class="content flex">
+                <p>© LuckyStar 2023.</p>
+            </div>
         </div>
     </Teleport>
 </template>
 <style scoped>
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
 p {
     font-family: 'Trebuchet MS';
     letter-spacing: 1px;
@@ -37,10 +45,23 @@ p {
 }
 
 .header {
+    flex: 7 0 auto;
     position: relative;
     text-align: center;
     background: linear-gradient(60deg, rgba(84, 58, 183, 1) 0%, rgba(0, 172, 193, 1) 100%);
     color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.inner-header {
+    flex: 65 0 auto;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .flex {
@@ -52,6 +73,7 @@ p {
 }
 
 .waves {
+    flex: 15 0 auto;
     position: relative;
     width: 100%;
     height: 15vh;
@@ -62,8 +84,8 @@ p {
 }
 
 .content {
+    flex: 3 0 auto;
     position: relative;
-    height: 20vh;
     text-align: center;
     background-color: white;
 }
@@ -106,12 +128,12 @@ p {
 
 @media only screen and (max-width: 768px) {
     .waves {
-        height: 40px;
+        flex: 0 0 40px;
         min-height: 40px;
     }
 
     .content {
-        height: 30vh;
+        flex: 4 0 auto;
     }
 }
 </style>

@@ -8,31 +8,29 @@ onBeforeMount(() => {
 })
 </script>
 <template>
-    <Teleport to="#teleport">
-        <WaveBackground>
-            <div class="inner-header">
-                <div class="inner-wrapper">
-                    <div class="flex">
-                        <div class="logo"><img src="@/assets/logo-white-star.png" /></div>
-                        <h1 class="title">Hello,<br />I'm Star.</h1>
-                    </div>
-                    <p class="intro">Web Developer,<br />major focus on back-end.</p>
-                    <div class="navigations">
-                        <a class="github" href="https://github.com/LuckyStar04/" target="_blank"><font-awesome-icon
-                                icon="fa-brands fa-github" /> Github</a>
-                        <RouterLink :to="{ name: 'articles' }"><font-awesome-icon icon="fa-solid fa-book" /> Blog
-                        </RouterLink>
-                        <RouterLink :to="{ name: 'archived' }"><font-awesome-icon icon="fa-solid fa-box" /> Archived
-                        </RouterLink>
-                        <RouterLink :to="{ name: 'chat' }"><el-icon><OpenAI/></el-icon> ChatGPT
-                        </RouterLink>
-                        <RouterLink :to="{ name: 'login' }"><font-awesome-icon icon="fa-solid fa-unlock-keyhole" /> Login
-                        </RouterLink>
-                    </div>
-                </div>
+    <WaveBackground>
+        <div class="inner-wrapper">
+            <div class="flex">
+                <div class="logo"><img src="@/assets/logo-white-star.png" /></div>
+                <h1 class="title">Hello,<br />I'm Star.</h1>
             </div>
-        </WaveBackground>
-    </Teleport>
+            <p class="intro">Web Developer,<br />major focus on back-end.</p>
+            <div class="navigations">
+                <a class="github" href="https://github.com/LuckyStar04/" target="_blank"><font-awesome-icon
+                        icon="fa-brands fa-github" /> Github</a>
+                <RouterLink :to="{ name: 'articles' }"><font-awesome-icon icon="fa-solid fa-book" /> Blog
+                </RouterLink>
+                <RouterLink :to="{ name: 'archived' }"><font-awesome-icon icon="fa-solid fa-box" /> Archived
+                </RouterLink>
+                <RouterLink :to="{ name: 'chat' }"><el-icon>
+                        <OpenAI />
+                    </el-icon> ChatGPT
+                </RouterLink>
+                <RouterLink :to="{ name: 'login' }"><font-awesome-icon icon="fa-solid fa-unlock-keyhole" /> Login
+                </RouterLink>
+            </div>
+        </div>
+    </WaveBackground>
 </template>
 <style scoped>
 * {
@@ -94,23 +92,13 @@ p {
     margin: 0;
 }
 
-.inner-header {
-    height: 65vh;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    animation: header-anime 1.5s ease;
-}
-
 .inner-wrapper {
     max-width: 70vw;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
+    animation: header-anime 1.5s ease;
 }
 
 .flex {
