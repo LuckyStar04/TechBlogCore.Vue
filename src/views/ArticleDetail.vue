@@ -224,9 +224,11 @@ const noteHtml = computed(() => {
         </div>
         <template v-if="data.hasNav">
             <Teleport to="body">
-            <div class="navi-wrapper autohide-scrollbar" :class="{ shrink: !data.expandNav }">
+            <div class="navi-wrapper" :class="{ shrink: !data.expandNav }">
+                <div class="navi-in-wrapper autohide-scrollbar">
                 <div class="navi-title" @click.stop="switchNav"><font-awesome-icon icon="fa-solid fa-list-ul" class="more-emojis-icon" />&nbsp;&nbsp;文章目录&nbsp;&nbsp;<font-awesome-icon icon="fa-solid fa-angle-down" /></div>
                 <ArticleNavi class="navi-body" :items="data.navItems"></ArticleNavi>
+                </div>
             </div>
             </Teleport>
             <div class="navi-drawer-button" @click.stop="switchNavDrawer"><font-awesome-icon icon="fa-solid fa-list-ul" class="more-emojis-icon" />&nbsp;目录</div>
@@ -379,13 +381,14 @@ a {
     top: 80px;
     z-index: 998;
     max-height: calc(100vh - 160px);
-    overflow: auto;
-    overflow-y: scroll;
     /* border-radius: 8px; */
     /* box-shadow: 0px 0px 12px rgba(0, 0, 0, .12); */
     margin: 50px 20px 20px;
     /* box-sizing: border-box; */
-    transition: max-height 1s;
+    /* transition: max-height 1s; */
+    display: grid;
+    grid-template-rows: 1fr;
+    transition: grid-template-rows 1s;
 }
 
 .navi-body {
@@ -393,7 +396,8 @@ a {
 }
 
 .navi-wrapper.shrink {
-    max-height: 0px;
+    /* max-height: 0px; */
+    grid-template-rows: 0fr;
     overflow: hidden;
 }
 
@@ -403,6 +407,11 @@ a {
 
 .navi-wrapper.shrink .fa-angle-down {
     transform: rotateZ(-90deg);
+}
+
+.navi-in-wrapper {
+    overflow: auto;
+    overflow-y: scroll;
 }
 
 .navi-wrapper > ul,
