@@ -159,7 +159,8 @@ html.dark .note-view blockquote{
     border:1px solid #d9d9d9;
     border-radius:0;
     line-height:20px;
-    background-color:#282c34
+    background-color:#282c34;
+    box-shadow: var(--code-shadow);
 }
 html.dark .note-view pre{
     background-color:#262626;

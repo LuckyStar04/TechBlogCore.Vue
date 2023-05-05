@@ -342,6 +342,8 @@ h2 {
 
 .chat.me .content .content-1>*:nth-child(2) {
     border-radius: 10px 0px 10px 10px;
+    color: white;
+    background-color: #1580ef;
 }
 
 .avatar {
