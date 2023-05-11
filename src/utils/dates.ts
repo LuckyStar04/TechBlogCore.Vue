@@ -62,7 +62,6 @@ export function calcTime (time: Date): string {
   time = new Date(time)
   let timeStr = `${padTime(time.getHours())}:${padTime(time.getMinutes())}`
   let diffDays = (new Date(curr.toLocaleDateString()).getTime() - new Date(time.toLocaleDateString()).getTime()) / 86400000
-  console.log('curr', curr, 'time', time, diffDays)
   if (time.getFullYear() == curr.getFullYear() && time.getMonth() == curr.getMonth() && time.getDate() == curr.getDate()) {
     return `${getHourTime(time.getHours())}${timeStr}`
   }

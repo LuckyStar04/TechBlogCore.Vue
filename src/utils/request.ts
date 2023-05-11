@@ -1,4 +1,5 @@
 import axios, { type AxiosRequestConfig } from "axios"
+import { ElMessage } from 'element-plus'
 
 class Request {
     baseURL: string
@@ -18,7 +19,27 @@ class Request {
             return config
         }, err => Promise.reject(err))
         // 设置响应拦截器
-        //instance.interceptors.response.use(res => res.data, err => Promise.reject(err));
+        instance.interceptors.response.use(res => res, err => {
+            console.log(err)
+            if (!err.response && err.message) {
+                ElMessage.error({
+                    dangerouslyUseHTMLString: true,
+                    message: `<strong>${err.message}</strong>`,
+                    duration: 5000,
+                })
+            }
+            else if (err.response && err.response.status == 500) {
+                let msg = '内部服务错误'
+                if (err.response.data) msg = err.response.data
+                else msg = `Code ${err.response.status}: ${err.response.statusText}`
+                ElMessage.error({
+                    dangerouslyUseHTMLString: true,
+                    message: `<strong>${msg}</strong>`,
+                    duration: 5000,
+                })
+            }
+            else throw err
+        });
 
         return instance(config)
     }

@@ -42,7 +42,6 @@ watch(() => route.query, () => {
 const showTitle = ref(false)
 const handleScroll = () => {
     const scrollTop = document.body.scrollTop || document.documentElement.scrollTop
-    console.log('scrollTop', scrollTop);
 
     if (scrollTop > 200) {
         showTitle.value = true

@@ -103,18 +103,15 @@ html.dark .note-view h1,html.dark .note-view h2,html.dark .note-view h3,html.dar
 }
 .note-view blockquote{
     padding:20px;
-    background-color:#f2f2f2;
-    border-left:6px solid #b3b3b3;
+    background-color:var(--el-color-info-light-9);
+    border-left:6px solid var(--el-color-info-light-7);
     word-break:break-word;
     font-size:16px;
     font-weight:400;
     line-height:30px;
     margin:0 0 20px
 }
-html.dark .note-view blockquote{
-    background-color:#595959;
-    border-color:#262626
-}
+
 .note-view blockquote h1:last-child,.note-view blockquote h2:last-child,.note-view blockquote h3:last-child,.note-view blockquote h4:last-child,.note-view blockquote h5:last-child,.note-view blockquote h6:last-child,.note-view blockquote li:last-child,.note-view blockquote ol:last-child,.note-view blockquote p:last-child,.note-view blockquote ul:last-child{
     margin-bottom:0
 }

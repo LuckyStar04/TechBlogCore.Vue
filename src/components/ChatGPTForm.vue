@@ -81,7 +81,6 @@ const send = async () => {
             time: new Date(),
         })
     } catch (e) {
-        console.log(e)
         data.chats.push({
             isMe: false,
             content: 'Error Response or Not Login',
