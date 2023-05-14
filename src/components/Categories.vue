@@ -17,6 +17,7 @@ const router = useRouter()
 const articleStore = useArticleStore()
 const data = reactive({
     categories: [] as Array<CategoryModel>,
+    isLoading: true,
 })
 
 const categories = ref()
@@ -34,7 +35,7 @@ const hoverBg = reactive({
 })
 
 const initBg = () => {
-    let e = categories.value.querySelector('.active') as HTMLElement|null
+    let e = categories.value.querySelector('.active') as HTMLElement | null
     if (!e) {
         hideBg()
         return
@@ -86,11 +87,13 @@ const hideHoverBg = (e: MouseEvent) => {
 }
 
 const fetchData = async () => {
+    data.isLoading = true
     let response = await req.request({
         url: 'categories', method: 'get', params: { size: 30 }
     })
     if (response.status == 200) {
         data.categories = response.data
+        data.isLoading = false
         nextTick(() => {
             initBg()
         })
@@ -98,7 +101,7 @@ const fetchData = async () => {
 }
 
 const handleResize = () => {
-    bg.Width = `${(categories.value as HTMLElement).firstElementChild?.clientWidth??0}px`
+    bg.Width = `${(categories.value as HTMLElement).firstElementChild?.clientWidth ?? 0}px`
 }
 
 const onHover = (e: MouseEvent) => {
@@ -122,19 +125,26 @@ onUnmounted(() => {
 
 const jumpCategory = (category: string, e: MouseEvent) => {
     moveBg(e.target as HTMLElement)
-    router.push({ name: 'articles', query: { category: category }})
+    router.push({ name: 'articles', query: { category: category } })
 }
 
-watch(() => articleStore.store.category, function() {
+watch(() => articleStore.store.category, function () {
     moveBg(undefined, articleStore.store.category)
 })
 </script>
 <template>
-    <div class="wrapper" :class="{ noshadow : !props.showShadow }">
-        <div class="category-title"><h2>文章分类<span>Categories</span></h2></div>
-        <ul class="categories" ref="categories" @mouseleave="hideHoverBg($event)">
-            <li v-for="category in data.categories" @click="jumpCategory(category.name, $event)" @mouseenter="onHover($event)" @mouseleave="onLeave($event)" :class="(articleStore.store.category==category.name?'active':'')" :id="`ca-${category.id}`">
-                {{ category.name }} ({{category.count}})
+    <div class="wrapper" :class="{ noshadow: !props.showShadow }">
+        <div class="category-title">
+            <h2>文章分类<span>Categories</span></h2>
+        </div>
+        <ul class="categories" v-if="data.isLoading">
+            <el-skeleton animated />
+        </ul>
+        <ul v-else class="categories" ref="categories" @mouseleave="hideHoverBg($event)">
+            <li v-for="category in data.categories" @click="jumpCategory(category.name, $event)"
+                @mouseenter="onHover($event)" @mouseleave="onLeave($event)"
+                :class="(articleStore.store.category == category.name ? 'active' : '')" :id="`ca-${category.id}`">
+                {{ category.name }} ({{ category.count }})
             </li>
         </ul>
     </div>
@@ -143,9 +153,11 @@ watch(() => articleStore.store.category, function() {
 * {
     font-family: 'Trebuchet MS';
 }
+
 a {
     text-decoration: none !important;
 }
+
 .wrapper {
     border-radius: 12px;
     background-color: var(--bg-color-primary);
@@ -158,6 +170,7 @@ a {
 .categories {
     padding: 1rem;
 }
+
 .categories {
     margin: 0;
     position: relative;
@@ -174,7 +187,7 @@ a {
     display: block;
     border-radius: .5rem;
     background-color: rgba(var(--el-color-info-rgb), .11);
-    transition: all .3s cubic-bezier(.12,1.01,.66,1.09);
+    transition: all .3s cubic-bezier(.12, 1.01, .66, 1.09);
 }
 
 .categories::after {
@@ -188,17 +201,19 @@ a {
     display: block;
     border-radius: .5rem;
     background-color: rgba(var(--el-color-primary-rgb), .2);
-    transition: all .3s cubic-bezier(.12,1.01,.66,1.09);
+    transition: all .3s cubic-bezier(.12, 1.01, .66, 1.09);
 }
 
 .c-blue {
     color: rgba(var(--el-color-primary-rgb), .95);
 }
+
 .category-title {
     margin: 0 1rem;
     padding-top: 0.1px;
     border-bottom: 1px solid var(--el-border-color-light);
 }
+
 .category-title>h2 {
     line-height: 2rem;
     font-weight: 400;
@@ -211,9 +226,13 @@ a {
     margin-left: .6rem;
     font-size: 0.8em;
 }
-h1, h2, h3 {
+
+h1,
+h2,
+h3 {
     color: var(--el-text-color-regular);
 }
+
 li {
     list-style-type: none;
     font-size: 1rem;
@@ -226,6 +245,7 @@ li {
     position: relative;
     z-index: 3;
 }
+
 li.active {
     font-weight: 700;
     color: var(--el-color-primary);

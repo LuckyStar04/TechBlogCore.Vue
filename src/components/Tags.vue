@@ -57,15 +57,18 @@ const onLeave = (e: MouseEvent) => {
 
 const data = reactive({
     tags: [] as Array<TagModel>,
+    isLoading: true,
 })
 const articleStore = useArticleStore()
 
 const fetchData = async () => {
+    data.isLoading = true
     let response = await req.request({
         url: 'tags', method: 'get', params: { size: 30 }
     })
     if (response.status == 200) {
         data.tags = response.data
+        data.isLoading = false
     }
 }
 fetchData()
@@ -73,7 +76,10 @@ fetchData()
 <template>
     <div class="wrapper" :class="{ noshadow : !props.showShadow }">
         <div class="tag-title"><h2>文章标签<span>Tags</span></h2></div>
-        <div class="tags" @mouseleave="hideHoverBg($event)">
+        <div class="tags" v-if="data.isLoading">
+            <el-skeleton animated />
+        </div>
+        <div v-else class="tags" @mouseleave="hideHoverBg($event)">
             <template v-for="(tag, index) in data.tags">
                 <RouterLink :to="{ name: 'articles', query: { tag: tag.name } }">
                     <el-button v-if="(articleStore.store.tags.includes(tag.name))" type="success" @mouseenter="onHover($event)" @mouseleave="onLeave($event)" round>{{ tag.name }}({{ tag.count }})</el-button>
