@@ -82,6 +82,14 @@ const handleScroll = () => {
     })
 }
 
+let timer : number|null = null
+const wrapScroll = () => {
+    if (timer !== null) {
+        clearTimeout(timer)
+    }
+    timer = setTimeout(handleScroll, 20)
+}
+
 watch(() => userStore.info.user, () => {
     nextTick(() => {
         handleScroll()
@@ -92,12 +100,12 @@ let key = 1
 
 onMounted(() => {
     fetchData()
-    window.addEventListener("scroll", handleScroll, false)
+    window.addEventListener("scroll", wrapScroll, false)
     window.addEventListener("resize", handleScroll, false)
 })
 
 onUnmounted(() => {
-    window.removeEventListener("scroll", handleScroll, false)
+    window.removeEventListener("scroll", wrapScroll, false)
     window.removeEventListener("resize", handleScroll, false)
 })
 
@@ -147,7 +155,7 @@ onUnmounted(() => {
 }
 
 .wrapper {
-    border-radius: 6px;
+    border-radius: 12px;
     background-color: var(--bg-color-primary);
 }
 

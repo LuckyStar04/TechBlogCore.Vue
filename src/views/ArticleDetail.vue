@@ -297,7 +297,7 @@ a {
 
 .wrapper {
     width: calc(100% - 400px);
-    border-radius: 6px;
+    border-radius: 12px;
     background-color: var(--bg-color-primary);
 }
 

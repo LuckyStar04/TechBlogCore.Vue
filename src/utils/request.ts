@@ -20,7 +20,6 @@ class Request {
         }, err => Promise.reject(err))
         // 设置响应拦截器
         instance.interceptors.response.use(res => res, err => {
-            console.log(err)
             if (!err.response && err.message) {
                 ElMessage.error({
                     dangerouslyUseHTMLString: true,
@@ -39,7 +38,7 @@ class Request {
                 })
             }
             else throw err
-        });
+        })
 
         return instance(config)
     }
