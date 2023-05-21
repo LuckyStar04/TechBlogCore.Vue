@@ -88,6 +88,8 @@ code::-webkit-scrollbar-track {
     --bg-color-chat-primary: #fff;
     --bg-color-chat-secondary: #efeff0;
     --bg-color-chat-regular: #eee;
+    --bg-color-login-primary: #fff;
+    --bg-color-modal: #0004;
     --text-color-chat-primary: var(--el-text-color-primary);
     --border-color-secondary: #dce8f1;
     --bg-sky-color: var(--el-color-primary);
@@ -110,6 +112,8 @@ html.dark {
     --bg-color-chat-primary: #26282c;
     --bg-color-chat-secondary: #121212;
     --bg-color-chat-regular: #060606;
+    --bg-color-login-primary: var(--bg-color-chat-primary);
+    --bg-color-modal: #fff2;
     --text-color-chat-primary: #b3b3b3;
     --border-color-secondary: #23170f;
     /* --bg-sky-color: #0159b2; */

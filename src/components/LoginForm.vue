@@ -147,7 +147,7 @@ const register = async () => {
 }
 
 .loginform-wrapper.dark #formContent {
-    background-color: var(--bg-color-chat-primary);
+    background-color: var(--bg-color-login-primary);
     box-shadow: var(--login-shadow);
 }
 
