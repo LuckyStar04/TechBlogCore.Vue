@@ -1,5 +1,5 @@
 <template>
-    <div class="loginform-wrapper fadeInDown" :class="{ dark: useDark }" v-loading.fullscreen="data.isLoading">
+    <div class="loginform-wrapper" :class="{ dark: useDark }" v-loading.fullscreen="data.isLoading">
         <div id="formContent" @click.stop>
             <template v-if="data.login">
                 <h2 class="active"> 登&nbsp;&nbsp;录 </h2>
@@ -147,7 +147,8 @@ const register = async () => {
 }
 
 .loginform-wrapper.dark #formContent {
-    background-color: var(--el-bg-color);
+    background-color: var(--bg-color-chat-primary);
+    box-shadow: var(--login-shadow);
 }
 
 .loginform-wrapper.dark #formFooter {
@@ -313,6 +314,11 @@ input[type=password] {
     color: var(--el-text-color-primary);
 }
 
+.loginform-wrapper.dark input[type=text]:focus,
+.loginform-wrapper.dark input[type=password]:focus {
+    border-bottom: 2px solid #5fbae9;
+}
+
 input[type=text]:focus,
 input[type=password]:focus {
     background-color: #fff;
@@ -325,46 +331,6 @@ input[type=password]:placeholder {
 }
 
 
-
-/* ANIMATIONS */
-
-/* Simple CSS3 Fade-in-down Animation */
-.fadeInDown {
-    -webkit-animation-name: fadeInDown;
-    animation-name: fadeInDown;
-    -webkit-animation-duration: 1s;
-    animation-duration: 1s;
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
-}
-
-@-webkit-keyframes fadeInDown {
-    0% {
-        opacity: 0;
-        -webkit-transform: translate3d(0, -100%, 0);
-        transform: translate3d(0, -100%, 0);
-    }
-
-    100% {
-        opacity: 1;
-        -webkit-transform: none;
-        transform: none;
-    }
-}
-
-@keyframes fadeInDown {
-    0% {
-        opacity: 0;
-        -webkit-transform: translate3d(0, -100%, 0);
-        transform: translate3d(0, -100%, 0);
-    }
-
-    100% {
-        opacity: 1;
-        -webkit-transform: none;
-        transform: none;
-    }
-}
 
 /* Simple CSS3 Fade-in Animation */
 @-webkit-keyframes fadeIn {

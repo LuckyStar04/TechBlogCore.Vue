@@ -115,7 +115,7 @@ a {
 }
 .tag-title>h2 {
     line-height: 2rem;
-    font-weight: 400;
+    font-weight: 200;
     color: var(--el-text-color-primary);
 }
 .tag-title>h2>span {

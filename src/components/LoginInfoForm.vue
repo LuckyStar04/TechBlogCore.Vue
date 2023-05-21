@@ -80,7 +80,7 @@ const reset = () => {
 }
 </script>
 <template>
-    <div class="logininfo-wrapper fadeInDown" v-loading.fullscreen="data.isLoading" @click="close">
+    <div class="logininfo-wrapper" v-loading.fullscreen="data.isLoading" @click="close">
         <div v-if="!data.isChangePswd" class="form" @click.stop>
             <div class="form-title">
                 <h3>个人信息</h3>
@@ -140,7 +140,7 @@ const reset = () => {
 }
 
 .form {
-    background-color: var(--el-bg-color);
+    background-color: var(--bg-color-chat-primary);
     border-radius: 10px;
     box-shadow: var(--el-box-shadow-dark);
     overflow: hidden;
@@ -157,45 +157,8 @@ const reset = () => {
 }
 
 .form-body {
-    background-color: var(--el-bg-color-page);
+    background-color: var(--bg-color-secondary);
     padding: 1rem 2rem 0;
     overflow: hidden;
-}
-
-.fadeInDown {
-    -webkit-animation-name: fadeInDown;
-    animation-name: fadeInDown;
-    -webkit-animation-duration: 1s;
-    animation-duration: 1s;
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
-}
-
-@-webkit-keyframes fadeInDown {
-    0% {
-        opacity: 0;
-        -webkit-transform: translate3d(0, -100%, 0);
-        transform: translate3d(0, -100%, 0);
-    }
-
-    100% {
-        opacity: 1;
-        -webkit-transform: none;
-        transform: none;
-    }
-}
-
-@keyframes fadeInDown {
-    0% {
-        opacity: 0;
-        -webkit-transform: translate3d(0, -100%, 0);
-        transform: translate3d(0, -100%, 0);
-    }
-
-    100% {
-        opacity: 1;
-        -webkit-transform: none;
-        transform: none;
-    }
 }
 </style>

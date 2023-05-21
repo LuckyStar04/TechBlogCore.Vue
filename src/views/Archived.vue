@@ -133,7 +133,7 @@ onUnmounted(() => {
 .article-title>h2 {
     display: inline;
     line-height: 2rem;
-    font-weight: 400;
+    font-weight: 200;
     color: var(--el-text-color-primary);
 }
 

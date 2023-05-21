@@ -70,7 +70,7 @@ const handleScroll = () => {
             element.classList.add('hidden')
         }
     })
-    let i = 1
+    let i = 0
     document.querySelectorAll('.article.hidden').forEach(function (e) {
         let element = e as HTMLElement
         if (element.getBoundingClientRect().top < pageBottom) {
@@ -174,7 +174,7 @@ onUnmounted(() => {
     overflow: hidden;
     white-space: pre-line;
     text-overflow: ellipsis;
-    font-weight: 400;
+    font-weight: 200;
     color: var(--el-text-color-primary);
 }
 

@@ -6,9 +6,9 @@ import { useUserStore } from '@/stores/UserStore'
 import { ref } from 'vue'
 const store = useUserStore()
 
-const toggleLogin = () => {
-    store.isShowLoginForm = !store.isShowLoginForm
-}
+const toggleLogin = () => store.isShowLoginForm = !store.isShowLoginForm
+
+const hideLogin = () => store.isShowLoginForm = false
 
 const loginSuccess = async () => {
     store.isShowLoginForm = false
@@ -21,17 +21,17 @@ const logout = async () => {
 
 const isShowInfo = ref(false)
 
-const toggleShowInfo = () => {
-    isShowInfo.value = !isShowInfo.value
-}
+const toggleShowInfo = () => isShowInfo.value = !isShowInfo.value
+
+const hideShowInfo = () =>isShowInfo.value = false
 </script>
 <template>
     <Teleport to="body">
-        <div class="pos-fixed" v-show="store.isShowLoginForm" @click="toggleLogin">
-            <LoginForm :use-dark="true" @onSuccess="loginSuccess"></LoginForm>
+        <div class="pos-fixed" :class="{ show: store.isShowLoginForm }" @click="hideLogin">
+            <LoginForm :use-dark="true" @onSuccess="loginSuccess" :class="{ fadeInDown: store.isShowLoginForm, fadeInUp: !store.isShowLoginForm }"></LoginForm>
         </div>
-        <div class="pos-fixed" v-show="isShowInfo">
-            <LoginInfoForm @close="toggleShowInfo"></LoginInfoForm>
+        <div class="pos-fixed" :class="{ show: isShowInfo }" @click="hideShowInfo">
+            <LoginInfoForm @close="toggleShowInfo" :class="{ fadeInDown: isShowInfo, fadeInUp: !isShowInfo }"></LoginInfoForm>
         </div>
     </Teleport>
     <el-popover :width="180"
@@ -59,6 +59,88 @@ const toggleShowInfo = () => {
     </el-popover>
 </template>
 <style scoped>
+
+/* ANIMATIONS */
+
+/* Simple CSS3 Fade-in-down Animation */
+.fadeInDown {
+    -webkit-animation-name: fadeInDown;
+    animation-name: fadeInDown;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-timing-function: ease;
+    animation-timing-function: ease;
+}
+
+@-webkit-keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+    }
+}
+
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+    }
+}
+
+.fadeInUp {
+    -webkit-animation-name: fadeInUp;
+    animation-name: fadeInUp;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-timing-function: ease;
+    animation-timing-function: ease;
+}
+
+@-webkit-keyframes fadeInUp {
+    100% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+    }
+
+    0% {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+    }
+}
+
+@keyframes fadeInUp {
+    100% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+    }
+
+    0% {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+    }
+}
+
 .avatar {
     width: 40px;
     height: 40px;
@@ -77,6 +159,14 @@ const toggleShowInfo = () => {
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.5);
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility .6s, opacity .6s;
+}
+
+.pos-fixed.show {
+    visibility: visible;
+    opacity: 1;
 }
 
 .ul {
