@@ -159,6 +159,8 @@ const hideShowInfo = () =>isShowInfo.value = false
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.5);
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
     visibility: hidden;
     opacity: 0;
     transition: visibility .6s, opacity .6s;
