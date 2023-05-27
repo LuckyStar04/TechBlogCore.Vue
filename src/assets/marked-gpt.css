@@ -17,9 +17,8 @@ html.dark img.math-block,html.dark img.math-inline{
     color: var(--el-text-color-primary);
 }
 
-.gpt-view code:not(.hljs){
-    font-family: 'Courier New', monospace;
-    color: lightgray;
+.gpt-view .hljs {
+    font-family: 'Cascadia Code', 'Fira Code', 'Consolas', 'Courier New', '微软雅黑', 'Microsoft Yahei', monospace;
 }
 
 .gpt-view ol,.gpt-view ul{
@@ -167,25 +166,31 @@ html.dark .gpt-view blockquote{
     background-color:#282c34
 }
 html.dark .gpt-view pre{
-    background-color:#262626;
+    background-color:#121212;
     border-color:#1a1a1a
 }
 .gpt-view pre code{
+    font-family: 'Cascadia Code', 'Fira Code', 'Consolas', 'Courier New', '微软雅黑', 'Microsoft Yahei', monospace;
+    color: #abb2bf;
     padding:0;
     background-color:transparent;
     white-space:pre;
     border-radius: 5px;
+    display: block;
+    overflow-x: auto;
 }
 .gpt-view code{
     padding:2px 4px;
-    background-color:#f6f6f6;
+    margin: 0 2px;
+    background-color:#e8e8e8;
     vertical-align:middle;
     border:none;
+    border-radius: 4px;
     font-size:14px;
     white-space:pre-wrap
 }
 html.dark .gpt-view code{
-    background-color:#262626
+    background-color:#121212
 }
 .gpt-view table{
     width:100%;

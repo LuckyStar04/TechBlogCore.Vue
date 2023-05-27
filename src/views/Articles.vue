@@ -168,6 +168,7 @@ onUnmounted(() => {
 }
 
 .article-title>h2 {
+    font-family: initial;
     display: inline-block;
     line-height: 2rem;
     overflow-wrap: normal;
@@ -183,6 +184,7 @@ onUnmounted(() => {
 }
 
 .article-title>h2>span {
+    font-family: initial;
     color: var(--el-text-color-secondary);
     margin-left: .6rem;
     font-size: 0.8em;

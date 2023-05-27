@@ -164,6 +164,7 @@ html.dark .note-view pre{
     border-color:#1a1a1a
 }
 .note-view pre code{
+    font-family: 'Cascadia Code', 'Fira Code', 'Consolas', 'Courier New', '微软雅黑', 'Microsoft Yahei', monospace;
     padding:0;
     background-color:transparent;
     white-space:pre;

@@ -215,6 +215,7 @@ a {
 }
 
 .category-title>h2 {
+    font-family: initial;
     line-height: 2rem;
     font-weight: 200;
     color: var(--el-text-color-primary);
@@ -222,6 +223,7 @@ a {
 }
 
 .category-title>h2>span {
+    font-family: initial;
     color: var(--el-text-color-secondary);
     margin-left: .6rem;
     font-size: 0.8em;
