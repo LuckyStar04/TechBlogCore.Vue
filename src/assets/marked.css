@@ -73,7 +73,8 @@ html.dark .note-view{
 .note-view h1,.note-view h2,.note-view h3,.note-view h4,.note-view h5,.note-view h6{
     text-rendering:optimizelegibility;
     line-height:1.7;
-    margin:0 0 15px
+    margin:0 0 15px;
+    font-family: 'Trebuchet MS';
 }
 html.dark .note-view h1,html.dark .note-view h2,html.dark .note-view h3,html.dark .note-view h4,html.dark .note-view h5,html.dark .note-view h6{
     color:#b3b3b3
@@ -128,7 +129,8 @@ html.dark .note-view h1,html.dark .note-view h2,html.dark .note-view h3,html.dar
 }
 .note-view p{
     margin:0 0 25px;
-    word-break:break-word
+    word-break:break-word;
+    line-height: 30px;
 }
 .note-view ol,.note-view ul{
     word-break:break-word;
@@ -137,8 +139,15 @@ html.dark .note-view h1,html.dark .note-view h2,html.dark .note-view h3,html.dar
 .note-view ol li,.note-view ul li{
     line-height:30px
 }
+.note-view li>h1, .note-view li>h2, .note-view li>h3, .note-view li>h4, .note-view li>h5, .note-view li>h6 {
+    margin-top: 20px;
+}
 .note-view ol li ol,.note-view ol li ul,.note-view ul li ol,.note-view ul li ul{
     margin-top:15px
+}
+.note-view li>ul, .note-view li>ol, .note-view li>p {
+    margin-top: 0px !important;
+    margin-bottom: 0px;
 }
 .note-view ol{
     list-style-type:decimal
