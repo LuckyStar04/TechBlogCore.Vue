@@ -66,7 +66,7 @@ const moveBg = (to?: HTMLElement, category?: string) => {
 }
 
 const hideBg = () => {
-    bg.X = `${categories.value.clientWidth / 2}px`
+    bg.X = `${categories.value?.clientWidth ?? 0 / 2}px`
     bg.Y = `0px`
     bg.Width = '0px'
     bg.Height = '0px'

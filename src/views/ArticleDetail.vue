@@ -104,7 +104,9 @@ const setImageModal = () => {
     imgs = [...document.querySelectorAll('.note-view img') as NodeListOf<HTMLElement>]
     data.pics = imgs
     imgs.forEach((e, i) => {
-        e.onclick = function () {
+        e.onclick = function ($event) {
+            $event.stopPropagation()
+            $event.preventDefault()
             canGoBack = true
             router.push({ name: 'articleDetail', params: { id: route.params.id }, hash: `#${e.id}` })
         }

@@ -101,6 +101,8 @@ const saveArticle = async () => {
         }
         if (response.status == 200 || response.status == 201) {
             data.isLoading = false
+            data.isChanged = false
+            window.onbeforeunload = () => {}
             ElMessageBox.confirm('保存成功', '成功', {
                 confirmButtonText: '跳转',
                 cancelButtonText: '关闭',

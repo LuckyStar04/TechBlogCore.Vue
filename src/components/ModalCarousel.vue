@@ -89,7 +89,7 @@ watch(() => props.show, () => {
         data.curPic = props.current
         nextTick(() => addTranslate(props.current))
     } else {
-        body.style.overflow = 'auto'
+        body.style.overflow = 'initial'
         nextTick(() => removeTranslate(props.current))
     }
 })
@@ -194,12 +194,12 @@ onBeforeUnmount(() => {
     bottom: 0;
     z-index: 999;
     background-color: rgba(0, 0, 0, 0.5);
-    transition: all .4s ease;
+    transition: visibility .6s, opacity .6s;
 }
 
 .pos-fixed.hidden {
-    opacity: .4;
     visibility: hidden;
+    opacity: 0;
 }
 
 .pos-fixed.visible {
@@ -212,11 +212,12 @@ onBeforeUnmount(() => {
     width: v-bind('width');
     height: 100%;
     transform: translateX(calc(v-bind('index') + v-bind('touchIndex')));
-    transition: transform .4s ease;
+    transition: transform .4s ease, visibility .4s;
+    visibility: visible;
 }
 
 .pos-fixed.hidden .children {
-    display: none;
+    visibility: hidden;
 }
 
 .btn {
@@ -266,12 +267,13 @@ onBeforeUnmount(() => {
     max-height: 92%;
     background-color: var(--el-bg-color);
     transform: none;
-    transition: transform .4s cubic-bezier(.2,.91,.65,.98);
+    transition: transform .4s cubic-bezier(.2,.91,.65,.98), visibility .4s;
+    opacity: 1;
     visibility: visible;
 }
 
 .pos-fixed.hidden .child>img {
-    display: none;
+    visibility: hidden;
 }
 
 /* .child>p {

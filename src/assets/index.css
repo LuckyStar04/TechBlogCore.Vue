@@ -38,10 +38,10 @@ body,
     height: 100%;
 }
 
-html {
+/* html {
     overflow: auto;
     overflow-x: hidden;
-}
+} */
 
 body a {
     transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
