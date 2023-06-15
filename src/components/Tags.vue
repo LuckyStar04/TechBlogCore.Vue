@@ -97,7 +97,7 @@ a {
     text-decoration: none !important;
 }
 .wrapper {
-    border-radius: 12px;
+    border-radius: 7px;
     background-color: var(--bg-color-primary);
 }
 

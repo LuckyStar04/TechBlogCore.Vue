@@ -299,7 +299,7 @@ a {
 
 .wrapper {
     width: calc(100% - 400px);
-    border-radius: 12px;
+    border-radius: 7px;
     background-color: var(--bg-color-primary);
 }
 

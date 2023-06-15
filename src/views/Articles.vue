@@ -155,7 +155,7 @@ onUnmounted(() => {
 }
 
 .wrapper {
-    border-radius: 12px;
+    border-radius: 7px;
     background-color: var(--bg-color-primary);
 }
 
@@ -295,6 +295,8 @@ h3 {
     font-size: 1.6rem;
     transform: translate(0px);
     transition: all .3s ease;
+    font-weight: bold;
+    opacity: .9;
 }
 
 .article a.article-link:hover {
