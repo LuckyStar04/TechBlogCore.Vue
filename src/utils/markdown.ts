@@ -1,5 +1,6 @@
 import { marked } from 'marked'
 import hljs from 'highlight.js'
+import markedKatex from "marked-katex-extension"
 
 const renderer = new marked.Renderer()
 renderer.link = function (href, title, text) {
@@ -47,6 +48,10 @@ marked.setOptions({
     smartypants: false,
     xhtml: false
 })
+
+marked.use(markedKatex({
+    throwOnError: false
+}))
 
 export function parseMarkdown(content: string) {
     imgId = 1
