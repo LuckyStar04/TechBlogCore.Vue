@@ -503,6 +503,3 @@ html.dark .kalamu-area .video-package .video-description{
 .kalamu-area .image-package .image-caption:empty{
     display:inline-block
 }
-.katex-html[aria-hidden] {
-    display: none;
-}
