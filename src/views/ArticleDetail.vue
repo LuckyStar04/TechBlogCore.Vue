@@ -5,6 +5,7 @@ import type { ArticleDetail, Comment, NavItem } from '@/types'
 import { useRoute, useRouter } from 'vue-router'
 import { parseMarkdown } from '@/utils/markdown'
 import "highlight.js/styles/atom-one-dark.css"
+import "katex/dist/katex.min.css"
 import { computed } from '@vue/reactivity'
 import { parseDateTime } from '@/utils/dates'
 import { EditPen, Calendar, Histogram, Reading, Clock, TakeawayBox, PriceTag, Comment as CommentIcon } from '@element-plus/icons-vue'

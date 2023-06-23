@@ -91,6 +91,7 @@ code::-webkit-scrollbar-track {
     --bg-color-login-primary: #fff;
     --bg-color-modal: #0004;
     --text-color-chat-primary: var(--el-text-color-primary);
+    --text-color-katex: #000;
     --border-color-secondary: #dce8f1;
     --bg-sky-color: var(--el-color-primary);
     --bg-banner-sky-color: linear-gradient(0deg, var(--el-color-primary-light-3), var(--el-color-primary));
@@ -114,6 +115,7 @@ html.dark {
     --bg-color-chat-regular: #060606;
     --bg-color-login-primary: var(--bg-color-chat-primary);
     --bg-color-modal: #fff2;
+    --text-color-katex: #fff;
     --text-color-chat-primary: #b3b3b3;
     --border-color-secondary: #23170f;
     /* --bg-sky-color: #0159b2; */

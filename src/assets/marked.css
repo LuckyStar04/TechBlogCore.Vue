@@ -503,3 +503,9 @@ html.dark .kalamu-area .video-package .video-description{
 .kalamu-area .image-package .image-caption:empty{
     display:inline-block
 }
+.katex {
+    color: var(--text-color-katex);
+}
+p>.katex-display:not(:first-child) {
+    display: inline-block;
+}
