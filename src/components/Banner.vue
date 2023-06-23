@@ -24,7 +24,7 @@ const isDark = useDark()
 
 .banner {
     height: 11rem;
-    overflow: visible;
+    width: 100vw;
 }
 
 .banner-img {

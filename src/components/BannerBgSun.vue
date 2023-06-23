@@ -355,6 +355,7 @@ $blue: #85C7F2;
 @media only screen and (max-width: 768px) {
     .bg-wrapper-1 {
         width: 100%;
+        overflow: hidden;
     }
 }
 </style>

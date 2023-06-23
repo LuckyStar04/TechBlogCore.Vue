@@ -97,11 +97,12 @@ const isShowChatIcon = computed(() => {
 
 .el-main {
   padding: 0;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 .el-main, .el-container {
   background-color: var(--bg-color-secondary);
-  overflow: visible;
 }
 
 .pt60 {

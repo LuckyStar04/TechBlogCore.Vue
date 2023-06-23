@@ -26,7 +26,7 @@
     height: 12.5rem
     margin: 0 auto
     transform: translateY(-0.5rem)
-    overflow: visible
+    overflow: hidden
 
 /* COLORS */
 $l-blue: #0B0F2B
