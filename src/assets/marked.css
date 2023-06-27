@@ -506,7 +506,15 @@ html.dark .kalamu-area .video-package .video-description{
 .katex {
     color: var(--text-color-katex);
 }
-p>.katex-display:not(:only-child) {
+p>.katex-display:not(:only-child),
+li>.katex-display:not(:only-child),
+h1>.katex-display:not(:only-child),
+h2>.katex-display:not(:only-child),
+h3>.katex-display:not(:only-child),
+h4>.katex-display:not(:only-child),
+h5>.katex-display:not(:only-child),
+h6>.katex-display:not(:only-child)
+ {
     display: inline-block;
     margin: 0;
 }
