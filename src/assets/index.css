@@ -179,13 +179,13 @@ html.dark textarea::-webkit-scrollbar-thumb {
 }
 
 .main-shadow {
-    transition: box-shadow .4s ease,transform .4s ease;
+    transition: box-shadow .4s ease;
     box-shadow: var(--content-shadow);
 }
 
 .main-shadow:hover {
     box-shadow: var(--content-shadow-high);
-    transform: translateY(-1px);
+    /* transform: translateY(-1px); */
 }
 
 /* body.fixed {
