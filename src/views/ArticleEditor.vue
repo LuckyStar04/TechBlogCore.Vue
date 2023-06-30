@@ -7,6 +7,7 @@ import { useRoute, useRouter } from 'vue-router'
 import EditTag from '@/components/EditTag.vue'
 import { parseMarkdown } from '@/utils/markdown'
 import "highlight.js/styles/atom-one-dark.css"
+import "katex/dist/katex.min.css"
 import { Edit, ArrowRight } from '@element-plus/icons-vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import type { AxiosResponse } from 'axios'
