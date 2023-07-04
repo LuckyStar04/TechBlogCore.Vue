@@ -551,7 +551,7 @@ h6>.katex-display:not(:only-child)
 
 .bsr-head .bsr-title {
     margin-left: 6px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', 'Trebuchet MS', Arial, sans-serif;
     color: #888;
     font-size: 15px;
 }
