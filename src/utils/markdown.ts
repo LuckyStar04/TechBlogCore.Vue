@@ -34,6 +34,13 @@ renderer.image = function (href, title, text) {
     return out;
 }
 
+let _base = renderer.code
+
+renderer.code = function (code, infostring, escaped) {
+    let base = _base.call(renderer, code, infostring, escaped)
+    return [base.slice(0, 5), `<div class="bsr-head"><div class="bsr-dot"></div><div class="bsr-dot"></div><div class="bsr-dot"></div><div class="bsr-title">${infostring?.toUpperCase()}</div></div>`, base.slice(5)].join('')
+  }
+
 marked.setOptions({
     renderer: renderer,
     highlight: function (code, lang) {
