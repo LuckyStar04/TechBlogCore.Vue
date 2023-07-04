@@ -59,6 +59,7 @@ marked.setOptions({
 marked.use(markedKatex({
     displayMode: true,
     throwOnError: false,
+    output: 'html',
 }))
 
 export function parseMarkdown(content: string) {
