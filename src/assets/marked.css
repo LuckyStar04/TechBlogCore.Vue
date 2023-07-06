@@ -524,7 +524,6 @@ h6>.katex-display:not(:only-child)
     display: flex;
     align-items: center;
     padding: 2px 0px 12px;
-    background-color: #292d33;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
 }
