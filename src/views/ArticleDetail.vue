@@ -15,6 +15,7 @@ import ArticleNavi from '@/components/ArticleNavi.vue'
 import ModalCarousel from '@/components/ModalCarousel.vue'
 import { useUserStore } from '@/stores/UserStore'
 import { useArticleStore } from '@/stores/ArticleStore'
+import { handleCopyClick } from '@/utils/clipboard'
 
 const route = useRoute()
 const router = useRouter()
@@ -59,6 +60,14 @@ const fetchData = async () => {
         await nextTick()
         makeNav()
         setImageModal()
+        setCopyCodeBtn()
+    }
+}
+
+const setCopyCodeBtn = () => {
+    const btns = document.querySelectorAll('.bsr-copy') as NodeListOf<HTMLElement>
+    for (const btn of btns) {
+        btn.onclick = handleCopyClick
     }
 }
 

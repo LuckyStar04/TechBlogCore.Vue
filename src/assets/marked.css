@@ -554,4 +554,20 @@ h6>.katex-display:not(:only-child)
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', 'Trebuchet MS', Arial, sans-serif;
     color: #888;
     font-size: 15px;
+    flex: 1 0 auto;
+}
+
+.bsr-head .bsr-copy {
+    background-color: #c45656;
+    color: white;
+    border: none;
+    outline: none;
+    border-radius: 7px;
+    padding: 3px 9px 4px;
+    cursor: pointer;
+    transition: background-color .4s ease;
+}
+
+.bsr-head .bsr-copy:hover {
+    background-color: #b02d2d;
 }
