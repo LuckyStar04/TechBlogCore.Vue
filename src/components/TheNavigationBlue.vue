@@ -162,7 +162,7 @@ onUnmounted(() => {
 }
 
 .navi-scroll-white {
-    background: var(--el-bg-color-overlay);
+    background: var(--bg-color-primary);
 }
 
 .navi-scroll-wrapper {
