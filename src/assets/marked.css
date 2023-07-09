@@ -104,8 +104,10 @@ html.dark .note-view h1,html.dark .note-view h2,html.dark .note-view h3,html.dar
 }
 .note-view blockquote{
     padding:20px;
-    background-color:var(--el-color-info-light-9);
-    border-left:6px solid var(--el-color-info-light-7);
+    /* background-color:var(--el-color-info-light-9); */
+    border: 1px solid var(--el-color-info-light-7);
+    border-left:6px solid var(--el-color-primary);
+    border-radius: 6px;
     word-break:break-word;
     font-size:16px;
     font-weight:400;
@@ -180,13 +182,16 @@ html.dark .note-view pre{
     border-radius: 5px;
 }
 .note-view code{
-    padding:2px 4px 8px;
+    padding:2px 4px;
     background-color:#f6f6f6;
     vertical-align:middle;
     border:none;
     font-size:15px;
     white-space:pre-wrap;
     margin: 6px 0 0;
+}
+.note-view pre code {
+    padding:2px 4px 8px;
 }
 html.dark .note-view code{
     background-color:#262626
@@ -206,7 +211,9 @@ html.dark .note-view code{
     vertical-align:middle
 }
 .note-view table th{
-    font-weight:700
+    font-weight:700;
+    background-color: var(--el-color-primary-light-8);
+    color: var(--el-text-color-primary);
 }
 .note-view table thead th{
     vertical-align:middle;
@@ -551,6 +558,7 @@ h6>.katex-display:not(:only-child)
 .bsr-head .bsr-title {
     margin-left: 6px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', 'Trebuchet MS', Arial, sans-serif;
+    font-weight: bold;
     color: #888;
     font-size: 15px;
     flex: 1 0 auto;
@@ -576,4 +584,10 @@ h6>.katex-display:not(:only-child)
 .bsr-head .bsr-copy>i {
     vertical-align: middle;
     margin-right: 6px;
+    color: #c45656;
+    transition: color .4s ease;
+}
+
+.bsr-head .bsr-copy:hover>i {
+    color: white;
 }
