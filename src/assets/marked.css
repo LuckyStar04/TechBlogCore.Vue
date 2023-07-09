@@ -170,7 +170,7 @@ html.dark .note-view h1,html.dark .note-view h2,html.dark .note-view h3,html.dar
 }
 html.dark .note-view pre{
     background-color:#262626;
-    border-color:#1a1a1a
+    border-color:#313131;
 }
 .note-view pre code{
     font-family: 'Fira Code', 'JetBrains Mono', 'Cascadia Code', 'Consolas', 'Courier New', '微软雅黑', 'Microsoft Yahei', monospace;
@@ -557,16 +557,23 @@ h6>.katex-display:not(:only-child)
 }
 
 .bsr-head .bsr-copy {
-    background-color: #c45656;
+    background-color: rgba(196, 86, 86, .2);
     color: white;
-    border: none;
+    border: 1px solid #c45656;
     outline: none;
     border-radius: 7px;
     padding: 3px 9px 4px;
     cursor: pointer;
     transition: background-color .4s ease;
+    display: inline-flex;
+    align-items: center;
 }
 
 .bsr-head .bsr-copy:hover {
-    background-color: #b02d2d;
+    background-color: #c45656;
+}
+
+.bsr-head .bsr-copy>i {
+    vertical-align: middle;
+    margin-right: 6px;
 }
