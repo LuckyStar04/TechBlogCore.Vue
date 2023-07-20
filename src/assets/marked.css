@@ -171,7 +171,7 @@ html.dark .note-view h1,html.dark .note-view h2,html.dark .note-view h3,html.dar
     box-shadow: var(--code-shadow);
 }
 html.dark .note-view pre{
-    background-color:#262626;
+    background-color:#0c0c12;
     border-color:#313131;
 }
 .note-view pre code{
@@ -194,7 +194,7 @@ html.dark .note-view pre{
     padding:2px 4px 8px;
 }
 html.dark .note-view code{
-    background-color:#262626
+    background-color:#0c0c12
 }
 .note-view table{
     width:100%;
