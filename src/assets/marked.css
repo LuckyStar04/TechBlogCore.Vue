@@ -533,6 +533,7 @@ h6>.katex-display:not(:only-child)
     padding: 2px 0px 12px;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
+    position: relative;
 }
 
 .bsr-head .bsr-dot {
@@ -561,7 +562,7 @@ h6>.katex-display:not(:only-child)
     font-weight: bold;
     color: #888;
     font-size: 15px;
-    flex: 1 0 auto;
+    /* flex: 1 0 auto; */
 }
 
 .bsr-head .bsr-copy {
@@ -572,9 +573,19 @@ h6>.katex-display:not(:only-child)
     border-radius: 7px;
     padding: 3px 9px 4px;
     cursor: pointer;
-    transition: background-color .4s ease;
+    transition: background-color .4s ease, visibility .4s ease-out, opacity .4s ease-out;
     display: inline-flex;
+    visibility: hidden;
+    opacity: 0;
     align-items: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+pre:hover .bsr-copy {
+    visibility: visible;
+    opacity: 1;
 }
 
 .bsr-head .bsr-copy:hover {
