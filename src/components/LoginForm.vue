@@ -10,7 +10,7 @@
                 </div>
 
                 <form method="post">
-                    <input type="text" id="login" class="fadeIn second" name="login" v-model="data.username"
+                    <input type="text" id="login" class="fadeIn second" name="username" v-model="data.username"
                         placeholder="请输入用户名" autocomplete="off" maxlength="50">
                     <input type="password" id="password" class="fadeIn third" name="password" v-model="data.password"
                         placeholder="请输入密码" maxlength="50">
@@ -28,7 +28,7 @@
                 <form>
                     <input type="text" id="email" class="fadeIn second" name="email" v-model="data.email"
                         placeholder="输入注册邮箱" autocomplete="off" maxlength="50">
-                    <input type="text" id="login" class="fadeIn second" name="login" v-model="data.username"
+                    <input type="text" id="login" class="fadeIn second" name="username" v-model="data.username"
                         placeholder="输入用户名" autocomplete="off" maxlength="50">
                     <input type="password" id="password" class="fadeIn third" name="password" v-model="data.password"
                         placeholder="输入注册密码" maxlength="50">

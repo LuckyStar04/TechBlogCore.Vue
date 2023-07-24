@@ -192,9 +192,14 @@ html.dark .note-view pre{
 }
 .note-view pre code {
     padding:2px 4px 8px;
+    overflow-x: auto;
+    display: block;
 }
-html.dark .note-view code{
+html.dark .note-view pre code{
     background-color:#0c0c12
+}
+html.dark .note-view code {
+    background-color: #444;
 }
 .note-view table{
     width:100%;

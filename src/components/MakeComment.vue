@@ -142,7 +142,7 @@ const showExtraEmoji = () => {
     outline: 0;
     font-size: var(--el-font-size-medium);
     color: var(--el-text-color-regular);
-    background-color: var(--el-bg-color);
+    background-color: var(--bg-color-primary);
 }
 
 .mc-wrapper>.extra {
