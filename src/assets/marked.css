@@ -105,7 +105,8 @@ html.dark .note-view h1,html.dark .note-view h2,html.dark .note-view h3,html.dar
 .note-view blockquote{
     padding:20px;
     /* background-color:var(--el-color-info-light-9); */
-    border: 1px solid var(--el-color-info-light-7);
+    border: 0px solid var(--el-color-info-light-7);
+    background-color: var(--bg-blockquote-color);
     border-left:6px solid var(--el-color-primary);
     border-radius: 6px;
     word-break:break-word;

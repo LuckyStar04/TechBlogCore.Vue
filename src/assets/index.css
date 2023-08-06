@@ -28,6 +28,7 @@ pre {
 code:not(.hljs) {
     font-family: initial;
     vertical-align: baseline !important;
+    border-radius: 4px;
 }
 
 html,
@@ -99,6 +100,7 @@ code::-webkit-scrollbar-track {
     --bg-sky-color-dark: var(--el-color-primary-dark-2);
     --bg-sky-color-light-3: var(--el-color-primary-light-3);
     --bg-sky-color-light-9: var(--el-color-primary-light-9);
+    --bg-blockquote-color: #f8f8f8;
 }
 
 html.dark {
@@ -126,6 +128,7 @@ html.dark {
     --bg-sky-color-dark: #0654a5;
     --bg-sky-color-light-3: #054280;
     --bg-sky-color-light-9: #d0e2f5;
+    --bg-blockquote-color: #27333f;
 }
 
 .thin-scrollbar::-webkit-scrollbar {
