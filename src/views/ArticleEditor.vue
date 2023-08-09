@@ -65,6 +65,27 @@ const handleChange = () => {
     }
 }
 
+const handlePaste = async (evt: ClipboardEvent) => {
+    if (!evt.clipboardData?.items.length) return
+    for (let d of evt.clipboardData.items) {
+        if (d.kind == 'file' && d.type.startsWith('image')) {
+            const blob = d.getAsFile()
+            if (!blob) return
+            const formData = new FormData();
+            formData.append('1.png', blob);
+            const res = await req.request({
+                url: `file`, method: 'post', data: formData
+            })
+            let t = document.querySelector('textarea')!
+            let startPos = t.selectionStart
+            let endPos = t.selectionEnd
+            data.article.content = data.article.content.substring(0, startPos)
+                + `\n![截图](/api/File/${res.data})\n`
+                + data.article.content.substring(endPos, data.article.content.length)
+        }
+    }
+}
+
 onBeforeMount(() => {
     document.addEventListener('keydown', handleHotKey)
 })
@@ -103,7 +124,7 @@ const saveArticle = async () => {
         if (response.status == 200 || response.status == 201) {
             data.isLoading = false
             data.isChanged = false
-            window.onbeforeunload = () => {}
+            window.onbeforeunload = () => { }
             ElMessageBox.confirm('保存成功', '成功', {
                 confirmButtonText: '跳转',
                 cancelButtonText: '关闭',
@@ -193,7 +214,8 @@ const handleHotKey = (event: KeyboardEvent) => {
                     <el-button type="primary" class="save" plain :icon="Edit" @click="saveArticle">保存</el-button>
                 </div>
                 <div class="content">
-                    <el-input class="content-1" v-model="data.article.content" type="textarea" @input="handleChange" autofocus/>
+                    <el-input class="content-1" v-model="data.article.content" type="textarea" @input="handleChange"
+                        @paste="handlePaste" autofocus />
                     <div class="replace-dialog" :class="{ show: data.showFind, expand: data.showReplace }">
                         <div class="expand" :class="{ show: data.showReplace }">
                             <el-icon @click="data.showReplace = !data.showReplace">
