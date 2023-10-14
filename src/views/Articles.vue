@@ -43,7 +43,7 @@ const fetchData = async () => {
         data.totalPages = a.totalPages
         data.isLoading = false
         nextTick(() => {
-            handleScroll()
+            wrapScroll()
         })
     }
 }
@@ -55,7 +55,12 @@ const changePage = () => {
 
 watch(() => route.query, fetchData)
 
+let i = 0
+let isHandle = false
+
 const handleScroll = () => {
+    if (isHandle) return
+    isHandle = true
     // const scrollTop = document.body.scrollTop || document.documentElement.scrollTop
     const pageBottom = window.innerHeight// + scrollTop
     document.querySelectorAll('.article.visible').forEach(function (e) {
@@ -70,24 +75,30 @@ const handleScroll = () => {
             element.classList.add('hidden')
         }
     })
-    let i = 0
     document.querySelectorAll('.article.hidden').forEach(function (e) {
         let element = e as HTMLElement
         if (element.getBoundingClientRect().top < pageBottom) {
             element.classList.remove('hidden')
             element.classList.add('visible')
-            element.classList.add('delay-' + i)
-            i++
+            if (!element.className.includes('delay-')) {
+                element.classList.add('delay-' + i)
+                i++
+            }
         }
     })
+    setTimeout(() => isHandle = false, 40)
 }
 
 let timer : number|null = null
 const wrapScroll = () => {
+    handleScroll()
     if (timer !== null) {
         clearTimeout(timer)
     }
-    timer = setTimeout(handleScroll, 20)
+    timer = setTimeout(() => {
+        i = 0
+        console.log('reset i', i)
+    }, 30)
 }
 
 watch(() => userStore.info.user, () => {
