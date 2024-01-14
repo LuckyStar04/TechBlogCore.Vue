@@ -8,6 +8,7 @@ import markdownToTxt from 'markdown-to-txt'
 import { Plus, Calendar, TakeawayBox } from '@element-plus/icons-vue'
 import { useUserStore } from '@/stores/UserStore'
 import { useArticleStore } from '@/stores/ArticleStore'
+import { debounce } from 'lodash-es'
 
 const userStore = useUserStore()
 const route = useRoute()
@@ -43,7 +44,7 @@ const fetchData = async () => {
         data.totalPages = a.totalPages
         data.isLoading = false
         nextTick(() => {
-            wrapScroll()
+            debounceScroll()
         })
     }
 }
@@ -89,16 +90,9 @@ const handleScroll = () => {
     setTimeout(() => isHandle = false, 40)
 }
 
-let timer : number|null = null
-const wrapScroll = () => {
-    handleScroll()
-    if (timer !== null) {
-        clearTimeout(timer)
-    }
-    timer = setTimeout(() => {
-        i = 0
-        console.log('reset i', i)
-    }, 30)
+const debounceScroll = () => {
+    debounce(handleScroll, 30)()
+    debounce(() => i = 0, 30)()
 }
 
 watch(() => userStore.info.user, () => {
@@ -111,12 +105,12 @@ let key = 1
 
 onMounted(() => {
     fetchData()
-    window.addEventListener("scroll", wrapScroll, false)
+    window.addEventListener("scroll", debounceScroll, false)
     window.addEventListener("resize", handleScroll, false)
 })
 
 onUnmounted(() => {
-    window.removeEventListener("scroll", wrapScroll, false)
+    window.removeEventListener("scroll", debounceScroll, false)
     window.removeEventListener("resize", handleScroll, false)
 })
 

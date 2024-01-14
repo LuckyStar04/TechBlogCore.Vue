@@ -64,7 +64,7 @@ const articleStore = useArticleStore()
 const fetchData = async () => {
     data.isLoading = true
     let response = await req.request({
-        url: 'tags', method: 'get', params: { size: 30 }
+        url: 'tags', method: 'get', params: { size: 100 }
     })
     if (response.status == 200) {
         data.tags = response.data
