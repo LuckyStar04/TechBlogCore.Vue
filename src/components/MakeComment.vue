@@ -25,7 +25,7 @@ const props = defineProps({
         required: true
     },
     parentId: {
-        type: Number,
+        type: [Number, String],
         default: null,
         required: false
     },
@@ -64,7 +64,7 @@ const addEmoji = async (emoji: string) => {
 }
 
 const commitComment = async () => {
-    if (data.comment.trim().length == 0) {
+    if (!data.comment || data.comment.trim().length == 0) {
         ElMessageBox.alert('评论不能为空哦', '提示', { confirmButtonText: '好的' })
         return
     }

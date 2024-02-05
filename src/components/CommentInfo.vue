@@ -69,7 +69,7 @@ const showMakeComment = () => {
             </div>
             <MakeComment class="make-comment" v-show="data.showReply" :placeholder="`回复 ${comment.userName}：`" :articleId="props.comment.articleId.toString()"
                 :parentId="comment.parentId ? comment.parentId : comment.id" :replyTo="comment.userName"  @comment-success="addComment"></MakeComment>
-            <Comments v-if="(comment.children.length > 0)" :comments="comment.children"></Comments>
+            <Comments v-if="(comment.children && comment.children.length > 0)" :comments="comment.children"></Comments>
         </div>
     </div>
 </template>
