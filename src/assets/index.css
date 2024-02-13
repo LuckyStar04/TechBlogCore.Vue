@@ -131,6 +131,27 @@ html.dark {
     --bg-blockquote-color: #27333f;
 }
 
+/* Alternative custom animation style */
+::view-transition-old(root),
+::view-transition-new(root) {
+  height: auto;
+  width: 100vw;
+  animation: none;
+  mix-blend-mode: normal;
+}
+html.dark::view-transition-old(root) {
+  z-index: 2147483646;
+}
+html.dark::view-transition-new(root) {
+  z-index: 1;
+}
+html::view-transition-old(root) {
+  z-index: 1;
+}
+html::view-transition-new(root) {
+  z-index: 2147483646;
+}
+
 .thin-scrollbar::-webkit-scrollbar {
     height: 3px;
     width: 3px;

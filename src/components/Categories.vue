@@ -206,6 +206,8 @@ a {
 
 .c-blue {
     color: rgba(var(--el-color-primary-rgb), .95);
+    transform: translateY(-2px);
+    text-shadow: 0 2px 6px var(--el-color-info);
 }
 
 .category-title {
@@ -246,12 +248,13 @@ li {
     -webkit-tap-highlight-color: transparent;
     position: relative;
     z-index: 3;
+    transition: all .3s;
 }
 
 li.active {
     font-weight: 700;
     color: var(--el-color-primary);
-    transition: color .25s;
+    /* transition: color .25s; */
     /* background-color: rgba(var(--el-color-primary-rgb), .1); */
 }
 </style>

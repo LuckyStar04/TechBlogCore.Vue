@@ -13,9 +13,8 @@ import bannerpng from '@/assets/little_prince.png'
 import BannerBgStar from './BannerBgStar.vue'
 import BannerBgSun from './BannerBgSun.vue'
 import BannerBgMoon from './BannerBgMoon.vue'
-import { useDark } from '@vueuse/core'
+import { useDark as isDark } from '@/components/dark'
 
-const isDark = useDark()
 </script>
 <style scoped>
 .pt60 {

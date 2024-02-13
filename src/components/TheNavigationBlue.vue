@@ -10,20 +10,8 @@ import Tags from '@/components/Tags.vue'
 import SearchInput from '@/components/SearchInput.vue'
 import UserAvatar from '@/components/UserAvatar.vue'
 import { useRoute, useRouter } from 'vue-router'
-import { useDark } from '@vueuse/core'
 import { useUserStore } from '@/stores/UserStore'
-
-const isDark = useDark({
-    onChanged(dark: boolean) {
-        if (dark) {
-            document.documentElement.classList.add('dark')
-            document.querySelector('meta[name="theme-color"]')!.setAttribute('content', '#121212')
-        } else {
-            document.documentElement.classList.remove('dark')
-            document.querySelector('meta[name="theme-color"]')!.setAttribute('content', '#ffffff')
-        }
-    },
-})
+import { useDark, handleDark } from '@/components/dark'
 
 const route = useRoute()
 const router = useRouter()
@@ -78,7 +66,7 @@ onUnmounted(() => {
                             selected-text-color="#fff">
                             <MenuItem v-for="item in userStore.menu" :index="item.index" :route="item.route">{{ item.name }}</MenuItem>
                         </Menu>
-                        <el-switch v-model="isDark" :inline-prompt="true" :active-icon="Sunny" :inactive-icon="Moon"
+                        <el-switch v-model="useDark" @click="handleDark" :inline-prompt="true" :active-icon="Sunny" :inactive-icon="Moon"
                             style="margin: 0 1.7rem;" />
                         <UserAvatar></UserAvatar>
                     </div>
@@ -98,7 +86,7 @@ onUnmounted(() => {
                         <Menu id="navi-menu">
                             <MenuItem v-for="item in userStore.menu" :index="item.index" :route="item.route">{{ item.name }}</MenuItem>
                         </Menu>
-                        <el-switch v-model="isDark" :inline-prompt="true" :active-icon="Sunny" :inactive-icon="Moon"
+                        <el-switch v-model="useDark" @click="handleDark" :inline-prompt="true" :active-icon="Sunny" :inactive-icon="Moon"
                             style="margin: 0 1.7rem;" />
                         <UserAvatar></UserAvatar>
                     </div>
@@ -109,7 +97,7 @@ onUnmounted(() => {
             :close-on-click-modal="true">
             <div class="drawer-top">
                 <SearchInput></SearchInput>
-                <el-switch v-model="isDark" :inline-prompt="true" :active-icon="Sunny" :inactive-icon="Moon"
+                <el-switch v-model="useDark" @click="handleDark" :inline-prompt="true" :active-icon="Sunny" :inactive-icon="Moon"
                     style="margin-left:1.5rem;" />
             </div>
             <el-divider style="margin: 0;" />
