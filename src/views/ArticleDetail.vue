@@ -434,6 +434,7 @@ a {
 
 :deep(.el-drawer__body) {
     padding: .2rem !important;
+    background-color: var(--bg-color-primary);
 }
 
 .navi-title {
