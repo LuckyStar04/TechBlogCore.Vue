@@ -31,6 +31,7 @@ import { useDark as isDark } from '@/components/dark'
     justify-content: center;
     background: var(--bg-banner-sky-color);
     height: 14.4rem;
+    user-select: none;
 }
 
 .banner-img>img {

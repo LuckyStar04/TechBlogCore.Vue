@@ -8,8 +8,15 @@ const isDark = ref(false)
 export const useDark = computed({
   get() {
     let color = localStorage.getItem("TechBlog_ThemeColor")
-    if (!color) isDark.value = preferred.value === 'dark'
-    else isDark.value = color === 'dark'
+    if (!color) {
+      isDark.value = preferred.value === 'dark'
+      localStorage.setItem("TechBlog_ThemeColor", preferred.value)
+      if (isDark.value) {
+        document.documentElement.classList.add("dark")
+      }
+    } else {
+      isDark.value = color === 'dark'
+    }
     return isDark.value
   },
   set(dark: boolean) {
