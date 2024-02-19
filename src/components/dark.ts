@@ -4,6 +4,7 @@ import { computed, ref } from "vue"
 const preferred = usePreferredColorScheme()
 
 const isDark = ref(false)
+const isFirstLoad = ref(true)
 
 export const useDark = computed({
   get() {
@@ -11,11 +12,14 @@ export const useDark = computed({
     if (!color) {
       isDark.value = preferred.value === 'dark'
       localStorage.setItem("TechBlog_ThemeColor", preferred.value)
+    } else {
+      isDark.value = color === 'dark'
+    }
+    if (isFirstLoad.value == true) {
       if (isDark.value) {
         document.documentElement.classList.add("dark")
       }
-    } else {
-      isDark.value = color === 'dark'
+      isFirstLoad.value = false
     }
     return isDark.value
   },
