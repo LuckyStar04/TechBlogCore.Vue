@@ -101,7 +101,7 @@ const router = createRouter({
     if (savedPosition) {
       return savedPosition
     } else {
-      return { }
+      return { top: 0 }
     }
   }
 })

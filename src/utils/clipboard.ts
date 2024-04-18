@@ -21,8 +21,10 @@ const copyToClipboard = (str: string) => {
 }
 
 export function handleCopyClick(evt: MouseEvent): void {
-    const target = evt.target as any
-    const innerText = target.parentElement?.nextElementSibling?.innerText
+    let target = evt.target as any
+    while (!target.classList.contains('bsr-head'))
+        target = target.parentElement
+    const innerText = target.nextElementSibling?.innerText
     copyToClipboard(innerText)
     ElNotification({
         title: '成功',

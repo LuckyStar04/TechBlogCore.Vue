@@ -75,10 +75,9 @@ html.dark .note-view{
     line-height:1.7;
     margin:0 0 15px;
     font-family: 'Trebuchet MS';
+    color: var(--el-text-color-primary);
 }
-html.dark .note-view h1,html.dark .note-view h2,html.dark .note-view h3,html.dark .note-view h4,html.dark .note-view h5,html.dark .note-view h6{
-    color:#b3b3b3
-}
+
 .note-view h1{
     font-size:26px
 }
@@ -176,7 +175,7 @@ html.dark .note-view pre{
     border-color:#313131;
 }
 .note-view pre code{
-    font-family: 'Fira Code', 'JetBrains Mono', 'Cascadia Code', 'Consolas', 'Courier New', '微软雅黑', 'Microsoft Yahei', monospace;
+    font-family: 'Cascadia Code', 'Fira Code', 'JetBrains Mono', 'Consolas', 'Courier New', '微软雅黑', 'Microsoft Yahei', monospace;
     padding: 0 0 12px;
     background-color:transparent;
     white-space:pre;
