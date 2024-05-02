@@ -126,6 +126,7 @@ const isShowChatIcon = computed(() => {
 
 .grow-2 {
   flex-grow: 1;
+  width: 0;
 }
 
 .grow-2 {

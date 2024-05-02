@@ -206,7 +206,7 @@ a {
 
 .c-blue {
     color: rgba(var(--el-color-primary-rgb), .95);
-    transform: translateY(-2px);
+    transform: translate(4px, -2px);
     text-shadow: 0 2px 6px var(--el-color-info);
 }
 
