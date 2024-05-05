@@ -101,6 +101,7 @@ code::-webkit-scrollbar-track {
     --bg-sky-color-light-3: var(--el-color-primary-light-3);
     --bg-sky-color-light-9: var(--el-color-primary-light-9);
     --bg-blockquote-color: #f8f8f8;
+    --bg-code-color: var(--el-border-color-light);
 }
 
 html.dark {
@@ -129,6 +130,7 @@ html.dark {
     --bg-sky-color-light-3: #054280;
     --bg-sky-color-light-9: #d0e2f5;
     --bg-blockquote-color: #27333f;
+    --bg-code-color: #314355;
 }
 
 /* Alternative custom animation style */

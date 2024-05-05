@@ -112,7 +112,8 @@ html.dark .note-view{
     font-size:16px;
     font-weight:400;
     line-height:30px;
-    margin:0 0 20px
+    margin:0 0 20px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -1px rgba(0,0,0,.06);
 }
 
 .note-view blockquote h1:last-child,.note-view blockquote h2:last-child,.note-view blockquote h3:last-child,.note-view blockquote h4:last-child,.note-view blockquote h5:last-child,.note-view blockquote h6:last-child,.note-view blockquote li:last-child,.note-view blockquote ol:last-child,.note-view blockquote p:last-child,.note-view blockquote ul:last-child{
@@ -175,7 +176,6 @@ html.dark .note-view pre{
     border-color:#313131;
 }
 .note-view pre code{
-    font-family: 'Cascadia Code', 'Fira Code', 'JetBrains Mono', 'Consolas', 'Courier New', '微软雅黑', 'Microsoft Yahei', monospace;
     padding: 0 0 12px;
     background-color:transparent;
     white-space:pre;
@@ -183,35 +183,43 @@ html.dark .note-view pre{
 }
 .note-view code{
     padding:2px 4px;
-    background-color:#f6f6f6;
+    background-color:var(--bg-code-color);
     vertical-align:middle;
     border:none;
     font-size:15px;
     white-space:pre-wrap;
     margin: 6px 0 0;
 }
+.note-view h1 code,
+.note-view h2 code,
+.note-view h3 code,
+.note-view h4 code,
+.note-view h5 code,
+.note-view h6 code {
+    font-size: smaller;
+}
 .note-view pre code {
     padding:2px 4px 8px;
     overflow-x: auto;
     display: block;
 }
+.note-view code {
+    font-family: 'Cascadia Code', 'Fira Code', 'JetBrains Mono', 'Consolas', 'Courier New', '微软雅黑', 'Microsoft Yahei', monospace;
+}
 html.dark .note-view pre code{
     background-color:#0c0c12
-}
-html.dark .note-view code {
-    background-color: #444;
 }
 .note-view table{
     width:100%;
     margin-bottom:20px;
-    border:1px solid #d9d9d9;
+    border:1px solid var(--el-border-color-dark);
     border-collapse:collapse;
     border-left:none;
     word-break:normal
 }
 .note-view table td,.note-view table th{
     padding:8px;
-    border:1px solid #d9d9d9;
+    border:1px solid var(--el-border-color-dark);
     line-height:20px;
     vertical-align:middle
 }
