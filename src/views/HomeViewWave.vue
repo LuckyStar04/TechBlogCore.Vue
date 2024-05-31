@@ -5,6 +5,7 @@ import OpenAI from '@/icons/OpenAI.vue'
 
 onBeforeMount(() => {
     document.querySelector('meta[name="theme-color"]')!.setAttribute("content", "#188dbf")
+    document.title = "Star's Blog"
 })
 </script>
 <template>

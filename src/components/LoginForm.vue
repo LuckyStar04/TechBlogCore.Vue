@@ -310,7 +310,7 @@ input[type=password] {
 .loginform-wrapper.dark input[type=text],
 .loginform-wrapper.dark input[type=password] {
     background-color: var(--bg-color-secondary);
-    border: 2px solid var(--bg-color-secondary);
+    border: 2px solid var(--el-border-color-lighter);
     color: var(--el-text-color-primary);
 }
 

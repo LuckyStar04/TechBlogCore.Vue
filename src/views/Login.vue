@@ -5,6 +5,7 @@ import { onBeforeMount } from 'vue'
 import { useRouter } from 'vue-router'
 
 onBeforeMount(() => {
+    document.title = "登录 - Star's Blog"
     document.querySelector('meta[name="theme-color"]')!.setAttribute("content", "#188dbf")
 })
 

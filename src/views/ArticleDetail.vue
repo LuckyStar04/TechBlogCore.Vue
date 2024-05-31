@@ -57,6 +57,7 @@ const fetchData = async () => {
         data.isLoading = false
         articleStore.store.category = response.data.category
         articleStore.store.tags = response.data.tags
+        document.title = data.article.title + " - Star's Blog"
         await nextTick()
         makeNav()
         setImageModal()

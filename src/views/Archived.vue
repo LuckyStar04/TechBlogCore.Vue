@@ -66,6 +66,7 @@ const handleScroll = () => {
 }
 
 onMounted(() => {
+    document.title = "归档 - Star's Blog"
     fetchData()
     handleScroll()
     window.addEventListener("scroll", handleScroll, false)

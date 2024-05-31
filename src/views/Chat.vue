@@ -11,6 +11,7 @@ const documentHeight = () => {
 }
 
 onMounted(() => {
+    document.title = "ChatGPT - Star's Blog"
     window.addEventListener('resize', documentHeight)
     documentHeight()
 })

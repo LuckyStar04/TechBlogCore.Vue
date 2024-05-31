@@ -40,5 +40,10 @@ import { useDark as isDark } from '@/components/dark'
     transform: translate(0, 2.08rem);
     position: relative;
     z-index: 4;
+    filter: brightness(107%) saturate(143%) drop-shadow(1px -1px 1px #fffa) drop-shadow(-1px 1px 1px #000a);
+}
+
+html.dark .banner-img>img {
+    filter: brightness(88%) saturate(90%) drop-shadow(-1px -1px 5px #fffa) drop-shadow(1px 1px 1px #000a);
 }
 </style>

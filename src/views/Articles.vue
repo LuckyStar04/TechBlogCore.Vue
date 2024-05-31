@@ -104,6 +104,7 @@ watch(() => userStore.info.user, () => {
 let key = 1
 
 onMounted(() => {
+    document.title = "文章列表 - Star's Blog"
     fetchData()
     window.addEventListener("scroll", debounceScroll, false)
     window.addEventListener("resize", handleScroll, false)

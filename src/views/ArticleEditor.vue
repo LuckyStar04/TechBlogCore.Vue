@@ -40,6 +40,7 @@ const fetchData = async () => {
         url: `articles/${route.params.id}`, method: 'get',
     })
     if (response.status == 200) {
+        document.title = "编辑 - Star's Blog"
         data.article.title = response.data.title
         data.article.content = response.data.content
         data.article.category = response.data.category
