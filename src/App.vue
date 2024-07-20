@@ -4,7 +4,7 @@ import { ElConfigProvider } from 'element-plus'
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
 import { useRoute } from 'vue-router'
 import { computed } from 'vue'
-import Banner from './components/Banner.vue'
+import Banner from './components/BannerWave.vue'
 import ChatGPTIcon from './components/ChatGPTIcon.vue'
 
 const route = useRoute()

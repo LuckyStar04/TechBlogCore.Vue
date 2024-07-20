@@ -12,6 +12,7 @@ declare module '@vue/runtime-core' {
     BannerBgMoon: typeof import('./src/components/BannerBgMoon.vue')['default']
     BannerBgStar: typeof import('./src/components/BannerBgStar.vue')['default']
     BannerBgSun: typeof import('./src/components/BannerBgSun.vue')['default']
+    BannerWave: typeof import('./src/components/BannerWave.vue')['default']
     Categories: typeof import('./src/components/Categories.vue')['default']
     ChatGPTForm: typeof import('./src/components/ChatGPTForm.vue')['default']
     ChatGPTIcon: typeof import('./src/components/ChatGPTIcon.vue')['default']
