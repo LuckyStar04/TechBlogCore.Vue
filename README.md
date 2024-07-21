@@ -8,6 +8,8 @@ A front-end minimalist style blog based on **Vue3 + TypeScript + Element-Plus + 
 
 Back-end based on ASP.NET Core RestAPI + JWT Authorization, see https://github.com/LuckyStar04/TechBlogCore
 
+Back-end based on ASP.NET Core AOT, see https://github.com/LuckyStar04/TechBlogCore.AOT
+
 If you want a preview please visit [here](https://techblogcore.top/)
 
 ## Project Setup
