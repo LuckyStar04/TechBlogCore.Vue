@@ -61,8 +61,8 @@ onUnmounted(() => {
                     <div class="right-dock">
                         <SearchInput class="search" :bgcolor="'var(--bg-sky-color-light-9)'"
                             style="width: 160px;margin-right:1rem;"></SearchInput>
-                        <Menu id="navi-menu" background-color="var(--bg-sky-color)"
-                            hover-bg-color="var(--bg-sky-color-light-3)" text-color="#fff" active-text-color="#fff"
+                        <Menu id="navi-menu" background-color="transparent"
+                            hover-bg-color="#fff3" text-color="#fff" active-text-color="#fff"
                             selected-text-color="#fff">
                             <MenuItem v-for="item in userStore.menu" :index="item.index" :route="item.route">{{ item.name }}</MenuItem>
                         </Menu>
@@ -146,7 +146,7 @@ onUnmounted(() => {
 }
 
 .navi-scroll-blue {
-    background: var(--bg-sky-color);
+    background: #0052;
 }
 
 .navi-scroll-white {

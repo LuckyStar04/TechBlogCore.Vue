@@ -1,19 +1,20 @@
 <template>
-  <div class="banner pt60">
-    <div class="banner-fill"></div>
-    <svg class="banner-svg" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"
-      xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <path id="gentle-wave"
-          d="M-112 3C-82 3 -54 21 -24 21C6 21 34 3 64 3C94 3 122 21 152 21C182 21 210 3 240 3V-41H-112V3Z" />
-      </defs>
-      <g class="parallax">
-        <use xlink:href="#gentle-wave" x="0" y="31" fill-opacity="0.3" />
-        <use xlink:href="#gentle-wave" x="0" y="29" fill-opacity="0.5" />
-        <use xlink:href="#gentle-wave" x="0" y="27" fill-opacity="0.7"/>
-        <use xlink:href="#gentle-wave" x="0" y="24" />
-      </g>
-    </svg>
+  <div class="banner">
+    <div class="banner-content">
+      <div class="banner-fill"></div>
+      <svg class="banner-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" fill-opacity="0.7" />
+          <use xlink:href="#gentle-wave" x="48" y="3" fill-opacity="0.5" />
+          <use xlink:href="#gentle-wave" x="48" y="5" fill-opacity="0.3" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
   </div>
 </template>
 <style scoped>
@@ -22,14 +23,19 @@
 }
 
 .banner {
-  height: 11rem;
+  height: 16rem;
   width: 100vw;
 }
 
-.banner-fill {
-  background-color: var(--bg-sky-color);
+.banner-content {
   width: 100vw;
-  height: 11rem;
+  height: 22rem;
+  background: linear-gradient(to right, var(--bg-sky-color-dark), var(--bg-sky-color));
+}
+
+.banner-fill {
+  width: 100vw;
+  height: 16rem;
 }
 
 .banner-svg {
@@ -48,7 +54,7 @@
 
 .parallax>use {
   animation: move-forever 25s cubic-bezier(.55, .5, .45, .5) infinite;
-  fill: var(--bg-sky-color);
+  fill: var(--bg-color-secondary);
 }
 
 .parallax>use:nth-child(1) {

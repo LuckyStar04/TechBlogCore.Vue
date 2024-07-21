@@ -73,7 +73,6 @@ const isShowChatIcon = computed(() => {
   left: 0;
   right: 0;
   z-index: 997;
-  background-color: var(--bg-color-primary);
   /* background-image: radial-gradient(transparent 1px,var(--el-bg-color) 1px);
   background-size: 4px 4px;
   backdrop-filter: saturate(50%) blur(4px);
@@ -81,6 +80,10 @@ const isShowChatIcon = computed(() => {
   padding: 0;
   box-shadow: var(--header-shadow);
   animation: header-anime .5s cubic-bezier(.17,.67,.57,.93);
+}
+
+.el-header:has(.bg-primary) {
+  background-color: var(--bg-color-primary);
 }
 
 @keyframes header-anime {

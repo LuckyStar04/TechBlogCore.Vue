@@ -54,7 +54,7 @@ onUnmounted(() => {
 })
 </script>
 <template>
-    <div class="navigations-wrapper" :class="{ scroll: showTitle }">
+    <div class="navigations-wrapper bg-primary" :class="{ scroll: showTitle }">
         <el-button id="navi-button" type="primary" plain style="font-size: 22px;"
             @click="data.drawer = true"><font-awesome-icon icon="fa-solid fa-bars" /></el-button>
         <div class="logo-wrapper">

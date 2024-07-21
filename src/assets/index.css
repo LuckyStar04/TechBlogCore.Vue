@@ -105,7 +105,7 @@ code::-webkit-scrollbar-track {
 }
 
 html.dark {
-    --header-shadow: 0px 0px 12px rgba(0, 0, 0, 1);
+    --header-shadow: 0px 0px 12px rgba(0, 0, 0, .7);
     --content-shadow: 0px 4px 8px rgba(0, 0, 0, 1);
     --content-shadow-high: 0px 16px 40px -15px rgba(0, 0, 0, 1);
     --content-shadow-high-rev: 0px -16px 40px -15px rgba(0, 0, 0, 1);
