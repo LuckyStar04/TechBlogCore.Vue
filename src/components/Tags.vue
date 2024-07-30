@@ -74,7 +74,7 @@ const fetchData = async () => {
 fetchData()
 </script>
 <template>
-    <div class="wrapper" :class="{ noshadow : !props.showShadow }">
+    <div class="wrapper" :class="{ noshadow : !props.showShadow, alpha: route.name == 'articles' }">
         <div class="tag-title"><h2>文章标签<span>Tags</span></h2></div>
         <div class="tags" v-if="data.isLoading">
             <el-skeleton animated />
@@ -99,6 +99,11 @@ a {
 .wrapper {
     border-radius: 7px;
     background-color: var(--bg-color-primary);
+}
+
+.wrapper.alpha {
+    background-color: var(--bg-color-primary-alpha);
+    backdrop-filter: blur(5px);
 }
 
 .wrapper.noshadow {

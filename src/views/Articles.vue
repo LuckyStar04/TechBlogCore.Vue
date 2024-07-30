@@ -131,7 +131,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <div v-loading="data.isLoading" class="wrapper">
+    <div v-loading="data.isLoading" class="wrapper" :class="{ alpha: route.name == 'articles' }">
         <div class="article-title">
             <h2 v-if="route.query.tag" class="color-success fw-600"># 标签：{{ route.query.tag }}</h2>
             <h2 v-else-if="route.query.category" class="color-primary fw-600"># 文章分类：{{ route.query.category }}</h2>
@@ -163,6 +163,11 @@ onUnmounted(() => {
 .wrapper {
     border-radius: 7px;
     background-color: var(--bg-color-primary);
+}
+
+.wrapper.alpha {
+    background-color: var(--bg-color-primary-alpha);
+    backdrop-filter: blur(5px);
 }
 
 .article-title {

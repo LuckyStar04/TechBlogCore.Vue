@@ -133,7 +133,7 @@ watch(() => articleStore.store.category, function () {
 })
 </script>
 <template>
-    <div class="wrapper" :class="{ noshadow: !props.showShadow }">
+    <div class="wrapper" :class="{ noshadow: !props.showShadow, alpha: route.name == 'articles' }">
         <div class="category-title">
             <h2>文章分类<span>Categories</span></h2>
         </div>
@@ -161,6 +161,11 @@ a {
 .wrapper {
     border-radius: 7px;
     background-color: var(--bg-color-primary);
+}
+
+.wrapper.alpha {
+    background-color: var(--bg-color-primary-alpha);
+    backdrop-filter: blur(5px);
 }
 
 .wrapper.noshadow {

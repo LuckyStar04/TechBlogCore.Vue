@@ -84,6 +84,7 @@ code::-webkit-scrollbar-track {
     --login-shadow: var(--content-shadow);
     --code-shadow: rgba(0, 0, 0, 0.55) 0px 2px 10px;
     --bg-color-primary: #fff;
+    --bg-color-primary-alpha: #fff9;
     --bg-color-secondary: #eff2f5;
     --bg-color-regular: #eee;
     --bg-color-chat-primary: #fff;
@@ -112,6 +113,7 @@ html.dark {
     --login-shadow: 0px 1px 40px -8px rgb(0, 0, 0);
     --code-shadow: rgba(0, 0, 0, 0.55) 0px 2px 10px;
     --bg-color-primary: #111a25;
+    --bg-color-primary-alpha: #111a2577;
     --bg-color-secondary: #0e1620;
     --bg-color-regular: #060606;
     --bg-color-chat-primary: #26282c;

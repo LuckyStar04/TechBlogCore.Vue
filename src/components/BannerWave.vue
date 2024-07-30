@@ -30,7 +30,20 @@
 .banner-content {
   width: 100vw;
   height: 22rem;
-  background: linear-gradient(to right, var(--bg-sky-color-dark), var(--bg-sky-color));
+  background: repeating-linear-gradient(90deg, var(--bg-sky-color-dark), var(--bg-sky-color), var(--bg-sky-color-dark));
+  background-repeat: repeat-x;
+  background-size: 500% 100%;
+  animation: AnimationName 70s linear infinite;
+}
+
+@keyframes AnimationName {
+  0% {
+    background-position: 500% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .banner-fill {
