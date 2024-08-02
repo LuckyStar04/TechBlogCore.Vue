@@ -3,8 +3,10 @@ import req from '@/utils/request'
 import { onMounted, onUnmounted, reactive, watch } from 'vue'
 import type { ArticleList, GroupedArticleList } from '@/types'
 import { useArticleStore } from '@/stores/ArticleStore'
+import { useRoute } from 'vue-router'
 
 const articleStore = useArticleStore()
+const route = useRoute()
 
 const data = reactive({
     articles: [] as Array<ArticleList>,
@@ -76,10 +78,11 @@ onUnmounted(() => {
     window.removeEventListener("scroll", handleScroll, false)
 })
 
+const transRoute = ['articles', 'archived']
 </script>
 
 <template>
-    <div v-loading="data.isLoading" class="wrapper">
+    <div v-loading="data.isLoading" class="wrapper" :class="{ alpha: transRoute.includes(route.name as string) }">
         <div class="article-title">
             <h2>文章归档<span>Archived</span></h2>
         </div>
@@ -108,6 +111,11 @@ onUnmounted(() => {
 .wrapper {
     border-radius: 7px;
     background-color: var(--bg-color-primary);
+}
+
+.wrapper.alpha {
+    background-color: var(--bg-color-primary-alpha);
+    backdrop-filter: blur(5px);
 }
 
 .expand-top-enter-active,

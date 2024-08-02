@@ -131,9 +131,12 @@ const jumpCategory = (category: string, e: MouseEvent) => {
 watch(() => articleStore.store.category, function () {
     moveBg(undefined, articleStore.store.category)
 })
+
+const transRoute = ['articles', 'archived']
+
 </script>
 <template>
-    <div class="wrapper" :class="{ noshadow: !props.showShadow, alpha: route.name == 'articles' }">
+    <div class="wrapper" :class="{ noshadow: !props.showShadow, alpha: transRoute.includes(route.name as string) }">
         <div class="category-title">
             <h2>文章分类<span>Categories</span></h2>
         </div>

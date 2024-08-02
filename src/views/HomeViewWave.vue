@@ -12,7 +12,7 @@ onBeforeMount(() => {
     <WaveBackground>
         <div class="inner-wrapper">
             <div class="flex">
-                <div class="logo"><img src="@/assets/logo-white-star.png" /></div>
+                <div class="logo"><img src="@/assets/logo-white-star.svg" /></div>
                 <h1 class="title">Hello,<br />I'm Star.</h1>
             </div>
             <p class="intro">Web Developer,<br />major focus on back-end.</p>

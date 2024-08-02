@@ -72,9 +72,11 @@ const fetchData = async () => {
     }
 }
 fetchData()
+
+const transRoute = ['articles', 'archived']
 </script>
 <template>
-    <div class="wrapper" :class="{ noshadow : !props.showShadow, alpha: route.name == 'articles' }">
+    <div class="wrapper" :class="{ noshadow : !props.showShadow, alpha: transRoute.includes(route.name as string) }">
         <div class="tag-title"><h2>文章标签<span>Tags</span></h2></div>
         <div class="tags" v-if="data.isLoading">
             <el-skeleton animated />
