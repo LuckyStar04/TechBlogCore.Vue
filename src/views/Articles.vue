@@ -101,8 +101,6 @@ watch(() => userStore.info.user, () => {
     })
 })
 
-let key = 1
-
 onMounted(() => {
     document.title = "文章列表 - Star's Blog"
     fetchData()
@@ -115,25 +113,12 @@ onUnmounted(() => {
     window.removeEventListener("resize", handleScroll, false)
 })
 
-// const onMouseEnter = (e: MouseEvent) => {
-//     let ele: HTMLElement = e.target as HTMLElement
-//     if (ele.classList.contains('wrapper')) {
-//         ele.classList.add('hovered')
-//     }
-// }
-
-// const onMouseLeave = (e: MouseEvent) => {
-//     let ele: HTMLElement = e.target as HTMLElement
-//     if (ele.classList.contains('wrapper')) {
-//         ele.classList.remove('hovered')
-//     }
-// }
-
 const transRoute = ['articles', 'archived']
 </script>
 
 <template>
-    <div v-loading="data.isLoading" class="wrapper" :class="{ alpha: transRoute.includes(route.name as string) }">
+    <div v-loading="data.isLoading" element-loading-background="transparent" element-loading-text="拼命加载中..."
+        class="wrapper" :class="{ alpha: transRoute.includes(route.name as string) }">
         <div class="article-title">
             <h2 v-if="route.query.tag" class="color-success fw-600"># 标签：{{ route.query.tag }}</h2>
             <h2 v-else-if="route.query.category" class="color-primary fw-600"># 文章分类：{{ route.query.category }}</h2>
@@ -142,18 +127,27 @@ const transRoute = ['articles', 'archived']
             <RouterLink v-if="userStore.info.role == 'Admin'" :to="{ name: 'createArticle' }"><el-button type="primary"
                     plain :icon="Plus">创建文章</el-button></RouterLink>
         </div>
-        <div class="articles">
-            <div v-for="article in data.articles" class="article hidden" :key="key++">
-                <RouterLink class="article-link" :to="{ name: 'articleDetail', params: { id: article.id } }">{{ article.title }}</RouterLink>
+        <div class="articles" v-if="data.isLoading">
+            <el-skeleton animated style="margin-top: 20px;" />
+        </div>
+        <div class="articles" v-else>
+            <div v-for="article in data.articles" class="article hidden" :key="article.id">
+                <RouterLink class="article-link" :to="{ name: 'articleDetail', params: { id: article.id } }">{{
+                    article.title }}</RouterLink>
                 <br />
                 <div class="article-meta">
-                    <span class="create-time"><el-icon><Calendar /></el-icon> {{ parseDateTime(article.createTime, true) }}</span>
-                    <router-link class="category" :to="{ name: 'articles', query: { category: article.category } }"><el-icon><TakeawayBox /></el-icon> {{ article.category }}</router-link>
+                    <span class="create-time"><el-icon>
+                            <Calendar />
+                        </el-icon> {{ parseDateTime(article.createTime, true) }}</span>
+                    <router-link class="category"
+                        :to="{ name: 'articles', query: { category: article.category } }"><el-icon>
+                            <TakeawayBox />
+                        </el-icon> {{ article.category }}</router-link>
                 </div>
                 <p class="content">{{ markdownToTxt(article.content) }}</p>
             </div>
-            <el-pagination style="margin-top:10px;" layout="total, prev, pager, next" :total="data.totalCount"
-                v-model:currentPage="data.pageNumber" @update:current-page="changePage" />
+            <el-pagination v-if="!data.isLoading" background style="margin-top:10px;" layout="total, prev, pager, next"
+                :total="data.totalCount" v-model:currentPage="data.pageNumber" @update:current-page="changePage" />
         </div>
     </div>
 </template>
@@ -360,6 +354,7 @@ h3 {
     .article-title {
         min-height: 1rem;
     }
+
     .article-title>h2 {
         font-size: 1.35rem;
     }

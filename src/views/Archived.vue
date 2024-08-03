@@ -82,22 +82,24 @@ const transRoute = ['articles', 'archived']
 </script>
 
 <template>
-    <div v-loading="data.isLoading" class="wrapper" :class="{ alpha: transRoute.includes(route.name as string) }">
+    <div v-loading="data.isLoading" element-loading-background="#fffa" element-loading-text="拼命加载中..."
+        class="wrapper" :class="{ alpha: transRoute.includes(route.name as string) }">
         <div class="article-title">
             <h2>文章归档<span>Archived</span></h2>
         </div>
         <transition name="expand-top">
-        <el-timeline v-show="data.groupedArticles.length > 0">
-            <el-timeline-item v-for="group in data.groupedArticles" :key="group.year" :timestamp="group.year.toString()"
-                type="primary" :hollow="true" size="large" placement="top">
-                <div class="articles">
-                    <div class="article" v-for="article in group.articles" :style="{ 'animation-delay': (i++ * 70 + 250) + 'ms' }">
-                        <RouterLink :to="{ name: 'articleDetail', params: { id: article.id } }">{{ article.title }}
-                        </RouterLink>
+            <el-timeline v-show="data.groupedArticles.length > 0">
+                <el-timeline-item v-for="group in data.groupedArticles" :key="group.year"
+                    :timestamp="group.year.toString()" type="primary" :hollow="true" size="large" placement="top">
+                    <div class="articles">
+                        <div class="article" v-for="article in group.articles"
+                            :style="{ 'animation-delay': (i++ * 70 + 250) + 'ms' }">
+                            <RouterLink :to="{ name: 'articleDetail', params: { id: article.id } }">{{ article.title }}
+                            </RouterLink>
+                        </div>
                     </div>
-                </div>
-            </el-timeline-item>
-        </el-timeline>
+                </el-timeline-item>
+            </el-timeline>
         </transition>
         <el-divider id="divider-btm" v-if="data.pageNumber < data.totalPages">加载中…</el-divider>
         <el-divider id="divider-btm" v-else>已经到底啦</el-divider>
@@ -120,16 +122,16 @@ const transRoute = ['articles', 'archived']
 
 .expand-top-enter-active,
 .expand-top-leave-active {
-  opacity: 1;
-  transform: scaleY(1);
-  transition: all 700ms cubic-bezier(.23,1.06,.7,.94);
-  transform-origin: center top;
+    opacity: 1;
+    transform: scaleY(1);
+    transition: all 700ms cubic-bezier(.23, 1.06, .7, .94);
+    transform-origin: center top;
 }
 
 .expand-top-enter-from,
 .expand-top-leave-active {
-  opacity: 0;
-  transform: scaleY(0);
+    opacity: 0;
+    transform: scaleY(0);
 }
 
 .article-title {
@@ -190,7 +192,7 @@ h3 {
     animation-name: showLeft;
     animation-duration: 1.8s;
     animation-fill-mode: forwards;
-    animation-timing-function: cubic-bezier(.09,1.13,.26,.98);
+    animation-timing-function: cubic-bezier(.09, 1.13, .26, .98);
 }
 
 @keyframes showLeft {
@@ -266,9 +268,11 @@ h3 {
     .el-timeline {
         padding: 1.6rem .8rem;
     }
+
     .articles {
         padding: 1rem 0;
     }
+
     .article>a {
         font-size: 20px;
     }
@@ -278,9 +282,11 @@ h3 {
     .el-timeline {
         padding: 1.6rem .8rem;
     }
+
     .articles {
         padding: 1rem 0;
     }
+
     .article>a {
         font-size: 20px;
     }

@@ -75,7 +75,7 @@ const setCopyCodeBtn = () => {
 const makeNav = () => {
     let nav = document.querySelectorAll('.note-view h1[id],.note-view h2[id],.note-view h3[id],.note-view h4[id],.note-view h5[id],.note-view h6[id]') as NodeListOf<HTMLElement>
     if (nav.length <= 0) return
-    let newItem : NavItem = { level: nav[0].tagName, id: nav[0].id, title: nav[0].innerText, children: [], parent: null }
+    let newItem: NavItem = { level: nav[0].tagName, id: nav[0].id, title: nav[0].innerText, children: [], parent: null }
     let oldItem = newItem
     for (let i = 0; i < nav.length; i++) {
         newItem = { level: nav[i].tagName, id: nav[i].id, title: nav[i].innerText, children: [], parent: null }
@@ -92,7 +92,7 @@ const makeNav = () => {
             }
             oldItem = newItem
         } else {
-            let pointer : NavItem|null = oldItem
+            let pointer: NavItem | null = oldItem
             while (pointer != null && pointer.level != newItem.level) {
                 pointer = pointer.parent
             }
@@ -166,7 +166,7 @@ const closeModal = () => {
             canGoBack = false
             router.back()
         } else {
-            router.replace({ name: 'articleDetail', params: { id: route.params.id }})
+            router.replace({ name: 'articleDetail', params: { id: route.params.id } })
         }
     }
 }
@@ -199,57 +199,93 @@ const noteHtml = computed(() => {
 
 </script>
 <template>
-    <div v-loading="data.isLoading" class="wrapper">
+    <div v-loading="data.isLoading" element-loading-background="transparent" element-loading-text="拼命加载中..."
+        class="wrapper">
         <Teleport to="#navi-article-title">
             <h1 style="cursor: pointer;" @click.stop="backTop">{{ data.article.title }}</h1>
         </Teleport>
-        <ModalCarousel :show="data.showModal" :pic-items="data.pics" :current="data.currPic" @hide="closeModal"></ModalCarousel>
+        <ModalCarousel :show="data.showModal" :pic-items="data.pics" :current="data.currPic" @hide="closeModal">
+        </ModalCarousel>
         <div class="article-title">
-            <h1>{{ data.article.title }}</h1>
-            <RouterLink v-if="userStore.info.role=='Admin'" :to="{ name: 'editArticle', params: { id: route.params.id } }"><el-button type="primary" plain :icon="EditPen">编辑文章</el-button></RouterLink>
+            <h1>{{ data.article.title || '　' }}</h1>
+            <RouterLink v-if="userStore.info.role == 'Admin'"
+                :to="{ name: 'editArticle', params: { id: route.params.id } }"><el-button type="primary" plain
+                    :icon="EditPen">编辑文章</el-button></RouterLink>
         </div>
         <div class="meta">
-            <span><el-icon><Calendar /></el-icon> {{ parseDateTime(data.article.createTime, true) }}</span>
-            <span><RouterLink :to="{ name: 'articles', query: { category: data.article.category } }"><el-icon><TakeawayBox /></el-icon> {{data.article.category}}</RouterLink></span>
+            <span><el-icon>
+                    <Calendar />
+                </el-icon> {{ parseDateTime(data.article.createTime, true) }}</span>
+            <span>
+                <RouterLink :to="{ name: 'articles', query: { category: data.article.category } }"><el-icon>
+                        <TakeawayBox />
+                    </el-icon> {{ data.article.category }}</RouterLink>
+            </span>
             <br />
-            <span><el-icon><Reading /></el-icon> {{ data.article.viewCount }} 次阅读</span>
-            <span><el-icon><CommentIcon /></el-icon> {{ data.article.comments.length }} 条评论</span>
+            <span><el-icon>
+                    <Reading />
+                </el-icon> {{ data.article.viewCount }} 次阅读</span>
+            <span><el-icon>
+                    <CommentIcon />
+                </el-icon> {{ data.article.comments.length }} 条评论</span>
             <br />
-            <span><el-icon><Histogram /></el-icon> {{ calcLength(data.article.content.length) }} 字</span>
-            <span><el-icon><Clock /></el-icon> {{ calcReadMinutes(data.article.content.length) }} 分钟</span>
+            <span><el-icon>
+                    <Histogram />
+                </el-icon> {{ calcLength(data.article.content.length) }} 字</span>
+            <span><el-icon>
+                    <Clock />
+                </el-icon> {{ calcReadMinutes(data.article.content.length) }} 分钟</span>
         </div>
-        <div class="articles">
+        <div class="articles" v-if="data.isLoading">
+            <el-skeleton animated style="margin-top: 20px;" />
+        </div>
+        <div class="articles" v-else>
             <div class="note-view" v-html="noteHtml"></div>
             <div class="category">
-                <span><RouterLink :to="{ name: 'articles', query: { category: data.article.category } }"><el-icon><TakeawayBox /></el-icon> {{ data.article.category }}</RouterLink></span>
-                <span v-for="tag in data.article.tags"><RouterLink :to="{ name: 'articles', query: { tag: tag } }"><el-icon><PriceTag /></el-icon> {{ tag }}</RouterLink></span>
+                <span>
+                    <RouterLink :to="{ name: 'articles', query: { category: data.article.category } }"><el-icon>
+                            <TakeawayBox />
+                        </el-icon> {{ data.article.category }}</RouterLink>
+                </span>
+                <span v-for="tag in data.article.tags">
+                    <RouterLink :to="{ name: 'articles', query: { tag: tag } }"><el-icon>
+                            <PriceTag />
+                        </el-icon> {{ tag }}</RouterLink>
+                </span>
             </div>
             <div class="make-comment">
                 <div class="make-comment-avatar">
                     <img class="avatar" :src="userStore.info.avatar" />
                 </div>
-                <MakeComment placeholder="期待您的更多见解 :)" :article-id="route.params.id.toString()" @comment-success="addComment"></MakeComment>
+                <MakeComment placeholder="期待您的更多见解 :)" :article-id="route.params.id.toString()"
+                    @comment-success="addComment"></MakeComment>
             </div>
-            <p class="comment-title">{{data.article.comments.length}} 条评论</p>
+            <p class="comment-title">{{ data.article.comments.length }} 条评论</p>
             <div class="comment-body">
                 <Comments v-if="(data.article.comments.length > 0)" :comments="data.article.comments"></Comments>
-                <el-empty description="快来坐沙发吧~" :image-size="200" v-else style="height: 380px;padding-top: 0;"></el-empty>
+                <el-empty description="快来坐沙发吧~" :image-size="200" v-else
+                    style="height: 380px;padding-top: 0;"></el-empty>
             </div>
         </div>
         <template v-if="data.hasNav">
             <Teleport to="body">
-            <div class="navi-wrapper" :class="{ shrink: !data.expandNav }">
-                <div class="navi-in-wrapper autohide-scrollbar">
-                <div class="navi-title" @click.stop="switchNav"><font-awesome-icon icon="fa-solid fa-list-ul" class="more-emojis-icon" />&nbsp;&nbsp;文章目录&nbsp;&nbsp;<font-awesome-icon icon="fa-solid fa-angle-down" /></div>
-                <ArticleNavi class="navi-body" :items="data.navItems"></ArticleNavi>
+                <div class="navi-wrapper" :class="{ shrink: !data.expandNav }">
+                    <div class="navi-in-wrapper autohide-scrollbar">
+                        <div class="navi-title" @click.stop="switchNav"><font-awesome-icon
+                                icon="fa-solid fa-list-ul"
+                                class="more-emojis-icon" />&nbsp;&nbsp;文章目录&nbsp;&nbsp;<font-awesome-icon
+                                icon="fa-solid fa-angle-down" /></div>
+                        <ArticleNavi class="navi-body" :items="data.navItems"></ArticleNavi>
+                    </div>
                 </div>
-            </div>
             </Teleport>
-            <div class="navi-drawer-button" @click.stop="switchNavDrawer"><font-awesome-icon icon="fa-solid fa-list-ul" class="more-emojis-icon" />&nbsp;目录</div>
-            <el-drawer class="navi-drawer" v-model="data.navDrawer" title="侧边目录" direction="ltr" :with-header="false" size="70%"
-                :close-on-click-modal="true">
+            <div class="navi-drawer-button" @click.stop="switchNavDrawer"><font-awesome-icon
+                    icon="fa-solid fa-list-ul" class="more-emojis-icon" />&nbsp;目录</div>
+            <el-drawer class="navi-drawer" v-model="data.navDrawer" title="侧边目录" direction="ltr"
+                :with-header="false" size="70%" :close-on-click-modal="true">
                 <div class="drawer-wrapper">
-                    <div class="drawer-title"><font-awesome-icon icon="fa-solid fa-list-ul" class="more-emojis-icon" />&nbsp;&nbsp;文章目录</div>
+                    <div class="drawer-title"><font-awesome-icon icon="fa-solid fa-list-ul"
+                            class="more-emojis-icon" />&nbsp;&nbsp;文章目录</div>
                     <ArticleNavi class="navi-body" :items="data.navItems"></ArticleNavi>
                 </div>
             </el-drawer>
@@ -293,7 +329,7 @@ const noteHtml = computed(() => {
     margin: 0 1rem;
 }
 
-.article-title>h1{
+.article-title>h1 {
     overflow: hidden;
     white-space: pre-line;
     text-overflow: ellipsis;
@@ -301,7 +337,8 @@ const noteHtml = computed(() => {
     display: inline-block;
 }
 
-.article-title, .meta-table {
+.article-title,
+.meta-table {
     font-family: 'Trebuchet MS';
 }
 
@@ -349,16 +386,19 @@ a {
     color: var(--el-text-color-secondary);
 }
 
-.meta span, .category span {
+.meta span,
+.category span {
     line-height: 1.6rem;
     white-space: nowrap;
 }
 
-.meta span + span, .category span + span {
+.meta span+span,
+.category span+span {
     margin-left: 1rem;
 }
 
-.meta .el-icon, .category .el-icon {
+.meta .el-icon,
+.category .el-icon {
     position: relative;
     top: 1px;
 }
@@ -382,10 +422,12 @@ a {
     display: inline-block;
     width: 57px;
 }
+
 .make-comment-avatar>img {
     width: 48px;
     border-radius: 5px;
 }
+
 .comment-body {
     min-height: 300px;
 }
@@ -428,8 +470,8 @@ a {
     overflow-y: scroll;
 }
 
-.navi-wrapper > ul,
-.drawer-wrapper > ul {
+.navi-wrapper>ul,
+.drawer-wrapper>ul {
     padding-left: 4px;
 }
 
@@ -494,14 +536,16 @@ a {
         left: calc(4vw - 40px);
         width: calc(47vw - 477px);
     }
-    
+
     .navi-drawer-button {
         display: none;
     }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1280px) {
-    .navi-wrapper, .navi-title {
+
+    .navi-wrapper,
+    .navi-title {
         display: none;
     }
 
@@ -511,7 +555,9 @@ a {
 }
 
 @media only screen and (max-width: 768px) {
-    .navi-wrapper, .navi-title {
+
+    .navi-wrapper,
+    .navi-title {
         display: none;
     }
 
