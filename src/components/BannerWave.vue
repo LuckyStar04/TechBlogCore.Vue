@@ -56,6 +56,21 @@
   height: 7rem;
 }
 
+@media only screen and (max-width: 768px) {
+    .banner {
+        height: 11.5rem;
+    }
+    .banner-fill {
+        height: 11.5rem;
+    }
+    .banner-content {
+        height: 14.5rem;
+    }
+    .banner-svg {
+        height: 3rem;
+    }
+}
+
 .content {
   flex: 3 0 auto;
   position: relative;
