@@ -202,7 +202,7 @@ const noteHtml = computed(() => {
     <div v-loading="data.isLoading" element-loading-background="transparent" element-loading-text="拼命加载中..."
         class="wrapper">
         <Teleport to="#navi-article-title">
-            <h1 style="cursor: pointer;" @click.stop="backTop">{{ data.article.title }}</h1>
+            <h1 style="cursor: pointer; font-size: 1.6rem;" @click.stop="backTop">{{ data.article.title }}</h1>
         </Teleport>
         <ModalCarousel :show="data.showModal" :pic-items="data.pics" :current="data.currPic" @hide="closeModal">
         </ModalCarousel>
