@@ -334,6 +334,7 @@ const noteHtml = computed(() => {
     white-space: pre-line;
     text-overflow: ellipsis;
     line-height: 2rem;
+    font-size: 1.6rem;
     display: inline-block;
 }
 
