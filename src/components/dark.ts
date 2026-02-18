@@ -71,8 +71,9 @@ export function handleDark(event: MouseEvent) {
         clipPath: isDark ? [...clipPath].reverse() : clipPath,
       },
       {
-        duration: 400,
+        duration: 600,
         easing: "ease-in",
+        fill: 'both',
         pseudoElement: isDark
           ? "::view-transition-old(root)"
           : "::view-transition-new(root)",

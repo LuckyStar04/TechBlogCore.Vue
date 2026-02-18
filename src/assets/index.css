@@ -140,8 +140,7 @@ html.dark {
 ::view-transition-new(root) {
   height: auto;
   width: 100vw;
-  animation: none;
-  mix-blend-mode: normal;
+  animation: none !important;
 }
 html.dark::view-transition-old(root) {
   z-index: 2147483646;
