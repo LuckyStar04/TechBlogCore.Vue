@@ -15,7 +15,7 @@ onBeforeMount(() => {
                 <div class="logo"><img src="@/assets/logo-white-star.svg" /></div>
                 <h1 class="title">Hello,<br />I'm Star.</h1>
             </div>
-            <p class="intro">Web Developer,<br />major focus on back-end.</p>
+            <p class="intro">Full-Stack Web Developer,<br />embrace AI.</p>
             <div class="navigations">
                 <a class="github" href="https://github.com/LuckyStar04/" target="_blank"><font-awesome-icon
                         icon="fa-brands fa-github" /> Github</a>
